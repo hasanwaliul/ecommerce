@@ -234,7 +234,7 @@ class CategoryController extends Controller
         }
     }
 
-    // ########################################  Sub Category Part  ########################################
+    // ########################################  Sub Subcategory Part  ########################################
 
     public function subSubCategoryIndex(){
         $categories = Category::latest()->get();
