@@ -1,16 +1,16 @@
 @extends('admin.layouts.master')
-@section('title', 'Brands')
+@section('title', 'Sub Subcategory')
 @section('categories')
 active show-sub
 @endsection
-@section('add-brands')
+@section('add-sub-sub-categories')
 active
 @endsection
 @section('content')
 
 <nav class="breadcrumb sl-breadcrumb">
     <span class="breadcrumb-item active">Dashboard</span>
-    <a class="breadcrumb-item" href="">All Brands</a>
+    <a class="breadcrumb-item" href="">Sub Sub-Category Edit</a>
 </nav>
 
 <div class="sl-pagebody">
@@ -36,8 +36,8 @@ active
                 <h6 class="card-body-title">Update Brand Data</h6>
                 <form action=" {{ route('brand-data-update') }} " method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="old_image" value=" {{ $brandData->brand_image }} ">
-                    <input type="hidden" name="id" value=" {{ $brandData->brand_id }} ">
+                    <input type="hidden" name="old_image" value=" {{ $subsubcategoryData->brand_image }} ">
+                    <input type="hidden" name="id" value=" {{ $subsubcategoryData->brand_id }} ">
                     <div class="row mg-t-20 form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                         {{-- Select option with search facility --}}
                         <label class="col-sm-4 form-control-label">Select Category: <span
@@ -47,7 +47,7 @@ active
                                 data-placeholder="Choose one">
                                 <option label="Choose one" selected>Choose one</option>
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->category_id }}" {{ $category->category_id == $brandData->category_id ?
+                                <option value="{{ $category->category_id }}" {{ $category->category_id == $subsubcategoryData->category_id ?
                                     'selected':'' }}> {{ $category->category_name_en }} </option>
 
                                 @endforeach
@@ -66,7 +66,7 @@ active
                                 <option label="Choose one" selected>Choose one</option>
                                 @foreach ($subcategories as $subcategory)
                                 <option value="{{ $subcategory->subcategory_id  }}" {{ $subcategory->subcategory_id ==
-                                    $brandData->subcategory_id ? 'selected' : '' }}> {{ $subcategory->subcategory_name_en }}
+                                    $subsubcategoryData->subcategory_id ? 'selected' : '' }}> {{ $subcategory->subcategory_name_en }}
                                 </option>
                                 @endforeach
                             </select>
@@ -75,40 +75,26 @@ active
                             @enderror
                         </div>
                     </div><!-- row -->
-                    <div class="row mg-t-20 form-group {{ $errors->has('brand_name_en') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">Brand Name EN: <span
-                                class="tx-danger">*</span></label>
+                    <div class="row mg-t-10 form-group  {{ $errors->has('subsubcateg_name_en') ? ' has-error' : '' }}">
+                        <label class="col-sm-4 form-control-label">Sub Subcategory Name EN: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="text" class="form-control" placeholder="Enter Brand Name English"
-                                name="brand_name_en" value=" {{ $brandData->brand_name_en }} ">
+                            <input type="text" class="form-control" placeholder="Enter Sub Subcategory Name in English"
+                                name="subsubcateg_name_en" value="{{ $subsubcategoryData->subsubcategory_name_en }}">
 
-                            @error('brand_name_en')
+                            @error('subsubcateg_name_en')
                             <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
                     </div><!-- row -->
-                    <div class="row mg-t-20  form-group {{ $errors->has('brand_name_bn') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">Brand Name BN: <span
-                                class="tx-danger">*</span></label>
+                    <div class="row mg-t-20  form-group  {{ $errors->has('subsubcateg_name_bn') ? ' has-error' : '' }}">
+                        <label class="col-sm-4 form-control-label">Sub Subcategory Name BN: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="text" class="form-control" placeholder="Enter Brand Name Bangla"
-                                name="brand_name_bn" value=" {{ $brandData->brand_name_bn }} ">
+                            <input type="text" class="form-control" placeholder="Enter Sub Subcategory Name in Bangla"
+                                name="subsubcateg_name_bn" value="{{ $subsubcategoryData->subsubcategory_name_bn }}">
 
-                            @error('brand_name_bn')
+                            @error('subsubcateg_name_bn')
                             <span class="text-danger"> {{ $message }} </span>
                             @enderror
-                        </div>
-                    </div>
-                    <div class="row mg-t-20  form-group {{ $errors->has('brand_image') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">Brand Image: <span class="tx-danger">*</span></label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="file" class="custom-file-input" name="brand_image"
-                                value=" {{ $brandData->brand_image }} ">
-                            <span class="custom-file-control custom-file-control-inverse">
-                                @error('brand_image')
-                                <span class="text-danger"> {{ $message }} </span>
-                                @enderror
-                            </span>
                         </div>
                     </div>
                     <div class="form-layout-footer mg-t-30  form-group">
@@ -123,8 +109,8 @@ active
 <br><br><br><br><br><br><br><br><br><br>
 @endsection
 @section('scripts')
-<script>
-    $("select[name='category_id']").on('change', function (event) {
+    <script>
+         $("select[name='category_id']").on('change', function (event) {
         var catg_id = $(this).val();
 
         /* ==== ajax request ==== */
@@ -153,37 +139,6 @@ active
         }
         /* ==== ajax request ==== */
     });
+    </script>
 
-
-    //  ################## Selected Image preview ###################
-    $(document).ready(function () {
-        $('#BrandImg').on('change', function () { //on file input change
-            if (window.File && window.FileReader && window.FileList && window
-                .Blob) //check File API supported browser
-            {
-                var data = $(this)[0].files; //this file data
-
-                $.each(data, function (index, file) { //loop though each file
-                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
-                        .type)) { //check supported file type
-                        var fRead = new FileReader(); //new filereader
-                        fRead.onload = (function (file) { //trigger function on successful read
-                            return function (e) {
-                                var img = $('<img/>').addClass('thumb').attr('src',
-                                    e.target.result).width(80)
-                                    .height(80); //create image element
-                                $('#preview_image').append(
-                                    img); //append image to output element
-                            };
-                        })(file);
-                        fRead.readAsDataURL(file); //URL representing the file's data.
-                    }
-                });
-
-            } else {
-                alert("Your browser doesn't support File API!"); //if File API is absent
-            }
-        });
-    });
-</script>
 @endsection

@@ -24,7 +24,8 @@
       </a><!-- sl-menu-link -->
       <a href=" {{ route('brands') }} " class="sl-menu-link @yield('brands')">
         <div class="sl-menu-item">
-          <i class="fa fa-empire tx-20"></i>
+          {{-- <i class="fa fa-snowflake-o tx-20"></i> --}}
+          <i class="fa fa-certificate tx-20"></i>
           <span class="menu-item-label">Brands</span>
         </div> <!-- menu-item -->
       </a> <!-- sl-menu-link -->

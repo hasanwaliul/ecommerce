@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('category_name_bn');
             $table->string('category_slug_en');
             $table->string('category_slug_bn');
-            $table->string('category_icon');
+            $table->string('category_image');
             $table->boolean('category_status', ['1', '0'])->default('1');
             $table->timestamps();
         });

@@ -22,7 +22,6 @@ Route::get('/clear-cache', function () {
     return 'CACHE CLEARED SUCCESSFULLY';
 });
 
-
     // #################### Frontend  ####################
 Route::get('/',[FrontendController::class, 'index'])->name('frontend');
 
@@ -55,8 +54,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('subcategory-data/update', [CategoryController::class, 'subcategoryDataUpdate'])->name('subcategory-data-update');
     Route::get('subcategory-delete/{id}', [CategoryController::class, 'subcategoryDataDelete'])->name('subcategory-data-delete');
 
-    // #################### Sub Category Part ####################
+    // #################### Sub subCategory Part ####################
     Route::get('sub-subcategories', [CategoryController::class, 'subSubCategoryIndex'])->name('sub-sub-categories');
+    Route::post('sub-subcategory/add', [CategoryController::class, 'subSubCategoryAdd'])->name('sub-sub-category-add');
+    Route::get('subsubcategory-edit/{id}', [CategoryController::class, 'subSubCategoryDataEdit'])->name('sub-sub-category-edit');
+    
 
     // #################### Brand Part ####################
     Route::get('all-brand', [BrandController::class, 'index'])->name('brands');

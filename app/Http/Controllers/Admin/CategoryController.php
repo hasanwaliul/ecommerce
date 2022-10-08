@@ -5,10 +5,12 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\SubsubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Expr\FuncCall;
 
 class CategoryController extends Controller
 {
@@ -131,8 +133,13 @@ class CategoryController extends Controller
 
     public function categoryDataDelete($id){
         // dd('This is from delete method');
-        $categoryData = Category::where('category_id', $id)->delete();
-        if($categoryData){
+        $category = Category::where('category_id', $id)->first();
+        $oldCategoryImage = $category->category_image;
+        unlink($oldCategoryImage);
+
+        $categoryDataDelete = Category::where('category_id', $id)->delete();
+
+        if($categoryDataDelete){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->route('categories')->with('message','Category Data Deleted Successfully'); //Toastr alert
         }else {
@@ -238,8 +245,54 @@ class CategoryController extends Controller
 
     public function subSubCategoryIndex(){
         $categories = Category::latest()->get();
-        return view('admin.subsubcategory.index', compact('categories'));
+        $subsubcategories = SubsubCategory::latest()->get();
+        return view('admin.subsubcategory.index', compact('categories', 'subsubcategories'));
     }
+
+    public function subSubCategoryAdd(Request $request){
+        // dd($request->all());
+
+        $this->validate($request, [
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'subsubcateg_name_en' => 'required',
+            'subsubcateg_name_bn' => 'required',
+        ], [
+            'category_id.required' => 'Please select any category name',
+            'subcategory_id.required' => 'Please select any Sub category name',
+            'subsubcateg_name_en.required' => 'Please Enter Sub sub category name in English',
+            'subsubcateg_name_bn.required' => 'Please Enter Sub sub category name in Bangla',
+        ]);
+        // dd('After validation');
+
+        $subsubcategory = SubsubCategory::insert([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_name_en' => $request->subsubcateg_name_en,
+            'subsubcategory_name_bn' => $request->subsubcateg_name_bn,
+            'subsubcategory_slug_en' => strtolower(str_replace(' ', '-',$request->subsubcateg_name_en )),
+            'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-',$request->subsubcateg_name_bn )),
+            'created_at' => Carbon::now(),
+        ]);
+
+        if($subsubcategory){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Information Added Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
+    public function subSubCategoryDataEdit($id){
+        // dd('Edit request');
+        $subsubcategoryData = SubsubCategory::where('subsubcategory_id', $id)->first();
+        $categories = Category::latest()->get();
+        $subcategories = Subcategory::latest()->get();
+        return view('admin.subsubcategory.edit', compact('subsubcategoryData', 'categories', 'subcategories'));
+    }
+
 
 
 
