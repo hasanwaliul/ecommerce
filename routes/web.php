@@ -70,6 +70,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('brand-delete/{id}', [BrandController::class, 'brandDataDelete'])->name('brand-data-delete');
 
     // #################### Product Part  ####################
+    Route::get('all-product', [ProductController::class, 'index'])->name('products');
 });
     // #################### User Part  ####################
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
