@@ -58,7 +58,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('sub-subcategories', [CategoryController::class, 'subSubCategoryIndex'])->name('sub-sub-categories');
     Route::post('sub-subcategory/add', [CategoryController::class, 'subSubCategoryAdd'])->name('sub-sub-category-add');
     Route::get('subsubcategory-edit/{id}', [CategoryController::class, 'subSubCategoryDataEdit'])->name('sub-sub-category-edit');
-    
+    Route::post('subsubcategory-data/update', [CategoryController::class, 'subSubCategoryDataUpdate'])->name('sub-sub-category-data-update');
+    Route::get('subsubcategory-delete/{id}', [CategoryController::class, 'subSubCategoryDataDelete'])->name('sub-sub-category-data-delete');
+
 
     // #################### Brand Part ####################
     Route::get('all-brand', [BrandController::class, 'index'])->name('brands');

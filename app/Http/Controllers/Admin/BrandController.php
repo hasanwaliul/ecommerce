@@ -21,6 +21,8 @@ class BrandController extends Controller
 
 
 
+
+
     public function index(){
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();

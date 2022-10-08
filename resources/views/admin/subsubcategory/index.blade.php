@@ -124,7 +124,7 @@ active
                                 <td> {{ $subsubcategory->subsubcategory_name_bn }} </td>
                                 <td>
                                     <a href=" {{ url('admin/subsubcategory-edit/'.$subsubcategory->subsubcategory_id) }} " class="btn btn-primary" title="Edit"><i class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/subcategory-delete/'.$subsubcategory->subsubcategory_id) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
+                                    <a href=" {{ url('admin/subsubcategory-delete/'.$subsubcategory->subsubcategory_id) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach

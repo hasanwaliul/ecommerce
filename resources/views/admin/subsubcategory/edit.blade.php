@@ -33,11 +33,10 @@ active
     <div class="row row-sm mg-t-20">
         <div class="col-xl-8">
             <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                <h6 class="card-body-title">Update Brand Data</h6>
-                <form action=" {{ route('brand-data-update') }} " method="post" enctype="multipart/form-data">
+                <h6 class="card-body-title">Update Sub Subcategory Data</h6>
+                <form action=" {{ route('sub-sub-category-data-update') }} " method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="old_image" value=" {{ $subsubcategoryData->brand_image }} ">
-                    <input type="hidden" name="id" value=" {{ $subsubcategoryData->brand_id }} ">
+                    <input type="hidden" name="id" value=" {{ $subsubcategoryData->subsubcategory_id  }} ">
                     <div class="row mg-t-20 form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                         {{-- Select option with search facility --}}
                         <label class="col-sm-4 form-control-label">Select Category: <span

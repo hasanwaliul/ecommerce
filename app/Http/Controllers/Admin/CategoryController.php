@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use Laravel\Ui\Presets\React;
 use PhpParser\Node\Expr\FuncCall;
 
 class CategoryController extends Controller
@@ -21,6 +22,9 @@ class CategoryController extends Controller
     }
 
 
+
+
+    // ########################################  Category Part Start ########################################
 
     public function index(){
         $categories = Category::latest()->get();
@@ -148,8 +152,9 @@ class CategoryController extends Controller
             return redirect()->back();
         }
     }
+    // ########################################  Category Part End ########################################
 
-    // ########################################  Sub Category Part  ########################################
+    // ########################################  SubCategory Part Start ########################################
 
     public function subCategoryIndex(){
         $categories = Category::latest()->get();
@@ -218,6 +223,7 @@ class CategoryController extends Controller
             'category_id' => $request->category_id,
             'updated_at' => Carbon::now(),
         ]);
+
         if($update){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->route('subcategories')->with('message','Sub Category Information Updated Successfully'); //Toastr alert
@@ -240,8 +246,9 @@ class CategoryController extends Controller
             return redirect()->back();
         }
     }
+    // ########################################   Subcategory Part End ########################################
 
-    // ########################################  Sub Subcategory Part  ########################################
+    // ########################################  Sub Subcategory Part Start ########################################
 
     public function subSubCategoryIndex(){
         $categories = Category::latest()->get();
@@ -293,11 +300,56 @@ class CategoryController extends Controller
         return view('admin.subsubcategory.edit', compact('subsubcategoryData', 'categories', 'subcategories'));
     }
 
+    public function subSubCategoryDataUpdate(Request $request){
+        // dd($request->all());
+        $this->validate($request, [
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'subsubcateg_name_en' => 'required',
+            'subsubcateg_name_bn' => 'required',
+        ], [
+            'category_id.required' => 'Please select any category name',
+            'subcategory_id.required' => 'Please select any Sub category name',
+            'subsubcateg_name_en.required' => 'Please Enter Sub sub category name in English',
+            'subsubcateg_name_bn.required' => 'Please Enter Sub sub category name in Bangla',
+        ]);
+        // dd('After validation');
 
+        $id = $request->id;
+        $subsubcategoryDataUpdate = SubsubCategory::where('subsubcategory_id', $id)->update([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_name_en' => $request->subsubcateg_name_en,
+            'subsubcategory_name_bn' => $request->subsubcateg_name_bn,
+            'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcateg_name_en)),
+            'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-', $request->subsubcateg_name_bn)),
+            'updated_at' => Carbon::now(),
+        ]);
 
+        if($subsubcategoryDataUpdate){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('sub-sub-categories')->with('message','Sub subcategory Information Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
 
+    public function subSubCategoryDataDelete($id){
+        // dd('Delete Request');
 
-
+        $subsubcategoryDataDelete = SubsubCategory::where('subsubcategory_id', $id)->delete();
+        if($subsubcategoryDataDelete){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('sub-sub-categories')->with('message','Sub Subcategory Data Deleted Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+    // ########################################  Sub Subcategory Part End ########################################
 
 
 
