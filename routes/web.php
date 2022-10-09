@@ -71,6 +71,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
     // #################### Product Part  ####################
     Route::get('all-product', [ProductController::class, 'index'])->name('products');
+    Route::post('product/add', [ProductController::class, 'productDataAdd'])->name('product-add');
 });
     // #################### User Part  ####################
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
@@ -85,6 +86,7 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 
 // #################### Ajax Request for select data  ####################
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
-Route::get('subcategory-wise/brands/{id}', [BrandController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
+Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
+Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
 
 

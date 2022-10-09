@@ -39,7 +39,7 @@ active
                 </div>
                 <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
                     <h6 class="card-body-title">Add New Product</h6>
-                    <form action=" {{ route('category-add') }} " method="post" enctype="multipart/form-data">
+                    <form action=" {{ route('product-add') }} " method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-layout">
                             <div class="row mg-b-25">
@@ -78,11 +78,11 @@ active
                                     <div class="form-group mg-t-20">
                                         <label class="form-control-label">Select Sub Subcategory Name: <span
                                                 class="tx-danger">*</span></label>
-                                        <select class="form-control select2-show-search" name="category_id" id=""
+                                        <select class="form-control select2-show-search" name="subsubcategory_id" id=""
                                             data-placeholder="Choose one">
                                             <option label="Choose one"></option>
                                         </select>
-                                        @error('category_id')
+                                        @error('subsubcategory_id')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
                                     </div>
@@ -244,25 +244,24 @@ active
                                     <div class="form-group mg-t-20-force">
                                         <label class="form-control-label">Product Main Thumbnail: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="file" name="product_mainthumb"
-                                            value=" {{ old('product_mainthumb') }} "
-                                            placeholder="Enter Product Discount Price">
+                                        <input class="form-control" type="file" name="product_mainthumb" id="mainThmb"
+                                            value=" {{ old('product_mainthumb') }} " placeholder="Enter Product Discount Price">
                                         @error('product_mainthumb')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
+                                        <div class="row" id="preview_image"></div>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-t-20-force">
                                         <label class="form-control-label">Product Multiple Image: <span
                                                 class="tx-danger">*</span></label>
-                                        <input class="form-control" type="file" name="product_mainthumb" id="multiImg"
-                                            value=" {{ old('product_mainthumb') }} "
-                                            placeholder="Enter Product Discount Price">
-                                        @error('product_mainthumb')
+                                        <input class="form-control" type="file" name="product_mtpImg[]" id="multiImg"
+                                            value=" {{ old('product_mtpImg') }} " placeholder="Enter Product Discount Price" multiple>
+                                        @error('product_mtpImg')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
-                                        <div class="row" id="preview_image"></div>
+                                        <div class="row" id="preview_image1"></div>
                                     </div>
                                 </div><!-- col-4 -->
                                 <div class="col-lg-6">
@@ -333,7 +332,7 @@ active
                             </div><!-- row -->
 
                             <div class="form-layout-footer mg-t-50-force">
-                                <button class="btn btn-info mg-r-5">Add Product</button>
+                                <button type="submit" class="btn btn-info mg-r-5">Add Product</button>
                             </div><!-- form-layout-footer -->
                         </div><!-- form-layout -->
                     </form>
@@ -401,7 +400,6 @@ active
 @section('scripts')
 <script>
     //Summernote text editor
-
     $(function () {
         'use strict';
         // Summernote editor
@@ -440,6 +438,7 @@ active
                         $('select[name="subcategory_id"]').append('<option value="">Sub Category Not Found!</option>');
                     } else {
                         $('select[name="subcategory_id"]').empty();
+                        $('select[name="subsubcategory_id"]').empty();
                         $('select[name="brand_id"]').empty();
                         $('select[name="subcategory_id"]').append('<option value="">Select Sub Category</option>');
                         // data load
@@ -486,10 +485,71 @@ active
         /* ==== ajax request ==== */
     });
 
+    // ########################### Subcategory wise Sub Subcategory  ###########################
+    $("select[name='subcategory_id']").on('change', function (event) {
+        var subcatg_id = $(this).val();
 
-    //  ################## Selected Image preview ###################
+        /* ==== ajax request ==== */
+        if (subcatg_id) {
+            $.ajax({
+                url: "{{ url('subcategory-wise/subsubcategory/') }}/" + subcatg_id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // response
+                    if (data == "") {
+                        $('select[name="subsubcategory_id"]').empty();
+                        $('select[name="subsubcategory_id"]').append('<option value="">Brand Not Found!</option>');
+                    } else {
+                        $('select[name="subsubcategory_id"]').empty();
+                        $('select[name="subsubcategory_id"]').append('<option value="">Select Brand Name</option>');
+                        // data load
+                        $.each(data, function (key, value) {
+                            $('select[name="subsubcategory_id"]').append('<option value="' + value.subsubcategory_id + '">' + value.subsubcategory_name_en + '</option>');
+                        });
+                        // data load
+                    }
+                    // response
+                },
+            });
+        }
+        /* ==== ajax request ==== */
+    });
+
+    //  ################## Selected Multiple Image preview ###################
     $(document).ready(function () {
         $('#multiImg').on('change', function () { //on file input change
+            if (window.File && window.FileReader && window.FileList && window
+                .Blob) //check File API supported browser
+            {
+                var data = $(this)[0].files; //this file data
+
+                $.each(data, function (index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
+                        .type)) { //check supported file type
+                        var fRead = new FileReader(); //new filereader
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function (e) {
+                                var img = $('<img/>').addClass('thumb').attr('src',
+                                    e.target.result).width(80)
+                                    .height(80); //create image element
+                                $('#preview_image1').append(
+                                    img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+
+            } else {
+                alert("Your browser doesn't support File API!"); //if File API is absent
+            }
+        });
+    });
+
+    //  ################## Selected MainThumb Image preview ###################
+    $(document).ready(function () {
+        $('#mainThmb').on('change', function () { //on file input change
             if (window.File && window.FileReader && window.FileList && window
                 .Blob) //check File API supported browser
             {
@@ -518,6 +578,5 @@ active
         });
     });
 
-    
 </script>
 @endsection

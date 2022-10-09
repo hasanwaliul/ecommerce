@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\SubsubCategory;
@@ -18,6 +19,18 @@ class CategoryController extends Controller
     // Category Wise SubCategory Data show
     public function categoryWiseSubcategory($id){
         $data = Subcategory::select('subcategory_id', 'subcategory_name_en')->where('category_id',$id)->get();
+        return json_encode($data);
+    }
+
+    // Subcategory Wise Brand Data
+    public function subcategoryWiseBrandData($id){
+        $data = Brand::select('brand_id', 'brand_name_en')->where('subcategory_id', $id)->get();
+        return json_encode($data);
+    }
+
+    // SubCategory wise Sub SubCategory Data show
+    public function subcategoryWiseSubsubcategoryData($id){
+        $data = SubsubCategory::select('subsubcategory_id', 'subsubcategory_name_en')->where('subcategory_id', $id)->get();
         return json_encode($data);
     }
 

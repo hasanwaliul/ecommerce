@@ -12,4 +12,8 @@ class ProductController extends Controller
         $categories = Category::latest()->get();
         return view('admin.product.index', compact('categories'));
     }
+
+    public function productDataAdd(Request $request){
+        dd($request->all());
+    }
 }

@@ -13,16 +13,6 @@ use Illuminate\Support\Facades\Session;
 
 class BrandController extends Controller
 {
-    // Subcategory Wise Brand Data
-    public function subcategoryWiseBrandData($id){
-        $data = Brand::select('brand_id', 'brand_name_en')->where('subcategory_id', $id)->get();
-        return json_encode($data);
-    }
-
-
-
-
-
     public function index(){
         $categories = Category::latest()->get();
         $brands = Brand::latest()->get();
