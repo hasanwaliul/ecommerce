@@ -14,41 +14,10 @@ active show-sub
 </nav>
 
 <div class="sl-pagebody">
+    {{-- Form Part Start --}}
     <div class="row row-sm">
+        <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">All Categories</h6>
-                <br>
-                <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap">
-                        <thead>
-                            <tr>
-                                <th class="wd-20p">Category Icon</th>
-                                <th class="wd-30p">Category Name EN</th>
-                                <th class="wd-30p">Category Name BN</th>
-                                <th class="wd-20p">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @foreach ($categories as $category )
-                            <tr>
-                                <td>
-                                    <img src=" {{ asset($category->category_image) }} " alt="" style="width: 80px">
-                                </td>
-                                <td> {{ $category->category_name_en }} </td>
-                                <td> {{ $category->category_name_bn }} </td>
-                                <td>
-                                    <a href=" {{ url('admin/category-edit/'.$category->category_id) }} " class="btn btn-primary" title="Edit"><i class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/category-delete/'.$category->category_id) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div><!-- table-wrapper -->
-            </div><!-- card -->
-        </div>
-        <div class="col-md-4">
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
@@ -108,7 +77,59 @@ active show-sub
                 </form>
             </div><!-- card -->
         </div>
+        <div class="col-md-2"></div>
+    </div>
+    {{-- Form Part End --}}
+    <br><br><br>
+    {{-- Table Part Start --}}
+    <div class="row row-sm">
+        <div class="col-md-12">
+            <div class="card pd-20 pd-sm-40">
+                <h6 class="card-body-title">All Categories</h6>
+                <br>
+                <div class="table-wrapper">
+                    <table id="datatable1" class="table display responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th class="wd-20p">Category Image</th>
+                                <th class="wd-20p">Category Name EN</th>
+                                <th class="wd-20p">Category Name BN</th>
+                                <th class="wd-20p">Created At</th>
+                                <th class="wd-20p">Updated At</th>
+                                <th class="wd-10p">Status</th>
+                                <th class="wd-10p">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($categories as $category )
+                            <tr>
+                                <td>
+                                    <img src=" {{ asset($category->category_image) }} " alt="" style="width: 80px">
+                                </td>
+                                <td> {{ $category->category_name_en }} </td>
+                                <td> {{ $category->category_name_bn }} </td>
+                                <td> {{ Carbon\Carbon::parse($category->created_at)->format('D, d F Y') }} </td>
+                                <td> {{ Carbon\Carbon::parse($category->updated_at)->format('D, d F Y') }} </td>
+                                <td>
+                                    @if ($category->category_status == 1)
+                                        <span class="badge badge-pill badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger">In Active</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href=" {{ url('admin/category-edit/'.$category->category_id) }} " class="btn btn-primary" title="Edit"><i class="tx-18 fa fa-pencil-square-o"></i></a>
+                                    <a href=" {{ url('admin/category-delete/'.$category->category_id) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div><!-- table-wrapper -->
+            </div><!-- card -->
+        </div>
     </div><!-- row -->
+    {{-- Table Part End --}}
 </div>
 <br><br><br><br><br><br><br><br><br><br>
 @endsection
