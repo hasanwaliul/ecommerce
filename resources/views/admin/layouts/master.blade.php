@@ -46,8 +46,9 @@
     {{-- Sweetalert 2 --}}
     <link rel="stylesheet" href=" {{ asset('backend') }}/lib/sweetalert/sweetalert2.min.css">
     {{-- Summernote Text Editor --}}
-
     <link href=" {{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+    {{-- Bootstrap tagsinput --}}
+    <link rel="stylesheet" href=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.css ">
 
 </head>
 
@@ -202,6 +203,8 @@
 
     {{-- ################## Summernote Text Editor ###################--}}
     <script src=" {{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
+    {{-- ################## Bootstrap Tagsinput  ###################--}}
+    <script src=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js "></script>
 
     @yield('scripts')
 

@@ -102,13 +102,14 @@ active
                     <div class="row mg-t-20  form-group {{ $errors->has('brand_image') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Brand Image: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="file" class="custom-file-input" name="brand_image"
+                            <input type="file" class="custom-file-input" name="brand_image" id="BrandImg"
                                 value=" {{ $brandData->brand_image }} ">
                             <span class="custom-file-control custom-file-control-inverse">
                                 @error('brand_image')
                                 <span class="text-danger"> {{ $message }} </span>
                                 @enderror
                             </span>
+                            <div class="row" id="preview_image"></div>
                         </div>
                     </div>
                     <div class="form-layout-footer mg-t-30  form-group">
