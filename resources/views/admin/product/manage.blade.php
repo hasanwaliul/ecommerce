@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
-@section('title', 'Product')
+@section('title', 'Products')
 @section('products')
 active show-sub
 @endsection
-@section('add-products')
+@section('manage-products')
 active
 @endsection
 @section('content')
@@ -36,31 +36,32 @@ active
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            {{-- @foreach ($brands as $brandData )
+                            @foreach ($products as $product )
                             <tr>
                                 <td>
-                                    <img src=" {{ asset($brandData->brand_image) }} " alt="" style="width: 80px">
+                                    <img src=" {{ asset($product->product_thumbnail) }} " alt="" style="width: 80px" height="50px">
+                                </td>
+                                <td> {{ $product->product_name_en }} </td>
+                                <td> {{ $product->product_qty }} </td>
+                                <td> {{ Carbon\Carbon::parse($product->created_at)->format('D, d F Y') }} </td>
+                                <td> {{ Carbon\Carbon::parse($product->updated_at)->format('D, d F Y') }} </td>
+                                <td>
+                                    @if ($product->product_status == 1)
+                                        <span class="badge badge-pill badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-pill badge-danger">In Active</span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <p>{{ isset($brandData->categoryfuncB) ?
-                                        $brandData->categoryfuncB->category_name_en: '-'}}</p>
-                                </td>
-                                <td>
-                                    <p>{{ isset($brandData->subcategoryfuncB) ?
-                                        $brandData->subcategoryfuncB->subcategory_name_en: '-'}}</p>
-                                </td>
-                                <td> {{ $brandData->brand_name_en }} </td>
-                                <td> {{ $brandData->brand_name_bn }} </td>
-                                <td>
-                                    <a href=" {{ url('admin/brand-edit/'. $brandData->brand_id) }} "
+                                    <a href=" {{ url('admin/brand-edit/'. $product->brand_id) }} "
                                         class="btn btn-primary" title="Edit"><i
                                             class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/brand-delete/'. $brandData->brand_id) }} "
+                                    <a href=" {{ url('admin/brand-delete/'. $product->brand_id) }} "
                                         class="btn btn-danger" title="Delete" id="delete"><i
                                             class="tx-18 fa fa-trash"></i></a>
                                 </td>
                             </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div><!-- table-wrapper -->

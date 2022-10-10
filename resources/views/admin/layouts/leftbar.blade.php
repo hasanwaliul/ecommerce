@@ -57,7 +57,7 @@
       </a><!-- sl-menu-link -->
       <ul class="sl-menu-sub nav flex-column">
         <li class="nav-item"><a href=" {{ route('products') }} " class="nav-link @yield('add-products') ">Add Product</a></li>
-        <li class="nav-item"><a href=" {{ route('products-manage') }} " class="nav-link @yield('add-categories')">Manage Products</a></li>
+        <li class="nav-item"><a href=" {{ route('products-manage') }} " class="nav-link @yield('manage-products')">Manage Products</a></li>
     {{-- <li class="nav-item"><a href=" {{ route('subcategories') }} " class="nav-link @yield('add-sub-categories')">Add Sub Category</a></li>
         <li class="nav-item"><a href=" {{ route('sub-sub-categories') }} " class="nav-link @yield('add-sub-sub-categories')">Add Sub SubCategory</a></li> --}}
       </ul>

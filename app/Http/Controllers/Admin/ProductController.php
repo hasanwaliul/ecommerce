@@ -9,6 +9,7 @@ use App\Models\Product;
 use Intervention\Image\Facades\Image;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -140,6 +141,8 @@ class ProductController extends Controller
     }
 
     public function productDataManage(){
+        $products = Product::latest()->get();
+        return view('admin.product.manage', compact('products'));
     }
 
 }
