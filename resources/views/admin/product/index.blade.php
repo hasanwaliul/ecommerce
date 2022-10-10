@@ -343,7 +343,7 @@ active
                                 </div><!-- col-3 -->
                             </div><!-- row -->
 
-                            <div class="form-layout-footer mg-t-50-force">
+                            <div class="text-center form-layout-footer mg-t-50-force">
                                 <button type="submit" class="btn btn-info mg-r-5">Add Product</button>
                             </div><!-- form-layout-footer -->
                         </div><!-- form-layout -->
@@ -354,60 +354,9 @@ active
         <div class="col-md-1"></div>
     </div>
     {{-- Form part End --}}
-    <br><br><br>
-    {{-- Table Part Start --}}
-    <div class="row row-sm">
-        <div class="col-md-12">
-            <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">All Brand Items</h6>
-                <br>
-                <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap">
-                        <thead>
-                            <tr>
-                                <th class="wd-20p">Brand Img</th>
-                                <th class="wd-15p">Cetg Name</th>
-                                <th class="wd-10p">Sb-Cetg Name</th>
-                                <th class="wd-15p">B Name EN</th>
-                                <th class="wd-15p">B Name BN</th>
-                                <th class="wd-15p">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            {{-- @foreach ($brands as $brandData )
-                            <tr>
-                                <td>
-                                    <img src=" {{ asset($brandData->brand_image) }} " alt="" style="width: 80px">
-                                </td>
-                                <td>
-                                    <p>{{ isset($brandData->categoryfuncB) ?
-                                        $brandData->categoryfuncB->category_name_en: '-'}}</p>
-                                </td>
-                                <td>
-                                    <p>{{ isset($brandData->subcategoryfuncB) ?
-                                        $brandData->subcategoryfuncB->subcategory_name_en: '-'}}</p>
-                                </td>
-                                <td> {{ $brandData->brand_name_en }} </td>
-                                <td> {{ $brandData->brand_name_bn }} </td>
-                                <td>
-                                    <a href=" {{ url('admin/brand-edit/'. $brandData->brand_id) }} "
-                                        class="btn btn-primary" title="Edit"><i
-                                            class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/brand-delete/'. $brandData->brand_id) }} "
-                                        class="btn btn-danger" title="Delete" id="delete"><i
-                                            class="tx-18 fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach --}}
-                        </tbody>
-                    </table>
-                </div><!-- table-wrapper -->
-            </div><!-- card -->
-        </div>
-    </div><!-- row -->
 </div>
 {{-- Page Content End --}}
-<br><br><br><br><br><br><br><br><br><br>
+<br><br><br>
 @endsection
 @section('scripts')
 <script>

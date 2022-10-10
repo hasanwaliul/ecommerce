@@ -127,17 +127,19 @@ class ProductController extends Controller
                 'created_at' => Carbon::now(),
             ]);
         }
-
-            if($productData_Id){
-                // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-                return redirect()->back()->with('message','Information Added Successfully'); //Toastr alert
-            }else {
-                // Session::flash('error', 'Somthing Went wrong! Please try again later');
-                Session::flash('error', 'Somthing Went wrong! Please try again later');
-                return redirect()->back();
-            }
-
-
         // Multiple Image Upload End
+
+        if($productData_Id){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Information Added Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
     }
+
+    public function productDataManage(){
+    }
+
 }

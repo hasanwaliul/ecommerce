@@ -72,6 +72,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     // #################### Product Part  ####################
     Route::get('all-product', [ProductController::class, 'index'])->name('products');
     Route::post('product/add', [ProductController::class, 'productDataAdd'])->name('product-add');
+    Route::get('manage/products', [ProductController::class, 'productDataManage'])->name('products-manage');
 });
     // #################### User Part  ####################
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
