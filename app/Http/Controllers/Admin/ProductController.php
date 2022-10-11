@@ -145,4 +145,67 @@ class ProductController extends Controller
         return view('admin.product.manage', compact('products'));
     }
 
+    public function productDataEdit($id){
+        $productData = Product::where('product_id', $id)->first();
+        $categories = Category::latest()->get();
+        return view('admin.product.edit', compact('productData', 'categories'));
+    }
+
+    public function productDataUpdate(Request $request){
+        // dd($request->all());
+
+        $this->validate($request, [
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'subsubcategory_id' => 'required',
+            'brand_id' => 'required',
+            'product_name_en' => 'required',
+            'product_name_bn' => 'required',
+            'product_code' => 'required',
+            'product_qty' => 'required',
+            'product_tags_en' => 'required',
+            'product_tags_bn' => 'required',
+            'product_size_en' => 'required',
+            'product_size_bn' => 'required',
+            'product_color_en' => 'required',
+            'product_color_bn' => 'required',
+            'product_selling_price' => 'required',
+            'product_disc_price' => 'required',
+            'long_descp_en' => 'required',
+            'long_descp_bn' => 'required',
+            'short_descp_en' => 'required',
+            'short_descp_bn' => 'required',
+            'hot_deals' => 'required',
+            'featured' => 'required',
+            'special_offer' => 'required',
+            'special_deals' => 'required',
+        ], [
+            'category_id.required' => 'Please Enter Category Name',
+            'subcategory_id.required' => 'Please Enter Subcategory Name',
+            'subsubcategory_id.required' => 'Please Enter Sub Subcategory',
+            'brand_id.required' => 'Please Enter Brand Name',
+            'product_name_en.required' => 'Please Enter Product Name In English',
+            'product_name_bn.required' => 'Please Enter Product Name In Bangla',
+            'product_code.required' => 'Please Enter Product Code',
+            'product_qty.required' => 'Please Enter Product Quantity',
+            'product_tags_en.required' => 'Please Enter Product Tags In English',
+            'product_tags_bn.required' => 'Please Enter Product Tags In Bangla',
+            'product_size_en.required' => 'Please Enter Product Size In English',
+            'product_size_bn.required' => 'Please Enter Product Size In Bangla',
+            'product_color_en.required' => 'Please Enter Product Color In English',
+            'product_color_bn.required' => 'Please Enter Product Color In Bangla',
+            'selling_price.required' => 'Please Enter Product Selling Price',
+            'discount_price.required' => 'Please Enter Product Discount Price',
+            'long_descp_en.required' => 'Please Enter Product Long Description In English',
+            'long_descp_bn.required' => 'Please Enter Product Long Description In Bangla',
+            'short_descp_en.required' => 'Please Enter Product Short Description In English',
+            'short_descp_bn.required' => 'Please Enter Product Short Description In Bangla',
+            'hot_deals.required' => 'Please Check Product Hot deals Option',
+            'featured.required' => 'Please Check Product Featured Option',
+            'special_offer.required' => 'Please Check Product Special Offer Option',
+            'special_deals.required' => 'Please Check Product Special Deals Option',
+        ]);
+        dd('After validation');
+    }
+
 }

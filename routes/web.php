@@ -73,6 +73,14 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('all-product', [ProductController::class, 'index'])->name('products');
     Route::post('product/add', [ProductController::class, 'productDataAdd'])->name('product-add');
     Route::get('manage-products', [ProductController::class, 'productDataManage'])->name('products-manage');
+    Route::get('product-edit/{id}', [ProductController::class, 'productDataEdit'])->name('product-data-edit');
+    Route::post('product-data/update', [ProductController::class, 'productDataUpdate'])->name('product-data-update');
+
+
+
+
+
+
 });
     // #################### User Part  ####################
 Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
@@ -82,7 +90,6 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
     Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
     Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
-
 });
 
 // #################### Ajax Request for select data  ####################

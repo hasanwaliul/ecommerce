@@ -53,7 +53,7 @@ active
                                     @endif
                                 </td>
                                 <td>
-                                    <a href=" {{ url('admin/brand-edit/'. $product->brand_id) }} "
+                                    <a href=" {{ url('admin/product-edit/'. $product->product_id) }} "
                                         class="btn btn-primary" title="Edit"><i
                                             class="tx-18 fa fa-pencil-square-o"></i></a>
                                     <a href=" {{ url('admin/brand-delete/'. $product->brand_id) }} "
