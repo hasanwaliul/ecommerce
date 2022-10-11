@@ -291,7 +291,7 @@ active
                                         <label class="form-control-label">Short Description BN: <span
                                                 class="tx-danger">*</span></label>
                                         <textarea name="short_descp_bn" id="summernote4" cols="10"
-                                            rows="5"> {{ $productData->short_descp_en }} </textarea>
+                                            rows="5"> {{ $productData->short_descp_bn }} </textarea>
                                         @error('short_descp_bn')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror

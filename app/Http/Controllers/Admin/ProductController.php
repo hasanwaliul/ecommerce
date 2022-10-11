@@ -205,7 +205,47 @@ class ProductController extends Controller
             'special_offer.required' => 'Please Check Product Special Offer Option',
             'special_deals.required' => 'Please Check Product Special Deals Option',
         ]);
-        dd('After validation');
+        // dd('After validation');
+
+        $productId = $request->id;
+        $productUpdate = Product::where('product_id', $productId)->update([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_id' => $request->subsubcategory_id,
+            'brand_id' => $request->brand_id,
+            'product_name_en' => $request->product_name_en,
+            'product_name_bn' => $request->product_name_bn,
+            'product_slug_en' => strtolower(str_replace(' ','-', $request->product_name_en)),
+            'product_slug_bn' => strtolower(str_replace(' ','-', $request->product_name_bn)),
+            'product_code' => $request->product_code,
+            'product_qty' => $request->product_qty,
+            'product_tags_en' => $request->product_tags_en,
+            'product_tags_bn' => $request->product_tags_bn,
+            'product_size_en' => $request->product_size_en,
+            'product_size_bn' => $request->product_size_bn,
+            'product_color_en' => $request->product_color_en,
+            'product_color_bn' => $request->product_color_bn,
+            'selling_price' => $request->product_selling_price,
+            'discount_price' => $request->product_disc_price,
+            'long_descp_en' => $request->long_descp_en,
+            'long_descp_bn' => $request->long_descp_bn,
+            'short_descp_en' => $request->short_descp_en,
+            'short_descp_bn' => $request->short_descp_bn,
+            'hot_deals' => $request->hot_deals,
+            'featured' => $request->featured,
+            'special_offer' => $request->special_offer,
+            'special_deals' => $request->special_deals,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if($productUpdate){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('products-manage')->with('message','Brand Data Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
     }
 
 }
