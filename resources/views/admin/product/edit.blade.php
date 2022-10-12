@@ -349,12 +349,12 @@ active
 
     {{-- Miltiple Image Part Start --}}
     <div class="card pd-20 pd-sm-40 mg-t-50">
-        <h6 class="card-body-title">Update Product Image</h6>
+        <h5 class="card-body-title">Update Product Image</h5>
         <form action=" {{ route('product-multiImg-update') }} " method="post" enctype="multipart/form-data">
             @csrf
             <div class="row row-sm">
                 @foreach ($multiImage as $image)
-                    <div class="col-md-3 card bg-gray-200">
+                    <div class="col-md-3 card bg-gray-300">
                         <div class="card-body">
                             <div class="item item-carousel">
                                 <div class="products">
