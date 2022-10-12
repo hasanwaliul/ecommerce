@@ -251,7 +251,31 @@ class ProductController extends Controller
 
     // Multi Image Update
     public function productMultiImgUpdate(Request $request){
+        $multiImages = $request->multiImg;
         dd($request->all());
+
+        foreach ($multiImages as $multiImg_id => $multiImg) {
+            $imgDel = MultiImg::where('multiImg_id', $multiImg_id)->first();
+            unlink($imgDel->photo_name);
+
+            $name_gen = hexdec(uniqid()).'.'.$multiImg->getClientOriginalExtension();
+            Image::make($multiImg)->resize(917,1000)->save('uploads/products/thumbnail/multi-image/'.$name_gen);
+            $uploadPath = 'uploads/products/thumbnail/multi-image/'.$name_gen;
+
+            $multiImgUpdate = MultiImg::where('multiImg_id', $multiImg_id)->update([
+                'photo_name' => $uploadPath,
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        if($multiImgUpdate){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Product Multiple Image Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
 
     }
 

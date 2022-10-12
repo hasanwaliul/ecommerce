@@ -389,7 +389,11 @@ active
                             <div class="card-text">
                                 <div class="form-group">
                                     <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
-                                    <input type="file" name="multiImg[{{$image->multiImg_id}}] " id="">
+                                    <input type="file" class="form-control" name="multiImg[{{$image->multiImg_id}}] ">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="Check" placeholder="This is for check">
                                 </div>
                             </div>
                         </div>
@@ -525,48 +529,5 @@ active
         }
         /* ==== ajax request ==== */
     });
-
-    //  ################## Selected Multiple Image preview ###################
-    $(document).ready(function () {
-        $('#multiImg').on('change', function () { //on file input change
-            if (window.File && window.FileReader && window.FileList && window
-                .Blob) //check File API supported browser
-            {
-                var data = $(this)[0].files; //this file data
-
-                $.each(data, function (index, file) { //loop though each file
-                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file
-                        .type)) { //check supported file type
-                        var fRead = new FileReader(); //new filereader
-                        fRead.onload = (function (file) { //trigger function on successful read
-                            return function (e) {
-                                var img = $('<img/>').addClass('thumb').attr('src',
-                                    e.target.result).width(80)
-                                    .height(80); //create image element
-                                $('#preview_image1').append(
-                                    img); //append image to output element
-                            };
-                        })(file);
-                        fRead.readAsDataURL(file); //URL representing the file's data.
-                    }
-                });
-
-            } else {
-                alert("Your browser doesn't support File API!"); //if File API is absent
-            }
-        });
-    });
-
-    //  ################## Selected Single Image preview ###################
-    function MainThumbURL(ipnut) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#mainThumb').attr('src', e.target.result).width(80).height(80)
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 </script>
 @endsection
