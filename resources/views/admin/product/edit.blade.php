@@ -343,218 +343,65 @@ active
                 </div><!-- card -->
             </div><!-- card -->
         </div>
-        {{-- Image part --}}
-
-        {{-- <div class="col-lg-4">
-            <div class="form-group mg-t-20-force">
-                <label class="form-control-label">Product Main Thumbnail: <span class="tx-danger">*</span></label>
-                <input class="form-control" type="file" name="product_mainthumb" id="mainThmb"
-                    placeholder="Enter Product Discount Price" value=" {{ $productData->product_thumbnail }} "
-                    onchange="MainThumbURL(this)">
-                @error('product_mainthumb')
-                <span class="text-danger"> {{ $message }} </span>
-                @enderror
-                <img src="" alt="" id="mainThumb">
-            </div>
-        </div><!-- col-4 --> --}}
-        {{-- <div class="col-lg-4">
-            <div class="form-group mg-t-20-force">
-                <label class="form-control-label">Product Multiple Image: <span class="tx-danger">*</span></label>
-                <input class="form-control" type="file" name="product_mtpImg[]" id="multiImg"
-                    value=" {{ $productData->product_name_en }} " placeholder="Enter Product Discount Price" multiple>
-                @error('product_mtpImg')
-                <span class="text-danger"> {{ $message }} </span>
-                @enderror
-                <div class="row" id="preview_image1"></div>
-            </div>
-        </div><!-- col-4 --> --}}
         <div class="col-md-1"></div>
     </div>
     {{-- Form part End --}}
 
+    {{-- Miltiple Image Part Start --}}
     <div class="card pd-20 pd-sm-40 mg-t-50">
         <h6 class="card-body-title">Update Product Image</h6>
+        <form action=" {{ route('product-multiImg-update') }} " method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="row row-sm">
+                @foreach ($multiImage as $image)
+                    <div class="col-md-3 card bg-gray-200">
+                        <div class="card-body">
+                            <div class="item item-carousel">
+                                <div class="products">
+                                    <div class="product">
+                                        <div class="product-image">
+                                            <div class="image">
+                                                <a href="#">
+                                                    <img src="{{ asset($image->photo_name) }}" alt="" height="250px" width="100%">
+                                                </a>
+                                            </div><!-- /.image -->
+                                        </div><!-- /.product-image -->
 
-        {{-- Miltiple Image Part Start --}}
-        <div class="row row-sm">
+                                        <div class="cart clearfix animate-effect">
+                                            <div class="action">
+                                                <ul class="list-unstyled">
+                                                    <li class="add-cart-button btn-group">
+                                                        <button data-toggle="tooltip"
+                                                        class="btn btn-primary" title="Delete" id="delete"><i
+                                                        class="tx-18 fa fa-trash"></i>
+                                                        </button>
+                                                        <button class="btn btn-danger cart-btn"
+                                                            type="button">Delete</button>
 
-                <div class="col-md-3 card bg-gray-200">
-                    <div class="card-body">
-
-                        <div class="item item-carousel">
-                            <div class="products">
-                                <div class="product">
-                                    <div class="product-image">
-                                        <div class="image">
-                                            <a href="detail.html">
-                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
-                                            </a>
-                                        </div><!-- /.image -->
-                                    </div><!-- /.product-image -->
-
-                                    <div class="cart clearfix animate-effect">
-                                        <div class="action">
-                                            <ul class="list-unstyled">
-                                                <li class="add-cart-button btn-group">
-                                                    <button data-toggle="tooltip"
-                                                        class="btn btn-primary icon" type="button"
-                                                        title="Add Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn"
-                                                        type="button">Add to cart</button>
-
-                                                </li>
-                                            </ul>
-                                        </div><!-- /.action -->
-                                    </div><!-- /.cart -->
-                                </div><!-- /.product -->
-                            </div><!-- /.products -->
-                        </div><!-- /.item -->
-                        <div class="card-text">
-                            <div class="form-group">
-                                <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
-                                <input type="file" name="multiImg" id="">
+                                                    </li>
+                                                </ul>
+                                            </div><!-- /.action -->
+                                        </div><!-- /.cart -->
+                                    </div><!-- /.product -->
+                                </div><!-- /.products -->
+                            </div><!-- /.item -->
+                            <br>
+                            <div class="card-text">
+                                <div class="form-group">
+                                    <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
+                                    <input type="file" name="multiImg[{{$image->multiImg_id}}] " id="">
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                </div><!-- card -->
-                <div class="col-md-3 card bg-gray-200">
-                    <div class="card-body">
-
-                        <div class="item item-carousel">
-                            <div class="products">
-                                <div class="product">
-                                    <div class="product-image">
-                                        <div class="image">
-                                            <a href="detail.html">
-                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
-                                            </a>
-                                        </div><!-- /.image -->
-                                    </div><!-- /.product-image -->
-
-                                    <div class="cart clearfix animate-effect">
-                                        <div class="action">
-                                            <ul class="list-unstyled">
-                                                <li class="add-cart-button btn-group">
-                                                    <button data-toggle="tooltip"
-                                                        class="btn btn-primary icon" type="button"
-                                                        title="Add Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn"
-                                                        type="button">Add to cart</button>
-
-                                                </li>
-                                            </ul>
-                                        </div><!-- /.action -->
-                                    </div><!-- /.cart -->
-                                </div><!-- /.product -->
-                            </div><!-- /.products -->
-                        </div><!-- /.item -->
-
-                    </div>
-                </div><!-- card -->
-                <div class="col-md-3 card bg-gray-200">
-                    <div class="card-body">
-
-                        <div class="item item-carousel">
-                            <div class="products">
-                                <div class="product">
-                                    <div class="product-image">
-                                        <div class="image">
-                                            <a href="detail.html">
-                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
-                                            </a>
-                                        </div><!-- /.image -->
-                                    </div><!-- /.product-image -->
-
-                                    <div class="cart clearfix animate-effect">
-                                        <div class="action">
-                                            <ul class="list-unstyled">
-                                                <li class="add-cart-button btn-group">
-                                                    <button data-toggle="tooltip"
-                                                        class="btn btn-primary icon" type="button"
-                                                        title="Add Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn"
-                                                        type="button">Add to cart</button>
-
-                                                </li>
-                                            </ul>
-                                        </div><!-- /.action -->
-                                    </div><!-- /.cart -->
-                                </div><!-- /.product -->
-                            </div><!-- /.products -->
-                        </div><!-- /.item -->
-
-                    </div>
-                </div><!-- card -->
-                <div class="col-md-3 card bg-gray-200">
-                    <div class="card-body">
-
-                        <div class="item item-carousel">
-                            <div class="products">
-                                <div class="product">
-                                    <div class="product-image">
-                                        <div class="image">
-                                            <a href="detail.html">
-                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
-                                            </a>
-                                        </div><!-- /.image -->
-                                    </div><!-- /.product-image -->
-
-                                    <div class="cart clearfix animate-effect">
-                                        <div class="action">
-                                            <ul class="list-unstyled">
-                                                <li class="add-cart-button btn-group">
-                                                    <button data-toggle="tooltip"
-                                                        class="btn btn-primary icon" type="button"
-                                                        title="Add Cart">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary cart-btn"
-                                                        type="button">Add to cart</button>
-
-                                                </li>
-                                            </ul>
-                                        </div><!-- /.action -->
-                                    </div><!-- /.cart -->
-                                </div><!-- /.product -->
-                            </div><!-- /.products -->
-                        </div><!-- /.item -->
-
-                    </div>
-                </div><!-- card -->
-
-        </div>
+                    </div><!-- card --> <!-- col-md-3 -->
+                @endforeach
+            </div> <!-- row -->
+            <div class="form-layout-footer mg-t-30  form-group text-center">
+                <button type="submit" class="btn btn-info mg-r-5">Update Image</button>
+            </div><!-- form-layout-footer -->
+        </form>
     {{-- Miltiple Image Part End --}}
 
-
-    <br><br>
-    {{-- Multiple image upload start --}}
-    {{-- <div class="row row-sm card pd-20 pd-sm-40 mg-t-50">
-        <div class="col-md-3">
-            <div class="card bg-info tx-white bd-0">
-                <div class="card-body">
-                    <h5 class="card-body-title tx-white">The Card Title</h5>
-                    <p class="card-subtitle tx-normal mg-b-15 tx-white-8">This is the card subtitle</p>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="card-link tx-white-7 hover-white">Card link</a>
-                    <a href="#" class="card-link tx-white-7 hover-white">Another link</a>
-                </div>
-            </div><!-- card -->
-        </div><!-- col-md-3 -->
-        <div class="col-md-3">
-        </div><!-- col-md-3 -->
-        <div class="col-md-3">
-
-        </div><!-- col-md-3 -->
-    </div> --}}
-    {{-- Multiple image upload end --}}
 </div>
 {{-- Page Content End --}}
 <br><br><br>

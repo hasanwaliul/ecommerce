@@ -148,7 +148,8 @@ class ProductController extends Controller
     public function productDataEdit($id){
         $productData = Product::where('product_id', $id)->first();
         $categories = Category::latest()->get();
-        return view('admin.product.edit', compact('productData', 'categories'));
+        $multiImage = MultiImg::where('product_id', $id)->latest()->get();
+        return view('admin.product.edit', compact('productData', 'categories', 'multiImage'));
     }
 
     public function productDataUpdate(Request $request){
@@ -240,12 +241,18 @@ class ProductController extends Controller
 
         if($productUpdate){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-            return redirect()->route('products-manage')->with('message','Brand Data Updated Successfully'); //Toastr alert
+            return redirect()->route('products-manage')->with('message','Product Data Updated Successfully'); //Toastr alert
         }else {
             // Session::flash('error', 'Somthing Went wrong! Please try again later');
             Session::flash('error', 'Somthing Went wrong! Please try again later');
             return redirect()->back();
         }
+    }
+
+    // Multi Image Update
+    public function productMultiImgUpdate(Request $request){
+        dd($request->all());
+
     }
 
 }

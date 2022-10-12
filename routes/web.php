@@ -75,6 +75,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('manage-products', [ProductController::class, 'productDataManage'])->name('products-manage');
     Route::get('product-edit/{id}', [ProductController::class, 'productDataEdit'])->name('product-data-edit');
     Route::post('product-data/update', [ProductController::class, 'productDataUpdate'])->name('product-data-update');
+    Route::post('product-multiImg/update', [ProductController::class, 'productMultiImgUpdate'])->name('product-multiImg-update');
 
 
 
