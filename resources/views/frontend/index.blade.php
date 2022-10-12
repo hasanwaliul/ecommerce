@@ -23,25 +23,20 @@
                                 </a>
                                 <ul class="dropdown-menu mega-menu">
                                     <li class="yamm-content">
+                                        @php
+                                        $subcategories = App\Models\Subcategory::where('category_id',
+                                        $category->category_id)->orderBy('subcategory_name_en',
+                                        'ASC')->get();
+                                        @endphp
                                         <div class="row">
                                             <div class="col-sm-12 col-md-3">
-                                                <ul class="links list-unstyled">
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shoes </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Sunglasses</a></li>
-                                                    <li><a href="#">Sport Wear</a></li>
-                                                    <li><a href="#">Blazers</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">Shorts</a></li>
-                                                </ul>
+                                                @foreach ($subcategories as $subcategory)
+                                                    <ul class="links list-unstyled">
+                                                        <li><a href="#"> {{ $subcategory->subcategory_name_en }} </a></li>
+                                                    </ul>
+                                                @endforeach
                                             </div>
-                                            <!-- /.Category Image -->
-                                            {{-- <div class="dropdown-banner-holder">
-                                                <a href="#">
-                                                   <img src=" {{ asset($category->category_image) }} " alt="">
-                                                </a>
-                                            </div> --}}
+
                                         </div> <!-- /.row -->
                                     </li><!-- /.yamm-content -->
                                 </ul><!-- /.dropdown-menu -->
