@@ -52,7 +52,8 @@ active
                                             data-placeholder="Choose one">
                                             <option label="Choose one"></option>
                                             @foreach ($categories as $category)
-                                            <option value=" {{ $category->category_id }} " {{ $category->category_id == $productData->category_id ? 'selected' : ''}} > {{
+                                            <option value=" {{ $category->category_id }} " {{ $category->category_id ==
+                                                $productData->category_id ? 'selected' : ''}} > {{
                                                 $category->category_name_en }}
                                             </option>
                                             @endforeach
@@ -107,7 +108,8 @@ active
                                         <label class="form-control-label">Product Name EN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_name_en"
-                                            value=" {{ $productData->product_name_en }} " placeholder="Enter Product Name EN">
+                                            value=" {{ $productData->product_name_en }} "
+                                            placeholder="Enter Product Name EN">
                                         @error('product_name_en')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -118,7 +120,8 @@ active
                                         <label class="form-control-label">Product Name BN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_name_bn"
-                                            value=" {{ $productData->product_name_bn }} " placeholder="Enter Product Name BN">
+                                            value=" {{ $productData->product_name_bn }} "
+                                            placeholder="Enter Product Name BN">
                                         @error('product_name_bn')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -129,7 +132,8 @@ active
                                         <label class="form-control-label">Product Code: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_code"
-                                            value=" {{ $productData->product_code }} " placeholder="Enter Product Code Here">
+                                            value=" {{ $productData->product_code }} "
+                                            placeholder="Enter Product Code Here">
                                         @error('product_code')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -140,7 +144,8 @@ active
                                         <label class="form-control-label">Product Quantity: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_qty"
-                                            value=" {{ $productData->product_qty }} " placeholder="Enter Product Quantity">
+                                            value=" {{ $productData->product_qty }} "
+                                            placeholder="Enter Product Quantity">
                                         @error('product_qty')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -175,8 +180,8 @@ active
                                         <label class="form-control-label">Product Tags EN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_tags_en"
-                                            value=" {{ $productData->product_tags_en }} " placeholder="Enter Product Tags EN"
-                                            data-role="tagsinput">
+                                            value=" {{ $productData->product_tags_en }} "
+                                            placeholder="Enter Product Tags EN" data-role="tagsinput">
                                         @error('product_tags_en')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -187,8 +192,8 @@ active
                                         <label class="form-control-label">Product Tags BN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_tags_bn"
-                                            value=" {{ $productData->product_tags_bn }} " placeholder="Enter Product Tags BN"
-                                            data-role="tagsinput">
+                                            value=" {{ $productData->product_tags_bn }} "
+                                            placeholder="Enter Product Tags BN" data-role="tagsinput">
                                         @error('product_tags_bn')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -199,8 +204,8 @@ active
                                         <label class="form-control-label">Product Size EN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_size_en"
-                                            value=" {{ $productData->product_size_en }} " placeholder="Enter Product Size EN"
-                                            data-role="tagsinput">
+                                            value=" {{ $productData->product_size_en }} "
+                                            placeholder="Enter Product Size EN" data-role="tagsinput">
                                         @error('product_size_en')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -211,8 +216,8 @@ active
                                         <label class="form-control-label">Product Size BN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_size_bn"
-                                            value="{{ $productData->product_size_bn }} " placeholder="Enter Product Size BN"
-                                            data-role="tagsinput">
+                                            value="{{ $productData->product_size_bn }} "
+                                            placeholder="Enter Product Size BN" data-role="tagsinput">
                                         @error('product_size_bn')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -223,8 +228,8 @@ active
                                         <label class="form-control-label">Product Color EN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_color_en"
-                                            value=" {{ $productData->product_color_en }} " placeholder="Enter Product Color EN"
-                                            data-role="tagsinput">
+                                            value=" {{ $productData->product_color_en }} "
+                                            placeholder="Enter Product Color EN" data-role="tagsinput">
                                         @error('product_color_en')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -235,8 +240,8 @@ active
                                         <label class="form-control-label">Product Color BN: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_color_bn"
-                                            value=" {{ $productData->product_color_bn }} " placeholder="Enter Product Color BN"
-                                            data-role="tagsinput">
+                                            value=" {{ $productData->product_color_bn }} "
+                                            placeholder="Enter Product Color BN" data-role="tagsinput">
                                         @error('product_color_bn')
                                         <span class="text-danger"> {{ $message }} </span>
                                         @enderror
@@ -244,7 +249,8 @@ active
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4  mg-t-60">
                                     <label class="ckbox">
-                                        <input type="checkbox" name="hot_deals" value="1" {{ $productData->hot_deals == 1 ? 'checked' : '' }} ><span>Hot Deals</span>
+                                        <input type="checkbox" name="hot_deals" value="1" {{ $productData->hot_deals ==
+                                        1 ? 'checked' : '' }} ><span>Hot Deals</span>
                                     </label>
                                     @error('hot_deals')
                                     <span class="text-danger"> {{ $message }} </span>
@@ -252,7 +258,8 @@ active
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4  mg-t-60">
                                     <label class="ckbox">
-                                        <input type="checkbox" name="featured" value="1" {{ $productData->featured == 1 ? 'checked' : '' }} ><span>Featured</span>
+                                        <input type="checkbox" name="featured" value="1" {{ $productData->featured == 1
+                                        ? 'checked' : '' }} ><span>Featured</span>
                                     </label>
                                     @error('featured')
                                     <span class="text-danger"> {{ $message }} </span>
@@ -260,7 +267,8 @@ active
                                 </div><!-- col-4 -->
                                 <div class="col-lg-6 mg-t-20 mg-b-20">
                                     <label class="ckbox">
-                                        <input type="checkbox" name="special_offer" value="1" {{ $productData->special_offer	 == 1 ? 'checked' : '' }} ><span>Special
+                                        <input type="checkbox" name="special_offer" value="1" {{
+                                            $productData->special_offer == 1 ? 'checked' : '' }} ><span>Special
                                             Offers</span>
                                     </label>
                                     @error('special_offer')
@@ -269,7 +277,9 @@ active
                                 </div><!-- col-6 -->
                                 <div class="col-lg-6 mg-t-20 mg-b-20">
                                     <label class="ckbox">
-                                        <input type="checkbox" name="special_deals" value="1" {{ $productData->special_deals == 1 ? 'checked' : '' }} ><span>Special Deals</span>
+                                        <input type="checkbox" name="special_deals" value="1" {{
+                                            $productData->special_deals == 1 ? 'checked' : '' }} ><span>Special
+                                            Deals</span>
                                     </label>
                                     @error('special_deals')
                                     <span class="text-danger"> {{ $message }} </span>
@@ -325,7 +335,7 @@ active
                                 </div><!-- col- -->
                             </div><!-- row -->
 
-                            <div class="text-center form-layout-footer mg-t-50-force">
+                            <div class="text-center form-layout-footer mg-t-30-force">
                                 <button type="submit" class="btn btn-info mg-r-5">Update Product</button>
                             </div><!-- form-layout-footer -->
                         </div><!-- form-layout -->
@@ -333,14 +343,14 @@ active
                 </div><!-- card -->
             </div><!-- card -->
         </div>
-{{-- Image part --}}
+        {{-- Image part --}}
 
         {{-- <div class="col-lg-4">
             <div class="form-group mg-t-20-force">
-                <label class="form-control-label">Product Main Thumbnail: <span
-                        class="tx-danger">*</span></label>
-                <input class="form-control" type="file" name="product_mainthumb" id="mainThmb" placeholder="Enter Product Discount Price"
-                    value=" {{ $productData->product_thumbnail }} " onchange="MainThumbURL(this)">
+                <label class="form-control-label">Product Main Thumbnail: <span class="tx-danger">*</span></label>
+                <input class="form-control" type="file" name="product_mainthumb" id="mainThmb"
+                    placeholder="Enter Product Discount Price" value=" {{ $productData->product_thumbnail }} "
+                    onchange="MainThumbURL(this)">
                 @error('product_mainthumb')
                 <span class="text-danger"> {{ $message }} </span>
                 @enderror
@@ -349,8 +359,7 @@ active
         </div><!-- col-4 --> --}}
         {{-- <div class="col-lg-4">
             <div class="form-group mg-t-20-force">
-                <label class="form-control-label">Product Multiple Image: <span
-                        class="tx-danger">*</span></label>
+                <label class="form-control-label">Product Multiple Image: <span class="tx-danger">*</span></label>
                 <input class="form-control" type="file" name="product_mtpImg[]" id="multiImg"
                     value=" {{ $productData->product_name_en }} " placeholder="Enter Product Discount Price" multiple>
                 @error('product_mtpImg')
@@ -362,9 +371,194 @@ active
         <div class="col-md-1"></div>
     </div>
     {{-- Form part End --}}
+
+    <div class="card pd-20 pd-sm-40 mg-t-50">
+        <h6 class="card-body-title">Update Product Image</h6>
+
+        {{-- Miltiple Image Part Start --}}
+        <div class="row row-sm">
+
+                <div class="col-md-3 card bg-gray-200">
+                    <div class="card-body">
+
+                        <div class="item item-carousel">
+                            <div class="products">
+                                <div class="product">
+                                    <div class="product-image">
+                                        <div class="image">
+                                            <a href="detail.html">
+                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
+                                            </a>
+                                        </div><!-- /.image -->
+                                    </div><!-- /.product-image -->
+
+                                    <div class="cart clearfix animate-effect">
+                                        <div class="action">
+                                            <ul class="list-unstyled">
+                                                <li class="add-cart-button btn-group">
+                                                    <button data-toggle="tooltip"
+                                                        class="btn btn-primary icon" type="button"
+                                                        title="Add Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary cart-btn"
+                                                        type="button">Add to cart</button>
+
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.action -->
+                                    </div><!-- /.cart -->
+                                </div><!-- /.product -->
+                            </div><!-- /.products -->
+                        </div><!-- /.item -->
+                        <div class="card-text">
+                            <div class="form-group">
+                                <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
+                                <input type="file" name="multiImg" id="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- card -->
+                <div class="col-md-3 card bg-gray-200">
+                    <div class="card-body">
+
+                        <div class="item item-carousel">
+                            <div class="products">
+                                <div class="product">
+                                    <div class="product-image">
+                                        <div class="image">
+                                            <a href="detail.html">
+                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
+                                            </a>
+                                        </div><!-- /.image -->
+                                    </div><!-- /.product-image -->
+
+                                    <div class="cart clearfix animate-effect">
+                                        <div class="action">
+                                            <ul class="list-unstyled">
+                                                <li class="add-cart-button btn-group">
+                                                    <button data-toggle="tooltip"
+                                                        class="btn btn-primary icon" type="button"
+                                                        title="Add Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary cart-btn"
+                                                        type="button">Add to cart</button>
+
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.action -->
+                                    </div><!-- /.cart -->
+                                </div><!-- /.product -->
+                            </div><!-- /.products -->
+                        </div><!-- /.item -->
+
+                    </div>
+                </div><!-- card -->
+                <div class="col-md-3 card bg-gray-200">
+                    <div class="card-body">
+
+                        <div class="item item-carousel">
+                            <div class="products">
+                                <div class="product">
+                                    <div class="product-image">
+                                        <div class="image">
+                                            <a href="detail.html">
+                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
+                                            </a>
+                                        </div><!-- /.image -->
+                                    </div><!-- /.product-image -->
+
+                                    <div class="cart clearfix animate-effect">
+                                        <div class="action">
+                                            <ul class="list-unstyled">
+                                                <li class="add-cart-button btn-group">
+                                                    <button data-toggle="tooltip"
+                                                        class="btn btn-primary icon" type="button"
+                                                        title="Add Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary cart-btn"
+                                                        type="button">Add to cart</button>
+
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.action -->
+                                    </div><!-- /.cart -->
+                                </div><!-- /.product -->
+                            </div><!-- /.products -->
+                        </div><!-- /.item -->
+
+                    </div>
+                </div><!-- card -->
+                <div class="col-md-3 card bg-gray-200">
+                    <div class="card-body">
+
+                        <div class="item item-carousel">
+                            <div class="products">
+                                <div class="product">
+                                    <div class="product-image">
+                                        <div class="image">
+                                            <a href="detail.html">
+                                                <img src=" {{ asset('frontend') }}/assets/images/banners/banner-side.png " alt="" height="250px" width="100%">
+                                            </a>
+                                        </div><!-- /.image -->
+                                    </div><!-- /.product-image -->
+
+                                    <div class="cart clearfix animate-effect">
+                                        <div class="action">
+                                            <ul class="list-unstyled">
+                                                <li class="add-cart-button btn-group">
+                                                    <button data-toggle="tooltip"
+                                                        class="btn btn-primary icon" type="button"
+                                                        title="Add Cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </button>
+                                                    <button class="btn btn-primary cart-btn"
+                                                        type="button">Add to cart</button>
+
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.action -->
+                                    </div><!-- /.cart -->
+                                </div><!-- /.product -->
+                            </div><!-- /.products -->
+                        </div><!-- /.item -->
+
+                    </div>
+                </div><!-- card -->
+
+        </div>
+    {{-- Miltiple Image Part End --}}
+
+
+    <br><br>
+    {{-- Multiple image upload start --}}
+    {{-- <div class="row row-sm card pd-20 pd-sm-40 mg-t-50">
+        <div class="col-md-3">
+            <div class="card bg-info tx-white bd-0">
+                <div class="card-body">
+                    <h5 class="card-body-title tx-white">The Card Title</h5>
+                    <p class="card-subtitle tx-normal mg-b-15 tx-white-8">This is the card subtitle</p>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                    <a href="#" class="card-link tx-white-7 hover-white">Card link</a>
+                    <a href="#" class="card-link tx-white-7 hover-white">Another link</a>
+                </div>
+            </div><!-- card -->
+        </div><!-- col-md-3 -->
+        <div class="col-md-3">
+        </div><!-- col-md-3 -->
+        <div class="col-md-3">
+
+        </div><!-- col-md-3 -->
+    </div> --}}
+    {{-- Multiple image upload end --}}
 </div>
 {{-- Page Content End --}}
 <br><br><br>
+
 @endsection
 @section('scripts')
 <script>
@@ -423,36 +617,36 @@ active
         /* ==== ajax request ==== */
     });
 
-// ########################### Subcategory wise Sub Subcategory  ###########################
-$("select[name='subcategory_id']").on('change', function (event) {
-    var subcatg_id = $(this).val();
+    // ########################### Subcategory wise Sub Subcategory  ###########################
+    $("select[name='subcategory_id']").on('change', function (event) {
+        var subcatg_id = $(this).val();
 
-    /* ==== ajax request ==== */
-    if (subcatg_id) {
-        $.ajax({
-            url: "{{ url('subcategory-wise/subsubcategory/') }}/" + subcatg_id,
-            type: "GET",
-            dataType: "json",
-            success: function (data) {
-                // response
-                if (data == "") {
-                    $('select[name="subsubcategory_id"]').empty();
-                    $('select[name="subsubcategory_id"]').append('<option value="">Brand Not Found!</option>');
-                } else {
-                    $('select[name="subsubcategory_id"]').empty();
-                    $('select[name="subsubcategory_id"]').append('<option value="">Select Brand Name</option>');
-                    // data load
-                    $.each(data, function (key, value) {
-                        $('select[name="subsubcategory_id"]').append('<option value="' + value.subsubcategory_id + '">' + value.subsubcategory_name_en + '</option>');
-                    });
-                    // data load
-                }
-                // response
-            },
-        });
-    }
-    /* ==== ajax request ==== */
-});
+        /* ==== ajax request ==== */
+        if (subcatg_id) {
+            $.ajax({
+                url: "{{ url('subcategory-wise/subsubcategory/') }}/" + subcatg_id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // response
+                    if (data == "") {
+                        $('select[name="subsubcategory_id"]').empty();
+                        $('select[name="subsubcategory_id"]').append('<option value="">Brand Not Found!</option>');
+                    } else {
+                        $('select[name="subsubcategory_id"]').empty();
+                        $('select[name="subsubcategory_id"]').append('<option value="">Select Brand Name</option>');
+                        // data load
+                        $.each(data, function (key, value) {
+                            $('select[name="subsubcategory_id"]').append('<option value="' + value.subsubcategory_id + '">' + value.subsubcategory_name_en + '</option>');
+                        });
+                        // data load
+                    }
+                    // response
+                },
+            });
+        }
+        /* ==== ajax request ==== */
+    });
 
     // ########################### Subcategory wise Brand ###########################
     $("select[name='subcategory_id']").on('change', function (event) {
@@ -517,12 +711,12 @@ $("select[name='subcategory_id']").on('change', function (event) {
     });
 
     //  ################## Selected Single Image preview ###################
-    function MainThumbURL(ipnut){
-        if(input.files && input.files[0]){
+    function MainThumbURL(ipnut) {
+        if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function(e){
-                $('#mainThumb').attr('src',e.target.result).width(80).height(80)
+            reader.onload = function (e) {
+                $('#mainThumb').attr('src', e.target.result).width(80).height(80)
             };
             reader.readAsDataURL(input.files[0]);
         }
