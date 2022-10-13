@@ -119,12 +119,12 @@ active
                 <h6 class="card-body-title">All Brand Items</h6>
                 <br>
                 <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap">
+                    <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
                         <thead>
                             <tr>
                                 <th class="wd-20p">Brand Img</th>
                                 <th class="wd-15p">Cetg Name</th>
-                                <th class="wd-10p">Sb-Cetg Name</th>
+                                <th class="wd-20p">Sb-Cetg Name</th>
                                 <th class="wd-15p">B Name EN</th>
                                 <th class="wd-15p">B Name BN</th>
                                 <th class="wd-15p">Action</th>

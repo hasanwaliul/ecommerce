@@ -93,7 +93,7 @@ active
                 <h6 class="card-body-title">All Sub Categories</h6>
                 <br>
                 <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap">
+                    <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
                         <thead>
                             <tr>
                                 <th class="wd-25p">Category Name</th>

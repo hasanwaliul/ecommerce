@@ -1,9 +1,6 @@
 @extends('admin.layouts.master')
 @section('title', 'Brands')
-@section('categories')
-active show-sub
-@endsection
-@section('add-brands')
+@section('brands')
 active
 @endsection
 @section('content')

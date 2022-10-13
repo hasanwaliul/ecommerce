@@ -88,15 +88,15 @@ active show-sub
                 <h6 class="card-body-title">All Categories</h6>
                 <br>
                 <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap">
+                    <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
                         <thead>
                             <tr>
                                 <th class="wd-20p">Category Image</th>
                                 <th class="wd-20p">Category Name EN</th>
                                 <th class="wd-20p">Category Name BN</th>
-                                <th class="wd-20p">Created At</th>
-                                <th class="wd-20p">Updated At</th>
-                                <th class="wd-10p">Status</th>
+                                <th class="wd-15p">Created At</th>
+                                <th class="wd-15p">Updated At</th>
+                                <th class="wd-20p">Status</th>
                                 <th class="wd-10p">Action</th>
                             </tr>
                         </thead>
