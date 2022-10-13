@@ -362,23 +362,17 @@ active
                                     <div class="product">
                                         <div class="product-image">
                                             <div class="image">
-                                                <a href="#">
                                                     <img src="{{ asset($image->photo_name) }}" alt="" width="100%">
-                                                </a>
                                             </div><!-- /.image -->
                                         </div><!-- /.product-image -->
-
                                         <div class="cart clearfix animate-effect">
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                        <button data-toggle="tooltip"
-                                                        class="btn btn-primary" title="Delete" id="delete"><i
-                                                        class="tx-18 fa fa-trash"></i>
-                                                        </button>
-                                                        <button class="btn btn-danger cart-btn"
-                                                            type="button">Delete</button>
-
+                                                        <a href=" {{ url('admin/product-multiImg/delete/'. $image->multiImg_id ) }} " data-toggle="tooltip" class="btn btn-primary" title="Delete" id="delete">
+                                                            <i class="tx-18 fa fa-trash">  </i>
+                                                        </a>
+                                                        <button class="btn btn-danger cart-btn" type="button">Delete</button>
                                                     </li>
                                                 </ul>
                                             </div><!-- /.action -->

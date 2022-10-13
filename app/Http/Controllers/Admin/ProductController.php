@@ -283,6 +283,24 @@ class ProductController extends Controller
             Session::flash('error', 'Somthing Went wrong! Please try again later');
             return redirect()->back();
         }
+    }
+
+    public function productMultiImgDelete($id){
+        // dd('This is for delete request');
+        $oldImage = MultiImg::where('multiImg_id', $id)->first();
+        // dd($oldImage->photo_name);
+        unlink($oldImage->photo_name);
+
+        $multiImgDelete = MultiImg::where('multiImg_id', $id)->delete();
+
+        if($multiImgDelete){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Product Multiple Image Deleted Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
 
     }
 
