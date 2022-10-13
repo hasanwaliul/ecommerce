@@ -123,11 +123,11 @@ active
                         <thead>
                             <tr>
                                 <th class="wd-20p">Brand Img</th>
-                                <th class="wd-15p">Cetg Name</th>
-                                <th class="wd-20p">Sb-Cetg Name</th>
-                                <th class="wd-15p">B Name EN</th>
-                                <th class="wd-15p">B Name BN</th>
-                                <th class="wd-15p">Action</th>
+                                <th class="wd-20p">Ctg Name</th>
+                                <th class="wd-20p">Sb-Ctg Name</th>
+                                <th class="wd-20p">B Name EN</th>
+                                <th class="wd-10p">B Name BN</th>
+                                <th class="wd-10p">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
