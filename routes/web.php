@@ -75,6 +75,12 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('manage-products', [ProductController::class, 'productDataManage'])->name('products-manage');
     Route::get('product-edit/{id}', [ProductController::class, 'productDataEdit'])->name('product-data-edit');
     Route::post('product-data/update', [ProductController::class, 'productDataUpdate'])->name('product-data-update');
+
+    // #################### Product Active & Inactive Part  ####################
+    Route::get('product-inactive/{id}', [ProductController::class, 'productDataInactive'])->name('product-data-inactive');
+    Route::get('product-active/{id}', [ProductController::class, 'productDataActive'])->name('product-data-active');
+
+    // #################### Product Multi Image Part  ####################
     Route::post('product-multiImg/update', [ProductController::class, 'productMultiImgUpdate'])->name('product-multiImg-update');
     Route::get('product-multiImg/delete/{id}', [ProductController::class, 'productMultiImgDelete'])->name('product-multiImg-delete');
 

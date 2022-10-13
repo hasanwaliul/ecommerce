@@ -248,8 +248,45 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+    // ############################## Product Data Active & Inactive Start ################################
+    public function productDataInactive($id){
+        // dd('This is for inactive request');
+        $productInactive = Product::where('product_id', $id)->update([
+            'product_status' => 0,
+            'updated_at' => Carbon::now(),
+        ]);
 
-    // Multi Image Update
+        if($productInactive){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('products-manage')->with('message','Product Activated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
+    public function productDataActive($id){
+        // dd('This is for active request');
+        $producActive = Product::where('product_id', $id)->update([
+            'product_status' => 1,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if($producActive){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('products-manage')->with('error','Product Data Inactive Now!'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
+    // ############################## Product Data Active & Inactive End ################################
+
+    // ################################ Multi Image Update & Delete Start ################################
+
     public function productMultiImgUpdate(Request $request){
 
         $multiImages = $request->product_mtpImg;
@@ -301,7 +338,7 @@ class ProductController extends Controller
             Session::flash('error', 'Somthing Went wrong! Please try again later');
             return redirect()->back();
         }
-
     }
+     // ################################ Multi Image Update & Delete End ################################
 
 }
