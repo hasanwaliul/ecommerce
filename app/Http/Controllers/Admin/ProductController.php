@@ -251,8 +251,15 @@ class ProductController extends Controller
 
     // Multi Image Update
     public function productMultiImgUpdate(Request $request){
-        $multiImages = $request->multiImg;
-        dd($request->all());
+
+        $multiImages = $request->product_mtpImg;
+        // dd($multiImages);
+
+        $this->validate($request, [
+            'product_mtpImg' => 'required',
+        ], [
+            'product_mtpImg.required' => 'Please select image first for update',
+        ]);
 
         foreach ($multiImages as $multiImg_id => $multiImg) {
             $imgDel = MultiImg::where('multiImg_id', $multiImg_id)->first();

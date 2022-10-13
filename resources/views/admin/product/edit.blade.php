@@ -352,9 +352,10 @@ active
         <h5 class="card-body-title">Update Product Image</h5>
         <form action=" {{ route('product-multiImg-update') }} " method="post" enctype="multipart/form-data">
             @csrf
-            <div class="row row-sm">
+            <div class="form-layout">
+                <div class="row mg-b-25">
                 @foreach ($multiImage as $image)
-                    <div class="col-md-3 card bg-gray-300">
+                    <div class="col-lg-3 card bg-gray-300">
                         <div class="card-body">
                             <div class="item item-carousel">
                                 <div class="products">
@@ -362,7 +363,7 @@ active
                                         <div class="product-image">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="{{ asset($image->photo_name) }}" alt="" height="250px" width="100%">
+                                                    <img src="{{ asset($image->photo_name) }}" alt="" width="100%">
                                                 </a>
                                             </div><!-- /.image -->
                                         </div><!-- /.product-image -->
@@ -385,25 +386,29 @@ active
                                     </div><!-- /.product -->
                                 </div><!-- /.products -->
                             </div><!-- /.item -->
-                            <br>
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="multiImg[{{$image->multiImg_id}}] ">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-control-label">Change Image <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="Check" placeholder="This is for check">
-                                </div>
+                        </div><!-- /.card -->
+                        <br>
+                        <div class="card-text">
+                            <div class="form-group mg-t-5-force">
+                                <label class="form-control-label">Product Multiple Image: <span
+                                        class="tx-danger">*</span></label>
+                                <input class="form-control" type="file" name="product_mtpImg[{{$image->multiImg_id}}]"
+                                    value=" {{ old('product_mtpImg') }} "multiple>
+                                @error('product_mtpImg')
+                                <span class="text-danger"> {{ $message }} </span>
+                                @enderror
                             </div>
                         </div>
-                    </div><!-- card --> <!-- col-md-3 -->
+                    </div><!-- col-4 -->
                 @endforeach
-            </div> <!-- row -->
-            <div class="form-layout-footer mg-t-30  form-group text-center">
-                <button type="submit" class="btn btn-info mg-r-5">Update Image</button>
-            </div><!-- form-layout-footer -->
+                </div><!-- row -->
+
+                <div class="text-center form-layout-footer mg-t-30-force">
+                    <button type="submit" class="btn btn-info mg-r-5">Update Image</button>
+                </div><!-- form-layout-footer -->
+            </div><!-- form-layout -->
         </form>
+
     {{-- Miltiple Image Part End --}}
 
 </div>
