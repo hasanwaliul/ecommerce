@@ -76,6 +76,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('product-edit/{id}', [ProductController::class, 'productDataEdit'])->name('product-data-edit');
     Route::post('product-data/update', [ProductController::class, 'productDataUpdate'])->name('product-data-update');
 
+    // #################### Single Product Information View  ####################
+    Route::get('product-info/{id}', [ProductController::class, 'singleProductInfo'])->name('single-product-info');
+
     // #################### Product Active & Inactive Part  ####################
     Route::get('product-inactive/{id}', [ProductController::class, 'productDataInactive'])->name('product-data-inactive');
     Route::get('product-active/{id}', [ProductController::class, 'productDataActive'])->name('product-data-active');

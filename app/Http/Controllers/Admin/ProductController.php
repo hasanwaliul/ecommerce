@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
+    // ############################## Individual Product view ##############################
+    public function singleProductInfo($id){
+        dd("This is for single product Data view");
+        return view('admin.product.view');
+    }
+
     public function index(){
         $categories = Category::latest()->get();
         return view('admin.product.index', compact('categories'));
@@ -285,7 +291,7 @@ class ProductController extends Controller
 
     // ############################## Product Data Active & Inactive End ################################
 
-    // ################################ Multi Image Update & Delete Start ################################
+    // ################################ Product Multi Image Update & Delete Start ################################
 
     public function productMultiImgUpdate(Request $request){
 

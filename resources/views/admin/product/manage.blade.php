@@ -52,7 +52,7 @@ active
                                             $amount = $product->selling_price - $product->discount_price;
                                             $discount = ($amount / $product->selling_price) * 100;
                                         @endphp
-                                            <span class="badge badge-pill badge-success"> {{ round($discount) }}% </span>
+                                            <span class="badge badge-pill badge-warning"> {{ round($discount) }}% </span>
                                     @endif
                                 </td>
                                 <td>
@@ -63,7 +63,7 @@ active
                                     @endif
                                 </td>
                                 <td>
-                                    <a href=" {{ url('admin/product-edit/'. $product->product_id) }} " class="btn btn-secondary" title="View">
+                                    <a href=" {{ url('admin/product-info/'. $product->product_id) }} " class="btn btn-secondary" title="View">
                                         <i class="tx-18 fa fa-eye"></i>
                                     </a>
 
