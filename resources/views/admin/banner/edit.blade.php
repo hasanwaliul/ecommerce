@@ -38,7 +38,8 @@ active
                     @csrf
                     <input type="hidden" name="old_image" value=" {{ $bannerData->banner_img }} ">
                     <input type="hidden" name="id" value=" {{ $bannerData->banner_id }} ">
-
+                    @if ($bannerData->banner_title_en == null)
+                    @else
                     <div class="row mg-t-10 form-group  {{ $errors->has('banner_title_en') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Banner Title EN: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -100,6 +101,7 @@ active
                             @enderror
                         </div>
                     </div><!-- row -->
+                    @endif
                     <div class="row mg-t-20  form-group  {{ $errors->has('banner_img') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Banner Image: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
