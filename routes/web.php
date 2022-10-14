@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -61,7 +62,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('subsubcategory-data/update', [CategoryController::class, 'subSubCategoryDataUpdate'])->name('sub-sub-category-data-update');
     Route::get('subsubcategory-delete/{id}', [CategoryController::class, 'subSubCategoryDataDelete'])->name('sub-sub-category-data-delete');
 
-
     // #################### Brand Part ####################
     Route::get('all-brand', [BrandController::class, 'index'])->name('brands');
     Route::post('brand/add', [BrandController::class, 'brandDataAdd'])->name('brand-add');
@@ -69,23 +69,38 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('brand-data/update', [BrandController::class, 'brandDataUpdate'])->name('brand-data-update');
     Route::get('brand-delete/{id}', [BrandController::class, 'brandDataDelete'])->name('brand-data-delete');
 
-    // #################### Product Part  ####################
+    /* ###########################################################################################
+          ############################### Product Part Start  ###############################
+       ########################################################################################### */
     Route::get('all-product', [ProductController::class, 'index'])->name('products');
     Route::post('product/add', [ProductController::class, 'productDataAdd'])->name('product-add');
     Route::get('manage-products', [ProductController::class, 'productDataManage'])->name('products-manage');
     Route::get('product-edit/{id}', [ProductController::class, 'productDataEdit'])->name('product-data-edit');
     Route::post('product-data/update', [ProductController::class, 'productDataUpdate'])->name('product-data-update');
-
-    // #################### Single Product Information View  ####################
+    // ########## Single Product Information View  ##########
     Route::get('product-info/{id}', [ProductController::class, 'singleProductInfo'])->name('single-product-info');
-
-    // #################### Product Active & Inactive Part  ####################
+    // ########## Product Active & Inactive Part  ##########
     Route::get('product-inactive/{id}', [ProductController::class, 'productDataInactive'])->name('product-data-inactive');
     Route::get('product-active/{id}', [ProductController::class, 'productDataActive'])->name('product-data-active');
-
-    // #################### Product Multi Image Part  ####################
+    // ########## Product Multi Image Part  ##########
     Route::post('product-multiImg/update', [ProductController::class, 'productMultiImgUpdate'])->name('product-multiImg-update');
     Route::get('product-multiImg/delete/{id}', [ProductController::class, 'productMultiImgDelete'])->name('product-multiImg-delete');
+
+    //  ################################## Product Part End #################################
+
+    //  ################################## Banner Part Start #################################
+    Route::get('banner', [BannerController::class, 'index'])->name('banners');
+    Route::post('banner/add', [BannerController::class, 'bannerDataAdd'])->name('banner-add');
+    Route::get('banner-edit/{id}', [BannerController::class, 'bannerDataEdit'])->name('banner-data-edit');
+    Route::post('banner-data/update', [BannerController::class, 'bannerDataUpdate'])->name('banner-data-update');
+    Route::get('banner-delete/{id}', [BannerController::class, 'bannerDataDelete'])->name('banner-data-delete');
+
+    //  ################################## Slider Part Start #################################
+
+
+
+
+
 
 
 

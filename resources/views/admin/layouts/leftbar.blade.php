@@ -24,6 +24,18 @@
         </div><!-- menu-item -->
       </a><!-- sl-menu-link -->
 
+      <a href="#" class="sl-menu-link @yield('banners')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon fa fa-bars tx-20"></i>
+          <span class="menu-item-label">Banner</span>
+          <i class="menu-item-arrow fa fa-angle-down"></i>
+        </div><!-- menu-item -->
+      </a><!-- sl-menu-link -->
+      <ul class="sl-menu-sub nav flex-column">
+        <li class="nav-item"><a href=" {{ route('banners') }} " class="nav-link @yield('add-banner')">Add Banner</a></li>
+      </ul>
+
+
       <a href=" {{ route('brands') }} " class="sl-menu-link @yield('brands')">
         <div class="sl-menu-item">
           {{-- <i class="fa fa-snowflake-o tx-20"></i> --}}
