@@ -38,17 +38,6 @@ active show-sub
                 <h6 class="card-body-title">Add New Category</h6>
                 <form action=" {{ route('category-add') }} " method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="row mg-t-20  form-group {{ $errors->has('category_image') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">Category Image: <span class="tx-danger">*</span></label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="file" class="custom-file-input" name="category_image" id="categImg">
-                            <span class="custom-file-control custom-file-control-inverse"></span>
-                            @error('category_image')
-                            <span class="text-danger"> {{ $message }} </span>
-                            @enderror
-                            <div class="row" id="preview_image"></div>
-                        </div>
-                    </div>
                     <div class="row mg-t-20 form-group {{ $errors->has('category_name_en') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Name EN: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -71,6 +60,17 @@ active show-sub
                             @enderror
                         </div>
                     </div><!-- row -->
+                    <div class="row mg-t-20  form-group {{ $errors->has('category_image') ? ' has-error' : '' }}">
+                        <label class="col-sm-4 form-control-label">Category Image: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="file" class="custom-file-input" name="category_image" id="categImg">
+                            <span class="custom-file-control custom-file-control-inverse"></span>
+                            @error('category_image')
+                            <span class="text-danger"> {{ $message }} </span>
+                            @enderror
+                            <div class="row" id="preview_image"></div>
+                        </div>
+                    </div>
                     <div class="form-layout-footer mg-t-30  form-group">
                         <button type="submit" class="btn btn-info mg-r-5">Add New</button>
                     </div><!-- form-layout-footer -->

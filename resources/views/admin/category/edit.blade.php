@@ -38,18 +38,6 @@ active show-sub
                 @csrf
                 <input type="hidden" name="old_image" value=" {{ $category->category_image }} ">
                 <input type="hidden" name="category_id" value=" {{ $category->category_id }} ">
-                <div class="row mg-t-20  form-group {{ $errors->has('category_image') ? ' has-error' : '' }}">
-                    <label class="col-sm-4 form-control-label">Category Image: <span class="tx-danger">*</span></label>
-                    <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                        <input type="file" class="custom-file-input" name="category_image" value=" {{ $category->category_image }} " id="categImg">
-                        <span class="custom-file-control custom-file-control-inverse">
-                            @error('category_image')
-                            <span class="text-danger"> {{ $message }} </span>
-                            @enderror
-                        </span>
-                        <div class="row" id="preview_image"></div>
-                    </div>
-                </div>
                 <div class="row mg-t-20 form-group {{ $errors->has('category_name_en') ? ' has-error' : '' }}">
                     <label class="col-sm-4 form-control-label">Category Name EN: <span class="tx-danger">*</span></label>
                     <div class="col-sm-8 mg-t-10 mg-sm-t-0">
@@ -70,6 +58,18 @@ active show-sub
                         @error('category_name_bn')
                         <span class="text-danger"> {{ $message }} </span>
                         @enderror
+                    </div>
+                </div>
+                <div class="row mg-t-20  form-group {{ $errors->has('category_image') ? ' has-error' : '' }}">
+                    <label class="col-sm-4 form-control-label">Category Image: <span class="tx-danger">*</span></label>
+                    <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                        <input type="file" class="custom-file-input" name="category_image" value=" {{ $category->category_image }} " id="categImg">
+                        <span class="custom-file-control custom-file-control-inverse">
+                            @error('category_image')
+                            <span class="text-danger"> {{ $message }} </span>
+                            @enderror
+                        </span>
+                        <div class="row" id="preview_image"></div>
                     </div>
                 </div>
                 <div class="form-layout-footer mg-t-30  form-group">
