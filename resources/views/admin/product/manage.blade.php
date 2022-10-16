@@ -63,7 +63,7 @@ active
                                     @endif
                                 </td>
                                 <td>
-                                    <a href=" {{ url('admin/product-info/'. $product->product_id) }} " class="btn btn-secondary" title="View">
+                                    <a href=" {{ url('admin/product-info/'. $product->product_id) }} " class="btn btn-primary" title="View">
                                         <i class="tx-18 fa fa-eye"></i>
                                     </a>
 

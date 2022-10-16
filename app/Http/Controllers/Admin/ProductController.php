@@ -15,8 +15,10 @@ class ProductController extends Controller
 {
     // ############################## Individual Product view ##############################
     public function singleProductInfo($id){
-        dd("This is for single product Data view");
-        return view('admin.product.view');
+        // dd("This is for single product Data view");
+        $productData = Product::where('product_id', $id)->first();
+        // dd($productData);
+        return view('admin.product.view', compact('productData'));
     }
 
     public function index(){
@@ -257,14 +259,14 @@ class ProductController extends Controller
     // ############################## Product Data Active & Inactive Start ################################
     public function productDataInactive($id){
         // dd('This is for inactive request');
-        $productInactive = Product::where('product_id', $id)->update([
+        $productDective = Product::where('product_id', $id)->update([
             'product_status' => 0,
             'updated_at' => Carbon::now(),
         ]);
 
-        if($productInactive){
+        if($productDective){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-            return redirect()->route('products-manage')->with('message','Product Activated Successfully'); //Toastr alert
+            return redirect()->route('products-manage')->with('error','Product Data Inactive Now!'); //Toastr alert
         }else {
             // Session::flash('error', 'Somthing Went wrong! Please try again later');
             Session::flash('error', 'Somthing Went wrong! Please try again later');
@@ -281,7 +283,7 @@ class ProductController extends Controller
 
         if($producActive){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-            return redirect()->route('products-manage')->with('error','Product Data Inactive Now!'); //Toastr alert
+            return redirect()->route('products-manage')->with('message','Product Activated Successfully'); //Toastr alert
         }else {
             // Session::flash('error', 'Somthing Went wrong! Please try again later');
             Session::flash('error', 'Somthing Went wrong! Please try again later');
