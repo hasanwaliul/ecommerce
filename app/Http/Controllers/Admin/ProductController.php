@@ -349,4 +349,36 @@ class ProductController extends Controller
     }
      // ################################ Multi Image Update & Delete End ################################
 
+    public function productMainThumbnailUpdate(Request $request){
+        // dd($request->all());
+        $this->validate($request, [
+            'product_mainThmb' => 'required',
+        ], [
+            'product_mainThmb.required' => 'Please select product main thumbnail image for update',
+        ]);
+
+        $product_id = $request->product_id;
+        $old_Img = $request->old_img;
+        unlink($old_Img);
+
+        $image = $request->file('product_mainThmb');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(917,1000)->save('uploads/products/thumbnail/'.$name_gen);
+        $save_url = 'uploads/products/thumbnail/'.$name_gen;
+
+        $productInfo = Product::where('product_id', $product_id)->update([
+            'product_thumbnail' => $save_url,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if($productInfo){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Product Main Thumbnail Image Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
 }

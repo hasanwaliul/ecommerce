@@ -509,7 +509,7 @@ active
     });
 
     //  ################## Selected Single Image preview ###################
-    function MainThumbURL(ipnut){
+    function maniThambUrl(ipnut){
         if(input.files && input.files[0]){
             var reader = new FileReader();
 

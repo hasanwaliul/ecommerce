@@ -346,6 +346,70 @@ active
         <div class="col-md-1"></div>
     </div>
     {{-- Form part End --}}
+    {{-- Update Product Main Thumbnail Start  --}}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card pd-20 pd-sm-40 mg-t-50">
+                <h5 class="card-body-title"> &nbsp; &nbsp;Update Main Thumbnail Image</h5>
+                <br>
+                <form action=" {{ route('product-mainThumb-update') }} " method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-layout">
+                        <div class="row">
+                            <div class="col-lg-12 card bg-gray-300">
+                                <div class="card-body">
+                                    <div class="item item-carousel">
+                                        <div class="products">
+                                            <div class="product">
+                                                <div class="product-image">
+                                                    <div class="image">
+                                                            <img src="{{ asset($productData->product_thumbnail) }}" alt="" width="100%">
+                                                    </div><!-- /.image -->
+                                                </div><!-- /.product-image -->
+                                                <!--<div class="cart clearfix animate-effect">
+                                                    <div class="action">
+                                                        <ul class="list-unstyled">
+                                                            <li class="add-cart-button btn-group">
+                                                                {{-- <a href=" {{ url('admin/product-multiImg/delete/'. $image->multiImg_id ) }} " data-toggle="tooltip" class="btn btn-primary" title="Delete" id="delete">
+                                                                    <i class="tx-18 fa fa-trash">  </i>
+                                                                </a> --}}
+                                                                <button class="btn btn-danger cart-btn" type="button">Delete</button>
+                                                            </li>
+                                                        </ul>
+                                                    </div> //.action
+                                                </div> /.cart -->
+                                            </div><!-- /.product -->
+                                        </div><!-- /.products -->
+                                    </div><!-- /.item -->
+                                </div><!-- /.card -->
+                                <br>
+                                <div class="card-text">
+                                    <input type="hidden" name="old_img" value=" {{ $productData->product_thumbnail }} ">
+                                    <input type="hidden" name="product_id" value=" {{ $productData->product_id  }} ">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Product Main Thumbnail Image: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" type="file" name="product_mainThmb"
+                                            value=" {{ old('product_mainThmb') }} ">
+                                        @error('product_mainThmb')
+                                        <span class="text-danger"> {{ $message }} </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div><!-- col-4 -->
+                        </div><!-- row -->
+
+                        <div class="text-center form-layout-footer mg-t-30-force">
+                            <button type="submit" class="btn btn-info mg-r-5">Update MainThmb</button>
+                        </div><!-- form-layout-footer -->
+                    </div><!-- form-layout -->
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+    {{-- Update Product Main Thumbnail End  --}}
 
     {{-- Miltiple Image Part Start --}}
     <div class="card pd-20 pd-sm-40 mg-t-50">
@@ -402,7 +466,7 @@ active
                 </div><!-- form-layout-footer -->
             </div><!-- form-layout -->
         </form>
-
+    </div>
     {{-- Miltiple Image Part End --}}
 
 </div>
