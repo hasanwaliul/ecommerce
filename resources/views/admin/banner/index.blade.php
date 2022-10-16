@@ -137,6 +137,15 @@ active
                                     @endif
                                 </td>
                                 <td>
+                                    @if ($banner->banner_status == 1)
+                                        <a href=" {{ url('admin/banner-inactive/'.  $banner->banner_id) }} " class="btn btn-danger" title=" Inactive ">
+                                            <i class="tx-18 fa fa-toggle-on"></i>
+                                        </a>
+                                    @else
+                                        <a href=" {{ url('admin/banner-active/'.  $banner->banner_id) }} " class="btn btn-success" title="Active now">
+                                            <i class="tx-18 fa fa-toggle-off"></i>
+                                        </a>
+                                    @endif
                                     <a href=" {{ url('admin/banner-edit/'. $banner->banner_id) }} "
                                         class="btn btn-primary" title="Edit"><i
                                             class="tx-18 fa fa-pencil-square-o"></i></a>

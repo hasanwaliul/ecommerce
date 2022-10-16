@@ -96,8 +96,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('banner-edit/{id}', [BannerController::class, 'bannerDataEdit'])->name('banner-data-edit');
     Route::post('banner-data/update', [BannerController::class, 'bannerDataUpdate'])->name('banner-data-update');
     Route::get('banner-delete/{id}', [BannerController::class, 'bannerDataDelete'])->name('banner-data-delete');
+    //  ################################## Banner Active && Inactive #################################
+    Route::get('banner-inactive/{id}', [BannerController::class, 'BannerDataInactive'])->name('banner-data-inactive');
+    Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
 
-    //  ################################## Slider Part Start #################################
+    //  ################################## Banner Part End #################################
 
 
 

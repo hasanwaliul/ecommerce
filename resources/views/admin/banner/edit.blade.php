@@ -84,23 +84,6 @@ active
                             @enderror
                         </div>
                     </div><!-- row -->
-
-                    <div class="row mg-t-20 form-group  {{ $errors->has('brand_status') ? ' has-error' : '' }}">
-                        {{-- Select option with search facility --}}
-                        <label class="col-sm-4 form-control-label">Select Sub Category: <span
-                                class="tx-danger">*</span></label>
-                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <select class="form-control select2-show-search" name="brand_status"
-                                data-placeholder="Choose one">
-                                <option label="Choose one"></option>
-                                <option value="1">Active</option>
-                                <option value="0">In Active</option>
-                            </select>
-                            @error('brand_status')
-                            <span class="text-danger"> {{ $message }} </span>
-                            @enderror
-                        </div>
-                    </div><!-- row -->
                     @endif
                     <div class="row mg-t-20  form-group  {{ $errors->has('banner_img') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Banner Image: <span class="tx-danger">*</span></label>
