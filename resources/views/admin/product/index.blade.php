@@ -242,6 +242,18 @@ active
                                 </div><!-- col-4 -->
                                 <div class="col-lg-4">
                                     <div class="form-group mg-t-20-force">
+                                        <label class="form-control-label">Product Main Thumbnail: <span
+                                                class="tx-danger">*</span></label>
+                                        <input class="form-control" type="file" name="product_mainthumb" id="mainThmb" placeholder="Enter Product Discount Price"
+                                            value=" {{ old('product_mainthumb') }} " onchange="maniThambUrl(this)">
+                                        @error('product_mainthumb')
+                                        <span class="text-danger"> {{ $message }} </span>
+                                        @enderror
+                                        <img src="" id="mainThmb">
+                                    </div>
+                                </div><!-- col-4 -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mg-t-20-force">
                                         <label class="form-control-label">Product Multiple Image: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="file" name="product_mtpImg[]" id="multiImg"
