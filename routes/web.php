@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\LanguageController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -100,8 +101,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('banner-inactive/{id}', [BannerController::class, 'BannerDataInactive'])->name('banner-data-inactive');
     Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
 
-    //  ################################## Banner Part End #################################
-
+    //  ################################## Multiple Language Part Start #################################
+    Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
+    Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
 
 
 
