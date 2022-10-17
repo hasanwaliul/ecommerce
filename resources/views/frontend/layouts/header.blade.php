@@ -6,12 +6,20 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+                        <li><a href="#"><i class="icon fa fa-heart"></i>
+                                @if (Session()->get('language') == 'bangla') ইচ্ছেতালিকা @else Wishlist @endif
+                            </a>
+                        </li>
+                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
+                                @if (Session()->get('language') == 'bangla') আমার বাঁজার @else My Cart @endif
+                            </a>
+                        </li>
+                        {{-- <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li> --}}
                         <li>
                             @auth
-                            <a href="{{ route('user-dashboard') }}"><i class="fa fa-tachometer"></i> Dashboard</a>
+                            <a href="{{ route('user-dashboard') }}"><i class="fa fa-tachometer"></i>
+                                @if (Session()->get('language') == 'bangla') ড্যাশবোর্ড @else Dashboard @endif
+                            </a>
                             @else
                             {{-- <a href="#"><i class="icon fa fa-user"></i>My Profile</a> --}}
                             @endauth
@@ -21,13 +29,15 @@
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                                 <i class="fa fa-power-off" aria-hidden="true"></i>
-                                Sign Out
+                                @if (Session()->get('language') == 'bangla') সাইন আউট @else Sign Out @endif
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                             @else
-                            <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a>
+                            <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>
+                                @if (Session()->get('language') == 'bangla') লগইন / রেজিস্টার @else Login/Register @endif
+                            </a>
                             @endauth
                         </li>
                     </ul>
@@ -143,7 +153,6 @@
                                     </span>
                                 </div>
 
-
                             </div>
                         </a>
                         <ul class="dropdown-menu">
@@ -183,7 +192,6 @@
                                         class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
                                 </div><!-- /.cart-total-->
 
-
                             </li>
                         </ul><!-- /.dropdown-menu-->
                     </div><!-- /.dropdown-cart -->
@@ -214,16 +222,20 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown">Home</a>
+                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"> @if (Session()->get('language') == 'bangla') হোম @else Home @endif</a>
                                 </li>
                                 @php
                                 $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                                 @endphp
                                 @foreach ($categories as $category)
                                 <li class="dropdown yamm mega-menu">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle"
-                                        data-toggle="dropdown"> {{ $category->category_name_en }} </a>
+                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                                        @if (Session()->get('language') == 'bangla')
+                                            {{ $category->category_name_bn }}
+                                         @else
+                                            {{ $category->category_name_en }}
+                                        @endif
+                                    </a>
                                     <ul class="dropdown-menu container">
                                         <li>
                                             <div class="yamm-content ">
@@ -236,10 +248,12 @@
                                                     @foreach ($subcategories as $subcategory)
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                                                         <a href="">
-                                                            <h2 class="title"> {{ $subcategory->subcategory_name_en }}
-                                                            </h2>
+                                                            @if (Session()->get('language') == 'bangla')
+                                                                <h2 class="title"> {{ $subcategory->subcategory_name_bn }}</h2>
+                                                            @else
+                                                                <h2 class="title"> {{ $subcategory->subcategory_name_en }}</h2>
+                                                            @endif
                                                         </a>
-
                                                         @php
                                                         $brands = App\Models\Brand::where('subcategory_id',
                                                         $subcategory->subcategory_id)->orderBy('brand_name_en',
@@ -247,12 +261,17 @@
                                                         @endphp
                                                         <ul class="links">
                                                             @foreach ($brands as $brand)
-                                                            <li><a href="#"> {{ $brand->brand_name_en }} </a></li>
+                                                                @if (Session()->get('language') == 'bangla')
+                                                                    <li><a href="#"> {{ $brand->brand_name_bn }} </a></li>
+                                                                @else
+                                                                    <li><a href="#"> {{ $brand->brand_name_en }} </a></li>
+                                                                @endif
                                                             @endforeach
                                                         </ul>
                                                     </div><!-- /.col -->
                                                     @endforeach
                                                 </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </li>
@@ -267,12 +286,10 @@
                         </div><!-- /.nav-outer -->
                     </div><!-- /.navbar-collapse -->
 
-
                 </div><!-- /.nav-bg-class -->
             </div><!-- /.navbar-default -->
         </div><!-- /.container-class -->
 
     </div><!-- /.header-nav -->
     <!-- ============================================== NAVBAR : END ============================================== -->
-
 </header>
