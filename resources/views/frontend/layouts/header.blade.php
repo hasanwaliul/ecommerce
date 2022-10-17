@@ -36,21 +36,33 @@
                 <div class="cnt-block">
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span
-                                    class="value">USD </span><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                <span class="value">@if (Session()->get('language') == 'bangla') মুদ্রা নির্বাচন করুন @else USD @endif
+                                </span>
+                                <b class="caret"></b>
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
+                                @if (Session()->get('language') == 'bangla')
+                                    <li><a href="#">USD</a></li>
+                                @else
+                                    <li><a href="#">টাকা</a></li>
+                                @endif
                             </ul>
                         </li>
 
                         <li class="dropdown dropdown-small">
-                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span
-                                    class="value">English </span><b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
+                                <span class="value">
+                                     @if (Session()->get('language') == 'bangla') ভাষা পরিবর্তন করুন @else English @endif
+                                </span>
+                                <b class="caret"></b>
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">Bangla</a></li>
+                                @if (Session()->get('language') == 'bangla')
+                                    <li><a href=" {{ route('english-language') }} ">English</a></li>
+                                @else
+                                    <li><a href=" {{ route('bangla-language') }} ">বাংলা</a></li>
+                                @endif
                             </ul>
                         </li>
                     </ul><!-- /.list-unstyled -->
