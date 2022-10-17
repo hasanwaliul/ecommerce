@@ -108,7 +108,7 @@ class ProductController extends Controller
             'product_size_bn' => $request->product_size_bn,
             'product_color_en' => $request->product_color_en,
             'product_color_bn' => $request->product_color_bn,
-            'selling_price' => $request->product_selling_price,
+            'actual_price' => $request->product_selling_price,
             'discount_price' => $request->product_disc_price,
             'long_descp_en' => $request->long_descp_en,
             'long_descp_bn' => $request->long_descp_bn,
@@ -127,8 +127,8 @@ class ProductController extends Controller
 
         foreach ($images as $singleImg) {
             $name_gen = hexdec(uniqid()).'.'.$singleImg->getClientOriginalExtension();
-            Image::make($singleImg)->resize(917,1000)->save('uploads/products/thumbnail/multi-image/'.$name_gen);
-            $uploadPath = 'uploads/products/thumbnail/multi-image/'.$name_gen;
+            Image::make($singleImg)->resize(917,1000)->save('uploads/products/multi-image/'.$name_gen);
+            $uploadPath = 'uploads/products/multi-image/'.$name_gen;
 
             $multipleImg = MultiImg::insert([
                 'product_id' => $productData_Id,
@@ -203,8 +203,8 @@ class ProductController extends Controller
             'product_size_bn.required' => 'Please Enter Product Size In Bangla',
             'product_color_en.required' => 'Please Enter Product Color In English',
             'product_color_bn.required' => 'Please Enter Product Color In Bangla',
-            'selling_price.required' => 'Please Enter Product Selling Price',
-            'discount_price.required' => 'Please Enter Product Discount Price',
+            'product_selling_price.required' => 'Please Enter Product Selling Price',
+            'product_disc_price.required' => 'Please Enter Product Discount Price',
             'long_descp_en.required' => 'Please Enter Product Long Description In English',
             'long_descp_bn.required' => 'Please Enter Product Long Description In Bangla',
             'short_descp_en.required' => 'Please Enter Product Short Description In English',
@@ -234,7 +234,7 @@ class ProductController extends Controller
             'product_size_bn' => $request->product_size_bn,
             'product_color_en' => $request->product_color_en,
             'product_color_bn' => $request->product_color_bn,
-            'selling_price' => $request->product_selling_price,
+            'actual_price' => $request->product_selling_price,
             'discount_price' => $request->product_disc_price,
             'long_descp_en' => $request->long_descp_en,
             'long_descp_bn' => $request->long_descp_bn,
@@ -311,8 +311,8 @@ class ProductController extends Controller
             unlink($imgDel->photo_name);
 
             $name_gen = hexdec(uniqid()).'.'.$multiImg->getClientOriginalExtension();
-            Image::make($multiImg)->resize(917,1000)->save('uploads/products/thumbnail/multi-image/'.$name_gen);
-            $uploadPath = 'uploads/products/thumbnail/multi-image/'.$name_gen;
+            Image::make($multiImg)->resize(917,1000)->save('uploads/products/multi-image/'.$name_gen);
+            $uploadPath = 'uploads/products/multi-image/'.$name_gen;
 
             $multiImgUpdate = MultiImg::where('multiImg_id', $multiImg_id)->update([
                 'photo_name' => $uploadPath,

@@ -156,7 +156,7 @@ active
                                         <label class="form-control-label">Product Selling Price: <span
                                                 class="tx-danger">*</span></label>
                                         <input class="form-control" type="text" name="product_selling_price"
-                                            value=" {{ $productData->selling_price }} "
+                                            value=" {{ $productData->actual_price }} "
                                             placeholder="Enter Product Selling Price">
                                         @error('product_selling_price')
                                         <span class="text-danger"> {{ $message }} </span>

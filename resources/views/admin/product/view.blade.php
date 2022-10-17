@@ -84,7 +84,7 @@ active
                                 <tr>
                                     <td><p> {{ $productData->product_size_en }} </p></td>
                                     <td><p> {{ $productData->product_color_en }} </p></td>
-                                    <td><p> {{ $productData->selling_price }} tk </p></td>
+                                    <td><p> {{ $productData->actual_price }} tk </p></td>
                                     <td><p> {{ $productData->discount_price }} tk </p></td>
                                 </tr>
                             </tbody>

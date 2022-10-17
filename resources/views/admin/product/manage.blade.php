@@ -43,14 +43,14 @@ active
                                 </td>
                                 <td> {{ $product->product_name_en }} </td>
                                 <td> {{ Carbon\Carbon::parse($product->created_at)->format('D, d F Y') }} </td>
-                                <td> {{ $product->selling_price }} tk </td>
+                                <td> {{ $product->actual_price }} tk </td>
                                 <td>
                                     @if ($product->discount_price == Null)
                                         <span class="badge badge-pill badge-danger">No</span>
                                     @else
                                         @php
-                                            $amount = $product->selling_price - $product->discount_price;
-                                            $discount = ($amount / $product->selling_price) * 100;
+                                            $amount = $product->actual_price - $product->discount_price;
+                                            $discount = ($amount / $product->actual_price) * 100;
                                         @endphp
                                             <span class="badge badge-pill badge-warning"> {{ round($discount) }}% </span>
                                     @endif
