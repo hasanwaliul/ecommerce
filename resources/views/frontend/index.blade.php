@@ -1118,7 +1118,7 @@
                 </ul><!-- /.nav-tabs -->
             </div>
             <div class="tab-content outer-top-xs">
-
+                {{-- Products Tab Part Start --}}
                 <div class="tab-pane in active" id="all">
                     <div class="product-slider">
                         <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
@@ -1189,6 +1189,7 @@
                         </div><!-- /.home-owl-carousel -->
                     </div><!-- /.product-slider -->
                 </div><!-- /.tab-pane -->
+                {{-- Products Tab Part Start --}}
 
                 @foreach ($categories as $category )
 
@@ -1269,7 +1270,6 @@
                     </div><!-- /.tab-pane -->
 
                 @endforeach
-
             </div><!-- /.tab-content -->
         </div><!-- /.scroll-tabs -->
         <!-- ============================================== SCROLL TABS : END ============================================== -->
