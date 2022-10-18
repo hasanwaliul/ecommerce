@@ -36,6 +36,9 @@
     {{-- tostr cdn --}}
     <link rel="stylesheet" href=" {{ asset('backend') }}/lib/toastr/toastr.min.css">
 
+    {{-- Bootstrap tagsinput --}}
+    <link rel="stylesheet" href=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.css ">
+
 </head>
 
 <body class="cnt-home">
@@ -107,6 +110,9 @@
                 toastr.warning("{{ session('warning') }}");
         @endif
       </script>
+    {{-- ################## Bootstrap Tagsinput  ###################--}}
+    <script src=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js "></script>
+    
     <script src=" {{ asset('frontend') }}/assets/js/jquery-1.11.1.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-hover-dropdown.min.js"></script>
