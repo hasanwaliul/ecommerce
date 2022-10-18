@@ -222,14 +222,14 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"> @if (Session()->get('language') == 'bangla') হোম @else Home @endif</a>
+                                    <a href=" {{ route('frontend') }} " data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"> @if (Session()->get('language') == 'bangla') হোম @else Home @endif</a>
                                 </li>
                                 @php
                                 $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                                 @endphp
                                 @foreach ($categories as $category)
                                 <li class="dropdown yamm mega-menu">
-                                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="#" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">
                                         @if (Session()->get('language') == 'bangla')
                                             {{ $category->category_name_bn }}
                                          @else
@@ -247,7 +247,7 @@
                                                     @endphp
                                                     @foreach ($subcategories as $subcategory)
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <a href="">
+                                                        <a href="#">
                                                             @if (Session()->get('language') == 'bangla')
                                                                 <h2 class="title"> {{ $subcategory->subcategory_name_bn }}</h2>
                                                             @else
