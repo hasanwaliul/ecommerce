@@ -1350,8 +1350,7 @@
                                     <form role="form" class="form-inline form-cnt">
                                         <div class="form-group">
                                             <label>&nbsp;</label>
-                                            <span class="text col-md-offset-3">Use spaces to separate tags. Use single
-                                                quotes (') for phrases.</span>
+                                            <span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
                                         </div>
                                     </form><!-- /.form-cnt -->
 
