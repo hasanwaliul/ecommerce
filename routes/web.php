@@ -26,6 +26,7 @@ Route::get('/clear-cache', function () {
 
     // #################### Frontend  ####################
 Route::get('/',[FrontendController::class, 'index'])->name('frontend');
+Route::get('single-prduct/details/{id}', [FrontendController::class, 'SingleProductDetails'])->name('single-product-details');
 
 // Auth::routes();
 Auth::routes();
