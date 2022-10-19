@@ -15,7 +15,7 @@ class FrontendController extends Controller
         $hot_deals = (new FrontendDataService())->HotDealsRelatedProductInfoCollect();
         $special_offers = (new FrontendDataService())->SpecialOfferRelatedProductInfoCollect();
         // dd($special_offers);
-        return view('frontend.index', compact('categories', 'banners', 'products', 'featureds', 'hot_deals'));
+        return view('frontend.index', compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers'));
     }
 
     public function SingleProductDetails($id, $slug){
