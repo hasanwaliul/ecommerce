@@ -217,7 +217,7 @@ class CategoryController extends Controller
     public function subSubCategoryIndex(){
 
         $categories = (new ProductInfoDataService())->CategoryInfoCollect();
-        $subsubcategories = SubsubCategory::latest()->get();
+        $subsubcategories = (new ProductInfoDataService())->SubsubCategInfoCollect();
         return view('admin.subsubcategory.index', compact('categories', 'subsubcategories'));
     }
 
@@ -236,18 +236,9 @@ class CategoryController extends Controller
             'subsubcateg_name_bn.required' => 'Please Enter Sub sub category name in Bangla',
         ]);
         // dd('After validation');
+        $subsubCatgInsert = (new ProductInfoDataService())->SubsubCategoryDataInsert($request->category_id, $request->subcategory_id, $request->subsubcateg_name_en, $request->subsubcateg_name_bn);
 
-        $subsubcategory = SubsubCategory::insert([
-            'category_id' => $request->category_id,
-            'subcategory_id' => $request->subcategory_id,
-            'subsubcategory_name_en' => $request->subsubcateg_name_en,
-            'subsubcategory_name_bn' => $request->subsubcateg_name_bn,
-            'subsubcategory_slug_en' => strtolower(str_replace(' ', '-',$request->subsubcateg_name_en )),
-            'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-',$request->subsubcateg_name_bn )),
-            'created_at' => Carbon::now(),
-        ]);
-
-        if($subsubcategory){
+        if($subsubCatgInsert){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->back()->with('message','Information Added Successfully'); //Toastr alert
         }else {
@@ -259,7 +250,7 @@ class CategoryController extends Controller
 
     public function subSubCategoryDataEdit($id){
         // dd('Edit request');
-        $subsubcategoryData = SubsubCategory::where('subsubcategory_id', $id)->first();
+        $subsubcategoryData = (new ProductInfoDataService())->FindSingleSubsubCatgoryData($id);
         $categories = (new ProductInfoDataService())->CategoryInfoCollect();
         $subcategories = (new ProductInfoDataService())->SubCategoryInfoColloct();
         return view('admin.subsubcategory.edit', compact('subsubcategoryData', 'categories', 'subcategories'));
@@ -280,16 +271,7 @@ class CategoryController extends Controller
         ]);
         // dd('After validation');
 
-        $id = $request->id;
-        $subsubcategoryDataUpdate = SubsubCategory::where('subsubcategory_id', $id)->update([
-            'category_id' => $request->category_id,
-            'subcategory_id' => $request->subcategory_id,
-            'subsubcategory_name_en' => $request->subsubcateg_name_en,
-            'subsubcategory_name_bn' => $request->subsubcateg_name_bn,
-            'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcateg_name_en)),
-            'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-', $request->subsubcateg_name_bn)),
-            'updated_at' => Carbon::now(),
-        ]);
+        $subsubcategoryDataUpdate = (new ProductInfoDataService())->SubsubCategoryDataUpdate($request->id,$request->category_id, $request->subcategory_id, $request->subsubcateg_name_en, $request->subsubcateg_name_bn);
 
         if($subsubcategoryDataUpdate){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
@@ -303,8 +285,8 @@ class CategoryController extends Controller
 
     public function subSubCategoryDataDelete($id){
         // dd('Delete Request');
-
-        $subsubcategoryDataDelete = SubsubCategory::where('subsubcategory_id', $id)->delete();
+        $subsubcategoryDataDelete = (new ProductInfoDataService())->SingleSubsubCategoryDataDelete($id);
+        
         if($subsubcategoryDataDelete){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->route('sub-sub-categories')->with('message','Sub Subcategory Data Deleted Successfully'); //Toastr alert

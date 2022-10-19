@@ -112,8 +112,41 @@ use Carbon\Carbon;
         // ########################################  Sub Category Part End ########################################
 
         // ########################################  Sub SubCategory Part Start ########################################
+        public function SubsubCategInfoCollect(){
+            return SubsubCategory::latest()->get();
+        }
 
+        public function SubsubCategoryDataInsert($catg_id, $subCatg_id, $subsubCatg_name_en, $subsubCatg_name_bn){
+            return SubsubCategory::insert([
+                'category_id' => $catg_id,
+                'subcategory_id' => $subCatg_id,
+                'subsubcategory_name_en' => $subsubCatg_name_en,
+                'subsubcategory_name_bn' => $subsubCatg_name_bn,
+                'subsubcategory_slug_en' => strtolower(str_replace(' ', '-',$subsubCatg_name_en )),
+                'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-',$subsubCatg_name_bn )),
+                'created_at' => Carbon::now(),
+            ]);
+        }
 
+        public function FindSingleSubsubCatgoryData($subsubCatg_id){
+            return SubsubCategory::where('subsubcategory_id', $subsubCatg_id)->first();
+        }
+
+        public function SubsubCategoryDataUpdate($subsubCatg_id, $catg_id, $subCatg_id, $subsubCatg_name_en, $subsubCatg_name_bn){
+            return SubsubCategory::where('subsubcategory_id', $subsubCatg_id)->update([
+                'category_id' => $catg_id,
+                'subcategory_id' => $subCatg_id,
+                'subsubcategory_name_en' => $subsubCatg_name_en,
+                'subsubcategory_name_bn' => $subsubCatg_name_bn,
+                'subsubcategory_slug_en' => strtolower(str_replace(' ', '-',$subsubCatg_name_en )),
+                'subsubcategory_slug_bn' => strtolower(str_replace(' ', '-',$subsubCatg_name_bn )),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+
+        public function SingleSubsubCategoryDataDelete($subsubCatg_id){
+            return SubsubCategory::where('subsubcategory_id', $subsubCatg_id)->delete();
+        }
 
 
 
