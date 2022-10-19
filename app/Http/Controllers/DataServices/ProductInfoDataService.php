@@ -147,15 +147,6 @@ use Carbon\Carbon;
         public function SingleSubsubCategoryDataDelete($subsubCatg_id){
             return SubsubCategory::where('subsubcategory_id', $subsubCatg_id)->delete();
         }
-
-
-
-
-
-
-
-
-
         // ########################################  Sub SubCategory Part End ########################################
 
 

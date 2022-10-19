@@ -1,5 +1,9 @@
 @extends('frontend.layouts.master')
-@section('title', 'Easy Shopping')
+@if (Session()->get('language') == 'bangla')
+    @section('title', 'সহজ কেনাকাটা')
+@else
+    @section('title', 'Easy Shopping')
+@endif
 @section('content')
 <div class="row">
     {{-- For Number Conversion --}}
@@ -65,217 +69,104 @@
 
         <!-- ============================================== HOT DEALS ============================================== -->
         <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-            <h3 class="section-title">hot deals</h3>
+            @if (Session()->get('language') == 'bangla')
+                <h3 class="section-title"> আকর্ষনীয় কেনাবেচা </h3>
+            @else
+                <h3 class="section-title">Special shopping</h3>
+            @endif
             <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
 
-                <div class="item">
-                    <div class="products">
-                        <div class="hot-deal-wrapper">
-                            <div class="image">
-                                <img src=" {{ asset('frontend') }}/assets/images/hot-deals/p25.jpg" alt="">
-                            </div>
-                            <div class="sale-offer-tag"><span>49%<br>off</span></div>
-                            <div class="timing-wrapper">
-                                <div class="box-wrapper">
-                                    <div class="date box">
-                                        <span class="key">120</span>
-                                        <span class="value">DAYS</span>
+                @foreach ($hot_deals as $product)
+                    <div class="item">
+                        <div class="products">
+                            <div class="hot-deal-wrapper">
+                                <div class="image">
+                                    <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                </div>
+
+                                @php
+                                    $amount = $product->actual_price - $product->discount_price;
+                                    $discount = ($amount / $product->actual_price) * 100;
+                                @endphp
+
+                                <div class="sale-offer-tag">
+                                    @if ($product->discount_price == null)
+                                    @else
+                                        <span> @if (Session()->get('language') == 'bangla') {{ bn_price(round($discount)) }}% @else {{ round($discount) }}% @endif <br> off </span>
+                                    @endif
+                                </div>
+                                <div class="timing-wrapper">
+                                    <div class="box-wrapper">
+                                        <div class="date box">
+                                            <span class="key">120</span>
+                                            <span class="value">DAYS</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-wrapper">
+                                        <div class="hour box">
+                                            <span class="key">20</span>
+                                            <span class="value">HRS</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-wrapper">
+                                        <div class="minutes box">
+                                            <span class="key">36</span>
+                                            <span class="value">MINS</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-wrapper hidden-md">
+                                        <div class="seconds box">
+                                            <span class="key">60</span>
+                                            <span class="value">SEC</span>
+                                        </div>
                                     </div>
                                 </div>
+                            </div><!-- /.hot-deal-wrapper -->
 
-                                <div class="box-wrapper">
-                                    <div class="hour box">
-                                        <span class="key">20</span>
-                                        <span class="value">HRS</span>
+                            <div class="product-info text-left m-t-20">
+                                @if (Session()->get('language') == 'bangla')
+                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
+                                @else
+                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
+                                @endif
+                                <div class="rating rateit-small"></div>
+                                <div class="product-price">
+                                    @if ($product->discount_price == null)
+                                        <span class="price">
+                                            @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
+                                         </span>
+                                    @else
+                                        <span class="price">
+                                            @if (Session()->get('language') == 'bangla') {{ bn_price($product->discount_price) }} @else {{ $product->discount_price }} @endif
+                                        </span>
+                                        <span class="price-before-discount">
+                                            @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price }} @endif
+                                         </span>
+                                    @endif
+                                </div><!-- /.product-price -->
+
+                            </div><!-- /.product-info -->
+
+                            <div class="cart clearfix animate-effect">
+                                <div class="action">
+
+                                    <div class="add-cart-button btn-group">
+                                        <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </button>
+                                        <button class="btn btn-primary cart-btn" type="button">
+                                            @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
+                                        </button>
                                     </div>
-                                </div>
 
-                                <div class="box-wrapper">
-                                    <div class="minutes box">
-                                        <span class="key">36</span>
-                                        <span class="value">MINS</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper hidden-md">
-                                    <div class="seconds box">
-                                        <span class="key">60</span>
-                                        <span class="value">SEC</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.hot-deal-wrapper -->
-
-                        <div class="product-info text-left m-t-20">
-                            <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                            <div class="rating rateit-small"></div>
-
-                            <div class="product-price">
-                                <span class="price">
-                                    $600.00
-                                </span>
-
-                                <span class="price-before-discount">$800.00</span>
-
-                            </div><!-- /.product-price -->
-
-                        </div><!-- /.product-info -->
-
-                        <div class="cart clearfix animate-effect">
-                            <div class="action">
-
-                                <div class="add-cart-button btn-group">
-                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </button>
-                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                        cart</button>
-
-                                </div>
-
-                            </div><!-- /.action -->
-                        </div><!-- /.cart -->
+                                </div><!-- /.action -->
+                            </div><!-- /.cart -->
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="products">
-                        <div class="hot-deal-wrapper">
-                            <div class="image">
-                                <img src=" {{ asset('frontend') }}/assets/images/hot-deals/p5.jpg" alt="">
-                            </div>
-                            <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                            <div class="timing-wrapper">
-                                <div class="box-wrapper">
-                                    <div class="date box">
-                                        <span class="key">120</span>
-                                        <span class="value">Days</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper">
-                                    <div class="hour box">
-                                        <span class="key">20</span>
-                                        <span class="value">HRS</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper">
-                                    <div class="minutes box">
-                                        <span class="key">36</span>
-                                        <span class="value">MINS</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper hidden-md">
-                                    <div class="seconds box">
-                                        <span class="key">60</span>
-                                        <span class="value">SEC</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.hot-deal-wrapper -->
-
-                        <div class="product-info text-left m-t-20">
-                            <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                            <div class="rating rateit-small"></div>
-
-                            <div class="product-price">
-                                <span class="price">
-                                    $600.00
-                                </span>
-
-                                <span class="price-before-discount">$800.00</span>
-
-                            </div><!-- /.product-price -->
-
-                        </div><!-- /.product-info -->
-
-                        <div class="cart clearfix animate-effect">
-                            <div class="action">
-
-                                <div class="add-cart-button btn-group">
-                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </button>
-                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                        cart</button>
-
-                                </div>
-
-                            </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="products">
-                        <div class="hot-deal-wrapper">
-                            <div class="image">
-                                <img src=" {{ asset('frontend') }}/assets/images/hot-deals/p10.jpg" alt="">
-                            </div>
-                            <div class="sale-offer-tag"><span>35%<br>off</span></div>
-                            <div class="timing-wrapper">
-                                <div class="box-wrapper">
-                                    <div class="date box">
-                                        <span class="key">120</span>
-                                        <span class="value">Days</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper">
-                                    <div class="hour box">
-                                        <span class="key">20</span>
-                                        <span class="value">HRS</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper">
-                                    <div class="minutes box">
-                                        <span class="key">36</span>
-                                        <span class="value">MINS</span>
-                                    </div>
-                                </div>
-
-                                <div class="box-wrapper hidden-md">
-                                    <div class="seconds box">
-                                        <span class="key">60</span>
-                                        <span class="value">SEC</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- /.hot-deal-wrapper -->
-
-                        <div class="product-info text-left m-t-20">
-                            <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                            <div class="rating rateit-small"></div>
-
-                            <div class="product-price">
-                                <span class="price">
-                                    $600.00
-                                </span>
-
-                                <span class="price-before-discount">$800.00</span>
-
-                            </div><!-- /.product-price -->
-
-                        </div><!-- /.product-info -->
-
-                        <div class="cart clearfix animate-effect">
-                            <div class="action">
-
-                                <div class="add-cart-button btn-group">
-                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </button>
-                                    <button class="btn btn-primary cart-btn" type="button">Add to
-                                        cart</button>
-
-                                </div>
-
-                            </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                    </div>
-                </div>
-
+                @endforeach
 
             </div><!-- /.sidebar-widget -->
         </div>
@@ -288,8 +179,10 @@
             <h3 class="section-title">Special Offer</h3>
             <div class="sidebar-widget-body outer-top-xs">
                 <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+
                     <div class="item">
                         <div class="products special-product">
+
                             <div class="product">
                                 <div class="product-micro">
                                     <div class="row product-micro-row">
@@ -301,9 +194,6 @@
                                                             alt="">
                                                     </a>
                                                 </div><!-- /.image -->
-
-
-
                                             </div><!-- /.product-image -->
                                         </div><!-- /.col -->
                                         <div class="col col-xs-7">
@@ -312,15 +202,13 @@
                                                 <div class="rating rateit-small"></div>
                                                 <div class="product-price">
                                                     <span class="price">
-                                                        $450.99 </span>
-
+                                                        $450.99
+                                                    </span>
                                                 </div><!-- /.product-price -->
-
                                             </div>
                                         </div><!-- /.col -->
                                     </div><!-- /.product-micro-row -->
                                 </div><!-- /.product-micro -->
-
                             </div>
                             <div class="product">
                                 <div class="product-micro">
@@ -388,7 +276,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
+
+                    {{-- <div class="item">
                         <div class="products special-product">
                             <div class="product">
                                 <div class="product-micro">
@@ -580,7 +469,8 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
                 </div>
             </div><!-- /.sidebar-widget-body -->
         </div><!-- /.sidebar-widget -->
@@ -1091,9 +981,15 @@
                                         <div class="product">
                                             <div class="product-image">
                                                 <div class="image">
-                                                    <a href=" {{ url('single-prduct/details/'. $product->product_id ) }} ">
-                                                        <img src=" {{ asset($product->product_thumbnail) }}" alt="">
-                                                    </a>
+                                                    @if (Session()->get('language') == 'bangla')
+                                                        <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} ">
+                                                            <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                                        </a>
+                                                    @else
+                                                        <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} ">
+                                                            <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                                        </a>
+                                                    @endif
                                                 </div><!-- /.image -->
 
                                                 @php
@@ -1115,9 +1011,9 @@
 
                                             <div class="product-info text-left">
                                                 @if (Session()->get('language') == 'bangla')
-                                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id ) }} "> {{ $product->product_name_bn }} </a></h3>
+                                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
                                                 @else
-                                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id ) }} "> {{ $product->product_name_en }} </a></h3>
+                                                    <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
                                                 @endif
                                                 <div class="rating rateit-small"></div>
                                                 <div class="description"></div>
@@ -1313,357 +1209,95 @@
         <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
         <!-- ============================================== FEATURED PRODUCTS ============================================== -->
         <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">Featured products</h3>
+            @if (Session()->get('language') == 'bangla')
+                <h3 class="section-title"> বিশেষ পণ্যসমূহ </h3>
+            @else
+                <h3 class="section-title">Featured products</h3>
+            @endif
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
-                <div class="item item-carousel">
-                    <div class="products">
-
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img
-                                            src=" {{ asset('frontend') }}/assets/images/products/p5.jpg" alt=""></a>
-                                </div><!-- /.image -->
-
-                                <div class="tag hot"><span>hot</span></div>
-                            </div><!-- /.product-image -->
-
-
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
+                @foreach ($featureds as $product)
+                    <div class="item item-carousel">
+                        <div class="products">
+                            <div class="product">
+                                <div class="product-image">
+                                    <div class="image">
+                                        @if (Session()->get('language') == 'bangla')
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
                                             </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
+                                        @else
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
                                             </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
+                                        @endif
+                                    </div><!-- /.image -->
 
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
+                                    @if (Session()->get('language') == 'bangla')
+                                        {{-- <div class="tag hot"><span>দুর্দান্ত</span></div> --}}
+                                        <div class="tag hot"><span>লক্ষণীয়</span></div>
+                                    @else
+                                        <div class="tag hot"><span>Hot</span></div>
+                                    @endif
 
-                <div class="item item-carousel">
-                    <div class="products">
+                                </div><!-- /.product-image -->
 
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img
-                                            src=" {{ asset('frontend') }}/assets/images/products/p6.jpg" alt=""></a>
-                                </div><!-- /.image -->
+                                <div class="product-info text-left">
+                                    @if (Session()->get('language') == 'bangla')
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
+                                    @else
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
+                                    @endif
+                                    <div class="rating rateit-small"></div>
+                                    <div class="description"></div>
+                                    <div class="product-price">
+                                        @if ($product->discount_price == null)
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
+                                             </span>
+                                        @else
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->discount_price) }} @else {{ $product->discount_price }} @endif
+                                            </span>
+                                            <span class="price-before-discount">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price }} @endif
+                                             </span>
+                                        @endif
+                                    </div><!-- /.product-price -->
 
-                                <div class="tag new"><span>new</span></div>
-                            </div><!-- /.product-image -->
+                                </div><!-- /.product-info -->
+                                <div class="cart clearfix animate-effect">
+                                    <div class="action">
+                                        <ul class="list-unstyled">
+                                            <li class="add-cart-button btn-group">
+                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                                <button class="btn btn-primary cart-btn" type="button">
+                                                    @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
+                                                </button>
 
+                                            </li>
 
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
+                                            <li class="lnk wishlist">
+                                                <a class="add-to-cart" href="#" title="Wishlist">
+                                                    <i class="icon fa fa-heart"></i>
+                                                </a>
+                                            </li>
 
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
+                                            <li class="lnk">
+                                                <a class="add-to-cart" href="#" title="Compare">
+                                                    <i class="fa fa-signal" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div><!-- /.action -->
+                                </div><!-- /.cart -->
+                            </div><!-- /.product -->
+                        </div><!-- /.products -->
+                    </div><!-- /.item -->
+                @endforeach
 
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
-
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
-
-                <div class="item item-carousel">
-                    <div class="products">
-
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img src=" {{ asset('frontend') }}/assets/images/blank.gif"
-                                            data-echo=" {{ asset('frontend') }}/assets/images/products/p7.jpg"
-                                            alt=""></a>
-                                </div><!-- /.image -->
-
-                                <div class="tag sale"><span>sale</span></div>
-                            </div><!-- /.product-image -->
-
-
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
-
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
-
-                <div class="item item-carousel">
-                    <div class="products">
-
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img
-                                            src=" {{ asset('frontend') }}/assets/images/products/p8.jpg" alt=""></a>
-                                </div><!-- /.image -->
-
-                                <div class="tag hot"><span>hot</span></div>
-                            </div><!-- /.product-image -->
-
-
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
-
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
-
-                <div class="item item-carousel">
-                    <div class="products">
-
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img
-                                            src=" {{ asset('frontend') }}/assets/images/products/p9.jpg" alt=""></a>
-                                </div><!-- /.image -->
-
-                                <div class="tag new"><span>new</span></div>
-                            </div><!-- /.product-image -->
-
-
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
-
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
-
-                <div class="item item-carousel">
-                    <div class="products">
-
-                        <div class="product">
-                            <div class="product-image">
-                                <div class="image">
-                                    <a href="detail.html"><img
-                                            src=" {{ asset('frontend') }}/assets/images/products/p10.jpg" alt=""></a>
-                                </div><!-- /.image -->
-
-                                <div class="tag sale"><span>sale</span></div>
-                            </div><!-- /.product-image -->
-
-
-                            <div class="product-info text-left">
-                                <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-                                <div class="rating rateit-small"></div>
-                                <div class="description"></div>
-
-                                <div class="product-price">
-                                    <span class="price">
-                                        $450.99 </span>
-                                    <span class="price-before-discount">$ 800</span>
-
-                                </div><!-- /.product-price -->
-
-                            </div><!-- /.product-info -->
-                            <div class="cart clearfix animate-effect">
-                                <div class="action">
-                                    <ul class="list-unstyled">
-                                        <li class="add-cart-button btn-group">
-                                            <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-                                                <i class="fa fa-shopping-cart"></i>
-                                            </button>
-                                            <button class="btn btn-primary cart-btn" type="button">Add to
-                                                cart</button>
-
-                                        </li>
-
-                                        <li class="lnk wishlist">
-                                            <a class="add-to-cart" href="detail.html" title="Wishlist">
-                                                <i class="icon fa fa-heart"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="lnk">
-                                            <a class="add-to-cart" href="detail.html" title="Compare">
-                                                <i class="fa fa-signal" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                        </div><!-- /.product -->
-
-                    </div><!-- /.products -->
-                </div><!-- /.item -->
             </div><!-- /.home-owl-carousel -->
         </section><!-- /.section -->
         <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->

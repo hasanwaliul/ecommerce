@@ -4,8 +4,6 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\ProductInfoDataService;
-use App\Models\SubsubCategory;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -32,7 +30,6 @@ class CategoryController extends Controller
 
 
     // ########################################  Category Part Start ########################################
-
     public function index(){
         $categories = (new ProductInfoDataService())->CategoryInfoCollect();
         return view('admin.category.index', compact('categories'));
@@ -286,7 +283,7 @@ class CategoryController extends Controller
     public function subSubCategoryDataDelete($id){
         // dd('Delete Request');
         $subsubcategoryDataDelete = (new ProductInfoDataService())->SingleSubsubCategoryDataDelete($id);
-        
+
         if($subsubcategoryDataDelete){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->route('sub-sub-categories')->with('message','Sub Subcategory Data Deleted Successfully'); //Toastr alert
