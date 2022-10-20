@@ -691,7 +691,11 @@
                                         </div><!-- /.products -->
                                     </div><!-- /.item -->
                                     @empty
-                                    <h4 class="text-danger text-center" style="padding: 20px;">No Products Found</h4>
+                                    @if (Session()->get('language') == 'bangla')
+                                        <h4 class="text-danger text-center" > দুঃখিত এই সম্পর্কিত কোনো পণ্য পাওয়া যায়নি  </h4>
+                                    @else
+                                        <h4 class="text-danger text-center" style="padding: 20px;">No Products Found</h4>
+                                    @endif
                                 @endforelse
                                 {{-- Category Wise Product Show Start --}}
                             </div><!-- /.home-owl-carousel -->
@@ -824,11 +828,12 @@
 
 
         <!-- ============================================== Category Wise PRODUCTS Show Start ============================================== -->
+        {{-- Category with skip(0) for Products --}}
         <section class="section featured-product wow fadeInUp">
             @if (Session()->get('language') == 'bangla')
-                <h3 class="section-title"> {{ $skip_catg_id0->category_name_en }}</h3>
+                <h3 class="section-title"> {{ $skip_catg_id0->category_name_bn }}</h3>
             @else
-                <h3 class="section-title"> {{ $skip_catg_id0->category_name_bn }} </h3>
+                <h3 class="section-title"> {{ $skip_catg_id0->category_name_en }} </h3>
             @endif
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
@@ -916,7 +921,101 @@
 
             </div><!-- /.home-owl-carousel -->
         </section><!-- /.section -->
-        <!-- ============================================== 1st Category Wise PRODUCTS Show End ============================================== -->
+
+        {{-- Category with skip(1) for Products --}}
+        <section class="section featured-product wow fadeInUp">
+            @if (Session()->get('language') == 'bangla')
+                <h3 class="section-title"> {{ $skip_catg_id1->category_name_bn }}</h3>
+            @else
+                <h3 class="section-title"> {{ $skip_catg_id1->category_name_en }} </h3>
+            @endif
+            <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+
+                @foreach ($skip_products1 as $product)
+                    <div class="item item-carousel">
+                        <div class="products">
+                            <div class="product">
+                                <div class="product-image">
+                                    <div class="image">
+                                        @if (Session()->get('language') == 'bangla')
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                            </a>
+                                        @else
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                            </a>
+                                        @endif
+                                    </div><!-- /.image -->
+
+                                    @if (Session()->get('language') == 'bangla')
+                                        {{-- <div class="tag hot"><span>দুর্দান্ত</span></div> --}}
+                                        <div class="tag hot"><span>লক্ষণীয়</span></div>
+                                    @else
+                                        <div class="tag hot"><span>Hot</span></div>
+                                    @endif
+
+                                </div><!-- /.product-image -->
+
+                                <div class="product-info text-left">
+                                    @if (Session()->get('language') == 'bangla')
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
+                                    @else
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
+                                    @endif
+                                    <div class="rating rateit-small"></div>
+                                    <div class="description"></div>
+                                    <div class="product-price">
+                                        @if ($product->discount_price == null)
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
+                                             </span>
+                                        @else
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->discount_price) }} @else {{ $product->discount_price }} @endif
+                                            </span>
+                                            <span class="price-before-discount">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price }} @endif
+                                             </span>
+                                        @endif
+                                    </div><!-- /.product-price -->
+
+                                </div><!-- /.product-info -->
+                                <div class="cart clearfix animate-effect">
+                                    <div class="action">
+                                        <ul class="list-unstyled">
+                                            <li class="add-cart-button btn-group">
+                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                                <button class="btn btn-primary cart-btn" type="button">
+                                                    @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
+                                                </button>
+
+                                            </li>
+
+                                            <li class="lnk wishlist">
+                                                <a class="add-to-cart" href="#" title="Wishlist">
+                                                    <i class="icon fa fa-heart"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="lnk">
+                                                <a class="add-to-cart" href="#" title="Compare">
+                                                    <i class="fa fa-signal" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div><!-- /.action -->
+                                </div><!-- /.cart -->
+                            </div><!-- /.product -->
+                        </div><!-- /.products -->
+                    </div><!-- /.item -->
+                @endforeach
+
+            </div><!-- /.home-owl-carousel -->
+        </section><!-- /.section -->
+        <!-- ============================================== Category Wise PRODUCTS Show End ============================================== -->
 
         <!-- ============================================== WIDE PRODUCTS ============================================== -->
         <div class="wide-banners wow fadeInUp outer-bottom-xs">
