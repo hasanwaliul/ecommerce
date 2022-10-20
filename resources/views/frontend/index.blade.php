@@ -17,7 +17,7 @@
         }
     @endphp
 
-    <!-- ============================================== SIDEBAR Categories Start ============================================== -->
+            <!-- ============================================== SIDEBAR PART Start ============================================== -->
     <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 
     <!-- ==================================(Sidebar Categories part) TOP NAVIGATION : START ================================== -->
@@ -32,29 +32,13 @@
         @include('frontend.include.sidebar-special-offer')
     <!-- ==================================(Sidebar Special offer part) SPECIAL OFFER : END ================================== -->
 
-        <!-- ============================================== PRODUCT TAGS ============================================== -->
+    <!-- ============================================== (Sidebar Product Tags part) PRODUCT TAGS START ============================================== -->
+        @include('frontend.include.sidebar-product-tags')
+    <!-- ============================================== (Sidebar Product Tags part) PRODUCT TAGS : END ============================================== -->
 
-        <div class="sidebar-widget product-tag wow fadeInUp">
-            <h3 class="section-title">Product tags</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-                <div class="tag-list">
-                    @if (Session()->get('language') == 'bangla')
-                        @foreach ($tags_bn as $tag)
-                            <a class="item" title="Phone" href="#"> {{ $tag }} </a>
-                        @endforeach
-                    @else
-                    @foreach ($tags_en as $tag)
-                        <a class="item" title="Phone" href="#"> {{ $tag }} </a>
-                    @endforeach
-                    @endif
-                </div><!-- /.tag-list -->
-            </div><!-- /.sidebar-widget-body -->
-        </div><!-- /.sidebar-widget -->
-        <!-- ============================================== PRODUCT TAGS : END ============================================== -->
-
-        <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : START ================================== -->
-            @include('frontend.include.sidebar-special-deals')
-        <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : END ================================== -->
+    <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : START ================================== -->
+        @include('frontend.include.sidebar-special-deals')
+    <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : END ================================== -->
         <!-- ============================================== NEWSLETTER ============================================== -->
         <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
             <h3 class="section-title">Newsletters</h3>
@@ -110,11 +94,8 @@
             <img src=" {{ asset('frontend') }}/assets/images/banners/LHS-banner.jpg" alt="Image">
         </div>
 
-
-
-
     </div><!-- /.sidemenu-holder -->
-    <!-- ============================================== SIDEBAR Categories Start  ============================================== -->
+            <!-- ============================================== SIDEBAR  Start  ============================================== -->
 
     <!-- ============================================== CONTENT ============================================== -->
     <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder">

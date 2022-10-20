@@ -47,15 +47,17 @@
                     <ul class="list-unstyled list-inline">
                         <li class="dropdown dropdown-small">
                             <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">
-                                <span class="value">@if (Session()->get('language') == 'bangla') মুদ্রা নির্বাচন করুন @else USD @endif
+                                <span class="value">@if (Session()->get('language') == 'bangla') মুদ্রা নির্বাচন করুন @else Currency @endif
                                 </span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 @if (Session()->get('language') == 'bangla')
                                     <li><a href="#">USD</a></li>
-                                @else
                                     <li><a href="#">টাকা</a></li>
+                                    @else
+                                    <li><a href="#">টাকা</a></li>
+                                    <li><a href="#">USD</a></li>
                                 @endif
                             </ul>
                         </li>
@@ -98,7 +100,7 @@
                     <!-- ============================================================= LOGO : END ============================================================= -->
                 </div><!-- /.logo-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
+                <div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
@@ -136,7 +138,7 @@
                     <!-- ============================================================= SEARCH AREA : END ============================================================= -->
                 </div><!-- /.top-search-holder -->
 
-                <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
+                <div class="col-xs-12 col-sm-12 col-md-3 animate-dropdown top-cart-row">
                     <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
 
                     <div class="dropdown dropdown-cart">
@@ -147,9 +149,17 @@
                                 </div>
                                 <div class="basket-item-count"><span class="count">2</span></div>
                                 <div class="total-price-basket">
-                                    <span class="lbl">cart -</span>
+                                    @if (Session()->get('language') == 'bangla')
+                                        <span class="lbl">মোট বাঁজার -</span>
+                                    @else
+                                        <span class="lbl">cart -</span>
+                                    @endif
                                     <span class="total-price">
+                                        @if (Session()->get('language') == 'bangla')
+                                        <span class="sign">৳</span><span class="value"> {{ bn_price(600.00) }} </span>
+                                        @else
                                         <span class="sign">$</span><span class="value">600.00</span>
+                                        @endif
                                     </span>
                                 </div>
 
@@ -278,7 +288,11 @@
                                 @endforeach
 
                                 <li class="dropdown  navbar-right special-menu">
-                                    <a href="#">Todays offer</a>
+                                    @if (Session()->get('language') == 'bangla')
+                                        <a href="#">আজকের ছাড় সমূহ</a>
+                                    @else
+                                        <a href="#">Todays offer</a>
+                                    @endif
                                 </li>
 
                             </ul><!-- /.navbar-nav -->

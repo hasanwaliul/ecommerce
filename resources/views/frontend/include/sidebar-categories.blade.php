@@ -1,4 +1,9 @@
 <!-- ================================== TOP NAVIGATION ================================== -->
+
+@php
+$categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
+@endphp
+
 <div class="side-menu animate-dropdown outer-bottom-xs">
     <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> @if (Session()->get('language') ==
         'bangla') আমাদের পণ্যের বিভাগ সমূহ @else Categories @endif </div>

@@ -89,6 +89,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('product-multiImg/delete/{id}', [ProductController::class, 'productMultiImgDelete'])->name('product-multiImg-delete');
     // ########## Product Main Thumbnail Image Update  ##########
     Route::post('product-mainThumbnail/update', [ProductController::class, 'productMainThumbnailUpdate'])->name('product-mainThumb-update');
+    // ########## Products Tag Wise Product show  ##########
+    Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
+
+
 
     //  ################################## Product Part End #################################
 

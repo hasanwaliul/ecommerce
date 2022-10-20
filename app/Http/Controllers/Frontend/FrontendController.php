@@ -46,4 +46,10 @@ class FrontendController extends Controller
         // dd($multiImages);
         return view('frontend.product-details', compact('singleProduct', 'multiImages'));
     }
+
+        // ########## Products Tag Wise Product show  ##########
+        public function productTagWiseProductShow($tag){
+            // dd('Calling');
+            return view('frontend.tagwise-product');
+        }
 }
