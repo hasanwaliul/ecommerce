@@ -37,9 +37,25 @@ class FrontendDataService {
     }
 
     public function SpecialOfferRelatedProductInfoCollect(){
-        return Product::where('special_offer', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->get();
+        // return Product::where('special_offer', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->get();
+        return Product::where('special_offer', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->paginate();
     }
 
+    public function SpecialDealRelatedProductInfoCollect(){
+        return Product::where('special_deals', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->paginate();
+    }
+
+    /* ##################################  Find Category With (skip) Query For Products Details  ################################## */
+     // Collect Products for Specific Catagory  with skip(0)
+
+     public function FindCategoryWithSkip0(){
+        return Category::skip(0)->first();
+     }
+     public function FindProductsForSkipCatgId0($skip_catg_id0){
+        // dd($skip_catg_id0->category_name_en);
+        // dd($skip_catg_id0->category_id);
+        return Product::where('product_status',1)->where('category_id', $skip_catg_id0->category_id)->orderBy('product_id', 'DESC')->get();
+     }
 
 
 }

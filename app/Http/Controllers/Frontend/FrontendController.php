@@ -14,8 +14,15 @@ class FrontendController extends Controller
         $featureds = (new FrontendDataService())->FeaturedProductInfoCollect();
         $hot_deals = (new FrontendDataService())->HotDealsRelatedProductInfoCollect();
         $special_offers = (new FrontendDataService())->SpecialOfferRelatedProductInfoCollect();
-        // dd($special_offers);
-        return view('frontend.index', compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers'));
+        $special_deals = (new FrontendDataService())->SpecialDealRelatedProductInfoCollect();
+        //  Collect Specific Category Wise Products with skip query
+        $skip_catg_id0 = (new FrontendDataService())->FindCategoryWithSkip0(); // For 1st Category
+        $skip_products0 = (new FrontendDataService())->FindProductsForSkipCatgId0($skip_catg_id0); // 1st Catagory Wise Products
+
+        // dd( $skip_products0);
+        return view('frontend.index',
+        compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers',
+        'special_deals', 'skip_catg_id0', 'skip_products0'));
     }
 
     public function SingleProductDetails($id, $slug){
