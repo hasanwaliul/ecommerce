@@ -2,6 +2,7 @@
     namespace App\Http\Controllers\DataServices;
 
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
@@ -45,9 +46,8 @@ class FrontendDataService {
         return Product::where('special_deals', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->paginate();
     }
 
-    /* ##################################  Find Category With (skip) Query For Products Details  ################################## */
+    /* ##################################  Find Specific Category With (skip) Query For Products Details  ################################## */
      // Collect Products for Specific Catagory  with skip(0)
-
      public function FindCategoryWithSkip0(){
         return Category::skip(0)->first();
      }
@@ -56,6 +56,7 @@ class FrontendDataService {
         // dd($skip_catg_id0->category_id);
         return Product::where('product_status',1)->where('category_id', $skip_catg_id0->category_id)->orderBy('product_id', 'DESC')->get();
      }
+
     // Collect Products for Specific Catagory  with skip(1)
      public function FindCategoryWithSkip1(){
         return Category::skip(1)->first();
@@ -64,6 +65,14 @@ class FrontendDataService {
         // dd($skip_catg_id1->category_name_en);
         // dd($skip_catg_id0->category_id);
         return Product::where('product_status',1)->where('category_id', $skip_catg_id1->category_id)->orderBy('product_id', 'DESC')->get();
+     }
+     /* ##################################  Find Specific Brand With (skip) Query For Products Details  ################################## */
+     // Collect Products for Specific Brand with skip(0)
+     public function FindBrandWithSkip0(){
+        return Brand::skip(0)->first();
+     }
+     public function FindProductsForSkipBrandId0($skip_brand_id0){
+        return Product::where('product_status', 1)->where('brand_id', $skip_brand_id0->brand_id)->orderBy('product_id', 'DESC')->get();
      }
 
 

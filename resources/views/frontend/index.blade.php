@@ -16,8 +16,10 @@
             return $str;
         }
     @endphp
+
     <!-- ============================================== SIDEBAR Categories Start ============================================== -->
     <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
+
     <!-- ==================================(Sidebar Categories part) TOP NAVIGATION : START ================================== -->
         @include('frontend.include.sidebar-categories')
     <!-- ==================================(Sidebar Categories part) TOP NAVIGATION : END ================================== -->
@@ -26,55 +28,10 @@
         @include('frontend.include.sidebar-special-shop')
     <!-- ==================================(Sidebar Special shopping part) SPECIAL SHOPPING : END ================================== -->
 
+    <!-- ==================================(Sidebar Special offer part) SPECIAL OFFER : START ================================== -->
+        @include('frontend.include.sidebar-special-offer')
+    <!-- ==================================(Sidebar Special offer part) SPECIAL OFFER : END ================================== -->
 
-        <!-- ============================================== SPECIAL OFFER ============================================== -->
-
-        <div class="sidebar-widget outer-bottom-small wow fadeInUp">
-            <h3 class="section-title">Special Offer</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-                <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
-
-                    @foreach ($special_offers as $product)
-                        <div class="item">
-                            <div class="products special-product">
-                                <div class="product">
-                                    <div class="product-micro">
-                                        <div class="row product-micro-row">
-                                            <div class="col col-xs-5">
-                                                <div class="product-image">
-                                                    <div class="image">
-                                                        <a href="#">
-                                                            <img src=" {{ asset($product->product_thumbnail) }}" alt="">
-                                                        </a>
-                                                    </div><!-- /.image -->
-                                                </div><!-- /.product-image -->
-                                            </div><!-- /.col -->
-                                            <div class="col col-xs-7">
-                                                <div class="product-info">
-                                                    @if (Session()->get('language') == 'bangla')
-                                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
-                                                    @else
-                                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
-                                                    @endif
-                                                    <div class="rating rateit-small"></div>
-                                                    <div class="product-price">
-                                                        <span class="price">
-                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
-                                                        </span>
-                                                    </div><!-- /.product-price -->
-                                                </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.product-micro-row -->
-                                    </div><!-- /.product-micro -->
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div><!-- /.sidebar-widget-body -->
-        </div><!-- /.sidebar-widget -->
-        <!-- ============================================== SPECIAL OFFER : END ============================================== -->
         <!-- ============================================== PRODUCT TAGS ============================================== -->
         <div class="sidebar-widget product-tag wow fadeInUp">
             <h3 class="section-title">Product tags</h3>
@@ -93,53 +50,9 @@
             </div><!-- /.sidebar-widget-body -->
         </div><!-- /.sidebar-widget -->
         <!-- ============================================== PRODUCT TAGS : END ============================================== -->
-        <!-- ============================================== SPECIAL DEALS ============================================== -->
-
-        <div class="sidebar-widget outer-bottom-small wow fadeInUp">
-            <h3 class="section-title">Special Deals</h3>
-            <div class="sidebar-widget-body outer-top-xs">
-                <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
-
-                        <div class="item">
-                            <div class="products special-product">
-                                @foreach ($special_deals as $product)
-                                    <div class="product">
-                                        <div class="product-micro">
-                                            <div class="row product-micro-row">
-                                                <div class="col col-xs-5">
-                                                    <div class="product-image">
-                                                        <div class="image">
-                                                            <a href="#">
-                                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
-                                                            </a>
-                                                        </div><!-- /.image -->
-                                                    </div><!-- /.product-image -->
-                                                </div><!-- /.col -->
-                                                <div class="col col-xs-7">
-                                                    <div class="product-info">
-                                                        @if (Session()->get('language') == 'bangla')
-                                                            <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
-                                                        @else
-                                                            <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
-                                                        @endif
-                                                        <div class="rating rateit-small"></div>
-                                                        <div class="product-price">
-                                                            <span class="price">
-                                                    @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
-                                                            </span>
-                                                        </div><!-- /.product-price -->
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.product-micro-row -->
-                                        </div><!-- /.product-micro -->
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                </div>
-            </div><!-- /.sidebar-widget-body -->
-        </div><!-- /.sidebar-widget -->
-        <!-- ============================================== SPECIAL DEALS : END ============================================== -->
+        <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : START ================================== -->
+            @include('frontend.include.sidebar-special-deals')
+        <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : END ================================== -->
         <!-- ============================================== NEWSLETTER ============================================== -->
         <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
             <h3 class="section-title">Newsletters</h3>
@@ -247,8 +160,8 @@
 
         <!-- ========================================= SECTION – Banner : END ========================================= -->
 
-        <!-- ============================================== INFO BOXES ============================================== -->
-        <div class="info-boxes wow fadeInUp">
+        <!-- ============================================== BANNER INFO BOXES ============================================== -->
+        {{-- <div class="info-boxes wow fadeInUp">
             <div class="info-boxes-inner">
                 <div class="row">
                     <div class="col-md-6 col-sm-4 col-lg-4">
@@ -289,9 +202,9 @@
                 </div><!-- /.row -->
             </div><!-- /.info-boxes-inner -->
 
-        </div><!-- /.info-boxes -->
-        <!-- ============================================== INFO BOXES : END ============================================== -->
-        <!-- ============================================== SCROLL TABS ============================================== -->
+        </div><!-- /.info-boxes --> --}}
+        <!-- ============================================== BANNER INFO BOXES : END ============================================== -->
+        <!-- ============================================== NEW PRODUCTS SCROLL TABS START ============================================== -->
         <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
             <div class="more-info-tab clearfix ">
                 @if (Session()->get('language') == 'bangla')
@@ -527,8 +440,9 @@
                 @endforeach
             </div><!-- /.tab-content -->
         </div><!-- /.scroll-tabs -->
-        <!-- ============================================== SCROLL TABS : END ============================================== -->
+        <!-- ============================================== NEW PRODUCTS SCROLL TABS : END ============================================== -->
         <!-- ============================================== WIDE PRODUCTS ============================================== -->
+
         <div class="wide-banners wow fadeInUp outer-bottom-xs">
             <div class="row">
                 <div class="col-md-7 col-sm-7">
@@ -553,7 +467,7 @@
         </div><!-- /.wide-banners -->
 
         <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
-        <!-- ============================================== FEATURED PRODUCTS ============================================== -->
+        <!-- ============================================== FEATURED PRODUCTS START ============================================== -->
         <section class="section featured-product wow fadeInUp">
             @if (Session()->get('language') == 'bangla')
                 <h3 class="section-title"> বিশেষ পণ্যসমূহ </h3>
@@ -647,7 +561,20 @@
             </div><!-- /.home-owl-carousel -->
         </section><!-- /.section -->
         <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
+        <!-- ============================================== WIDE PRODUCTS ============================================== -->
+        <div class="wide-banners wow fadeInUp outer-bottom-xs">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="wide-banner cnt-strip">
+                        <div class="image">
+                            <marquee behavior="scroll" direction="left"><h2 class="text-success" style="text-align: center">Category Wise Products Show</h2></marquee>
+                        </div>
 
+                    </div><!-- /.wide-banner -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.wide-banners -->
+        <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
 
         <!-- ============================================== Category Wise PRODUCTS Show Start ============================================== -->
         {{-- Category with skip(0) for Products --}}
@@ -839,34 +766,116 @@
         </section><!-- /.section -->
         <!-- ============================================== Category Wise PRODUCTS Show End ============================================== -->
 
+        <!-- ============================================== Brand Wise PRODUCTS Show Start ============================================== -->
+        {{-- Category with skip(1) for Products --}}
+        <section class="section featured-product wow fadeInUp">
+            @if (Session()->get('language') == 'bangla')
+                <h3 class="section-title"> {{ $skip_brand_id0->brand_name_bn }}</h3>
+            @else
+                <h3 class="section-title"> {{ $skip_brand_id0->brand_name_en }} </h3>
+            @endif
+            <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+
+                @foreach ($skip_products1 as $product)
+                    <div class="item item-carousel">
+                        <div class="products">
+                            <div class="product">
+                                <div class="product-image">
+                                    <div class="image">
+                                        @if (Session()->get('language') == 'bangla')
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                            </a>
+                                        @else
+                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} ">
+                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                            </a>
+                                        @endif
+                                    </div><!-- /.image -->
+
+                                    @if (Session()->get('language') == 'bangla')
+                                        {{-- <div class="tag hot"><span>দুর্দান্ত</span></div> --}}
+                                        <div class="tag hot"><span>লক্ষণীয়</span></div>
+                                    @else
+                                        <div class="tag hot"><span>Hot</span></div>
+                                    @endif
+
+                                </div><!-- /.product-image -->
+
+                                <div class="product-info text-left">
+                                    @if (Session()->get('language') == 'bangla')
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
+                                    @else
+                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
+                                    @endif
+                                    <div class="rating rateit-small"></div>
+                                    <div class="description"></div>
+                                    <div class="product-price">
+                                        @if ($product->discount_price == null)
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
+                                             </span>
+                                        @else
+                                            <span class="price">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->discount_price) }} @else {{ $product->discount_price }} @endif
+                                            </span>
+                                            <span class="price-before-discount">
+                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price }} @endif
+                                             </span>
+                                        @endif
+                                    </div><!-- /.product-price -->
+
+                                </div><!-- /.product-info -->
+                                <div class="cart clearfix animate-effect">
+                                    <div class="action">
+                                        <ul class="list-unstyled">
+                                            <li class="add-cart-button btn-group">
+                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                                <button class="btn btn-primary cart-btn" type="button">
+                                                    @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
+                                                </button>
+
+                                            </li>
+
+                                            <li class="lnk wishlist">
+                                                <a class="add-to-cart" href="#" title="Wishlist">
+                                                    <i class="icon fa fa-heart"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="lnk">
+                                                <a class="add-to-cart" href="#" title="Compare">
+                                                    <i class="fa fa-signal" aria-hidden="true"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div><!-- /.action -->
+                                </div><!-- /.cart -->
+                            </div><!-- /.product -->
+                        </div><!-- /.products -->
+                    </div><!-- /.item -->
+                @endforeach
+
+            </div><!-- /.home-owl-carousel -->
+        </section><!-- /.section -->
+        <!-- ============================================== Brand Wise PRODUCTS Show End ============================================== -->
+
         <!-- ============================================== WIDE PRODUCTS ============================================== -->
         <div class="wide-banners wow fadeInUp outer-bottom-xs">
             <div class="row">
-
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <div class="wide-banner cnt-strip">
                         <div class="image">
-                            <img class="img-responsive"
-                                src=" {{ asset('frontend') }}/assets/images/banners/home-banner.jpg" alt="">
+                            <marquee behavior="scroll" direction="left"><h2 class="text-success" style="text-align: center">Brand Wise Products Show</h2></marquee>
                         </div>
-                        <div class="strip strip-text">
-                            <div class="strip-inner">
-                                <h2 class="text-right">New Mens Fashion<br>
-                                    <span class="shopping-needs">Save up to 40% off</span>
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="new-label">
-                            <div class="text">NEW</div>
-                        </div><!-- /.new-label -->
                     </div><!-- /.wide-banner -->
                 </div><!-- /.col -->
-
             </div><!-- /.row -->
         </div><!-- /.wide-banners -->
         <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
         <!-- ============================================== BEST SELLER ============================================== -->
-
         <div class="best-deal wow fadeInUp outer-bottom-xs">
             <h3 class="section-title">Best seller</h3>
             <div class="sidebar-widget-body outer-top-xs">
