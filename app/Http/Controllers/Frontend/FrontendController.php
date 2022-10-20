@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
+use App\Models\Product;
 
 class FrontendController extends Controller
 {
@@ -25,12 +26,17 @@ class FrontendController extends Controller
         $skip_brand_id0 = (new FrontendDataService())->FindBrandWithSkip0();
         $skip_brand_products0 = (new FrontendDataService())->FindProductsForSkipBrandId0($skip_brand_id0);
 
+        // Collect Product Tags From Database
+        $tags_en = (new FrontendDataService())->CollectProductsTagsEnglish();
+        $tags_bn = (new FrontendDataService())->CollectProductsTagsBangla();
 
-        // dd( $skip_brand_products0);
+
+
+        // dd( $tags_bn);
         return view('frontend.index',
         compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers',
         'special_deals', 'skip_catg_id0', 'skip_products0', 'skip_catg_id1', 'skip_products1',
-        'skip_brand_id0', 'skip_brand_products0'));
+        'skip_brand_id0', 'skip_brand_products0', 'tags_en', 'tags_bn'));
     }
 
     public function SingleProductDetails($id, $slug){

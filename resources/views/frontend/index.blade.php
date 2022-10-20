@@ -33,23 +33,25 @@
     <!-- ==================================(Sidebar Special offer part) SPECIAL OFFER : END ================================== -->
 
         <!-- ============================================== PRODUCT TAGS ============================================== -->
+
         <div class="sidebar-widget product-tag wow fadeInUp">
             <h3 class="section-title">Product tags</h3>
             <div class="sidebar-widget-body outer-top-xs">
                 <div class="tag-list">
-                    <a class="item" title="Phone" href="category.html">Phone</a>
-                    <a class="item active" title="Vest" href="category.html">Vest</a>
-                    <a class="item" title="Smartphone" href="category.html">Smartphone</a>
-                    <a class="item" title="Furniture" href="category.html">Furniture</a>
-                    <a class="item" title="T-shirt" href="category.html">T-shirt</a>
-                    <a class="item" title="Sweatpants" href="category.html">Sweatpants</a>
-                    <a class="item" title="Sneaker" href="category.html">Sneaker</a>
-                    <a class="item" title="Toys" href="category.html">Toys</a>
-                    <a class="item" title="Rose" href="category.html">Rose</a>
+                    @if (Session()->get('language') == 'bangla')
+                        @foreach ($tags_bn as $tag)
+                            <a class="item" title="Phone" href="#"> {{ $tag }} </a>
+                        @endforeach
+                    @else
+                    @foreach ($tags_en as $tag)
+                        <a class="item" title="Phone" href="#"> {{ $tag }} </a>
+                    @endforeach
+                    @endif
                 </div><!-- /.tag-list -->
             </div><!-- /.sidebar-widget-body -->
         </div><!-- /.sidebar-widget -->
         <!-- ============================================== PRODUCT TAGS : END ============================================== -->
+
         <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : START ================================== -->
             @include('frontend.include.sidebar-special-deals')
         <!-- ==================================(Sidebar Special Deals part) SPECIAL OFFER : END ================================== -->
@@ -766,8 +768,22 @@
         </section><!-- /.section -->
         <!-- ============================================== Category Wise PRODUCTS Show End ============================================== -->
 
+        <!-- ============================================== WIDE PRODUCTS ============================================== -->
+        <div class="wide-banners wow fadeInUp outer-bottom-xs">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="wide-banner cnt-strip">
+                        <div class="image">
+                            <marquee behavior="scroll" direction="left"><h2 class="text-success" style="text-align: center">Brand Wise Products Show</h2></marquee>
+                        </div>
+                    </div><!-- /.wide-banner -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.wide-banners -->
+        <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
+
         <!-- ============================================== Brand Wise PRODUCTS Show Start ============================================== -->
-        {{-- Category with skip(1) for Products --}}
+        {{-- Brand with skip(0) for Products --}}
         <section class="section featured-product wow fadeInUp">
             @if (Session()->get('language') == 'bangla')
                 <h3 class="section-title"> {{ $skip_brand_id0->brand_name_bn }}</h3>
@@ -776,7 +792,7 @@
             @endif
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
-                @foreach ($skip_products1 as $product)
+                @foreach ($skip_brand_products0 as $product)
                     <div class="item item-carousel">
                         <div class="products">
                             <div class="product">
@@ -862,19 +878,6 @@
         </section><!-- /.section -->
         <!-- ============================================== Brand Wise PRODUCTS Show End ============================================== -->
 
-        <!-- ============================================== WIDE PRODUCTS ============================================== -->
-        <div class="wide-banners wow fadeInUp outer-bottom-xs">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="wide-banner cnt-strip">
-                        <div class="image">
-                            <marquee behavior="scroll" direction="left"><h2 class="text-success" style="text-align: center">Brand Wise Products Show</h2></marquee>
-                        </div>
-                    </div><!-- /.wide-banner -->
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.wide-banners -->
-        <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
         <!-- ============================================== BEST SELLER ============================================== -->
         <div class="best-deal wow fadeInUp outer-bottom-xs">
             <h3 class="section-title">Best seller</h3>

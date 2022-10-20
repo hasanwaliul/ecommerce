@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
+use PhpParser\Node\Expr\FuncCall;
 
 class FrontendDataService {
 
@@ -75,5 +76,14 @@ class FrontendDataService {
         return Product::where('product_status', 1)->where('brand_id', $skip_brand_id0->brand_id)->orderBy('product_id', 'DESC')->get();
      }
 
+     // Collect Product Tags From Database
+     public function CollectProductsTagsEnglish(){
+        $products = Product::get();
+        return $products->map(fn($product) => explode(',', $product->product_tags_en))->flatten()->unique()->sort()->values('product_tags_en');
+      }
+      public function CollectProductsTagsBangla(){
+        $products = Product::get();
+        return $products->map(fn($product) => explode(',', $product->product_tags_bn))->flatten()->unique()->sort()->values('product_tags_bn');
+      }
 
 }
