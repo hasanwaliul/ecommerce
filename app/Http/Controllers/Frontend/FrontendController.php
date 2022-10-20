@@ -50,6 +50,8 @@ class FrontendController extends Controller
         // ########## Products Tag Wise Product show  ##########
         public function productTagWiseProductShow($tag){
             // dd('Calling');
+            $products = (new FrontendDataService())->FindTagWiseProductsInfo($tag);
+            dd($products);
             return view('frontend.tagwise-product');
         }
 }

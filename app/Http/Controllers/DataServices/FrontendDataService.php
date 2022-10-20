@@ -86,4 +86,9 @@ class FrontendDataService {
         return $products->map(fn($product) => explode(',', $product->product_tags_bn))->flatten()->unique()->sort()->values('product_tags_bn');
       }
 
+      public function FindTagWiseProductsInfo($tag){
+        // dd($tag);
+        return Product::where('product_status',1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('product_id', 'DESC')->get();
+      }
+
 }
