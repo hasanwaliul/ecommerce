@@ -534,141 +534,105 @@
             <div class="tab-pane " id="list-container">
                     <div class="category-product">
 
+                        @foreach ($products as $product)
+                            <div class="category-product-inner wow fadeInUp">
+                                <div class="products">
+                                    <div class="product-list product">
+                                        <div class="row product-list-row">
+                                            <div class="col col-sm-4 col-lg-4">
+                                                <div class="product-image">
+                                                    <div class="image">
+                                                        @if (Session()->get('language') == 'bangla')
+                                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} ">
+                                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                                            </a>
+                                                        @else
+                                                            <a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} ">
+                                                                <img src=" {{ asset($product->product_thumbnail) }}" alt="">
+                                                            </a>
+                                                        @endif
+                                                    </div><!-- /.image -->
+                                                </div><!-- /.product-image -->
+                                            </div><!-- /.col -->
+                                            <div class="col col-sm-8 col-lg-8">
+                                                <div class="product-info">
+                                                    @if (Session()->get('language') == 'bangla')
+                                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
+                                                    @else
+                                                        <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
+                                                    @endif
+                                                    <div class="rating rateit-small"></div>
+                                                    <div class="product-price">
+                                                        @if ($product->discount_price == null)
+                                                            <span class="price">
+                                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price}} @endif
+                                                             </span>
+                                                        @else
+                                                            <span class="price">
+                                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->discount_price) }} @else {{ $product->discount_price }} @endif
+                                                            </span>
+                                                            <span class="price-before-discount">
+                                                                @if (Session()->get('language') == 'bangla') {{ bn_price($product->actual_price) }} @else {{ $product->actual_price }} @endif
+                                                             </span>
+                                                        @endif
+                                                    </div><!-- /.product-price -->
+                                                    <div class="description m-t-10">Suspendisse posuere arcu
+                                                        diam, id accumsan eros pharetra ac. Nulla enim risus,
+                                                        facilisis bibendum gravida eget, lacinia id purus.
+                                                        Suspendisse posuere arcu diam, id accumsan eros pharetra
+                                                        ac. Nulla enim risus, facilisis bibendum gravida eget.
+                                                    </div>
+                                                    <div class="cart clearfix animate-effect">
+                                                        <div class="action">
+                                                            <ul class="list-unstyled">
+                                                                <li class="add-cart-button btn-group">
+                                                                    <button class="btn btn-primary icon"
+                                                                        data-toggle="dropdown" type="button">
+                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                    </button>
+                                                                    <button class="btn btn-primary cart-btn" type="button">
+                                                                        @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
+                                                                    </button>
+                                                                </li>
 
-                        <div class="category-product-inner wow fadeInUp">
-                            <div class="products">
-                                <div class="product-list product">
-                                    <div class="row product-list-row">
-                                        <div class="col col-sm-4 col-lg-4">
-                                            <div class="product-image">
-                                                <div class="image">
-                                                    <img src="{{ asset('frontend') }}/assets/images/products/p3.jpg"
-                                                        alt="">
-                                                </div>
-                                            </div><!-- /.product-image -->
-                                        </div><!-- /.col -->
-                                        <div class="col col-sm-8 col-lg-8">
-                                            <div class="product-info">
-                                                <h3 class="name"><a href="detail.html">Floral Print
-                                                        Buttoned</a></h3>
-                                                <div class="rating rateit-small"></div>
-                                                <div class="product-price">
-                                                    <span class="price">
-                                                        $450.99 </span>
-                                                    <span class="price-before-discount">$ 800</span>
+                                                                <li class="lnk wishlist">
+                                                                    <a class="add-to-cart" href="#" title="Wishlist">
+                                                                        <i class="icon fa fa-heart"></i>
+                                                                    </a>
+                                                                </li>
 
-                                                </div><!-- /.product-price -->
-                                                <div class="description m-t-10">Suspendisse posuere arcu
-                                                    diam, id accumsan eros pharetra ac. Nulla enim risus,
-                                                    facilisis bibendum gravida eget, lacinia id purus.
-                                                    Suspendisse posuere arcu diam, id accumsan eros pharetra
-                                                    ac. Nulla enim risus, facilisis bibendum gravida eget.
-                                                </div>
-                                                <div class="cart clearfix animate-effect">
-                                                    <div class="action">
-                                                        <ul class="list-unstyled">
-                                                            <li class="add-cart-button btn-group">
-                                                                <button class="btn btn-primary icon"
-                                                                    data-toggle="dropdown" type="button">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </button>
-                                                                <button class="btn btn-primary cart-btn"
-                                                                    type="button">Add to cart</button>
+                                                                <li class="lnk">
+                                                                    <a class="add-to-cart" href="#" title="Compare">
+                                                                        <i class="fa fa-signal"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div><!-- /.action -->
+                                                    </div><!-- /.cart -->
 
-                                                            </li>
+                                                </div><!-- /.product-info -->
+                                            </div><!-- /.col -->
+                                        </div><!-- /.product-list-row -->
 
-                                                            <li class="lnk wishlist">
-                                                                <a class="add-to-cart" href="detail.html"
-                                                                    title="Wishlist">
-                                                                    <i class="icon fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="lnk">
-                                                                <a class="add-to-cart" href="detail.html"
-                                                                    title="Compare">
-                                                                    <i class="fa fa-signal"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div><!-- /.action -->
-                                                </div><!-- /.cart -->
-
-                                            </div><!-- /.product-info -->
-                                        </div><!-- /.col -->
-                                    </div><!-- /.product-list-row -->
-                                    <div class="tag new"><span>new</span></div>
-                                </div><!-- /.product-list -->
-                            </div><!-- /.products -->
-                        </div><!-- /.category-product-inner -->
-
-
-                        <div class="category-product-inner wow fadeInUp">
-                            <div class="products">
-                                <div class="product-list product">
-                                    <div class="row product-list-row">
-                                        <div class="col col-sm-4 col-lg-4">
-                                            <div class="product-image">
-                                                <div class="image">
-                                                    <img src="{{ asset('frontend') }}/assets/images/products/p4.jpg"
-                                                        alt="">
-                                                </div>
-                                            </div><!-- /.product-image -->
-                                        </div><!-- /.col -->
-                                        <div class="col col-sm-8 col-lg-8">
-                                            <div class="product-info">
-                                                <h3 class="name"><a href="detail.html">Floral Print
-                                                        Buttoned</a></h3>
-                                                <div class="rating rateit-small"></div>
-                                                <div class="product-price">
-                                                    <span class="price">
-                                                        $450.99 </span>
-                                                    <span class="price-before-discount">$ 800</span>
-
-                                                </div><!-- /.product-price -->
-                                                <div class="description m-t-10">Suspendisse posuere arcu
-                                                    diam, id accumsan eros pharetra ac. Nulla enim risus,
-                                                    facilisis bibendum gravida eget, lacinia id purus.
-                                                    Suspendisse posuere arcu diam, id accumsan eros pharetra
-                                                    ac. Nulla enim risus, facilisis bibendum gravida eget.
-                                                </div>
-                                                <div class="cart clearfix animate-effect">
-                                                    <div class="action">
-                                                        <ul class="list-unstyled">
-                                                            <li class="add-cart-button btn-group">
-                                                                <button class="btn btn-primary icon"
-                                                                    data-toggle="dropdown" type="button">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </button>
-                                                                <button class="btn btn-primary cart-btn"
-                                                                    type="button">Add to cart</button>
-
-                                                            </li>
-
-                                                            <li class="lnk wishlist">
-                                                                <a class="add-to-cart" href="detail.html"
-                                                                    title="Wishlist">
-                                                                    <i class="icon fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-
-                                                            <li class="lnk">
-                                                                <a class="add-to-cart" href="detail.html"
-                                                                    title="Compare">
-                                                                    <i class="fa fa-signal"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div><!-- /.action -->
-                                                </div><!-- /.cart -->
-
-                                            </div><!-- /.product-info -->
-                                        </div><!-- /.col -->
-                                    </div><!-- /.product-list-row -->
-                                    <div class="tag sale"><span>sale</span></div>
-                                </div><!-- /.product-list -->
-                            </div><!-- /.products -->
-                        </div><!-- /.category-product-inner -->
+                                        @php
+                                            $amount = $product->actual_price - $product->discount_price;
+                                            $discount = ($amount / $product->actual_price) * 100;
+                                        @endphp
+                                        @if ($product->discount_price == null)
+                                            @if (Session()->get('language') == 'bangla')
+                                                <div class="tag new"><span>নতুন</span></div>
+                                            @else
+                                                <div class="tag new"><span>new</span></div>
+                                            @endif
+                                        @else
+                                        <div class="tag sale">
+                                            <span> @if (Session()->get('language') == 'bangla') {{ bn_price(round($discount)) }}% @else {{ round($discount) }}% @endif </span>
+                                        </div>
+                                        @endif
+                                    </div><!-- /.product-list -->
+                                </div><!-- /.products -->
+                            </div><!-- /.category-product-inner -->
+                        @endforeach
 
                     </div><!-- /.category-product -->
                 </div><!-- /.tab-pane #list-container -->
