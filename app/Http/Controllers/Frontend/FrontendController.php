@@ -32,7 +32,7 @@ class FrontendController extends Controller
 
 
 
-        // dd( $tags_bn);
+        // dd( $tags_en);
         return view('frontend.index',
         compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers',
         'special_deals', 'skip_catg_id0', 'skip_products0', 'skip_catg_id1', 'skip_products1',
@@ -51,7 +51,12 @@ class FrontendController extends Controller
         public function productTagWiseProductShow($tag){
             // dd('Calling');
             $products = (new FrontendDataService())->FindTagWiseProductsInfo($tag);
-            dd($products);
-            return view('frontend.tagwise-product');
+            $banners = (new FrontendDataService())->BannerInfoCollect();
+            // Collect Product Tags From Database
+            $tags_en = (new FrontendDataService())->CollectProductsTagsEnglish();
+            $tags_bn = (new FrontendDataService())->CollectProductsTagsBangla();
+
+            // dd($products);
+            return view('frontend.tagwise-product', compact('products', 'banners', 'tags_en', 'tags_bn'));
         }
 }

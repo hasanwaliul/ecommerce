@@ -140,7 +140,6 @@
                 @endforeach
             </div><!-- /.owl-carousel -->
         </div>
-
         <!-- ========================================= SECTION – Banner : END ========================================= -->
 
         <!-- ============================================== BANNER INFO BOXES ============================================== -->
@@ -187,8 +186,10 @@
 
         </div><!-- /.info-boxes --> --}}
         <!-- ============================================== BANNER INFO BOXES : END ============================================== -->
+
         <!-- ============================================== NEW PRODUCTS SCROLL TABS START ============================================== -->
         <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
+
             <div class="more-info-tab clearfix ">
                 @if (Session()->get('language') == 'bangla')
                     <h3 class="new-product-title pull-left"> নতুন পণ্যসমূহ </h3>
@@ -206,11 +207,13 @@
                     @endforeach
                 </ul><!-- /.nav-tabs -->
             </div>
+
             <div class="tab-content outer-top-xs">
                 {{-- Products Tab Part Start --}}
                 <div class="tab-pane in active" id="all">
                     <div class="product-slider">
                         <div class="owl-carousel home-owl-carousel custom-carousel owl-theme" data-item="4">
+
                             {{-- Single Product Part Start --}}
                             @foreach ($products as $product )
                                 <div class="item item-carousel">
@@ -248,11 +251,13 @@
                                             </div><!-- /.product-image -->
 
                                             <div class="product-info text-left">
+
                                                 @if (Session()->get('language') == 'bangla')
                                                     <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_bn) }} "> {{ $product->product_name_bn }} </a></h3>
                                                 @else
                                                     <h3 class="name"><a href=" {{ url('single-prduct/details/'. $product->product_id . '/' . $product->product_slug_en) }} "> {{ $product->product_name_en }} </a></h3>
                                                 @endif
+
                                                 <div class="rating rateit-small"></div>
                                                 <div class="description"></div>
 
@@ -304,16 +309,15 @@
 
                                     </div><!-- /.products -->
                                 </div><!-- /.item -->
-
                             @endforeach
                             {{-- Single Product Part End --}}
+
                         </div><!-- /.home-owl-carousel -->
                     </div><!-- /.product-slider -->
                 </div><!-- /.tab-pane -->
+
                 {{-- Products Tab Part Start --}}
-
                 @foreach ($categories as $category )
-
                     <div class="tab-pane" id="category{{ $category->category_id }}">
                         <div class="product-slider">
                             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
@@ -419,13 +423,14 @@
                             </div><!-- /.home-owl-carousel -->
                         </div><!-- /.product-slider -->
                     </div><!-- /.tab-pane -->
-
                 @endforeach
+                {{-- Products Tab Part End --}}
+
             </div><!-- /.tab-content -->
         </div><!-- /.scroll-tabs -->
         <!-- ============================================== NEW PRODUCTS SCROLL TABS : END ============================================== -->
-        <!-- ============================================== WIDE PRODUCTS ============================================== -->
 
+        <!-- ============================================== WIDE PRODUCTS ============================================== -->
         <div class="wide-banners wow fadeInUp outer-bottom-xs">
             <div class="row">
                 <div class="col-md-7 col-sm-7">
@@ -448,8 +453,8 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.wide-banners -->
-
         <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
+
         <!-- ============================================== FEATURED PRODUCTS START ============================================== -->
         <section class="section featured-product wow fadeInUp">
             @if (Session()->get('language') == 'bangla')
@@ -544,6 +549,7 @@
             </div><!-- /.home-owl-carousel -->
         </section><!-- /.section -->
         <!-- ============================================== FEATURED PRODUCTS : END ============================================== -->
+
         <!-- ============================================== WIDE PRODUCTS ============================================== -->
         <div class="wide-banners wow fadeInUp outer-bottom-xs">
             <div class="row">

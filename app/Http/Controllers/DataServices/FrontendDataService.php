@@ -78,6 +78,7 @@ class FrontendDataService {
 
      // Collect Product Tags From Database
      public function CollectProductsTagsEnglish(){
+        // return Product::groupBy('product_tags_en')->select('product_tags_en')->get();
         $products = Product::get();
         return $products->map(fn($product) => explode(',', $product->product_tags_en))->flatten()->unique()->sort()->values('product_tags_en');
       }
