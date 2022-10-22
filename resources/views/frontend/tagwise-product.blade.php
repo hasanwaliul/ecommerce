@@ -115,7 +115,7 @@
                 <!-- ============================================== (Price Slider) PRICE SILDER : END ============================================== -->
 
                 <!-- ============================================== (Menufactures) MANUFACTURES START  ============================================== -->
-                <div class="sidebar-widget wow fadeInUp">
+                {{-- <div class="sidebar-widget wow fadeInUp">
                     <div class="widget-header">
                         <h4 class="widget-title">Manufactures</h4>
                     </div>
@@ -130,26 +130,8 @@
                         </ul>
                         <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
                     </div><!-- /.sidebar-widget-body -->
-                </div><!-- /.sidebar-widget -->
-                <!-- ============================================== (Menufactures) MANUFACTURES: END ============================================== -->
-
-                <!-- ============================================== (Colors) COLOR START ============================================== -->
-                {{-- <div class="sidebar-widget wow fadeInUp">
-                    <div class="widget-header">
-                        <h4 class="widget-title">Colors</h4>
-                    </div>
-                    <div class="sidebar-widget-body">
-                        <ul class="list">
-                            <li><a href="#">Red</a></li>
-                            <li><a href="#">Blue</a></li>
-                            <li><a href="#">Yellow</a></li>
-                            <li><a href="#">Pink</a></li>
-                            <li><a href="#">Brown</a></li>
-                            <li><a href="#">Teal</a></li>
-                        </ul>
-                    </div><!-- /.sidebar-widget-body -->
                 </div><!-- /.sidebar-widget --> --}}
-                <!-- ============================================== (Colors) COLOR: END ============================================== -->
+                <!-- ============================================== (Menufactures) MANUFACTURES: END ============================================== -->
 
                 <!-- ============================================== (Product Tags) PRODUCT TAGS START ============================================== -->
                 @include('frontend.include.sidebar-product-tags')
@@ -630,38 +612,11 @@
 
             <div class="clearfix filters-container">
                 <div class="text-right">
-                    <div class="pagination-container">
-                        <ul class="list-inline list-unstyled">
-                            <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(1) }}</a></li>
-                            @else
-                                <li><a href="#">1</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li class="active"><a href="#">{{ bn_price(2) }}</a></li>
-                            @else
-                                <li class="active"><a href="#">2</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(3) }}</a></li>
-                            @else
-                                <li><a href="#">3</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(4) }}</a></li>
-                            @else
-                                <li><a href="#">4</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(5) }}</a></li>
-                            @else
-                                <li><a href="#">5</a></li>
-                            @endif
-                            <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        </ul><!-- /.list-inline -->
-                    </div><!-- /.pagination-container -->
+                    @if (Session()->get('language') == 'bangla')
+                        {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                    @else
+                        {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                    @endif
                 </div><!-- /.text-right -->
             </div><!-- /.filters-container -->
 
