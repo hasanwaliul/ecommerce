@@ -35,7 +35,7 @@
         @include('frontend.include.sidebar-categories')
         <!-- ==================================(Sidebar Categories part) TOP NAVIGATION : END ================================== -->
 
-        <!-- ================================== Sidebar Part (Shop By, Price Slider, Menufactures, Colors, Compare Products, Product Tags) : START ================================== -->
+        <!-- ================================== Sidebar Part (Shop By, Price Slider, Menufactures, Colors, Product Tags) : START ================================== -->
         <div class="sidebar-module-container">
 
             <div class="sidebar-filter">
@@ -134,7 +134,7 @@
                 <!-- ============================================== (Menufactures) MANUFACTURES: END ============================================== -->
 
                 <!-- ============================================== (Colors) COLOR START ============================================== -->
-                <div class="sidebar-widget wow fadeInUp">
+                {{-- <div class="sidebar-widget wow fadeInUp">
                     <div class="widget-header">
                         <h4 class="widget-title">Colors</h4>
                     </div>
@@ -148,19 +148,8 @@
                             <li><a href="#">Teal</a></li>
                         </ul>
                     </div><!-- /.sidebar-widget-body -->
-                </div><!-- /.sidebar-widget -->
+                </div><!-- /.sidebar-widget --> --}}
                 <!-- ============================================== (Colors) COLOR: END ============================================== -->
-
-                <!-- ============================================== (Product Compare) COMPARE START============================================== -->
-                <div class="sidebar-widget wow fadeInUp outer-top-vs">
-                    <h3 class="section-title">Compare products</h3>
-                    <div class="sidebar-widget-body">
-                        <div class="compare-report">
-                            <p>You have no <span>item(s)</span> to compare</p>
-                        </div><!-- /.compare-report -->
-                    </div><!-- /.sidebar-widget-body -->
-                </div><!-- /.sidebar-widget -->
-                <!-- ============================================== (Product Compare) COMPARE: END ============================================== -->
 
                 <!-- ============================================== (Product Tags) PRODUCT TAGS START ============================================== -->
                 @include('frontend.include.sidebar-product-tags')
@@ -168,7 +157,7 @@
 
             </div><!-- /.sidebar-filter -->
         </div><!-- /.sidebar-module-container -->
-        <!-- ================================== Sidebar Part (Shop By, Price Slider, Menufactures, Colors, Compare Products, Product Tags) : START ================================== -->
+        <!-- ================================== Sidebar Part (Shop By, Price Slider, Menufactures, Colors, Product Tags) : START ================================== -->
 
         <!-- ============================================== Sidebar Testimonials START ============================================== -->
         <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
