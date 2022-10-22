@@ -234,27 +234,27 @@
         <!-- ========================= PRODUCT VIEW Top Bar Part START ========================= -->
         <div class="clearfix filters-container m-t-10">
             <div class="row">
-                <div class="col col-sm-6 col-md-2">
+                <div class="col col-sm-6 col-md-4">
                     <div class="filter-tabs">
                         <ul id="filter-tabs" class="nav nav-tabs nav-tab-box nav-tab-fa-icon">
                             <li class="active">
                                 @if (Session()->get('language') == 'bangla')
-                                    <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>ব্লক</a>
+                                    <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>ব্লক ভিউ</a>
                                 @else
-                                    <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid</a>
+                                    <a data-toggle="tab" href="#grid-container"><i class="icon fa fa-th-large"></i>Grid view</a>
                                 @endif
                             </li>
                             <li>
                                 @if (Session()->get('language') == 'bangla')
-                                    <a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>লিস্ট</a>
+                                    <a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>লিস্ট ভিউ</a>
                                 @else
-                                    <a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a>
+                                    <a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List view</a>
                                 @endif
                             </li>
                         </ul>
                     </div><!-- /.filter-tabs -->
                 </div><!-- /.col -->
-                <div class="col col-sm-12 col-md-6">
+                {{-- <div class="col col-sm-12 col-md-6">
                     <div class="col col-sm-3 col-md-6 no-padding">
                         <div class="lbl-cnt">
                             @if (Session()->get('language') == 'bangla')
@@ -356,41 +356,7 @@
                             </div><!-- /.fld -->
                         </div><!-- /.lbl-cnt -->
                     </div><!-- /.col -->
-                </div><!-- /.col -->
-                <div class="col col-sm-6 col-md-4 text-right">
-                    <div class="pagination-container">
-                        <ul class="list-inline list-unstyled">
-                            <li class="prev"><a href="#"><i class="fa fa-angle-left"></i></a></li>
-
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(1) }}</a></li>
-                            @else
-                                <li><a href="#">1</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li class="active"><a href="#">{{ bn_price(2) }}</a></li>
-                            @else
-                                <li class="active"><a href="#">2</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(3) }}</a></li>
-                            @else
-                                <li><a href="#">3</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(4) }}</a></li>
-                            @else
-                                <li><a href="#">4</a></li>
-                            @endif
-                            @if (Session()->get('language') == 'bangla')
-                                <li><a href="#">{{ bn_price(5) }}</a></li>
-                            @else
-                                <li><a href="#">5</a></li>
-                            @endif
-                            <li class="next"><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                        </ul><!-- /.list-inline -->
-                    </div><!-- /.pagination-container -->
-                </div><!-- /.col -->
+                </div><!-- /.col --> --}}
             </div><!-- /.row -->
         </div>
         <!-- ========================= PRODUCT VIEW Top Bar Part END ========================= -->
@@ -613,9 +579,11 @@
             <div class="clearfix filters-container">
                 <div class="text-right">
                     @if (Session()->get('language') == 'bangla')
-                        {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                        {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                        {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @else
-                        {!! $products->withQueryString()->links('pagination::bootstrap-5') !!}
+                        {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                        {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @endif
                 </div><!-- /.text-right -->
             </div><!-- /.filters-container -->

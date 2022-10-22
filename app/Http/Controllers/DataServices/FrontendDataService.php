@@ -89,7 +89,7 @@ class FrontendDataService {
 
       public function FindTagWiseProductsInfo($tag){
         // dd($tag);
-        return Product::where('product_status',1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('product_id', 'DESC')->paginate(1);
+        return Product::where('product_status',1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('product_id', 'DESC')->paginate(2);
       }
 
 }
