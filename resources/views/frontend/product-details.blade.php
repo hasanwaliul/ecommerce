@@ -20,11 +20,17 @@
     <div class="breadcrumb">
         <div class="container">
             <div class="breadcrumb-inner">
-                <ul class="list-inline list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Clothing</a></li>
-                    <li class='active'>Floral Print Buttoned</li>
-                </ul>
+                @if (Session()->get('language') == 'bangla')
+                    <ul class="list-inline list-unstyled">
+                        <li><a href="#">হোম</a></li>
+                        <li class='active'>পণ্যের বিস্তারিত তথ্য</li>
+                    </ul>
+                @else
+                    <ul class="list-inline list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li class='active'>Product Details Information</li>
+                    </ul>
+                @endif
             </div><!-- /.breadcrumb-inner -->
         </div><!-- /.container -->
     </div><!-- /.breadcrumb -->

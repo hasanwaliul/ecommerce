@@ -257,25 +257,23 @@
                                                     @endphp
                                                     @foreach ($subcategories as $subcategory)
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                        <a href="#">
-                                                            @if (Session()->get('language') == 'bangla')
-                                                                <h2 class="title"> {{ $subcategory->subcategory_name_bn }}</h2>
-                                                            @else
-                                                                <h2 class="title"> {{ $subcategory->subcategory_name_en }}</h2>
-                                                            @endif
-                                                        </a>
+                                                        @if (Session()->get('language') == 'bangla')
+                                                            <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
+                                                        @else
+                                                            <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
+                                                        @endif
                                                         @php
-                                                        $brands = App\Models\Brand::where('subcategory_id',
-                                                        $subcategory->subcategory_id)->orderBy('brand_name_en',
-                                                        'ASC')->get();
+                                                            $subsubCateg = App\Models\SubsubCategory::where('subcategory_id', $subcategory->subcategory_id)->orderBy('subsubcategory_name_en', 'ASC')->get();
                                                         @endphp
                                                         <ul class="links">
-                                                            @foreach ($brands as $brand)
-                                                                @if (Session()->get('language') == 'bangla')
-                                                                    <li><a href="#"> {{ $brand->brand_name_bn }} </a></li>
-                                                                @else
-                                                                    <li><a href="#"> {{ $brand->brand_name_en }} </a></li>
-                                                                @endif
+                                                            @foreach ($subsubCateg as $subsubCat)
+                                                                <li>
+                                                                    @if (Session()->get('language') == 'bangla')
+                                                                        <a href="#"> {{ $subsubCat->subsubcategory_name_bn }} </a>
+                                                                    @else
+                                                                        <a href="#"> {{ $subsubCat->subsubcategory_name_en  }} </a>
+                                                                    @endif
+                                                                </li>
                                                             @endforeach
                                                         </ul>
                                                     </div><!-- /.col -->

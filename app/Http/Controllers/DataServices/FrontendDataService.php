@@ -92,10 +92,17 @@ class FrontendDataService {
         return Product::where('product_status',1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('product_id', 'DESC')->paginate(1);
       }
 
+/* ################################## Sub Category Wise Product Show  ################################## */
       public function SubCategoryWiseProductInfo($subCatId, $slug){
         // dd('Calling from method');
         return Product::where('product_status', 1)->where('subcategory_id', $subCatId)->orderBy('product_id', 'DESC')->paginate(1);
         // return Product::where('product_status', 1)->where('subcategory_id', $subCatId)->orWhere('subcategory_slug_en', $slug)->orWhere('subcategory_slug_bn', $slug)->orderBy('product_id', 'DESC')->get();
+      }
+
+/* ##################################  Sub Sub Category Wise Product Show  ################################## */
+      public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
+        // dd('Calling from method');
+        return Product::where('product_status', 1)->where('subsubcategory_id', $subsubCatId)->orderBy('product_id', 'DESC')->paginate(1);
       }
 
 }

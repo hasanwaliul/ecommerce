@@ -67,4 +67,13 @@ class FrontendController extends Controller
             // dd($subCatProducts);
             return view('frontend.subcatwise-product', compact('subCatProducts', 'banners'));
         }
+
+        // ########## Sub Subcategory Wise Product show  ##########
+        public function subSubCategoryWiseProductsView($subSubCatgId, $slug){
+            // dd('Calling');
+            $subSubCatgProducts = (new FrontendDataService())->SubSubCategoryWiseProductsInfo($subSubCatgId, $slug);
+            $banners = (new FrontendDataService())->BannerInfoCollect();
+            // dd($subSubCatgProducts);
+            return view('frontend.subsubCatwise-product', compact('subSubCatgProducts', 'banners'));
+        }
 }

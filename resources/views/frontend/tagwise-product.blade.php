@@ -8,10 +8,17 @@
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
-            <ul class="list-inline list-unstyled">
-                <li><a href="#">Home</a></li>
-                <li class='active'>Category Wise Product</li>
-            </ul>
+            @if (Session()->get('language') == 'bangla')
+                <ul class="list-inline list-unstyled">
+                    <li><a href="#">হোম</a></li>
+                    <li class='active'>ট্যাগ অনুযায়ী পণ্যসমূহ</li>
+                </ul>
+            @else
+                <ul class="list-inline list-unstyled">
+                    <li><a href="#">Home</a></li>
+                    <li class='active'>Tag Wise Products</li>
+                </ul>
+            @endif
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->
 </div><!-- /.breadcrumb -->

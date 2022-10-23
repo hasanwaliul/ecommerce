@@ -360,10 +360,10 @@
                     <div class="clearfix filters-container">
                         <div class="text-right">
                             @if (Session()->get('language') == 'bangla')
-                            {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
+                            {!! $subSubCatgProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                             {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                             @else
-                            {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
+                            {!! $subSubCatgProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                             {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                             @endif
                         </div><!-- /.text-right -->
@@ -382,7 +382,7 @@
                 <div class="tab-pane active " id="grid-container">
                     <div class="category-product">
                         <div class="row">
-                            @foreach ($subCatProducts as $product)
+                            @foreach ($subSubCatgProducts as $product)
                             <div class="col-sm-6 col-md-4 wow fadeInUp">
                                 <div class="products">
 
@@ -500,7 +500,7 @@
                 <div class="tab-pane " id="list-container">
                     <div class="category-product">
 
-                        @foreach ($subCatProducts as $product)
+                        @foreach ($subSubCatgProducts as $product)
                         <div class="category-product-inner wow fadeInUp">
                             <div class="products">
                                 <div class="product-list product">
@@ -623,10 +623,10 @@
             <div class="clearfix filters-container">
                 <div class="text-right">
                     @if (Session()->get('language') == 'bangla')
-                    {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
+                    {!! $subSubCatgProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                     {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @else
-                    {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
+                    {!! $subSubCatgProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                     {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @endif
                 </div><!-- /.text-right -->
