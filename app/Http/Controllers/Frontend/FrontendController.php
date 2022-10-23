@@ -31,7 +31,6 @@ class FrontendController extends Controller
         $tags_bn = (new FrontendDataService())->CollectProductsTagsBangla();
 
 
-
         // dd( $tags_en);
         return view('frontend.index',
         compact('categories', 'banners', 'products', 'featureds', 'hot_deals', 'special_offers',
@@ -39,12 +38,30 @@ class FrontendController extends Controller
         'skip_brand_id0', 'skip_brand_products0', 'tags_en', 'tags_bn'));
     }
 
+        // ########## Single Product Details Show  ##########
     public function SingleProductDetails($id, $slug){
-        $categories = (new FrontendDataService())->CategoryInfoCollect();
+        $hot_deals = (new FrontendDataService())->HotDealsRelatedProductInfoCollect();
         $singleProduct = (new FrontendDataService())->SingleProductDetails($id);
         $multiImages = (new FrontendDataService())->SingleProductWiseMultiImgCollect($id);
-        // dd($multiImages);
-        return view('frontend.product-details', compact('singleProduct', 'multiImages'));
+
+
+        $color_en = $singleProduct->product_color_en;
+        $product_color_en = explode(',', $color_en);
+
+        $color_bn = $singleProduct->product_color_bn;
+        $product_color_en = explode(',', $color_bn);
+
+        $size_en = $singleProduct->product_size_en;
+        $product_size_en = explode(',', $size_en);
+
+        $size_bn = $singleProduct->product_size_bn;
+        $product_size_bn = explode(',', $size_bn);
+
+
+
+        // dd($product_color_en);
+        return view('frontend.product-details', compact('singleProduct', 'multiImages', 'hot_deals',
+                    'product_color_en', 'product_color_bn', 'product_size_en', 'product_size_bn'));
     }
 
         // ########## Products Tag Wise Product show  ##########

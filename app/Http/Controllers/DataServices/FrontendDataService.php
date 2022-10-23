@@ -22,13 +22,14 @@ class FrontendDataService {
         return Product::where('product_status', 1)->orderBy('product_id', 'DESC')->get();
     }
 
+    // Single Product Details Start
     public function SingleProductDetails($product_id){
         return Product::where('product_id', $product_id)->first();
     }
-
     public function SingleProductWiseMultiImgCollect($product_id){
         return MultiImg::where('product_id', $product_id)->get();
     }
+    // Single Product Details End
 
     public function FeaturedProductInfoCollect(){
         return Product::where('featured', 1)->where('product_status', 1)->orderBy('product_id', 'DESC')->get();
