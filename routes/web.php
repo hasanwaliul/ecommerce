@@ -91,6 +91,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('product-mainThumbnail/update', [ProductController::class, 'productMainThumbnailUpdate'])->name('product-mainThumb-update');
     // ########## Products Tag Wise Product show  ##########
     Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
+    // ########## Sub Category Wise Products show  ##########
+    Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
 
 
 

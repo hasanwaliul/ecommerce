@@ -10,7 +10,7 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="#">Home</a></li>
-                <li class='active'>Category Wise Product</li>
+                <li class='active'>Sub Category Wise Product</li>
             </ul>
         </div><!-- /.breadcrumb-inner -->
     </div><!-- /.container -->
@@ -133,7 +133,7 @@
                 <!-- ============================================== (Menufactures) MANUFACTURES: END ============================================== -->
 
                 <!-- ============================================== (Product Tags) PRODUCT TAGS START ============================================== -->
-                @include('frontend.include.sidebar-product-tags')
+                {{-- @include('frontend.include.sidebar-product-tags') --}}
                 <!-- ============================================== (Product Tags) PRODUCT TAGS : END ============================================== -->
 
             </div><!-- /.sidebar-filter -->
@@ -372,10 +372,10 @@
                     <div class="clearfix filters-container">
                         <div class="text-right">
                             @if (Session()->get('language') == 'bangla')
-                            {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                            {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                             {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                             @else
-                            {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                            {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                             {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                             @endif
                         </div><!-- /.text-right -->
@@ -394,7 +394,7 @@
                 <div class="tab-pane active " id="grid-container">
                     <div class="category-product">
                         <div class="row">
-                            @foreach ($products as $product)
+                            @foreach ($subCatProducts as $product)
                             <div class="col-sm-6 col-md-4 wow fadeInUp">
                                 <div class="products">
 
@@ -512,7 +512,7 @@
                 <div class="tab-pane " id="list-container">
                     <div class="category-product">
 
-                        @foreach ($products as $product)
+                        @foreach ($subCatProducts as $product)
                         <div class="category-product-inner wow fadeInUp">
                             <div class="products">
                                 <div class="product-list product">
@@ -635,10 +635,10 @@
             <div class="clearfix filters-container">
                 <div class="text-right">
                     @if (Session()->get('language') == 'bangla')
-                    {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                    {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                     {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @else
-                    {!! $products->withQueryString()->links('pagination::bootstrap-4') !!}
+                    {!! $subCatProducts->withQueryString()->links('pagination::bootstrap-4') !!}
                     {{-- {!! $products->withQueryString()->links('pagination::bootstrap-5') !!} --}}
                     @endif
                 </div><!-- /.text-right -->

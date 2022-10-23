@@ -29,17 +29,29 @@ $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                         App\Models\Subcategory::where('category_id',$category->category_id)->orderBy('subcategory_name_en','ASC')->get();
                         @endphp
                         <div class="row">
-                            <div class="col-sm-12 col-md-3">
-                                @foreach ($subcategories as $subcategory)
-                                <ul class="links list-unstyled">
+                            @foreach ($subcategories as $subcategory)
+                                <div class="col-sm-12 col-md-3">
                                     @if (Session()->get('language') == 'bangla')
-                                    <li><a href="#"> {{ $subcategory->subcategory_name_bn }} </a></li>
+                                        <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
                                     @else
-                                    <li><a href="#"> {{ $subcategory->subcategory_name_en }} </a></li>
+                                        <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
                                     @endif
-                                </ul>
-                                @endforeach
-                            </div>
+                                    <ul class="links list-unstyled">
+                                        @php
+                                            $subsubCateg = App\Models\SubsubCategory::where('subcategory_id', $subcategory->subcategory_id)->orderBy('subsubcategory_name_en', 'ASC')->get();
+                                        @endphp
+                                        @foreach ($subsubCateg as $subsubCat)
+                                            <li>
+                                                @if (Session()->get('language') == 'bangla')
+                                                    <a href="#"> {{ $subsubCat->subsubcategory_name_bn }} </a>
+                                                @else
+                                                    <a href="#"> {{ $subsubCat->subsubcategory_name_en  }} </a>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endforeach
 
                         </div> <!-- /.row -->
                     </li><!-- /.yamm-content -->
