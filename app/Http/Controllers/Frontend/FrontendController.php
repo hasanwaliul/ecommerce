@@ -97,4 +97,13 @@ class FrontendController extends Controller
             // dd($subSubCatgProducts);
             return view('frontend.subsubCatwise-product', compact('subSubCatgProducts', 'banners'));
         }
+
+        // ########## Product details show with modal  ##########
+        public function productInfoViewWithModal($productId){
+            $findProductDetails = (new FrontendDataService())->FindSingleProductInfoForModal($productId);
+
+          dd($findProductDetails);
+
+        }
+
 }

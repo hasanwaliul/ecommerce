@@ -104,9 +104,13 @@ class FrontendDataService {
       }
 
 /* ##################################  Sub Sub Category Wise Product Show  ################################## */
-      public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
-        // dd('Calling from method');
-        return Product::where('product_status', 1)->where('subsubcategory_id', $subsubCatId)->orderBy('product_id', 'DESC')->paginate(1);
-      }
+public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
+    // dd('Calling from method');
+    return Product::where('product_status', 1)->where('subsubcategory_id', $subsubCatId)->orderBy('product_id', 'DESC')->paginate(1);
+}
 
+/* ##################################  Product info for modal  ################################## */
+public function FindSingleProductInfoForModal($prodId){
+    return Product::where('product_id', $prodId)->first();
+}
 }

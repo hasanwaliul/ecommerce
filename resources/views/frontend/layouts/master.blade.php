@@ -12,7 +12,7 @@
     <meta name="robots" content="all">
 
 
-    <meta name="csrf-token" content=" {{ csrf_token() }} ">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title> @yield('title') </title>
 
@@ -71,7 +71,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" id="pName">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -85,11 +85,11 @@
                         </div>
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">Price:</li>
-                                <li class="list-group-item">Product Code:</li>
-                                <li class="list-group-item">Category:</li>
-                                <li class="list-group-item">Brand:</li>
-                                <li class="list-group-item">Stock:</li>
+                                <li class="list-group-item">Price: <strong id="pPrice"></strong></li>
+                                <li class="list-group-item">Product Code: <strong id="pCode"></strong></li>
+                                <li class="list-group-item">Category: <strong id="pCategory"></strong></li>
+                                <li class="list-group-item">Brand: <strong id="pBrand"></strong></li>
+                                <li class="list-group-item">Stock: <strong id="pStock"></strong></li>
                             </ul>
                         </div>
                         <div class="col-md-4">
@@ -123,23 +123,6 @@
         </div>
     </div>
     {{-- Modal Body End --}}
-    {{-- Modal Ajax request Start --}}
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers:{
-                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
-            }
-        })
-        function productView(id){
-            alert(id)
-            $.ajax({
-                type:'GET',
-                url:
-                dataType:'json',
-            })
-        }
-    </script>
-    {{-- Modal Ajax request End --}}
 
     {{-- tostr cdn --}}
     <script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script>
@@ -196,6 +179,34 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
+
+
+    {{-- Modal Ajax request Start --}}
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+        function productView(id){
+            // alert(id)
+            $.ajax({
+                type:'GET',
+                url:'admin/product/view/withModal/'+id,
+                dataType:'json',
+                success:function(data){
+                    // console.log(data)
+                    $('#pName').text(data.findProductDetails.product_name_en);
+                    $('#pPrice').text(data.findProductDetails.discount_price);
+                    $('#pCode').text(data.findProductDetails.product_code);
+                    $('#pCategory').text(data.findProductDetails.category_id);
+                    $('#pBrand').text(data.findProductDetails.brand_id);
+                }
+            })
+        }
+    </script>
+    {{-- Modal Ajax request End --}}
 
 </body>
 
