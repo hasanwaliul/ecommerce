@@ -102,7 +102,16 @@ class FrontendController extends Controller
         public function productInfoViewWithModal($productId){
             $findProductDetails = (new FrontendDataService())->FindSingleProductInfoForModal($productId);
 
-          dd($findProductDetails);
+            $color = $findProductDetails->product_color_en;
+            $product_color = explode(',', $color);
+            $size = $findProductDetails->product_size_en;
+            $product_size = explode(',', $size);
+
+            return response()->json(array(
+                'product' => $findProductDetails,
+                'color' => $product_color,
+                'size' => $product_size,
+            ));
 
         }
 

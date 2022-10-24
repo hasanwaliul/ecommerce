@@ -111,6 +111,8 @@ public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
 
 /* ##################################  Product info for modal  ################################## */
 public function FindSingleProductInfoForModal($prodId){
-    return Product::where('product_id', $prodId)->first();
+    return Product::with('categoryfuncProd', 'brandfuncProd')->where('product_id', $prodId)->first();
 }
+
+
 }

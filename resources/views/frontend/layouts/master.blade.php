@@ -71,7 +71,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" id="pName">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> <span id="pName"></span> </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -80,16 +80,16 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card" style="width: 16rem;">
-                                <img src="" alt="Cart Image" class="card-img-top" style="height: 250px;">
+                                <img src="" alt="Cart Image" class="card-img-top" style="height: 200px;" id="pImage">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">Price: <strong id="pPrice"></strong></li>
-                                <li class="list-group-item">Product Code: <strong id="pCode"></strong></li>
-                                <li class="list-group-item">Category: <strong id="pCategory"></strong></li>
-                                <li class="list-group-item">Brand: <strong id="pBrand"></strong></li>
-                                <li class="list-group-item">Stock: <strong id="pStock"></strong></li>
+                                <li class="list-group-item">Price: <strong id="pPrice" class="text-info"></strong></li>
+                                <li class="list-group-item">Code: <strong id="pCode" class="text-info"></strong></li>
+                                <li class="list-group-item">Category: <strong id="pCategory" class="text-info"></strong></li>
+                                <li class="list-group-item">Brand: <strong id="pBrand" class="text-info"></strong></li>
+                                <li class="list-group-item">Stock: <strong id="pStock" class="text-info"></strong></li>
                             </ul>
                         </div>
                         <div class="col-md-4">
@@ -197,11 +197,12 @@
                 dataType:'json',
                 success:function(data){
                     // console.log(data)
-                    $('#pName').text(data.findProductDetails.product_name_en);
-                    $('#pPrice').text(data.findProductDetails.discount_price);
-                    $('#pCode').text(data.findProductDetails.product_code);
-                    $('#pCategory').text(data.findProductDetails.category_id);
-                    $('#pBrand').text(data.findProductDetails.brand_id);
+                    $('#pName').text(data.product.product_name_en);
+                    $('#pPrice').text(data.product.discount_price);
+                    $('#pCode').text(data.product.product_code);
+                    $('#pCategory').text(data.product.category_id);
+                    $('#pBrand').text(data.product.brand_id);
+                    $('#pImage').attr('src','/'+data.product.product_thumbnail);
                 }
             })
         }

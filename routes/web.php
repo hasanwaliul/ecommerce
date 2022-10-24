@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\DataServices\FrontendDataService;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -97,7 +96,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     // ########## Sub SubCategory Wise Products show  ##########
     Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
     // ########## Product details show with Ajax ##########
-    Route::get('product/view/withModal/{productId}', [FrontendDataService::class, 'productInfoViewWithModal'])->name('product-view-modal');
+    Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 
 
 
