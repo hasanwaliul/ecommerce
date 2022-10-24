@@ -44,24 +44,28 @@ class FrontendController extends Controller
         $singleProduct = (new FrontendDataService())->SingleProductDetails($id);
         $multiImages = (new FrontendDataService())->SingleProductWiseMultiImgCollect($id);
 
-
+        // Product Color
         $color_en = $singleProduct->product_color_en;
         $product_color_en = explode(',', $color_en);
 
         $color_bn = $singleProduct->product_color_bn;
-        $product_color_en = explode(',', $color_bn);
+        $product_color_bn = explode(',', $color_bn);
 
+        // Product Size
         $size_en = $singleProduct->product_size_en;
         $product_size_en = explode(',', $size_en);
 
         $size_bn = $singleProduct->product_size_bn;
         $product_size_bn = explode(',', $size_bn);
 
+        $category_id = $singleProduct->category_id;
+        $relatedProducts = (new FrontendDataService())->GetCategoryWiseRelatedProducts($category_id, $id);
 
 
-        // dd($product_color_en);
+
+        // dd($relatedProducts);
         return view('frontend.product-details', compact('singleProduct', 'multiImages', 'hot_deals',
-                    'product_color_en', 'product_color_bn', 'product_size_en', 'product_size_bn'));
+                    'product_color_en', 'product_color_bn', 'product_size_en', 'product_size_bn', 'relatedProducts'));
     }
 
         // ########## Products Tag Wise Product show  ##########

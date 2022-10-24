@@ -518,10 +518,11 @@
                                     <div class="action">
                                         <ul class="list-unstyled">
                                             <li class="add-cart-button btn-group">
-                                                <button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+                                                <button class="btn btn-primary icon" type="button" data-toggle="modal" data-target="#cartModal"
+                                                 id="{{ $product->product_id }}" onclick="productView(this.id)">
                                                     <i class="fa fa-shopping-cart"></i>
                                                 </button>
-                                                <button class="btn btn-primary cart-btn" type="button">
+                                                <button class="btn btn-primary cart-btn"  data-toggle="tooltip"  type="button" title="Add Cart">
                                                     @if (Session()->get('language') == 'bangla') ব্যাগে যুক্ত করুন @else Add to cart @endif
                                                 </button>
 

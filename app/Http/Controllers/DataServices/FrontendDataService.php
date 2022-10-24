@@ -29,6 +29,9 @@ class FrontendDataService {
     public function SingleProductWiseMultiImgCollect($product_id){
         return MultiImg::where('product_id', $product_id)->get();
     }
+    public function GetCategoryWiseRelatedProducts($catg_id, $productId){
+        return Product::where('product_status', 1)->where('category_id', $catg_id)->where('product_id', '!=', $productId)->orderBy('product_id', 'DESC')->get();
+    }
     // Single Product Details End
 
     public function FeaturedProductInfoCollect(){

@@ -6,10 +6,13 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="keywords" content="MediaCenter, Template, eCommerce">
+    <meta name="description" content="This is an ecommerce website based on laravel name Easy Shopping">
+    <meta name="author" content="Waliul Hasan">
+    <meta name="keywords" content="MediaCenter, Template, eCommerce, Online, Shopping, Buy Something">
     <meta name="robots" content="all">
+
+
+    <meta name="csrf-token" content=" {{ csrf_token() }} ">
 
     <title> @yield('title') </title>
 
@@ -62,57 +65,125 @@
     @include('frontend.layouts.footer')
     <!-- ============================================================= FOOTER : END============================================================= -->
 
-
-    <!-- For demo purposes – can be removed on production -->
-
-
-    <!-- For demo purposes – can be removed on production : End -->
-
-    <!-- JavaScripts placed at the end of the document so the pages load faster -->
+    {{-- Modal Body Start --}}
+    <!-- Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card" style="width: 16rem;">
+                                <img src="" alt="Cart Image" class="card-img-top" style="height: 250px;">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="list-group">
+                                <li class="list-group-item">Price:</li>
+                                <li class="list-group-item">Product Code:</li>
+                                <li class="list-group-item">Category:</li>
+                                <li class="list-group-item">Brand:</li>
+                                <li class="list-group-item">Stock:</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="exampleFormControlSelect1">Product Color:</label>
+                              <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleFormControlSelect1">Product Size:</label>
+                              <select class="form-control" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="quantity">Quantity:</label>
+                              <input type="text" class="form-control" id="quantity">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal Body End --}}
+    {{-- Modal Ajax request Start --}}
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        function productView(id){
+            alert(id)
+            $.ajax({
+                type:'GET',
+                url:
+                dataType:'json',
+            })
+        }
+    </script>
+    {{-- Modal Ajax request End --}}
 
     {{-- tostr cdn --}}
     <script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script>
     <script src=" {{ asset('backend/lib/toastr/toastr.min.js') }} "></script>
     <script>
-        @if(Session::has('message'))
+        @if (Session:: has('message'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
-                toastr.success("{{ session('message') }}");
+        toastr.success("{{ session('message') }}");
         @endif
 
-        @if(Session::has('error'))
+        @if (Session:: has('error'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
-                toastr.error("{{ session('error') }}");
+        toastr.error("{{ session('error') }}");
         @endif
 
-        @if(Session::has('info'))
+        @if (Session:: has('info'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
-                toastr.info("{{ session('info') }}");
+        toastr.info("{{ session('info') }}");
         @endif
 
-        @if(Session::has('warning'))
+        @if (Session:: has('warning'))
         toastr.options =
         {
-            "closeButton" : true,
-            "progressBar" : true
+            "closeButton": true,
+            "progressBar": true
         }
-                toastr.warning("{{ session('warning') }}");
+        toastr.warning("{{ session('warning') }}");
         @endif
-      </script>
-    {{-- ################## Bootstrap Tagsinput  ###################--}}
+    </script>
+    {{-- ################## Bootstrap Tagsinput ###################--}}
     <script src=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js "></script>
-    
+
     <script src=" {{ asset('frontend') }}/assets/js/jquery-1.11.1.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-hover-dropdown.min.js"></script>
