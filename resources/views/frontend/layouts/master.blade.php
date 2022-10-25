@@ -72,7 +72,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> <span id="pName"></span> </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -113,10 +113,11 @@
                               </select>
                             </div>
                             <div class="form-group">
-                              <label for="quantity">Quantity:</label>
-                              <input type="text" class="form-control" id="quantity">
+                              <label for="pQty">Quantity:</label>
+                              <input type="text" class="form-control" id="pQty" value="" min="1">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <input type="hidden" name="product_id" id="product_id">
+                            <button type="submit" class="btn btn-primary" onclick="addToCart()">Add To Cart</button>
                         </div>
                     </div>
                 </div>
@@ -193,7 +194,7 @@
                 'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
             }
         })
-
+        // Start Product View Function with modal
         function productView(id){
             // alert(id)
             $.ajax({
@@ -208,6 +209,9 @@
                     $('#pCategory').text(data.product.category_id);
                     $('#pBrand').text(data.product.brand_id);
                     $('#pImage').attr('src','/'+data.product.product_thumbnail);
+
+                    $('#product_id').val(id);
+                    $('#pQty').text(data.product.product_qty)
 
                     // Product Price
                     if (data.product.discount_price == null) {
@@ -250,6 +254,35 @@
                 }
             })
         }
+        // End Product View Function with modal
+        // Start Cart Operation With Modal
+        function addToCart(){
+            var id = $('#product_id').val();
+            var name = $('#pName').text();
+            var color = $('#product_color option:selected').text();
+            var size = $('#product_size option:selected').text();
+            var qty = $('#pQty').val();
+
+            console.log(name)
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                url: "admin/cart/data/store/"+id,
+                data:{
+                    prod_name:name,
+                    color:color,
+                    size:size,
+                    quantity:qty,
+                },
+                success:function(data){
+                    $('#closeModal').click();
+                    // console.log(data)
+                }
+
+            })
+        }
+        // End Cart Operation With Modal
+
     </script>
     {{-- Modal Ajax request End --}}
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\UserController;
@@ -98,6 +99,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     // ########## Product details show with Ajax ##########
     Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 
+    // ########## Cart Data Store ##########
+    Route::post('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
 
 
 

@@ -6,7 +6,6 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
-use PhpParser\Node\Expr\FuncCall;
 
 class FrontendDataService {
 
@@ -24,7 +23,7 @@ class FrontendDataService {
 
     // Single Product Details Start
     public function SingleProductDetails($product_id){
-        return Product::where('product_id', $product_id)->first();
+        return Product::where('product_status', 1)->where('product_id', $product_id)->first();
     }
     public function SingleProductWiseMultiImgCollect($product_id){
         return MultiImg::where('product_id', $product_id)->get();
