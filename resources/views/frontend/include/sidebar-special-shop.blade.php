@@ -25,7 +25,8 @@
                         @else
                         <span> @if (Session()->get('language') == 'bangla') {{ bn_price(round($discount)) }}% @else {{
                             round($discount) }}% @endif <br> @if (Session()->get('language') == 'bangla') ছাড় @else Off
-                            @endif </span>
+                            @endif
+                        </span>
                         @endif
                     </div>
                     <div class="timing-wrapper">

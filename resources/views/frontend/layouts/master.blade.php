@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="This is an ecommerce website based on laravel name Easy Shopping">
     <meta name="author" content="Waliul Hasan">
-    <meta name="keywords" content="MediaCenter, Template, eCommerce, Online, Shopping, Buy Something">
+    <meta name="keywords" content="online store, online business, ecom, ecommerce website, shopping cart, e business, ecommerce platforms">
     <meta name="robots" content="all">
 
 
@@ -85,26 +85,31 @@
                         </div>
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">Price: <strong id="pPrice" class="text-info"></strong></li>
+                                <li class="list-group-item">
+                                    Price:
+                                    <strong class="text-danget" class="text-info">
+                                        $<span id="pPrice"></span>
+                                        <del id="oldPrice" class="text-danger"></del>
+                                    </strong>
+                                </li>
                                 <li class="list-group-item">Code: <strong id="pCode" class="text-info"></strong></li>
                                 <li class="list-group-item">Category: <strong id="pCategory" class="text-info"></strong></li>
                                 <li class="list-group-item">Brand: <strong id="pBrand" class="text-info"></strong></li>
-                                <li class="list-group-item">Stock: <strong id="pStock" class="text-info"></strong></li>
+                                <li class="list-group-item">Stock:
+                                    <span class="label label-success" id="available"></span>
+                                    <span class="label label-danger" id="stockout"></span>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                              <label for="exampleFormControlSelect1">Product Color:</label>
-                              <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
+                              <label for="product_color">Product Color:</label>
+                              <select class="form-control" id="product_color" name="pColor">
                               </select>
                             </div>
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1">Product Size:</label>
-                              <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
+                            <div class="form-group" id="sizeArea">
+                              <label for="product_size">Product Size:</label>
+                              <select class="form-control" id="product_size" name="pSize">
                               </select>
                             </div>
                             <div class="form-group">
@@ -203,6 +208,45 @@
                     $('#pCategory').text(data.product.category_id);
                     $('#pBrand').text(data.product.brand_id);
                     $('#pImage').attr('src','/'+data.product.product_thumbnail);
+
+                    // Product Price
+                    if (data.product.discount_price == null) {
+                        $('#pPrice').text('');
+                        $('#oldPrice').text('');
+                        $('#pPrice').text(data.product.actual_price);
+                    } else{
+                        $('#pPrice').text(data.product.discount_price);
+                        $('#oldPrice').text(data.product.actual_price);
+
+                    }
+
+                    // Product Stock Status
+                    if (data.product.product_qty > 0) {
+                        $('#available').text('');
+                        $('#stockout').text('');
+                        $('#available').text('Available');
+                    }else{
+                        $('#available').text('');
+                        $('#stockout').text('');
+                        $('#stockout').text('Stock Out');
+                    }
+
+                    // Product Color
+                    $('select[name="pColor"]').empty();
+                    $.each(data.color, function(key, value){
+                        $('select[name="pColor"]').append('<option value=" '+value+' ">' +value+ '</option>')
+                    })
+
+                    // Product Size
+                    $('select[name="pSize"]').empty();
+                    $.each(data.size, function(key, value){
+                        $('select[name="pSize"]').append('<option value=" '+value+' ">' +value+ '</option>')
+                        if (data.size == "") {
+                            $('#sizeArea').hide();
+                        }else {
+                            $('#sizeArea').show();
+                        }
+                    })
                 }
             })
         }
