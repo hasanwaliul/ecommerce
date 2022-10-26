@@ -92,10 +92,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('product-mainThumbnail/update', [ProductController::class, 'productMainThumbnailUpdate'])->name('product-mainThumb-update');
     // ########## Products Tag Wise Product show  ##########
     Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
-    // ########## Sub Category Wise Products show  ##########
-    Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
-    // ########## Sub SubCategory Wise Products show  ##########
-    Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
 
 
 
@@ -134,6 +130,11 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 //  ################################## Multiple Language Part Start #################################
 Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
 Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
+
+// ########## Sub Category Wise Products show  ##########
+Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
+// ########## Sub SubCategory Wise Products show  ##########
+Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
 
 
 // #################### Ajax Request for select data  ####################

@@ -156,7 +156,7 @@
                                     @endif
                                     <span class="total-price">
                                         @if (Session()->get('language') == 'bangla')
-                                        <span class="sign">৳</span><span class="value"> {{ bn_price(600.00) }} </span>
+                                        <span class="sign">৳</span><span class="value"> ৬০০.০০ </span>
                                         @else
                                         <span class="sign">$</span><span class="value">600.00</span>
                                         @endif
@@ -258,9 +258,9 @@
                                                     @foreach ($subcategories as $subcategory)
                                                     <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
                                                         @if (Session()->get('language') == 'bangla')
-                                                            <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
+                                                            <a href="{{ url('subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
                                                         @else
-                                                            <a href="{{ url('admin/subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
+                                                            <a href="{{ url('subCatg-wise/products/' .$subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
                                                         @endif
                                                         @php
                                                             $subsubCateg = App\Models\SubsubCategory::where('subcategory_id', $subcategory->subcategory_id)->orderBy('subsubcategory_name_en', 'ASC')->get();

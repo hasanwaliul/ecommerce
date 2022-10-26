@@ -32,9 +32,9 @@ $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                             @foreach ($subcategories as $subcategory)
                                 <div class="col-sm-12 col-md-3">
                                     @if (Session()->get('language') == 'bangla')
-                                        <a href="{{ url('admin/subCatg-wise/products/' . $subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
+                                        <a href="{{ url('subCatg-wise/products/' . $subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_bn) }}"> {{ $subcategory->subcategory_name_bn }} </a>
                                     @else
-                                        <a href="{{ url('admin/subCatg-wise/products/' . $subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
+                                        <a href="{{ url('subCatg-wise/products/' . $subcategory->subcategory_id . '/' . $subcategory->subcategory_slug_en) }}"> {{ $subcategory->subcategory_name_en  }} </a>
                                     @endif
                                     <ul class="links list-unstyled">
                                         @php
@@ -43,9 +43,9 @@ $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();
                                         @foreach ($subsubCateg as $subsubCat)
                                             <li>
                                                 @if (Session()->get('language') == 'bangla')
-                                                    <a href="{{ url('admin/subSubCatg-wise/products/' . $subsubCat->subsubcategory_id . '/' . $subsubCat->subsubcategory_slug_bn) }}"> {{ $subsubCat->subsubcategory_name_bn }} </a>
+                                                    <a href="{{ url('subSubCatg-wise/products/' . $subsubCat->subsubcategory_id . '/' . $subsubCat->subsubcategory_slug_bn) }}"> {{ $subsubCat->subsubcategory_name_bn }} </a>
                                                 @else
-                                                    <a href="{{ url('admin/subSubCatg-wise/products/' . $subsubCat->subsubcategory_id . '/' . $subsubCat->subsubcategory_slug_en) }}"> {{ $subsubCat->subsubcategory_name_en  }} </a>
+                                                    <a href="{{ url('subSubCatg-wise/products/' . $subsubCat->subsubcategory_id . '/' . $subsubCat->subsubcategory_slug_en) }}"> {{ $subsubCat->subsubcategory_name_en  }} </a>
                                                 @endif
                                             </li>
                                         @endforeach
