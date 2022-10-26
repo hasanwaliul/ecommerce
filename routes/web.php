@@ -96,11 +96,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
     // ########## Sub SubCategory Wise Products show  ##########
     Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
-    // ########## Product details show with Ajax ##########
-    Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 
-    // ########## Cart Data Store ##########
-    Route::post('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
 
 
 
@@ -115,11 +111,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     //  ################################## Banner Active && Inactive #################################
     Route::get('banner-inactive/{id}', [BannerController::class, 'BannerDataInactive'])->name('banner-data-inactive');
     Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
-
-    //  ################################## Multiple Language Part Start #################################
-    Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
-    Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
-
 
 
 
@@ -140,9 +131,18 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
 });
 
+//  ################################## Multiple Language Part Start #################################
+Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
+Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
+
+
 // #################### Ajax Request for select data  ####################
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
 
+// #################### Ajax Request for Cart Data Store  ####################
+ Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
+// #################### Ajax Request for Product details show  ####################
+ Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 

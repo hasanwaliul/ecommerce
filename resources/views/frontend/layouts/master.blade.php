@@ -199,7 +199,7 @@
             // alert(id)
             $.ajax({
                 type:'GET',
-                url:'admin/product/view/withModal/'+id,
+                url:'product/view/withModal/'+id,
                 dataType:'json',
                 success:function(data){
                     // console.log(data)
@@ -263,11 +263,11 @@
             var size = $('#product_size option:selected').text();
             var qty = $('#pQty').val();
 
-            console.log(name)
+            // console.log(name)
             $.ajax({
-                type:'POST',
+                type:'GET',
                 dataType:'json',
-                url: "admin/cart/data/store/"+id,
+                url: "cart/data/store/"+id,
                 data:{
                     prod_name:name,
                     color:color,
@@ -276,7 +276,7 @@
                 },
                 success:function(data){
                     $('#closeModal').click();
-                    // console.log(data)
+                    console.log(data)
                 }
 
             })

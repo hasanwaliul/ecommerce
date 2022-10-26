@@ -797,7 +797,7 @@
                                 <div id="owl-single-product-thumbnails">
                                     @foreach ($multiImages as $multiImg )
                                     <div class="item">
-                                        <a class="horizontal-thumb active" data-target="#owl-single-product"
+                                        <a class="horizontal-thumb" data-target="#owl-single-product"
                                             data-slide="{{ $multiImg->multiImg_id }}"
                                             href="#slide{{ $multiImg->multiImg_id }}">
                                             <img class="img-responsive" width="85" alt="Multiple Img Thumb"
