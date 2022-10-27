@@ -334,7 +334,7 @@
 
 												<h3 class="name"><a href="#">${value.name}</a>
 												</h3>
-												<div class="price">${value.price}</div>
+												<div class="price">${value.price} * ${value.qty}</div>
 											</div>
 											<div class="col-xs-1 action">
 												<button type="submit" id="${value.rowId}" onclick="miniCartProductRemove(this.id)" href="#"><i class="fa fa-trash"></i></button>
@@ -385,6 +385,20 @@
                 });
             }
         // Product Remove From Mini Cart End
+
+        // Product Add On Wishlist Start
+        function addToWishlist(productId){
+            // alert(productId);
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('user/product/add/wishlist') }}" + '/' + productId,
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                }
+            });
+        }
+        // Product Add On Wishlist End
 
 
 

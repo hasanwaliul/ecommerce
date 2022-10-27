@@ -527,12 +527,11 @@
                                                 </button>
 
                                             </li>
-
-                                            <li class="lnk wishlist">
-                                                <a class="add-to-cart" href="#" title="Wishlist">
-                                                    <i class="icon fa fa-heart"></i>
-                                                </a>
-                                            </li>
+                                            {{-- Wishlist button --}}
+                                            <button class="btn btn-primary icon" type="button" class="add-to-cart" title="Wishlist"
+                                             id="{{ $product->product_id }}" onclick="addToWishlist(this.id)">
+                                                 <i class="icon fa fa-heart"></i>
+                                            </button>
 
                                             <li class="lnk">
                                                 <a class="add-to-cart" href="#" title="Compare">

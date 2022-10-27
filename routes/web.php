@@ -142,11 +142,15 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
 });
     // #################### User Part  ####################
-Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
-    Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
-    Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
-    Route::get('image', [UserController::class, 'profileImage'])->name('profile-image');
-    Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
-    Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
-    Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
+    Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
+        Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
+        Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
+        Route::get('image', [UserController::class, 'profileImage'])->name('profile-image');
+        Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
+        Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
+        Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
+
+        // #################### Product Add To Wishlist  ####################
+        Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
+
 });

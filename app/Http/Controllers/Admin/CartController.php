@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class CartController extends Controller
 {
@@ -60,5 +61,12 @@ class CartController extends Controller
     public function productRemoveFromMiniCart($rowId){
         Cart::remove($rowId);
         return response()->json(['success' => 'Successfully Removed From Cart']);
+    }
+
+
+    // ####################### Product Add To Wishlist #######################
+    public function productAddToWishlist(Request $request, $product_id){
+        dd($product_id);
+        return response()->data();
     }
 }
