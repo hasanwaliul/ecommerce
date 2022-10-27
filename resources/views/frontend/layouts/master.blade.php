@@ -337,7 +337,7 @@
 												<div class="price">${value.price}</div>
 											</div>
 											<div class="col-xs-1 action">
-												<a href="#"><i class="fa fa-trash"></i></a>
+												<button type="submit" id="${value.rowId}" onclick="miniCartProductRemove(this.id)" href="#"><i class="fa fa-trash"></i></button>
 											</div>
 										</div>
 									</div><!-- /.cart-item -->
@@ -350,8 +350,41 @@
             });
         }
         miniCartInfo();
-
         // End Product Info Show On Public Page (Mini Cart)
+
+        // Product Remove From Mini Cart Start
+            function miniCartProductRemove(rowId){
+                // alert(rowId);
+                $.ajax({
+                    type:'GET',
+                    url:'/miniCart/product-remove/'+rowId,
+                    dataType:'json',
+                    success:function(data){
+                        // cosole.log(data)
+                        miniCartInfo();
+                        //  start message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'message',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                title: data.error
+                            })
+                        }
+                        //  end message
+                    }
+                });
+            }
+        // Product Remove From Mini Cart End
 
 
 

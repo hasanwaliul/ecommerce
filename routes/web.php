@@ -57,6 +57,8 @@ Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, '
 Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 // #################### Ajax Request for Product details show (On Mini Cart) ####################
 Route::get('product/mini-cart/info', [CartController::class, 'productBuyInfoOnMiniCart']);
+// #################### Ajax Request for Product Remove (From Mini Cart) ####################
+Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productRemoveFromMiniCart']);
 
 
 // Auth::routes();

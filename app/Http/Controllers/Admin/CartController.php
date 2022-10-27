@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -56,5 +55,10 @@ class CartController extends Controller
             'cartTotalPrice' => $cartTotal,
             // 'cartTotalPrice' => round($cartTotal),
         ));
+    }
+
+    public function productRemoveFromMiniCart($rowId){
+        Cart::remove($rowId);
+        return response()->json(['success' => 'Successfully Removed From Cart']);
     }
 }
