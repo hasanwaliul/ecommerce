@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -23,7 +24,7 @@ class CartController extends Controller
                 'options' => ['size' => $request->size],
                 'options' => ['image' => $produtDetails->product_thumbnail],
             ]);
-            return response()->json('success');
+            return response()->json(['success' => 'Successfully Added On Your Cart']);
         }else {
             Cart::add([
                 'id' => $prdId,
@@ -35,7 +36,8 @@ class CartController extends Controller
                 'options' => ['size' => $request->size],
                 'options' => ['image' => $produtDetails->product_thumbnail],
             ]);
-            return response()->json('success');
+            return response()->json(['success' => 'Successfully Added On Your Cart']);
+
         }
     }
 }

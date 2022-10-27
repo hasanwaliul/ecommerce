@@ -90,8 +90,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('product-multiImg/delete/{id}', [ProductController::class, 'productMultiImgDelete'])->name('product-multiImg-delete');
     // ########## Product Main Thumbnail Image Update  ##########
     Route::post('product-mainThumbnail/update', [ProductController::class, 'productMainThumbnailUpdate'])->name('product-mainThumb-update');
-    // ########## Products Tag Wise Product show  ##########
-    Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
 
 
 
@@ -107,12 +105,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     //  ################################## Banner Active && Inactive #################################
     Route::get('banner-inactive/{id}', [BannerController::class, 'BannerDataInactive'])->name('banner-data-inactive');
     Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
-
-
-
-
-
-
 
 
 
@@ -135,6 +127,9 @@ Route::get('language/English', [LanguageController::class, 'English'])->name('en
 Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
 // ########## Sub SubCategory Wise Products show  ##########
 Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
+
+// ########## Products Tag Wise Product show  ##########
+Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
 
 
 // #################### Ajax Request for select data  ####################

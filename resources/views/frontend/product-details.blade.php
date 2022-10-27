@@ -919,41 +919,53 @@
                                 </div><!-- /.row -->
                                 <div class="row mt-10">
                                     <div class="col-md-6">
-                                        @if (Session()->get('language') == 'bangla')
-                                        <label for="color">পণ্যের রংঃ</label>
-                                        <select class="form-control">
-                                            <option value="" selected> নির্বাচন করুন </option>
-                                            @foreach ($product_color_bn as $color_bn)
-                                            <option value="{{ $color_bn }}"> {{ $color_bn }} </option>
-                                            @endforeach
-                                        </select>
+                                        @if ($singleProduct->product_color_en == null)
+
                                         @else
-                                        <label for="color">Product Color:</label>
-                                        <select class="form-control">
-                                            <option value="" selected> Select One </option>
-                                            @foreach ($product_color_en as $color_en)
-                                            <option value="{{ $color_en }}"> {{ ucwords($color_en) }} </option>
-                                            @endforeach
-                                        </select>
+                                        
+                                            @if (Session()->get('language') == 'bangla')
+                                            <label for="color">পণ্যের রংঃ</label>
+                                            <select class="form-control">
+                                                <option value="" selected> নির্বাচন করুন </option>
+                                                @foreach ($product_color_bn as $color_bn)
+                                                <option value="{{ $color_bn }}"> {{ $color_bn }} </option>
+                                                @endforeach
+                                            </select>
+                                            @else
+                                            <label for="color">Product Color:</label>
+                                            <select class="form-control">
+                                                <option value="" selected> Select One </option>
+                                                @foreach ($product_color_en as $color_en)
+                                                <option value="{{ $color_en }}"> {{ ucwords($color_en) }} </option>
+                                                @endforeach
+                                            </select>
+                                            @endif
+
                                         @endif
                                     </div>
                                     <div class="col-md-6">
-                                        @if (Session()->get('language') == 'bangla')
-                                        <label for="color">পণ্যের আকারঃ</label>
-                                        <select class="form-control">
-                                            <option value="" selected> নির্বাচন করুন </option>
-                                            @foreach ($product_size_bn as $size_bn)
-                                            <option value="{{ $size_bn }}"> {{ $size_bn }} </option>
-                                            @endforeach
-                                        </select>
+                                        @if ($singleProduct->product_size_en == null)
+
                                         @else
-                                        <label for="color">Product Color:</label>
-                                        <select class="form-control">
-                                            <option value="" selected> Select One </option>
-                                            @foreach ($product_size_en as $size_en)
-                                            <option value="{{ $size_en }}"> {{ ucwords($size_en) }} </option>
-                                            @endforeach
-                                        </select>
+
+                                            @if (Session()->get('language') == 'bangla')
+                                            <label for="color">পণ্যের আকারঃ</label>
+                                            <select class="form-control">
+                                                <option value="" selected> নির্বাচন করুন </option>
+                                                @foreach ($product_size_bn as $size_bn)
+                                                <option value="{{ $size_bn }}"> {{ $size_bn }} </option>
+                                                @endforeach
+                                            </select>
+                                            @else
+                                            <label for="color">Product Size:</label>
+                                            <select class="form-control">
+                                                <option value="" selected> Select One </option>
+                                                @foreach ($product_size_en as $size_en)
+                                                <option value="{{ $size_en }}"> {{ ucwords($size_en) }} </option>
+                                                @endforeach
+                                            </select>
+                                            @endif
+
                                         @endif
                                     </div>
                                 </div><!-- /.row -->
@@ -979,7 +991,7 @@
                                                     <div class="arrow minus gradient"><span class="ir"><i
                                                                 class="icon fa fa-sort-desc"></i></span></div>
                                                 </div>
-                                                <input type="text" value="1">
+                                                <input type="text" value="1" min="1" >
                                             </div>
                                         </div>
                                     </div>

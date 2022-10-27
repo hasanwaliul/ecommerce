@@ -90,7 +90,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo">
-                        <a href="home.html">
+                        <a href=" {{ route('frontend') }} ">
 
                             <img src=" {{ asset('frontend') }}/assets/images/logo.png" alt="header-image" height="70px"
                                 width="100px">
@@ -232,7 +232,7 @@
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
                                 <li class="active dropdown yamm-fw">
-                                    <a href=" {{ route('frontend') }} " data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown"> @if (Session()->get('language') == 'bangla') হোম @else Home @endif</a>
+                                    <a href=" {{ url('/') }} "> @if (Session()->get('language') == 'bangla') হোম @else Home @endif</a>
                                 </li>
                                 @php
                                 $categories = App\Models\Category::orderBy('category_name_en', 'ASC')->get();

@@ -39,6 +39,9 @@
     {{-- tostr cdn --}}
     <link rel="stylesheet" href=" {{ asset('backend') }}/lib/toastr/toastr.min.css">
 
+    {{-- Sweetalert 2 --}}
+    <link rel="stylesheet" href=" {{ asset('backend') }}/lib/sweetalert/sweetalert2.min.css">
+
     {{-- Bootstrap tagsinput --}}
     <link rel="stylesheet" href=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.css ">
 
@@ -186,7 +189,8 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
-
+    {{-- ################## Sweetalert 2 ###################--}}
+    <script src=" {{ asset('backend') }}/lib/sweetalert/sweetalert2.all.min.js "></script>
 
     {{-- Modal Ajax request Start --}}
     <script type="text/javascript">
@@ -257,7 +261,7 @@
         }
         // End Product View Function with modal
         // Start Cart Operation With Modal
-        function addToCart(){
+        function addToCart(id){
             var id = $('#product_id').val();
             var name = $('#pName').text();
             var color = $('#product_color option:selected').text();
@@ -277,7 +281,27 @@
                 },
                 success:function(data){
                     $('#closeModal').click();
-                    console.log(data)
+                    // console.log(data)
+
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    //  end message
                 }
 
             })
