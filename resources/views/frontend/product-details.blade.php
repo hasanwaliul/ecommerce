@@ -815,9 +815,9 @@
                     <div class='col-sm-6 col-md-7 product-info-block'>
                         <div class="product-info">
                             @if (Session()->get('language') == 'bangla')
-                            <h1 class="name"> {{ $singleProduct->product_name_bn }} </h1>
+                            <h1 class="name" id="pName"> {{ $singleProduct->product_name_bn }} </h1>
                             @else
-                            <h1 class="name"> {{ $singleProduct->product_name_en }} </h1>
+                            <h1 class="name" id="pName"> {{ $singleProduct->product_name_en }} </h1>
                             @endif
 
                             <div class="rating-reviews m-t-20">
@@ -922,7 +922,7 @@
                                         @if ($singleProduct->product_color_en == null)
 
                                         @else
-                                        
+
                                             @if (Session()->get('language') == 'bangla')
                                             <label for="color">পণ্যের রংঃ</label>
                                             <select class="form-control">
@@ -932,8 +932,8 @@
                                                 @endforeach
                                             </select>
                                             @else
-                                            <label for="color">Product Color:</label>
-                                            <select class="form-control">
+                                            <label for="product_color">Product Color:</label>
+                                            <select class="form-control" id="product_color">
                                                 <option value="" selected> Select One </option>
                                                 @foreach ($product_color_en as $color_en)
                                                 <option value="{{ $color_en }}"> {{ ucwords($color_en) }} </option>
@@ -957,8 +957,8 @@
                                                 @endforeach
                                             </select>
                                             @else
-                                            <label for="color">Product Size:</label>
-                                            <select class="form-control">
+                                            <label for="product_size">Product Size:</label>
+                                            <select class="form-control" id="product_size">
                                                 <option value="" selected> Select One </option>
                                                 @foreach ($product_size_en as $size_en)
                                                 <option value="{{ $size_en }}"> {{ ucwords($size_en) }} </option>
@@ -991,19 +991,21 @@
                                                     <div class="arrow minus gradient"><span class="ir"><i
                                                                 class="icon fa fa-sort-desc"></i></span></div>
                                                 </div>
-                                                <input type="text" value="1" min="1" >
+                                                <input type="text" value="1" min="1" id="pQty">
                                             </div>
                                         </div>
                                     </div>
 
+                                    <input type="hidden" name="product_id" id="product_id" value="{{$singleProduct->product_id}}">
+
                                     <div class="col-sm-7">
-                                        <a href="#" class="btn btn-primary">
+                                        <button type="submit" onclick=" addToCart() " class="btn btn-primary">
                                             @if (Session()->get('language') == 'bangla')
                                             <i class="fa fa-shopping-cart inner-right-vs"></i> ব্যাগে যুক্ত করুন
                                             @else
                                             <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
                                             @endif
-                                        </a>
+                                        </button>
                                     </div>
 
                                 </div><!-- /.row -->

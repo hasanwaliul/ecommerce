@@ -29,6 +29,36 @@ Route::get('/clear-cache', function () {
 Route::get('/',[FrontendController::class, 'index'])->name('frontend');
 Route::get('single-prduct/details/{id}/{slug}', [FrontendController::class, 'SingleProductDetails'])->name('single-product-details');
 
+
+//  ################################## Multiple Language Part Start #################################
+Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
+Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
+
+// ########## Sub Category Wise Products show  ##########
+Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
+// ########## Sub SubCategory Wise Products show  ##########
+Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
+
+// ########## Products Tag Wise Product show  ##########
+Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
+
+// #################### Ajax Request for select data  ####################
+Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
+Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
+Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
+
+    /* ###########################################################################################
+          ############################### Cart Part Start  ###############################
+       ########################################################################################### */
+
+// #################### Ajax Request for Cart Data Store  ####################
+ Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
+// #################### Ajax Request for Product details show  ####################
+Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
+// #################### Ajax Request for Product details show (On Mini Cart) ####################
+Route::get('product/mini-cart/info', [CartController::class, 'productBuyInfoOnMiniCart']);
+
+
 // Auth::routes();
 Auth::routes();
 
@@ -118,27 +148,3 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
     Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
 });
-
-//  ################################## Multiple Language Part Start #################################
-Route::get('language/Bangla', [LanguageController::class, 'Bangla'])->name('bangla-language');
-Route::get('language/English', [LanguageController::class, 'English'])->name('english-language');
-
-// ########## Sub Category Wise Products show  ##########
-Route::get('subCatg-wise/products/{subCatgId}/{subCatgSlug}', [FrontendController::class, 'subCategoryWiseProductsView'])->name('subCagt-wise-product');
-// ########## Sub SubCategory Wise Products show  ##########
-Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendController::class, 'subSubCategoryWiseProductsView'])->name('subsubCatg-wise-product');
-
-// ########## Products Tag Wise Product show  ##########
-Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
-
-
-// #################### Ajax Request for select data  ####################
-Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
-Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
-Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
-
-// #################### Ajax Request for Cart Data Store  ####################
- Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
-// #################### Ajax Request for Product details show  ####################
- Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
-

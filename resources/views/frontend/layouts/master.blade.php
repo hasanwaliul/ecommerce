@@ -199,7 +199,7 @@
                 'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
             }
         })
-        // Start Product View Function with modal
+        // Start Product View ( On Cart) With Modal
         function productView(id){
             // alert(id)
             $.ajax({
@@ -259,8 +259,9 @@
                 }
             })
         }
-        // End Product View Function with modal
-        // Start Cart Operation With Modal
+        // End Product View (On Cart) With Modal
+
+        // Start Product Buying info (To Cart)
         function addToCart(id){
             var id = $('#product_id').val();
             var name = $('#pName').text();
@@ -272,7 +273,7 @@
             $.ajax({
                 type:'GET',
                 dataType:'json',
-                url: "cart/data/store/"+id,
+                url: "/cart/data/store/"+id,
                 data:{
                     prod_name:name,
                     color:color,
@@ -280,8 +281,10 @@
                     quantity:qty,
                 },
                 success:function(data){
-                    $('#closeModal').click();
+                    miniCartInfo();
+                    // alert(id)
                     // console.log(data)
+                    $('#closeModal').click();
 
                     //  start message
                     const Toast = Swal.mixin({
@@ -306,7 +309,51 @@
 
             })
         }
-        // End Cart Operation With Modal
+        // End Product Buying info (To Cart)
+
+        // Start Product Info Show On Public Page (Mini Cart)
+        function miniCartInfo(){
+            $.ajax({
+                type:'GET',
+                url:'/product/mini-cart/info',
+                dataType:'json',
+                success:function(response){
+                    $('span[id="cartProductPrice"]').text(response.cartTotalPrice);
+                    $('#cartProductQty').text(response.cartQuantity);
+                    var miniCart = "";
+                    $.each(response.carts, function(key, value){
+                        miniCart += `
+									<div class="cart-item product-summary">
+										<div class="row">
+											<div class="col-xs-4">
+												<div class="image">
+													<a href="#"><img src=" /${value.options.image}" alt=""></a>
+												</div>
+											</div>
+											<div class="col-xs-7">
+
+												<h3 class="name"><a href="#">${value.name}</a>
+												</h3>
+												<div class="price">${value.price}</div>
+											</div>
+											<div class="col-xs-1 action">
+												<a href="#"><i class="fa fa-trash"></i></a>
+											</div>
+										</div>
+									</div><!-- /.cart-item -->
+									<div class="clearfix"></div>
+									<hr>
+                                `
+                    });
+                    $('#miniCartArea').html(miniCart);
+                },
+            });
+        }
+        miniCartInfo();
+
+        // End Product Info Show On Public Page (Mini Cart)
+
+
 
     </script>
     {{-- Modal Ajax request End --}}

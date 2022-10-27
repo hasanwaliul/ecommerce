@@ -20,9 +20,11 @@ class CartController extends Controller
                 'qty' => $request->quantity,
                 'price' => $produtDetails->actual_price,
                 'weight' => 1,
-                'options' => ['color' => $request->color],
-                'options' => ['size' => $request->size],
-                'options' => ['image' => $produtDetails->product_thumbnail],
+                'options' => [
+                    'color' => $request->color,
+                    'size' => $request->size,
+                    'image' => $produtDetails->product_thumbnail,
+                ],
             ]);
             return response()->json(['success' => 'Successfully Added On Your Cart']);
         }else {
@@ -32,12 +34,27 @@ class CartController extends Controller
                 'qty' => $request->quantity,
                 'price' => $produtDetails->discount_price,
                 'weight' => 1,
-                'options' => ['color' => $request->color],
-                'options' => ['size' => $request->size],
-                'options' => ['image' => $produtDetails->product_thumbnail],
+                'options' => [
+                    'color' => $request->color,
+                    'size' => $request->size,
+                    'image' => $produtDetails->product_thumbnail,
+                ],
             ]);
             return response()->json(['success' => 'Successfully Added On Your Cart']);
 
         }
+    }
+
+    public function productBuyInfoOnMiniCart(){
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQuantity' => $cartQty,
+            'cartTotalPrice' => $cartTotal,
+            // 'cartTotalPrice' => round($cartTotal),
+        ));
     }
 }

@@ -147,7 +147,7 @@
                                 <div class="basket">
                                     <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
+                                <div class="basket-item-count"><span class="count" id="cartProductQty"></span></div>
                                 <div class="total-price-basket">
                                     @if (Session()->get('language') == 'bangla')
                                         <span class="lbl">মোট বাঁজার -</span>
@@ -156,9 +156,9 @@
                                     @endif
                                     <span class="total-price">
                                         @if (Session()->get('language') == 'bangla')
-                                        <span class="sign">৳</span><span class="value"> ৬০০.০০ </span>
+                                        <span class="sign">৳</span><span class="value" id="cartProductPrice"></span>
                                         @else
-                                        <span class="sign">$</span><span class="value">600.00</span>
+                                        <span class="sign">$</span><span class="value" id="cartProductPrice"></span>
                                         @endif
                                     </span>
                                 </div>
@@ -167,33 +167,15 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image">
-                                                <a href="detail.html"><img
-                                                        src=" {{ asset('frontend') }}/assets/images/cart.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-
-                                            <h3 class="name"><a href="index8a95.html?page-detail">Simple Product</a>
-                                            </h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                </div><!-- /.cart-item -->
-                                <div class="clearfix"></div>
-                                <hr>
+                                {{-- Mini Cart Selected Product Info Start --}}
+                                <div id="miniCartArea">
+                                </div>
+                                {{-- Mini Cart Selected Product Info End --}}
 
                                 <div class="clearfix cart-total">
                                     <div class="pull-right">
 
-                                        <span class="text">Sub Total :</span><span class='price'>$600.00</span>
+                                        <span class="text">Sub Total :</span><span class='price' id="cartProductPrice">$</span>
 
                                     </div>
                                     <div class="clearfix"></div>
