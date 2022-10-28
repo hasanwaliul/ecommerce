@@ -393,9 +393,28 @@
                 type: 'GET',
                 url: "{{ url('user/product/add/wishlist') }}" + '/' + productId,
                 dataType: 'json',
-                success:function(data){
-                    console.log(data);
-                }
+                    success:function(data){
+                        // cosole.log(data)
+                        //  start message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'message',
+                                title: data.success
+                            })
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                title: data.error
+                            })
+                        }
+                        //  end message
+                    }
             });
         }
         // Product Add On Wishlist End
