@@ -40,3 +40,14 @@
 @include('frontend.layouts.footer-slider')
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+

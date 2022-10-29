@@ -206,7 +206,7 @@
             // alert(id)
             $.ajax({
                 type: 'GET',
-                url: 'product/view/withModal/' + id,
+                url: '/product/view/withModal/' + id,
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data)
@@ -432,24 +432,20 @@
                     $.each(response, function (key, value) {
                         rows += `
                                     <tr>
-                                        <td class="col-md-2"><img src="/${value.wishlistProd.product_thumbnail}" alt="img"></td>
+                                        <td class="col-md-2"><img src="/${value.product_id}" alt="img"></td>
                                         <td class="col-md-7">
-                                            <div class="product-name"><a href="#">${value.wishlistProd.product_name_en}</a></div>
-                                            <div class="rating">
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star rate"></i>
-                                                <i class="fa fa-star non-rate"></i>
-                                                <span class="review">( 06 Reviews )</span>
-                                            </div>
+                                            <div class="product-name"><a href="#">${value.product_id}</a></div>
                                             <div class="price">
                                                 $400.00
                                                 <span>$900.00</span>
                                             </div>
                                         </td>
                                         <td class="col-md-2">
-                                            <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
+                                            <button type="button" data-toggle="modal" data-target="#cartModal"
+                                                 id="${value.product_id}" onclick="productView(this.id)"
+                                                  href="#" class="btn-upper btn btn-primary">
+                                                  Add to cart
+                                            </button>
                                         </td>
                                         <td class="col-md-1 close-btn">
                                             <a href="#" class=""><i class="fa fa-times"></i></a>
@@ -457,6 +453,7 @@
                                     </tr>
                                 `
                     });
+                    console.log(rows);
                     $('#wishlistProduct').html(rows);
                 },
             });
