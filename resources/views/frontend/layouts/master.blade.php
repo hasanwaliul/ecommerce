@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="This is an ecommerce website based on laravel name Easy Shopping">
     <meta name="author" content="Waliul Hasan">
-    <meta name="keywords" content="online store, online business, ecom, ecommerce website, shopping cart, e business, ecommerce platforms">
+    <meta name="keywords"
+        content="online store, online business, ecom, ecommerce website, shopping cart, e business, ecommerce platforms">
     <meta name="robots" content="all">
 
 
@@ -97,7 +98,8 @@
                                     </strong>
                                 </li>
                                 <li class="list-group-item">Code: <strong id="pCode" class="text-info"></strong></li>
-                                <li class="list-group-item">Category: <strong id="pCategory" class="text-info"></strong></li>
+                                <li class="list-group-item">Category: <strong id="pCategory" class="text-info"></strong>
+                                </li>
                                 <li class="list-group-item">Brand: <strong id="pBrand" class="text-info"></strong></li>
                                 <li class="list-group-item">Stock:
                                     <span class="label label-success" id="available"></span>
@@ -107,18 +109,18 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                              <label for="product_color">Product Color:</label>
-                              <select class="form-control" id="product_color" name="pColor">
-                              </select>
+                                <label for="product_color">Product Color:</label>
+                                <select class="form-control" id="product_color" name="pColor">
+                                </select>
                             </div>
                             <div class="form-group" id="sizeArea">
-                              <label for="product_size">Product Size:</label>
-                              <select class="form-control" id="product_size" name="pSize">
-                              </select>
+                                <label for="product_size">Product Size:</label>
+                                <select class="form-control" id="product_size" name="pSize">
+                                </select>
                             </div>
                             <div class="form-group">
-                              <label for="pQty">Quantity:</label>
-                              <input type="text" class="form-control" id="pQty" value="" min="1">
+                                <label for="pQty">Quantity:</label>
+                                <input type="text" class="form-control" id="pQty" value="" min="1">
                             </div>
                             <input type="hidden" name="product_id" id="product_id">
                             <button type="submit" class="btn btn-primary" onclick="addToCart()">Add To Cart</button>
@@ -195,25 +197,25 @@
     {{-- Modal Ajax request Start --}}
     <script type="text/javascript">
         $.ajaxSetup({
-            headers:{
-                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         })
         // Start Product View ( On Cart) With Modal
-        function productView(id){
+        function productView(id) {
             // alert(id)
             $.ajax({
-                type:'GET',
-                url:'product/view/withModal/'+id,
-                dataType:'json',
-                success:function(data){
+                type: 'GET',
+                url: 'product/view/withModal/' + id,
+                dataType: 'json',
+                success: function (data) {
                     // console.log(data)
                     $('#pName').text(data.product.product_name_en);
                     $('#pPrice').text(data.product.discount_price);
                     $('#pCode').text(data.product.product_code);
                     $('#pCategory').text(data.product.category_id);
                     $('#pBrand').text(data.product.brand_id);
-                    $('#pImage').attr('src','/'+data.product.product_thumbnail);
+                    $('#pImage').attr('src', '/' + data.product.product_thumbnail);
 
                     $('#product_id').val(id);
                     $('#pQty').text(data.product.product_qty)
@@ -223,10 +225,9 @@
                         $('#pPrice').text('');
                         $('#oldPrice').text('');
                         $('#pPrice').text(data.product.actual_price);
-                    } else{
+                    } else {
                         $('#pPrice').text(data.product.discount_price);
                         $('#oldPrice').text(data.product.actual_price);
-
                     }
 
                     // Product Stock Status
@@ -234,7 +235,7 @@
                         $('#available').text('');
                         $('#stockout').text('');
                         $('#available').text('Available');
-                    }else{
+                    } else {
                         $('#available').text('');
                         $('#stockout').text('');
                         $('#stockout').text('Stock Out');
@@ -242,17 +243,17 @@
 
                     // Product Color
                     $('select[name="pColor"]').empty();
-                    $.each(data.color, function(key, value){
-                        $('select[name="pColor"]').append('<option value=" '+value+' ">' +value+ '</option>')
+                    $.each(data.color, function (key, value) {
+                        $('select[name="pColor"]').append('<option value=" ' + value + ' ">' + value + '</option>')
                     })
 
                     // Product Size
                     $('select[name="pSize"]').empty();
-                    $.each(data.size, function(key, value){
-                        $('select[name="pSize"]').append('<option value=" '+value+' ">' +value+ '</option>')
+                    $.each(data.size, function (key, value) {
+                        $('select[name="pSize"]').append('<option value=" ' + value + ' ">' + value + '</option>')
                         if (data.size == "") {
                             $('#sizeArea').hide();
-                        }else {
+                        } else {
                             $('#sizeArea').show();
                         }
                     })
@@ -262,7 +263,7 @@
         // End Product View (On Cart) With Modal
 
         // Start Product Buying info (To Cart)
-        function addToCart(id){
+        function addToCart(id) {
             var id = $('#product_id').val();
             var name = $('#pName').text();
             var color = $('#product_color option:selected').text();
@@ -271,16 +272,16 @@
 
             // console.log(name)
             $.ajax({
-                type:'GET',
-                dataType:'json',
-                url: "/cart/data/store/"+id,
-                data:{
-                    prod_name:name,
-                    color:color,
-                    size:size,
-                    quantity:qty,
+                type: 'GET',
+                dataType: 'json',
+                url: "/cart/data/store/" + id,
+                data: {
+                    prod_name: name,
+                    color: color,
+                    size: size,
+                    quantity: qty,
                 },
-                success:function(data){
+                success: function (data) {
                     miniCartInfo();
                     // alert(id)
                     // console.log(data)
@@ -312,22 +313,22 @@
         // End Product Buying info (To Cart)
 
         // Start Product Info Show On Public Page (Mini Cart)
-        function miniCartInfo(){
+        function miniCartInfo() {
             $.ajax({
-                type:'GET',
-                url:'/product/mini-cart/info',
-                dataType:'json',
-                success:function(response){
+                type: 'GET',
+                url: '/product/mini-cart/info',
+                dataType: 'json',
+                success: function (response) {
                     $('span[id="cartProductPrice"]').text(response.cartTotalPrice);
                     $('#cartProductQty').text(response.cartQuantity);
                     var miniCart = "";
-                    $.each(response.carts, function(key, value){
+                    $.each(response.carts, function (key, value) {
                         miniCart += `
 									<div class="cart-item product-summary">
 										<div class="row">
 											<div class="col-xs-4">
 												<div class="image">
-													<a href="#"><img src=" /${value.options.image}" alt=""></a>
+													<a href="#"><img src="/${value.options.image}" alt=""></a>
 												</div>
 											</div>
 											<div class="col-xs-7">
@@ -353,76 +354,120 @@
         // End Product Info Show On Public Page (Mini Cart)
 
         // Product Remove From Mini Cart Start
-            function miniCartProductRemove(rowId){
-                // alert(rowId);
-                $.ajax({
-                    type:'GET',
-                    url:'/miniCart/product-remove/'+rowId,
-                    dataType:'json',
-                    success:function(data){
-                        // cosole.log(data)
-                        miniCartInfo();
-                        //  start message
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000
+        function miniCartProductRemove(rowId) {
+            // alert(rowId);
+            $.ajax({
+                type: 'GET',
+                url: '/miniCart/product-remove/' + rowId,
+                dataType: 'json',
+                success: function (data) {
+                    // cosole.log(data)
+                    miniCartInfo();
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
                         })
-                        if ($.isEmptyObject(data.error)) {
-                            Toast.fire({
-                                type: 'message',
-                                title: data.success
-                            })
-                        } else {
-                            Toast.fire({
-                                type: 'error',
-                                title: data.error
-                            })
-                        }
-                        //  end message
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
                     }
-                });
-            }
+                    //  end message
+                }
+            });
+        }
         // Product Remove From Mini Cart End
 
         // Product Add On Wishlist Start
-        function addToWishlist(productId){
+        function addToWishlist(productId) {
             // alert(productId);
             $.ajax({
                 type: 'GET',
                 url: "{{ url('product/add/wishlist') }}" + '/' + productId,
                 dataType: 'json',
-                    success:function(data){
-                        // cosole.log(data)
-                        //  start message
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 3000
+                success: function (data) {
+                    // cosole.log(data)
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
                         })
-                        if ($.isEmptyObject(data.error)) {
-                            Toast.fire({
-                                type: 'message',
-                                title: data.success
-                            })
-                        } else {
-                            Toast.fire({
-                                type: 'error',
-                                title: data.error
-                            })
-                        }
-                        //  end message
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
                     }
+                    //  end message
+                }
             });
         }
         // Product Add On Wishlist End
 
 
+           // Start Product Info Show On Wishlist Page
+           function wishlistProduct() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/user/wishlist-products/view') }}",
+                dataType: 'json',
+                success: function (response) {
+                    var rows = "";
+                    $.each(response, function (key, value) {
+                        rows += `
+                                    <tr>
+                                        <td class="col-md-2"><img src="/${value.wishlistProd.product_thumbnail}" alt="img"></td>
+                                        <td class="col-md-7">
+                                            <div class="product-name"><a href="#">${value.wishlistProd.product_name_en}</a></div>
+                                            <div class="rating">
+                                                <i class="fa fa-star rate"></i>
+                                                <i class="fa fa-star rate"></i>
+                                                <i class="fa fa-star rate"></i>
+                                                <i class="fa fa-star rate"></i>
+                                                <i class="fa fa-star non-rate"></i>
+                                                <span class="review">( 06 Reviews )</span>
+                                            </div>
+                                            <div class="price">
+                                                $400.00
+                                                <span>$900.00</span>
+                                            </div>
+                                        </td>
+                                        <td class="col-md-2">
+                                            <a href="#" class="btn-upper btn btn-primary">Add to cart</a>
+                                        </td>
+                                        <td class="col-md-1 close-btn">
+                                            <a href="#" class=""><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                `
+                    });
+                    $('#wishlistProduct').html(rows);
+                },
+            });
+        }
+        wishlistProduct();
+        // End Product Info Show On Wishlist Page
 
     </script>
     {{-- Modal Ajax request End --}}
+
+    @yield('script')
 
 </body>
 

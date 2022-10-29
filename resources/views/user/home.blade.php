@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-</div><!-- /.row -->
+</div><!-- /.row --> <br>
 @include('frontend.layouts.footer-slider')
 
 @endsection

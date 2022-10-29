@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,6 +63,7 @@ Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productR
 
 // #################### Product Add To Wishlist  ####################
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
+
 
 
 // Auth::routes();
@@ -152,6 +154,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
         Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
         Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
         Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
+        // #################### Products view Page at Wishlist  ####################
+        Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
+        // #################### Products show at Wishlist page  ####################
+        Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
 
 
 });

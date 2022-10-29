@@ -6,11 +6,11 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-heart"></i>
+                        <li><a href=" {{route('wishlist-item-view')}} "><i class="icon fa fa-heart"></i>
                                 @if (Session()->get('language') == 'bangla') ইচ্ছেতালিকা @else Wishlist @endif
                             </a>
                         </li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
+                        <li><a href=" {{route('wishlist-item-view')}} "><i class="icon fa fa-shopping-cart"></i>
                                 @if (Session()->get('language') == 'bangla') আমার বাঁজার @else My Cart @endif
                             </a>
                         </li>
