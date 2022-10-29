@@ -81,7 +81,7 @@ class CartController extends Controller
                 return response()->json(['error' => 'This product already on your wishlist']);
             }
         }else {
-            return response()->json(['error' => 'Login here first to put the product in wishlist']);
+            return response()->json(['error' => 'At first Login here to put this product in wishlist']);
         }
     }
 }

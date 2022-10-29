@@ -391,7 +391,7 @@
             // alert(productId);
             $.ajax({
                 type: 'GET',
-                url: "{{ url('user/product/add/wishlist') }}" + '/' + productId,
+                url: "{{ url('product/add/wishlist') }}" + '/' + productId,
                 dataType: 'json',
                     success:function(data){
                         // cosole.log(data)

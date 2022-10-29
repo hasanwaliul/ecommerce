@@ -60,6 +60,9 @@ Route::get('product/mini-cart/info', [CartController::class, 'productBuyInfoOnMi
 // #################### Ajax Request for Product Remove (From Mini Cart) ####################
 Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productRemoveFromMiniCart']);
 
+// #################### Product Add To Wishlist  ####################
+Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
+
 
 // Auth::routes();
 Auth::routes();
@@ -150,7 +153,5 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
         Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
         Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
 
-        // #################### Product Add To Wishlist  ####################
-        Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
 });
