@@ -17,7 +17,9 @@ class WishlistController extends Controller
    public function wishsistProducts(){
     $wishlist = Wishlist::with('wishlistProd')->where('user_id', Auth::id())->latest()->get();
 
-    return response()->json($wishlist);
+    $wishlistData = json_encode($wishlist);
+
+    return response()->json($wishlistData);
    }
 }
 

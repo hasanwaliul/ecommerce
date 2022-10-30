@@ -428,13 +428,14 @@
                 url: "{{ url('/user/wishlist-products/view') }}",
                 dataType: 'json',
                 success: function (response) {
+                    // console.log(response);
                     var rows = "";
-                    $.each(response, function (key, value) {
+                    $.each(response,function (key, value) {
                         rows += `
                                     <tr>
-                                        <td class="col-md-2"><img src="/${value.product_id}" alt="img"></td>
+                                        <td class="col-md-2"><img src="/${value.wishlistProd.product_thumbnail}" alt="img"></td>
                                         <td class="col-md-7">
-                                            <div class="product-name"><a href="#">${value.product_id}</a></div>
+                                            <div class="product-name"><a href="#">${value.wishlist_prod.product_name_en}</a></div>
                                             <div class="price">
                                                 $400.00
                                                 <span>$900.00</span>
