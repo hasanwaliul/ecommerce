@@ -158,6 +158,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
         Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
         // #################### Products show at Wishlist page  ####################
         Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
+        // #################### Products remove from Wishlist page  ####################
+        Route::get('wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
+
 
 
 });

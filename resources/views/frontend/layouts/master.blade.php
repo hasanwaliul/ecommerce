@@ -433,9 +433,9 @@
                     $.each(response,function (key, value) {
                         rows += `
                                     <tr>
-                                        <td class="col-md-2"><img src="/${value.wishlistProd.product_thumbnail}" alt="img"></td>
+                                        <td class="col-md-2"><img src="/${value.product_id}" alt="img"></td>
                                         <td class="col-md-7">
-                                            <div class="product-name"><a href="#">${value.wishlist_prod.product_name_en}</a></div>
+                                            <div class="product-name"><a href="#">${value.product_id}</a></div>
                                             <div class="price">
                                                 $400.00
                                                 <span>$900.00</span>
@@ -449,7 +449,7 @@
                                             </button>
                                         </td>
                                         <td class="col-md-1 close-btn">
-                                            <a href="#" class=""><i class="fa fa-times"></i></a>
+                                            <button type="submit" id="${value.product_id}" onclick="WishlistProductRemove(this.id)" href="#"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                 `
@@ -461,6 +461,40 @@
         }
         wishlistProduct();
         // End Product Info Show On Wishlist Page
+
+        // Start Wishlist Product Remove from Page
+        function  WishlistProductRemove(prodId){
+               alert(prodId);
+               $.ajax({
+                type: 'GET',
+                url: '/user/wishlist/product-remove/' + prodId,
+                dataType: 'json',
+                success: function (data) {
+                    // cosole.log(data)
+                    wishlistProduct();
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    //  end message
+                }
+            });
+        }
+        // End Wishlist Product Remove from Page
 
     </script>
     {{-- Modal Ajax request End --}}

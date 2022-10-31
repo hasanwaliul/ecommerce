@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class WishlistController extends Controller
 {
@@ -19,7 +20,13 @@ class WishlistController extends Controller
 
     $wishlistData = json_encode($wishlist);
 
-    return response()->json($wishlistData);
+    return response()->json($wishlist);
+   }
+
+   public function wishlistProductRemove($product_id){
+    Wishlist::where('user_id', Auth::id())->where('product_id', $product_id)->delete();
+
+    return response()->json(['success' => 'Product successfully removed from wishlist']);
    }
 }
 

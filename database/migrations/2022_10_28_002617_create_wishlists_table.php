@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('wishlists', function (Blueprint $table) {
-            $table->id();
+            $table->id('wishlist_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
