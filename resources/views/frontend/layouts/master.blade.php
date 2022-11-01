@@ -454,7 +454,7 @@
                                     </tr>
                                 `
                     });
-                    console.log(rows);
+                    // console.log(rows);
                     $('#wishlistProduct').html(rows);
                 },
             });
@@ -495,6 +495,73 @@
             });
         }
         // End Wishlist Product Remove from Page
+
+       // Start Product Info Show On Cart Page
+       function cartPageProduct() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/user/cart-products/view') }}",
+                dataType: 'json',
+                success: function (response) {
+                    // console.log(response);
+                    var cartItem = "";
+                    $.each(response.carts, function (key, value) {
+                        cartItem += `
+                                    <tr>
+                                        <td class="col-md-2"><img src="/${value.options.image}" alt="img" style="width:100px; height:120px;"></td>
+                                        <td class="col-md-2">
+                                            <div class="product-name"><a href="#">${value.name}</a></div>
+                                            <div class="price">
+                                                $${value.price}
+                                            </div>
+                                        </td>
+
+                                        <td class="col-md-1">
+                                            ${ value.options.color == null
+                                                ? `<span>....</span>`
+                                                : `<strong>${value.options.color}</strong>`
+                                            }
+                                        </td>
+
+                                        <td class="col-md-1">
+                                            ${ value.options.size == null
+                                                ? `<span>....</span>`
+                                                : `<strong>${value.options.size}</strong>`
+                                            }
+                                        </td>
+
+                                        <td class="col-md-1">
+                                            <div class="price">
+                                                ${value.price}*${value.qty}=${value.subtotal}
+                                            </div>
+                                        </td>
+
+                                        <td class="col-md-2">
+                                            <button type="submit" class="btn btn-success btn-sm">+</button>
+                                            <input type="text" name="" id="" value="${value.qty}" min="1" max="100" disabled style="width:30px; height:40px;">
+                                            <button type="submit" class="btn btn-danger btn-sm">-</button>
+                                        </td>
+
+                                        <td class="col-md-2" style="margin:0px; padding:0px">
+                                            <button type="button" data-toggle="modal" data-target="#cartModal"
+                                                 id="${value.id}" onclick="productView(this.id)"
+                                                  href="#" class="btn btn-sm btn-primary">
+                                                  Add to cart
+                                            </button>
+                                        </td>
+                                        <td class="col-md-1 close-btn" style="margin:0px; padding:0px">
+                                            <button type="submit" id="${value.id}" onclick="#" href="#" title="Remove"><i class="fa fa-times"></i></button>
+                                        </td>
+                                    </tr>
+                                `
+                    });
+                    console.log(cartItem);
+                    $('#cartProduct').html(cartItem);
+                },
+            });
+        }
+        cartPageProduct();
+        // End Product Info Show On Cart Page
 
     </script>
     {{-- Modal Ajax request End --}}

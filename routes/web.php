@@ -11,6 +11,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\User\CartPageController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -154,12 +155,18 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
         Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
         Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
         Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
+
         // #################### Products view Page at Wishlist  ####################
         Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
         // #################### Products show at Wishlist page  ####################
         Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
         // #################### Products remove from Wishlist page  ####################
-        Route::get('wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
+        Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
+
+        // #################### Products view Page at Wishlist  ####################
+        Route::get('cart', [CartPageController::class, 'cartItemView'])->name('cart-item-view');
+        // #################### Products show at Cart page  ####################
+        Route::get('/cart-products/view', [CartPageController::class, 'cartProducts']);
 
 
 

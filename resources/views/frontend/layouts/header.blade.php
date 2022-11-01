@@ -10,7 +10,7 @@
                                 @if (Session()->get('language') == 'bangla') ইচ্ছেতালিকা @else Wishlist @endif
                             </a>
                         </li>
-                        <li><a href=" {{route('wishlist-item-view')}} "><i class="icon fa fa-shopping-cart"></i>
+                        <li><a href=" {{route('cart-item-view')}} "><i class="icon fa fa-shopping-cart"></i>
                                 @if (Session()->get('language') == 'bangla') আমার বাঁজার @else My Cart @endif
                             </a>
                         </li>

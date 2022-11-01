@@ -84,4 +84,7 @@ class CartController extends Controller
             return response()->json(['error' => 'At first Login here to put this product in wishlist']);
         }
     }
+
+
+    
 }
