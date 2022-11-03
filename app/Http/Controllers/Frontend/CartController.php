@@ -85,6 +85,25 @@ class CartController extends Controller
         }
     }
 
+  // ####################### Cart Product View On Cart Page #######################
+    public function cartItemView(){
+        // dd('Calling');
+        return view('user.cart-page');
+    }
 
-    
+    public function cartProducts(){
+        $carts = Cart::content();
+        $cartQty = Cart::count();
+        $cartTotal = Cart::total();
+
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQuantity' => $cartQty,
+            'cartTotalPrice' => $cartTotal,
+            // 'cartTotalPrice' => round($cartTotal),
+        ));
+    }
+
+
+
 }

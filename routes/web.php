@@ -11,7 +11,6 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
-use App\Http\Controllers\User\CartPageController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +64,11 @@ Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productR
 // #################### Product Add To Wishlist  ####################
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
+
+// #################### Products view Page at Wishlist  ####################
+Route::get('cart', [CartController::class, 'cartItemView'])->name('cart-item-view');
+// #################### Products show at Cart page  ####################
+Route::get('/cart-products/view', [CartController::class, 'cartProducts']);
 
 
 // Auth::routes();
@@ -163,10 +167,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
         // #################### Products remove from Wishlist page  ####################
         Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
-        // #################### Products view Page at Wishlist  ####################
-        Route::get('cart', [CartPageController::class, 'cartItemView'])->name('cart-item-view');
-        // #################### Products show at Cart page  ####################
-        Route::get('/cart-products/view', [CartPageController::class, 'cartProducts']);
 
 
 

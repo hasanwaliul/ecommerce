@@ -500,7 +500,7 @@
        function cartPageProduct() {
             $.ajax({
                 type: 'GET',
-                url: "{{ url('/user/cart-products/view') }}",
+                url: "{{ url('/cart-products/view') }}",
                 dataType: 'json',
                 success: function (response) {
                     // console.log(response);
@@ -509,6 +509,7 @@
                         cartItem += `
                                     <tr>
                                         <td class="col-md-2"><img src="/${value.options.image}" alt="img" style="width:100px; height:120px;"></td>
+
                                         <td class="col-md-2">
                                             <div class="product-name"><a href="#">${value.name}</a></div>
                                             <div class="price">
@@ -531,7 +532,7 @@
                                         </td>
 
                                         <td class="col-md-1">
-                                            <div class="price">
+                                            <div class="price" style="font-weight:bold">
                                                 ${value.price}*${value.qty}=${value.subtotal}
                                             </div>
                                         </td>
@@ -548,9 +549,7 @@
                                                   href="#" class="btn btn-sm btn-primary">
                                                   Add to cart
                                             </button>
-                                        </td>
-                                        <td class="col-md-1 close-btn" style="margin:0px; padding:0px">
-                                            <button type="submit" id="${value.id}" onclick="#" href="#" title="Remove"><i class="fa fa-times"></i></button>
+                                            <button type="submit" id="${value.id}" style="color: #ff7878;border: 2px solid #ff7878;border-radius: 4px; height:35px; width:28px;" onclick="#" href="#" title="Remove"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                 `
