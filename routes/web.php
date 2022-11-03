@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\UserController;
@@ -26,7 +27,7 @@ Route::get('/clear-cache', function () {
     return 'CACHE CLEARED SUCCESSFULLY';
 });
 
-    // #################### Frontend  ####################
+    // ################################## Frontend  ##################################
 Route::get('/',[FrontendController::class, 'index'])->name('frontend');
 Route::get('single-prduct/details/{id}/{slug}', [FrontendController::class, 'SingleProductDetails'])->name('single-product-details');
 
@@ -43,14 +44,14 @@ Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendContr
 // ########## Products Tag Wise Product show  ##########
 Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
 
-// #################### Ajax Request for select data  ####################
+// #################### Ajax Request for select data (Category, Subcategory, Sub Subcategory) ####################
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
 
-    /* ###########################################################################################
-          ############################### Cart Part Start  ###############################
-       ########################################################################################### */
+        /* ###########################################################################################
+            ############################### Cart Part Start  ###############################
+        ########################################################################################### */
 
 // #################### Ajax Request for Cart Data Store  ####################
  Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
@@ -60,9 +61,6 @@ Route::get('product/view/withModal/{productId}', [FrontendController::class, 'pr
 Route::get('product/mini-cart/info', [CartController::class, 'productBuyInfoOnMiniCart']);
 // #################### Ajax Request for Product Remove (From Mini Cart) ####################
 Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productRemoveFromMiniCart']);
-
-// #################### Product Add To Wishlist  ####################
-Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
 
 // #################### Go for Cart Page  ####################
@@ -76,12 +74,18 @@ Route::get('/cart/product-increment/{rowId}', [CartController::class, 'cartProdu
 // #################### Ajax Request for Product Decrement (From Cart Page) ####################
 Route::get('/cart/product-decrement/{rowId}', [CartController::class, 'cartProductDecrementFromCartPage']);
 
+// #################### Product Add To Wishlist  ####################
+Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
 
 // Auth::routes();
 Auth::routes();
 
-    // #################### Admin  ####################
+
+            /* ###########################################################################################
+                    ############################### Admin Part  Start  ###############################
+                ########################################################################################### */
+
 Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'Admin'], function (){
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin-dashboard');
 
@@ -143,8 +147,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
 
 
-    //  ################################## Product Part End #################################
-
     //  ################################## Banner Part Start #################################
     Route::get('banner', [BannerController::class, 'index'])->name('banners');
     Route::post('banner/add', [BannerController::class, 'bannerDataAdd'])->name('banner-add');
@@ -155,10 +157,26 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('banner-inactive/{id}', [BannerController::class, 'BannerDataInactive'])->name('banner-data-inactive');
     Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
 
-
+    //  ################################## Coupon Part Start #################################
+   Route::get('coupon', [CouponController::class, 'index'])->name('coupons');
+   Route::post('coupon/add', [CouponController::class, 'couponDataAdd'])->name('coupon-add');
+   Route::get('coupon-edit/{id}', [CouponController::class, 'couponDataEdit'])->name('coupon-data-edit');
+   Route::post('coupon-data/update', [CouponController::class, 'couponDataUpdate'])->name('coupon--data-update');
+   Route::get('coupon-delete/{id}', [CouponController::class, 'couponDataDelete'])->name('coupon-data-delete');
 
 });
-    // #################### User Part  ####################
+            /* ###########################################################################################
+                    ############################### Admin Part  End  ###############################
+                ########################################################################################### */
+
+
+
+
+
+
+/* ###########################################################################################
+          ############################### User Part  Start  ###############################
+       ########################################################################################### */
     Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
         Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
         Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
@@ -178,3 +196,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
 
 });
+
+/* ###########################################################################################
+          ############################### User Part  End  ###############################
+       ########################################################################################### */
