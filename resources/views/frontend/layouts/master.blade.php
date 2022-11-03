@@ -470,7 +470,7 @@
                 url: '/user/wishlist/product-remove/' + prodId,
                 dataType: 'json',
                 success: function (data) {
-                    // cosole.log(data)
+                    // console.log(data)
                     wishlistProduct();
                     //  start message
                     const Toast = Swal.mixin({
@@ -510,7 +510,7 @@
                                     <tr>
                                         <td class="col-md-2"><img src="/${value.options.image}" alt="img" style="width:100px; height:120px;"></td>
 
-                                        <td class="col-md-2">
+                                        <td class="col-md-3">
                                             <div class="product-name"><a href="#">${value.name}</a></div>
                                             <div class="price">
                                                 $${value.price}
@@ -531,25 +531,25 @@
                                             }
                                         </td>
 
-                                        <td class="col-md-1">
+                                        <td class="col-md-2">
                                             <div class="price" style="font-weight:bold">
                                                 ${value.price}*${value.qty}=${value.subtotal}
                                             </div>
                                         </td>
 
                                         <td class="col-md-2">
-                                            <button type="submit" class="btn btn-success btn-sm">+</button>
+                                            ${value.qty > 1
+                                            ? `<button type="submit" id="${value.rowId}" onclick="CartDecrement(this.id)" class="btn btn-danger btn-sm">-</button>`
+                                            : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button>`
+                                            }
                                             <input type="text" name="" id="" value="${value.qty}" min="1" max="100" disabled style="width:30px; height:40px;">
-                                            <button type="submit" class="btn btn-danger btn-sm">-</button>
+                                            <button type="submit" id="${value.rowId}" onclick="CartIncrement(this.id)" class="btn btn-success btn-sm">+</button>
+
                                         </td>
 
-                                        <td class="col-md-2" style="margin:0px; padding:0px">
-                                            <button type="button" data-toggle="modal" data-target="#cartModal"
-                                                 id="${value.id}" onclick="productView(this.id)"
-                                                  href="#" class="btn btn-sm btn-primary">
-                                                  Add to cart
-                                            </button>
-                                            <button type="submit" id="${value.id}" style="color: #ff7878;border: 2px solid #ff7878;border-radius: 4px; height:35px; width:28px;" onclick="#" href="#" title="Remove"><i class="fa fa-times"></i></button>
+                                        <td class="col-md-1" style="margin:0px; padding:0px">
+                                            <button type="submit" id="${value.rowId}" style="color: #ff7878;border: 2px solid #ff7878;border-radius: 4px; height:35px; width:28px;"
+                                            onclick="CartProductRemove(this.id)" href="#" title="Remove"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                 `
@@ -562,6 +562,76 @@
         cartPageProduct();
         // End Product Info Show On Cart Page
 
+
+
+        // Product Remove From Mini Cart Start
+        function CartProductRemove(rowId) {
+            // alert(rowId);
+            $.ajax({
+                type: 'GET',
+                url: '/cart/product-remove/' + rowId,
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data)
+                    miniCartInfo();
+                    cartPageProduct();
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    //  end message
+                }
+            });
+        }
+        // Product Remove From Mini Cart End
+
+         // Start Product Increment On Cart Page
+         function CartIncrement(rowId) {
+            // alert(rowId);
+            $.ajax({
+                type: 'GET',
+                url: '/cart/product-increment/' + rowId,
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data)
+                    cartPageProduct();
+                    miniCartInfo();
+                }
+
+            });
+        }
+         // End Product Increment On Cart Page
+
+         // Start Product Decrement On Cart Page
+         function CartDecrement(rowId) {
+            // alert(rowId);
+            $.ajax({
+                type: 'GET',
+                url: '/cart/product-decrement/' + rowId,
+                dataType: 'json',
+                success: function (data) {
+                    // console.log(data)
+                    cartPageProduct();
+                    miniCartInfo();
+                }
+
+            });
+        }
+         // End Product Decrement On Cart Page
     </script>
     {{-- Modal Ajax request End --}}
 

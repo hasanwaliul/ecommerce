@@ -104,6 +104,29 @@ class CartController extends Controller
         ));
     }
 
+    public function cartProductRemoveFromCartPage($rowId){
+        Cart::remove($rowId);
+        return response()->json(['success' => 'This Product Has Been Removed From Cart']);
+    }
+
+    public function cartProductIncrementFromCartPage($rowId){
+        $row = Cart::get($rowId); // Get the row id for cart product
+        Cart::update($rowId, $row->qty + 1); // Will update the quantity with One
+
+        return response()->json('Incremented');
+    }
+
+    public function cartProductDecrementFromCartPage($rowId){
+        $row = Cart::get($rowId); // Get the row id for cart product
+
+        if ($row->qty == 1) {
+            return response()->json('Not Applicable');
+        } else {
+            Cart::update($rowId, $row->qty - 1); // Will update the quantity with One
+            return response()->json('Decremented');
+        }
+    }
+
 
 
 }

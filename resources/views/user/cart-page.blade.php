@@ -33,7 +33,7 @@
                                     <th class="cart-total last-item">Action</th>
                                 </tr>
                             </thead><!-- /thead -->
-                            <tbody id="cartProduct">
+                            <tbody id="cartProduct" class="text-center">
 
                             </tbody>
                         </table>

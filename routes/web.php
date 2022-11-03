@@ -65,10 +65,17 @@ Route::get('/miniCart/product-remove/{rowId}', [CartController::class, 'productR
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
 
-// #################### Products view Page at Wishlist  ####################
+// #################### Go for Cart Page  ####################
 Route::get('cart', [CartController::class, 'cartItemView'])->name('cart-item-view');
 // #################### Products show at Cart page  ####################
 Route::get('/cart-products/view', [CartController::class, 'cartProducts']);
+// #################### Ajax Request for Product Remove (From Cart Page) ####################
+Route::get('/cart/product-remove/{rowId}', [CartController::class, 'cartProductRemoveFromCartPage']);
+// #################### Ajax Request for Product Increment (From Cart Page) ####################
+Route::get('/cart/product-increment/{rowId}', [CartController::class, 'cartProductIncrementFromCartPage']);
+// #################### Ajax Request for Product Decrement (From Cart Page) ####################
+Route::get('/cart/product-decrement/{rowId}', [CartController::class, 'cartProductDecrementFromCartPage']);
+
 
 
 // Auth::routes();
