@@ -5,7 +5,6 @@ use App\Models\Banner;
 use Intervention\Image\Facades\Image;
 use App\Models\Coupon;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Session;
 
 class ProductTypeDataService {
 
@@ -108,6 +107,21 @@ class ProductTypeDataService {
         unlink($img);
 
         return Banner::where('banner_id', $bannerId)->delete();
+    }
+
+    // ############################## Banner Active & Inactive Start ################################
+    public function BannerInfoDeactive($bannerId){
+        return Banner::where('banner_id', $bannerId)->update([
+            'banner_status' => 0,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+
+    public function BannerInfoActive($bannerId){
+        return Banner::where('banner_id', $bannerId)->update([
+            'banner_status' => 1,
+            'updated_at' => Carbon::now(),
+        ]);
     }
 
     // ###################################### Banner Related Database Operation End ######################################

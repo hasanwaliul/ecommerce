@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\ProductTypeDataService;
 use App\Models\Banner;
 use Carbon\Carbon;
-use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -87,10 +86,8 @@ class BannerController extends Controller
     // ############################## Banner Active & Inactive Start ################################
     public function BannerDataInactive($id){
         // dd('This is for inactive request');
-        $bannerDective = Banner::where('banner_id', $id)->update([
-            'banner_status' => 0,
-            'updated_at' => Carbon::now(),
-        ]);
+        $bannerDective = (new ProductTypeDataService())->BannerInfoDeactive($id);
+
 
         if($bannerDective){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
@@ -104,10 +101,8 @@ class BannerController extends Controller
 
     public function BannerDataActive($id){
         // dd('This is for active request');
-        $bannerActive = Banner::where('banner_id', $id)->update([
-            'banner_status' => 1,
-            'updated_at' => Carbon::now(),
-        ]);
+        $bannerActive = (new ProductTypeDataService())->BannerInfoActive($id);
+        
 
         if($bannerActive){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert

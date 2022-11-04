@@ -1,19 +1,18 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BrandController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\Admin\CouponController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Controllers\Frontend\LanguageController;
-use App\Http\Controllers\Frontend\WishlistController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\Admin\AdminController;
+    use App\Http\Controllers\Admin\BannerController;
+    use App\Http\Controllers\Admin\BrandController;
+    use App\Http\Controllers\admin\CategoryController;
+    use App\Http\Controllers\Admin\CouponController;
+    use App\Http\Controllers\Admin\ProductController;
+    use App\Http\Controllers\Frontend\CartController;
+    use App\Http\Controllers\User\UserController;
+    use App\Http\Controllers\Frontend\FrontendController;
+    use App\Http\Controllers\Frontend\LanguageController;
+    use App\Http\Controllers\Frontend\WishlistController;
+    use Illuminate\Support\Facades\Artisan;
+    use Illuminate\Support\Facades\Auth;
 
 // cache clear route /
 
@@ -54,7 +53,7 @@ Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, '
         ########################################################################################### */
 
 // #################### Ajax Request for Cart Data Store  ####################
- Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
+Route::get('cart/data/store/{productId}', [CartController::class, 'cartDataStore']);
 // #################### Ajax Request for Product details show  ####################
 Route::get('product/view/withModal/{productId}', [FrontendController::class, 'productInfoViewWithModal'])->name('product-view-ajax');
 // #################### Ajax Request for Product details show (On Mini Cart) ####################
@@ -158,11 +157,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('banner-active/{id}', [BannerController::class, 'BannerDataActive'])->name('banner-data-active');
 
     //  ################################## Coupon Part Start #################################
-   Route::get('coupon', [CouponController::class, 'index'])->name('coupons');
-   Route::post('coupon/add', [CouponController::class, 'couponDataAdd'])->name('coupon-add');
-   Route::get('coupon-edit/{id}', [CouponController::class, 'couponDataEdit'])->name('coupon-data-edit');
-   Route::post('coupon-data/update', [CouponController::class, 'couponDataUpdate'])->name('coupon--data-update');
-   Route::get('coupon-delete/{id}', [CouponController::class, 'couponDataDelete'])->name('coupon-data-delete');
+    Route::get('coupon', [CouponController::class, 'index'])->name('coupons');
+    Route::post('coupon/add', [CouponController::class, 'couponDataAdd'])->name('coupon-add');
+    Route::get('coupon-edit/{id}', [CouponController::class, 'couponDataEdit'])->name('coupon-data-edit');
+    Route::post('coupon-data/update', [CouponController::class, 'couponDataUpdate'])->name('coupon--data-update');
+    Route::get('coupon-delete/{id}', [CouponController::class, 'couponDataDelete'])->name('coupon-data-delete');
 
 });
             /* ###########################################################################################
@@ -174,29 +173,29 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
 
 
-/* ###########################################################################################
-          ############################### User Part  Start  ###############################
-       ########################################################################################### */
-    Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
-        Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
-        Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
-        Route::get('image', [UserController::class, 'profileImage'])->name('profile-image');
-        Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
-        Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
-        Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
+            /* ###########################################################################################
+                    ############################### User Part  Start  ###############################
+                ########################################################################################### */
+Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
+    Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
+    Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
+    Route::get('image', [UserController::class, 'profileImage'])->name('profile-image');
+    Route::post('image/update', [UserController::class, 'profileImageUpdate'])->name('profile-image-update');
+    Route::get('password', [UserController::class, 'userPassword'])->name('user-password');
+    Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
 
-        // #################### Products view Page at Wishlist  ####################
-        Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
-        // #################### Products show at Wishlist page  ####################
-        Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
-        // #################### Products remove from Wishlist page  ####################
-        Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
+    // #################### Products view Page at Wishlist  ####################
+    Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
+    // #################### Products show at Wishlist page  ####################
+    Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
+    // #################### Products remove from Wishlist page  ####################
+    Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
 
 
 
 });
 
-/* ###########################################################################################
-          ############################### User Part  End  ###############################
-       ########################################################################################### */
+        /* ###########################################################################################
+                ############################### User Part  End  ###############################
+            ########################################################################################### */
