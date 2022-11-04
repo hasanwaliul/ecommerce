@@ -4,11 +4,13 @@
 use App\Models\Banner;
 use Intervention\Image\Facades\Image;
 use App\Models\Coupon;
+use App\Models\ShippingDivision;
 use Carbon\Carbon;
 
 class ProductTypeDataService {
-
-    // ###################################### Coupon Related Database Operation Start ######################################
+                    /* ###########################################################################################
+                        ################## Coupon Related Database Operation Start  ##################
+                ########################################################################################### */
     public function CouponInfoCollect(){
         return Coupon::where('coupon_status', 1)->latest()->get();
     }
@@ -39,9 +41,13 @@ class ProductTypeDataService {
     public function CouponDataDelete($coupon_Id){
         return Coupon::where('coupon_status', 1)->where('coupon_id', $coupon_Id)->delete();
     }
-    // ###################################### Coupon Related Database Operation End ######################################
+                    /* ###########################################################################################
+                        ################## Coupon Related Database Operation End  ##################
+                ########################################################################################### */
 
-    // ###################################### Banner Related Database Operation Start ######################################
+                /* ###########################################################################################
+                        ################## Banner Related Database Operation Start  ##################
+                ########################################################################################### */
     public function BannerInfoCollect(){
         return Banner::latest()->get();
     }
@@ -123,6 +129,28 @@ class ProductTypeDataService {
             'updated_at' => Carbon::now(),
         ]);
     }
+                /* ###########################################################################################
+                        ################## Banner Related Database Operation End  ##################
+                ########################################################################################### */
 
-    // ###################################### Banner Related Database Operation End ######################################
+            /* ###########################################################################################
+                        ############ Shipping Area Related Database Operation Start ############
+                ########################################################################################### */
+    public function ShippingAreaAllDivisions(){
+        return ShippingDivision::latest()->get();
+    }
+
+    public function DivisionDataInsert($divisionName){
+        return ShippingDivision::insert([
+            'division_name' => $divisionName,
+            'created_at' => Carbon::now(),
+        ]);
+    }
+
+
+
+            /* ###########################################################################################
+                                ############ Shipping Area Related Database Operation End ############
+                ########################################################################################### */
+
 }

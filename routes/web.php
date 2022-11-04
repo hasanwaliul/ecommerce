@@ -6,7 +6,8 @@
     use App\Http\Controllers\admin\CategoryController;
     use App\Http\Controllers\Admin\CouponController;
     use App\Http\Controllers\Admin\ProductController;
-    use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Frontend\CartController;
     use App\Http\Controllers\User\UserController;
     use App\Http\Controllers\Frontend\FrontendController;
     use App\Http\Controllers\Frontend\LanguageController;
@@ -162,6 +163,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('coupon-edit/{id}', [CouponController::class, 'couponDataEdit'])->name('coupon-data-edit');
     Route::post('coupon-data/update', [CouponController::class, 'couponDataUpdate'])->name('coupon--data-update');
     Route::get('coupon-delete/{id}', [CouponController::class, 'couponDataDelete'])->name('coupon-data-delete');
+
+    //  ################################## Shipping Area (Division) Part Start #################################
+    Route::get('division',[ShippingAreaController::class, 'index'])->name('divisions');
+    Route::post('division/add',[ShippingAreaController::class, 'divisionDataAdd'])->name('division-add');
+
 
 });
             /* ###########################################################################################

@@ -85,6 +85,7 @@ class BrandController extends Controller
             $save_url = 'uploads/brands/'.$name_gen;
 
             $brandUpdate = (new ProductInfoDataService())->ProductInfoUpdatIfHasImg($request->id, $request->category_id, $request->subcategory_id, $request->brand_name_en, $request->brand_name_bn, $save_url);
+
             if($brandUpdate){
                 // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
                 return redirect()->route('brands')->with('message','Brand Data Updated Successfully'); //Toastr alert
