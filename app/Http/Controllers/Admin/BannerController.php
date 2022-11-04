@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DataServices\ProductTypeDataService;
 use App\Models\Banner;
 use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 class BannerController extends Controller
 {
     public function index(){
-        $banners = Banner::latest()->get();
+        $banners = (new ProductTypeDataService())->BannerInfoCollect();
         return view('admin.banner.index', compact('banners'));
     }
 
@@ -26,21 +27,7 @@ class BannerController extends Controller
         ]);
         // dd('After validation');
 
-        $image = $request->file('banner_img');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(870,370)->save('uploads/banner/'.$name_gen);
-        $save_url = 'uploads/banner/'.$name_gen;
-
-        $banner = Banner::insert([
-            'banner_title_en' => $request->banner_title_en,
-            'banner_title_bn' => $request->banner_title_bn,
-            'banner_subtitle_en' => $request->banner_subtitle_en,
-            'banner_subtitle_bn' => $request->banner_subtitle_bn,
-            'banner_slug_en' => strtolower(str_replace(' ','-', $request->banner_title_en)),
-            'banner_slug_bn' => strtolower(str_replace(' ','-', $request->banner_title_bn)),
-            'banner_img' => $save_url,
-            'created_at' => Carbon::now(),
-        ]);
+        $banner = (new ProductTypeDataService())->BannerDataInsert($request->banner_title_en, $request->banner_title_bn, $request->banner_subtitle_en, $request->banner_subtitle_bn, $request->banner_img);
         // dd('After Insertion ');
 
         if($banner){
@@ -55,8 +42,7 @@ class BannerController extends Controller
 
     public function bannerDataEdit($id){
         // dd('Calling for edit');
-
-        $bannerData = Banner::where('banner_id', $id)->first();
+        $bannerData = (new ProductTypeDataService())->SingleBannerDataCollect($id);
         return view('admin.banner.edit', compact('bannerData'));
     }
 
@@ -70,67 +56,25 @@ class BannerController extends Controller
         ]);
         // dd('After Validation');
 
-        $old_image = $request->old_image;
-        $banner_id = $request->id;
+        $bannerUpdate = (new ProductTypeDataService())->BannerDataUpdate(
+            $request->old_image, $request->id, $request->banner_title_en, $request->banner_title_bn,
+            $request->banner_subtitle_en, $request->banner_subtitle_bn, $request->banner_img);
 
-        if ($request->file('banner_img')) {
-            unlink($old_image);
-            $image = $request->file('banner_img');
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(870,370)->save('uploads/banner/'.$name_gen);
-            $save_url = 'uploads/banner/'.$name_gen;
-
-            $bannerUpdate = Banner::where('banner_id', $banner_id)->update([
-                'banner_title_en' => $request->banner_title_en,
-                'banner_title_bn' => $request->banner_title_bn,
-                'banner_subtitle_en' => $request->banner_subtitle_en,
-                'banner_subtitle_bn' => $request->banner_subtitle_bn,
-                'banner_slug_en' => strtolower(str_replace(' ','-', $request->banner_title_en)),
-                'banner_slug_bn' => strtolower(str_replace(' ','-', $request->banner_title_bn)),
-                'banner_img' => $save_url,
-                'updated_at' => Carbon::now(),
-            ]);
-
-            if($bannerUpdate){
-                // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-                return redirect()->route('banners')->with('message','Brand Data Updated Successfully'); //Toastr alert
-            }else {
-                // Session::flash('error', 'Somthing Went wrong! Please try again later');
-                Session::flash('error', 'Somthing Went wrong! Please try again later');
-                return redirect()->back();
-            }
-        } else {
-            $bannerUpdate = Banner::where('banner_id', $banner_id)->update([
-                'banner_title_en' => $request->banner_title_en,
-                'banner_title_bn' => $request->banner_title_bn,
-                'banner_subtitle_en' => $request->banner_subtitle_en,
-                'banner_subtitle_bn' => $request->banner_subtitle_bn,
-                'banner_slug_en' => strtolower(str_replace(' ','-', $request->banner_title_en)),
-                'banner_slug_bn' => strtolower(str_replace(' ','-', $request->banner_title_bn)),
-                'updated_at' => Carbon::now(),
-            ]);
-
-            if($bannerUpdate){
-                // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
-                return redirect()->route('banners')->with('message','Brand Data Updated Successfully'); //Toastr alert
-            }else {
-                // Session::flash('error', 'Somthing Went wrong! Please try again later');
-                Session::flash('error', 'Somthing Went wrong! Please try again later');
-                return redirect()->back();
-            }
+        if($bannerUpdate){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('banners')->with('message','Brand Data Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
         }
     }
 
     public function bannerDataDelete($id){
         // dd('This is for Delete request');
+        $bannerDelete = (new ProductTypeDataService())->BannerDataDeleteWithImage($id);
 
-        $banner = Banner::where('banner_id', $id)->first();
-        $img = $banner->banner_img;
-        unlink($img);
-
-        $bannerData = Banner::where('banner_id', $id)->delete();
-
-        if($bannerData){
+        if($bannerDelete){
             // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
             return redirect()->route('banners')->with('message','Banner Data Deleted Successfully'); //Toastr alert
         }else {
