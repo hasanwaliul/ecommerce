@@ -6,6 +6,7 @@ use Intervention\Image\Facades\Image;
 use App\Models\Coupon;
 use App\Models\ShippingDistrict;
 use App\Models\ShippingDivision;
+use App\Models\ShippingState;
 use Carbon\Carbon;
 
 class ProductTypeDataService {
@@ -138,7 +139,7 @@ class ProductTypeDataService {
                         ############ Shipping Area Related Database Operation Start ############
                 ########################################################################################### */
     public function ShippingAreaAllDivisions(){
-        return ShippingDivision::latest()->get();
+        return ShippingDivision::orderBy('division_id', 'DESC')->latest()->get();
     }
 
     public function DivisionDataInsert($divisionName){
@@ -166,7 +167,7 @@ class ProductTypeDataService {
 
     // ################### Districts ###################
     public function ShippingAreaAllDistricts(){
-        return ShippingDistrict::with('division')->latest()->get();
+        return ShippingDistrict::with('division')->orderBy('district_id', 'DESC')->latest()->get();
     }
 
     public function ShippingAreaDistrictInsert($divId, $distName){
@@ -194,6 +195,10 @@ class ProductTypeDataService {
         return ShippingDistrict::where('district_id',$disId)->delete();
     }
 
+    // ################### States/Upazilla ###################
+    public function ShippingAreaAllStates(){
+        return ShippingState::orderBy('state_id', 'DESC')->latest()->get();
+    }
 
 
             /* ###########################################################################################

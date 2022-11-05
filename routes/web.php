@@ -48,7 +48,7 @@ Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTag
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
-
+Route::get('division-wise/districts/{id}', [CategoryController::class, 'DivisionWisedistrictData'])->name('division-wise-states');
         /* ###########################################################################################
             ############################### Cart Part Start  ###############################
         ########################################################################################### */
@@ -178,6 +178,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::post('district-data/update', [ShippingAreaController::class, 'districtDataUpdate'])->name('district-data-update');
     Route::get('district-delete/{id}', [ShippingAreaController::class, 'districtDataDelete'])->name('district-data-delete');
 
+    //  ################################## Shipping Area (States/Upazilla) Part Start #################################
+    Route::get('state', [ShippingAreaController::class, 'stateIndex'])->name('states');
 
 
 });

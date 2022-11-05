@@ -62,7 +62,7 @@ active
                         <label class="col-sm-4 form-control-label">District Name : <span
                                 class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="text" class="form-control" placeholder="Enter Brand Name English"
+                            <input type="text" class="form-control" placeholder="Enter District Name"
                                 name="district_name" value=" {{ $singleDistrict->district_name }} ">
 
                             @error('district_name')

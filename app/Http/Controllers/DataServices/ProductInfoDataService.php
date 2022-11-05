@@ -3,6 +3,7 @@
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ShippingDistrict;
 use App\Models\Subcategory;
 use App\Models\SubsubCategory;
 use Carbon\Carbon;
@@ -19,6 +20,10 @@ use Carbon\Carbon;
         // SubCategory Wise Sub SubCategory Data Show
         public function subCategoryWiseSubsubCategCollect($id){
             return SubsubCategory::select('subsubcategory_id', 'subsubcategory_name_en')->where('subcategory_id', $id)->get();
+        }
+        // Division Wise District Data Show
+        public function DivisionWiseDistrictDataShow($id){
+            return ShippingDistrict::select('district_id', 'district_name')->where('division_id', $id)->get();
         }
 
 

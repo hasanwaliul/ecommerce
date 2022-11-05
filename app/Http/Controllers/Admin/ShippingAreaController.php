@@ -154,7 +154,14 @@ class ShippingAreaController extends Controller
         }
     }
 
+    // ################################### Shipping area (States / Upazilla) Part Start ###################################
+    public function stateIndex(){
+        // dd('call for states');
+        $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
+        $states = (new ProductTypeDataService())->ShippingAreaAllStates();
 
+        return view('admin.states.index', compact('divisions', 'states'));
+    }
 
 
 

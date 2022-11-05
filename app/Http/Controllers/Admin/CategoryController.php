@@ -27,6 +27,11 @@ class CategoryController extends Controller
         return json_encode($data);
     }
 
+    // Division wise District Data show
+    public function DivisionWisedistrictData($id){
+        $data = (new ProductInfoDataService())->DivisionWiseDistrictDataShow($id);
+        return json_encode($data);
+    }
 
 
     // ########################################  Category Part Start ########################################

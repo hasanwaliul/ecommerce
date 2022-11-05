@@ -1,16 +1,16 @@
 @extends('admin.layouts.master')
-@section('title', 'Districs')
+@section('title', 'States')
 @section('shipping-area')
 active show-sub
 @endsection
-@section('districts')
+@section('states')
 active
 @endsection
 @section('content')
 
 <nav class="breadcrumb sl-breadcrumb">
     <span class="breadcrumb-item active">Dashboard</span>
-    <a class="breadcrumb-item" href="">Districts</a>
+    <a class="breadcrumb-item" href="">States</a>
 </nav>
 
 <div class="sl-pagebody">
@@ -36,7 +36,7 @@ active
                 <div class="col-md-2"></div>
             </div>
             <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                <h6 class="card-body-title">Add New Districts</h6>
+                <h6 class="card-body-title">Add New States/Upazilla</h6>
                 <form action=" {{ route('district-add') }} " method="post">
                     @csrf
                     <div class="row mg-t-20 form-group {{ $errors->has('division_id') ? ' has-error' : '' }}">
@@ -57,14 +57,26 @@ active
                             @enderror
                         </div>
                     </div><!-- row -->
-                    <div class="row mg-t-10 form-group  {{ $errors->has('district_name') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">District Name: <span
+                    <div class="row mg-t-20 form-group  {{ $errors->has('district_id') ? ' has-error' : '' }}">
+                        {{-- Select option with search facility  --}}
+                        <label class="col-sm-4 form-control-label">Select District: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2-show-search" name="district_id" data-placeholder="Choose one">
+                                <option label="Choose one"></option>
+                            </select>
+                            @error('district_id')
+                            <span class="text-danger"> {{ $message }} </span>
+                            @enderror
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-10 form-group  {{ $errors->has('state_name') ? ' has-error' : '' }}">
+                        <label class="col-sm-4 form-control-label">State Name: <span
                                 class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                            <input type="text" class="form-control" placeholder="Enter District Name"
-                                name="district_name" value="{{ old('district_name') }}">
+                            <input type="text" class="form-control" placeholder="Enter State/Upazilla Name"
+                                name="state_name" value="{{ old('state_name') }}">
 
-                            @error('district_name')
+                            @error('state_name')
                             <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -92,20 +104,22 @@ active
                             <tr>
                                 <th class="wd-40p"> Division Name</th>
                                 <th class="wd-40p"> District Name</th>
+                                <th class="wd-40p"> State Name</th>
                                 <th class="wd-20p">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @foreach ($districts as $district)
+                            @foreach ($states as $state)
                             <tr>
-                                <td> {{ $district->division->division_name }} </td>
-                                <td> {{ $district->district_name }} </td>
+                                <td> {{ $state->division->division_name }} </td>
+                                <td> {{ $state->district->district_name }} </td>
+                                <td> {{ $state->state_name }} </td>
 
                                 <td>
-                                    <a href=" {{ url('admin/district-edit/'.$district->district_id  ) }} "
+                                    <a href=" {{ url('admin/district-edit/'.$state->state_id  ) }} "
                                         class="btn btn-primary" title="Edit"><i
                                             class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/district-delete/'.$district->district_id  ) }} "
+                                    <a href=" {{ url('admin/district-delete/'.$state->state_id  ) }} "
                                         class="btn btn-danger" title="Delete" id="delete"><i
                                             class="tx-18 fa fa-trash"></i></a>
                                 </td>
@@ -122,9 +136,37 @@ active
 <br><br><br><br><br><br><br><br><br><br>
 @endsection
 @section('scripts')
-<script type="text/javascript">
 
+            {{-- Division Wise District Name With Ajax Request --}}
+    <script>
+         $("select[name='division_id']").on('change', function (event) {
+        var divId = $(this).val();
 
-</script>
-
+        /* ==== ajax request ==== */
+        if (divId) {
+            $.ajax({
+                url: "{{ url('division-wise/districts/') }}/" + divId,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // response
+                    if (data == "") {
+                        $('select[name="district_id"]').empty();
+                        $('select[name="district_id"]').append('<option value="">Districts Not Found!</option>');
+                    } else {
+                        $('select[name="district_id"]').empty();
+                        $('select[name="district_id"]').append('<option value="">Select Any Districts</option>');
+                        // data load
+                        $.each(data, function (key, value) {
+                            $('select[name="district_id"]').append('<option value="' + value.district_id + '">' + value.district_name + '</option>');
+                        });
+                        // data load
+                    }
+                    // response
+                },
+            });
+        }
+        /* ==== ajax request ==== */
+    });
+    </script>
 @endsection

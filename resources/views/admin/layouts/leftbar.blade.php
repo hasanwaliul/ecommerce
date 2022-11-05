@@ -95,7 +95,7 @@
     <ul class="sl-menu-sub nav flex-column">
       <li class="nav-item"><a href=" {{ route('divisions') }} " class="nav-link @yield('divisions')">Add Divisions</a></li>
       <li class="nav-item"><a href=" {{ route('districts') }} " class="nav-link @yield('districts')">Add Districts</a></li>
-        <li class="nav-item"><a href="#" class="nav-link @yield('states')">Add States</a></li>
+        <li class="nav-item"><a href=" {{ route('states') }} " class="nav-link @yield('states')">Add States</a></li>
     </ul>
       {{-- Dropdown menu End --}}
 
