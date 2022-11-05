@@ -87,7 +87,10 @@
       {{-- Dropdown menu start --}}
     <a href="#" class="sl-menu-link @yield('shipping-area')">
       <div class="sl-menu-item">
-          <i class="menu-item-icon fa fa-area-chart tx-20"></i>
+          {{-- <i class="menu-item-icon fa fa-area-chart tx-20"></i> --}}
+          {{-- <i class="menu-item-icon fa fa-crosshairs tx-20"></i> --}}
+          <i class="menu-item-icon fa fa-arrows-alt tx-20"></i>
+          {{-- <i class="menu-item-icon fa fa-fort-awesome tx-20"></i> --}}
         <span class="menu-item-label">Shipping Area</span>
         <i class="menu-item-arrow fa fa-angle-down"></i>
       </div><!-- menu-item -->

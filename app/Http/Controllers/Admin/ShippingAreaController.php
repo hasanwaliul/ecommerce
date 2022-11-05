@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\ProductTypeDataService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Node\Expr\FuncCall;
 
 class ShippingAreaController extends Controller
 {
@@ -160,7 +159,7 @@ class ShippingAreaController extends Controller
         $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
         $states = (new ProductTypeDataService())->ShippingAreaAllStates();
 
-        return view('admin.states.index', compact('divisions', 'states'));
+        return view('admin.states.index', compact('divisions','states'));
     }
 
 

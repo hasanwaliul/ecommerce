@@ -102,10 +102,10 @@ active
                     <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
                         <thead>
                             <tr>
-                                <th class="wd-40p"> Division Name</th>
-                                <th class="wd-40p"> District Name</th>
-                                <th class="wd-40p"> State Name</th>
-                                <th class="wd-20p">Action</th>
+                                <th class="wd-20p"> Division Name</th>
+                                <th class="wd-25p"> District Name</th>
+                                <th class="wd-30p"> State Name</th>
+                                <th class="wd-25p">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
