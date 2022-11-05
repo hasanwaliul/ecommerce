@@ -167,6 +167,17 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     //  ################################## Shipping Area (Division) Part Start #################################
     Route::get('division',[ShippingAreaController::class, 'index'])->name('divisions');
     Route::post('division/add',[ShippingAreaController::class, 'divisionDataAdd'])->name('division-add');
+    Route::get('division-edit/{id}', [ShippingAreaController::class, 'divisionDataEdit'])->name('division-data-edit');
+    Route::post('division-data/update', [ShippingAreaController::class, 'divisionDataUpdate'])->name('division-data-update');
+    Route::get('division-delete/{id}', [ShippingAreaController::class, 'divisionDataDelete'])->name('division-data-delete');
+
+    //  ################################## Shipping Area (District) Part Start #################################
+    Route::get('district', [ShippingAreaController::class, 'districtIndex'])->name('districts');
+    Route::post('district/add',[ShippingAreaController::class, 'districtDataAdd'])->name('district-add');
+    Route::get('district-edit/{id}', [ShippingAreaController::class, 'districtDataEdit'])->name('district-data-edit');
+    Route::post('district-data/update', [ShippingAreaController::class, 'districtDataUpdate'])->name('district-data-update');
+    Route::get('district-delete/{id}', [ShippingAreaController::class, 'districtDataDelete'])->name('district-data-delete');
+
 
 
 });

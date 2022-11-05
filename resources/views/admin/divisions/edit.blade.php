@@ -36,14 +36,15 @@ active
                 <div class="col-md-2"></div>
             </div>
             <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                <h6 class="card-body-title">Add New Division</h6>
-                <form action=" {{ route('division-add') }} " method="post">
+                <h6 class="card-body-title">Update Division</h6>
+                <form action=" {{ route('division-data-update') }} " method="post">
                     @csrf
+                    <input type="hidden" name="divId" value="{{$SingleDivision->division_id}}">
                     <div class="row mg-t-10 form-group  {{ $errors->has('division_name') ? ' has-error' : '' }}">
                         <label class="col-sm-4 form-control-label">Division Name: <span class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input type="text" class="form-control" placeholder="Enter Division Name"
-                                name="division_name" value="{{ old('division_name') }}">
+                                name="division_name" value="{{ $SingleDivision->division_name }}">
 
                             @error('division_name')
                             <span class="text-danger"> {{ $message }} </span>
@@ -51,7 +52,7 @@ active
                         </div>
                     </div><!-- row -->
                     <div class="form-layout-footer mg-t-30  form-group">
-                        <button type="submit" class="btn btn-info mg-r-5">Add New</button>
+                        <button type="submit" class="btn btn-info mg-r-5">Update</button>
                     </div><!-- form-layout-footer -->
                 </form>
             </div><!-- card -->
@@ -59,40 +60,6 @@ active
         <div class="col-md-2"></div>
     </div>
     {{-- Form part End --}}
-    <br><br><br>
-    {{-- Table Part Start --}}
-    <div class="row row-sm">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
-            <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">All Divisions</h6>
-                <br>
-                <div class="table-wrapper">
-                    <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
-                        <thead>
-                            <tr>
-                                <th class="wd-70p"> Division Name</th>
-                                <th class="wd-30p">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @foreach ($divisions as $division)
-                            <tr>
-                                <td> {{ $division->division_name }} </td>
-
-                                <td>
-                                    <a href=" {{ url('admin/division-edit/'.$division->division_id  ) }} " class="btn btn-primary" title="Edit"><i class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/division-delete/'.$division->division_id  ) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div><!-- table-wrapper -->
-            </div><!-- card -->
-        </div>
-        <div class="col-md-1"></div>
-    </div><!-- row -->
 </div>
 <br><br><br><br><br><br><br><br><br><br>
 @endsection

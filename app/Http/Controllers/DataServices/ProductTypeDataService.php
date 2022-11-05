@@ -4,6 +4,7 @@
 use App\Models\Banner;
 use Intervention\Image\Facades\Image;
 use App\Models\Coupon;
+use App\Models\ShippingDistrict;
 use App\Models\ShippingDivision;
 use Carbon\Carbon;
 
@@ -145,6 +146,52 @@ class ProductTypeDataService {
             'division_name' => $divisionName,
             'created_at' => Carbon::now(),
         ]);
+    }
+
+    public function SingleDivisionDataCollect($divId){
+        return ShippingDivision::where('division_id', $divId)->first();
+    }
+
+    public function DivisionDataUpdate($divId,$divName){
+        // dd($divId);
+        return ShippingDivision::where('division_id', $divId)->update([
+            'division_name' => $divName,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+
+    public function DivisionDataDelete($divId){
+        return ShippingDivision::where('division_id',$divId)->delete();
+    }
+
+    // ################### Districts ###################
+    public function ShippingAreaAllDistricts(){
+        return ShippingDistrict::with('division')->latest()->get();
+    }
+
+    public function ShippingAreaDistrictInsert($divId, $distName){
+        return ShippingDistrict::insert([
+            'division_id' => $divId,
+            'district_name' => $distName,
+            'created_at' => Carbon::now(),
+        ]);
+    }
+
+    public function ShippingAreaSingleDistrictInfo($disId){
+        // dd('call from method');
+        return ShippingDistrict::where('district_id', $disId)->first();
+    }
+
+    public function ShippingAreaDistrictDataUpdate($disId, $divId, $distName){
+        return ShippingDistrict::where('district_id', $disId)->update([
+            'division_id' => $divId,
+            'district_name' => $distName,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+
+    public function ShippingAreaDistrictDataDelete($disId){
+        return ShippingDistrict::where('district_id',$disId)->delete();
     }
 
 

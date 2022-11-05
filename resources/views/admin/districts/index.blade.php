@@ -1,16 +1,16 @@
 @extends('admin.layouts.master')
-@section('title', 'Division')
+@section('title', 'Districs')
 @section('shipping-area')
 active show-sub
 @endsection
-@section('divisions')
+@section('districts')
 active
 @endsection
 @section('content')
 
 <nav class="breadcrumb sl-breadcrumb">
     <span class="breadcrumb-item active">Dashboard</span>
-    <a class="breadcrumb-item" href="">Divisions</a>
+    <a class="breadcrumb-item" href="">Districts</a>
 </nav>
 
 <div class="sl-pagebody">
@@ -36,16 +36,35 @@ active
                 <div class="col-md-2"></div>
             </div>
             <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-                <h6 class="card-body-title">Add New Division</h6>
-                <form action=" {{ route('division-add') }} " method="post">
+                <h6 class="card-body-title">Add New Districts</h6>
+                <form action=" {{ route('district-add') }} " method="post">
                     @csrf
-                    <div class="row mg-t-10 form-group  {{ $errors->has('division_name') ? ' has-error' : '' }}">
-                        <label class="col-sm-4 form-control-label">Division Name: <span class="tx-danger">*</span></label>
+                    <div class="row mg-t-20 form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
+                        {{-- Select option with search facility --}}
+                        <label class="col-sm-4 form-control-label">Select Division: <span
+                                class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2-show-search" name="division_id" id=""
+                                data-placeholder="Choose one">
+                                <option label="Choose one"></option>
+                                @foreach ($divisions as $division)
+                                <option value=" {{ $division->division_id }} "> {{ $division->division_name }}
+                                </option>
+                                @endforeach
+                            </select>
+                            @error('division_id')
+                            <span class="text-danger"> {{ $message }} </span>
+                            @enderror
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-10 form-group  {{ $errors->has('district_name') ? ' has-error' : '' }}">
+                        <label class="col-sm-4 form-control-label">District Name: <span
+                                class="tx-danger">*</span></label>
                         <div class="col-sm-8 mg-t-10 mg-sm-t-0">
                             <input type="text" class="form-control" placeholder="Enter Division Name"
-                                name="division_name" value="{{ old('division_name') }}">
+                                name="district_name" value="{{ old('district_name') }}">
 
-                            @error('division_name')
+                            @error('district_name')
                             <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
@@ -65,24 +84,30 @@ active
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">All Divisions</h6>
+                <h6 class="card-body-title">All Districts</h6>
                 <br>
                 <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap table-primary mg-b-0">
                         <thead>
                             <tr>
-                                <th class="wd-70p"> Division Name</th>
-                                <th class="wd-30p">Action</th>
+                                <th class="wd-40p"> Division Name</th>
+                                <th class="wd-40p"> District Name</th>
+                                <th class="wd-20p">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            @foreach ($divisions as $division)
+                            @foreach ($districts as $district)
                             <tr>
-                                <td> {{ $division->division_name }} </td>
+                                <td> {{ $district->division->division_name }} </td>
+                                <td> {{ $district->district_name }} </td>
 
                                 <td>
-                                    <a href=" {{ url('admin/division-edit/'.$division->division_id  ) }} " class="btn btn-primary" title="Edit"><i class="tx-18 fa fa-pencil-square-o"></i></a>
-                                    <a href=" {{ url('admin/division-delete/'.$division->division_id  ) }} " class="btn btn-danger" title="Delete" id="delete"><i class="tx-18 fa fa-trash"></i></a>
+                                    <a href=" {{ url('admin/district-edit/'.$district->district_id  ) }} "
+                                        class="btn btn-primary" title="Edit"><i
+                                            class="tx-18 fa fa-pencil-square-o"></i></a>
+                                    <a href=" {{ url('admin/district-delete/'.$district->district_id  ) }} "
+                                        class="btn btn-danger" title="Delete" id="delete"><i
+                                            class="tx-18 fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
