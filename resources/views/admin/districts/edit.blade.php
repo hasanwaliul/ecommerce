@@ -53,7 +53,7 @@ active
                                 </option>
                                 @endforeach
                             </select>
-                            @error('subcategory_id')
+                            @error('division_id')
                             <span class="text-danger"> {{ $message }} </span>
                             @enderror
                         </div>

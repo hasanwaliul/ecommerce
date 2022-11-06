@@ -162,6 +162,79 @@ class ShippingAreaController extends Controller
         return view('admin.states.index', compact('divisions','states'));
     }
 
+    public function statesDataAdd(Request $request){
+        // dd($request->all());
+        $this->validate($request, [
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'state_name' => 'required',
+        ], [
+            'division_id.required' => 'Please Select Any Division Name Please .....',
+            'district_id.required' => 'Please Select Any District Name Please .....',
+            'state_name.required' => 'Please Enter States/Upazilla Name Here .....',
+        ]);
+        // dd('After validation');
+
+        $statesInsert = (new ProductTypeDataService())->ShippingAreaStatesDataInsert($request->division_id,$request->district_id,$request->state_name);
+
+        if($statesInsert){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->back()->with('message','Information Added Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
+    public function statesDataEdit($id){
+        // dd('Call for edit');
+        $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
+        $districts = (new ProductTypeDataService())->ShippingAreaAllDistricts();
+        $singleState = (new ProductTypeDataService())->ShippingAreaSingleStateInfoCollect($id);
+        // dd($singleState);
+        return view('admin.states.edit', compact('singleState', 'divisions', 'districts'));
+
+    }
+
+    public function stateDataUpdate(Request $request){
+        // dd($request->all());
+        $this->validate($request, [
+            'division_id' => 'required',
+            'district_id' => 'required',
+            'state_name' => 'required',
+        ], [
+            'division_id.required' => 'Please Select Any Division Name Please .....',
+            'district_id.required' => 'Please Select Any District Name Please .....',
+            'state_name.required' => 'Please Enter States/Upazilla Name Here .....',
+        ]);
+        // dd('After validation');
+
+        $stateUpdate = (new ProductTypeDataService())->ShippingAreaSingleStateDataUpdate($request->stateId,$request->division_id,$request->district_id,$request->state_name);
+
+        if($stateUpdate){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('states')->with('message','State Data Updated Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
+    public function statesDataDelete($id){
+        $stateDelete = (new ProductTypeDataService())->ShippingAreaStateDataDelete($id);
+
+        if($stateDelete){
+            // Session::flash('success', 'Information Has Been Updated Successfully'); //Custom alert
+            return redirect()->route('states')->with('message','District Deleted Successfully'); //Toastr alert
+        }else {
+            // Session::flash('error', 'Somthing Went wrong! Please try again later');
+            Session::flash('error', 'Somthing Went wrong! Please try again later');
+            return redirect()->back();
+        }
+    }
+
 
 
 }

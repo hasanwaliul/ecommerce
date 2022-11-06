@@ -180,6 +180,11 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
     //  ################################## Shipping Area (States/Upazilla) Part Start #################################
     Route::get('state', [ShippingAreaController::class, 'stateIndex'])->name('states');
+    Route::post('states/add',[ShippingAreaController::class, 'statesDataAdd'])->name('states-add');
+    Route::get('states-edit/{id}', [ShippingAreaController::class, 'statesDataEdit'])->name('states-data-edit');
+    Route::post('state-data/update', [ShippingAreaController::class, 'stateDataUpdate'])->name('state-data-update');
+    Route::get('states-delete/{id}', [ShippingAreaController::class, 'statesDataDelete'])->name('states-data-delete');
+
 
 
 });

@@ -200,6 +200,32 @@ class ProductTypeDataService {
         return ShippingState::orderBy('state_id', 'DESC')->latest()->get();
     }
 
+    public function ShippingAreaStatesDataInsert($divId, $distId, $stateName){
+        return ShippingState::insert([
+            'division_id' => $divId,
+            'district_id' => $distId,
+            'state_name' => $stateName,
+            'created_at' => Carbon::now(),
+        ]);
+    }
+
+    public function ShippingAreaSingleStateInfoCollect($stateId){
+        return ShippingState::where('state_id', $stateId)->first();
+    }
+
+    public function ShippingAreaSingleStateDataUpdate($stateId, $divId, $distId, $stateName){
+        return ShippingState::where('state_id', $stateId)->update([
+            'division_id' => $divId,
+            'district_id' => $distId,
+            'state_name' => $stateName,
+            'updated_at' => Carbon::now(),
+        ]);
+    }
+
+    public function ShippingAreaStateDataDelete($stateId){
+        return ShippingState::where('state_id', $stateId)->delete();
+    }
+
 
             /* ###########################################################################################
                                 ############ Shipping Area Related Database Operation End ############
