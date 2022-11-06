@@ -290,6 +290,7 @@
                     // console.log(data)
                     $('#closeModal').click();
 
+
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,
@@ -395,7 +396,7 @@
             // alert(productId);
             $.ajax({
                 type: 'GET',
-                url: "{{ url('product/add/wishlist') }}" + '/' + productId,
+                url: "{{ url('/product/add/wishlist') }}" + '/' + productId,
                 dataType: 'json',
                 success: function (data) {
                     // cosole.log(data)
@@ -431,17 +432,17 @@
                 url: "{{ url('/user/wishlist-products/view') }}",
                 dataType: 'json',
                 success: function (response) {
-                    // console.log(response);
+                    console.log(response);
                     var rows = "";
                     $.each(response,function (key, value) {
                         rows += `
                                     <tr>
-                                        <td class="col-md-2"><img src="/${value.product_id}" alt="img"></td>
+                                        <td class="col-md-2"><img src="/${value.wishlist_prod.product_thumbnail}" alt="img"></td>
                                         <td class="col-md-7">
-                                            <div class="product-name"><a href="#">${value.product_id}</a></div>
+                                            <div class="product-name"><a href="#">${value.wishlist_prod.product_name_en}</a></div>
                                             <div class="price">
-                                                $400.00
-                                                <span>$900.00</span>
+                                                $${value.wishlist_prod.discount_price}
+                                                <span>$${value.wishlist_prod.actual_price}</span>
                                             </div>
                                         </td>
                                         <td class="col-md-2">
@@ -467,7 +468,7 @@
 
         // Start Wishlist Product Remove from Page
         function  WishlistProductRemove(prodId){
-               alert(prodId);
+            //    alert(prodId);
                $.ajax({
                 type: 'GET',
                 url: '/user/wishlist/product-remove/' + prodId,
@@ -610,6 +611,7 @@
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data)
+                    couponCalculatedData();
                     cartPageProduct();
                     miniCartInfo();
                 }
@@ -627,6 +629,7 @@
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data)
+                    couponCalculatedData();
                     cartPageProduct();
                     miniCartInfo();
                 }
@@ -637,7 +640,7 @@
     </script>
 
     <script>
-        
+
          // Start Cart Page Coupon Apply With Ajax
          function applyCoupon() {
             var coupon_name = $('#coupon_name').val();
@@ -648,6 +651,8 @@
                 data:{coupon_name:coupon_name},
                 url: "{{ url('/coupon-apply') }}",
                 success: function (data) {
+                    couponCalculatedData();
+                    $('#CouponField').hide();
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,
@@ -671,8 +676,95 @@
                 }
             });
         }
-
          // End Cart Page Coupon Apply With Ajax
+
+         // Start Cart Page Coupon Applied Data With Ajax
+         function couponCalculatedData(){
+            $.ajax({
+                type: 'GET',
+                url: '/cart-page/coupon-calculated-data',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.totalprice) {
+                        $('#couponCalculatedDataField').html(
+                            `
+								<tr>
+									<th>
+										<div class="cart-sub-total">
+											Subtotal<span class="inner-left-md">$ ${data.totalprice}</span>
+										</div>
+										<div class="cart-grand-total">
+											Grand Total<span class="inner-left-md">$ ${data.totalprice}</span>
+										</div>
+									</th>
+								</tr>
+
+                            `
+                        )
+                    } else {
+                        $('#couponCalculatedDataField').html(
+                            `
+								<tr>
+									<th>
+										<div class="cart-sub-total">
+											Subtotal<span class="inner-left-md">$${data.subTotal}</span>
+										</div>
+										<div class="cart-sub-total">
+											Coupon Name<span class="inner-left-md">${data.coupon_name}</span>
+                                            <button type="submit" id="" onclick="CouponRemove()" href="#"><i class="fa fa-times"></i></button>
+										</div>
+										<div class="cart-sub-total">
+											Discount Amount<span class="inner-left-md">$${data.discount_amount_withCoupon}</span>
+										</div>
+										<div class="cart-grand-total">
+											Grand Total<span class="inner-left-md">$${data.total_amount}</span>
+										</div>
+									</th>
+								</tr>
+
+                            `
+                        )
+                    }
+                }
+
+            });
+         }
+         couponCalculatedData();
+         // End Cart Page Coupon Applied Data With Ajax
+
+         // Start Cart Page Applied Coupon Data Remove With Ajax
+            function CouponRemove(){
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: "{{ url('/applied-coupon-remove') }}",
+                    success: function (data) {
+                        couponCalculatedData();
+                        $('#CouponField').show();
+                        //  start message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                        })
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'message',
+                                title: data.success
+                            })
+                        } else {
+                            $('#coupon_name').val('');
+                            Toast.fire({
+                                type: 'error',
+                                title: data.error
+                            })
+                        }
+                        //  end message
+                    }
+                });
+            }
+         // End Cart Page Applied Coupon Data Remove With Ajax
     </script>
 
     @yield('script')

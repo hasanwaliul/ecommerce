@@ -75,6 +75,11 @@ Route::get('/cart/product-increment/{rowId}', [CartController::class, 'cartProdu
 Route::get('/cart/product-decrement/{rowId}', [CartController::class, 'cartProductDecrementFromCartPage']);
 // #################### Ajax Request for Product Price with Coupon (From Cart Page) ####################
 Route::post('/coupon-apply', [CartController::class, 'couponApplyForCartPage']);
+// #################### Ajax Request for Product Price Calculataion with Coupon (From Cart Page) ####################
+Route::get('/cart-page/coupon-calculated-data', [CartController::class, 'couponCalculatedDataForCouponPage']);
+// #################### Ajax Request for Coupon Remove with Ajax (From Cart Page) ####################
+Route::get('/applied-coupon-remove', [CartController::class, 'appliedCouponDataRemoveFromCartPage']);
+
 // #################### Product Add To Wishlist  ####################
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 

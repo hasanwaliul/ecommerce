@@ -140,14 +140,35 @@ class CartController extends Controller
         if ($coupon) {
             Session::put('coupon', [
                 'coupon_name' => $request->coupon_name,
-                'coupon_discount' => $request->coupon_discount,
-                'coupon_discount_amount' => round(Cart::total() * $request->coupon_discount / 100),
-                'total_amount' => round(Cart::total() - Cart::total() * $request->coupon_discount / 100),
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             ]);
-            return response()->json(['error' => 'Coupon Applied Successfully']);
+            return response()->json(['success' => 'Coupon Applied Successfully']);
         }else {
             return response()->json(['error' => 'You have entered an invalid coupon']);
         }
+    }
+
+    public function couponCalculatedDataForCouponPage(){
+        if (Session::has('coupon')) {
+            return response()->json(array(
+                'subTotal' => Cart::total(),
+                'coupon_name' => session()->get('coupon')['coupon_name'],
+                'coupon_discount' => session()->get('coupon')['coupon_discount'],
+                'discount_amount_withCoupon' => session()->get('coupon')['discount_amount_withCoupon'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        } else {
+            return response()->json(array(
+                'totalprice' => Cart::total(),
+            ));
+        }
+    }
+
+    public function appliedCouponDataRemoveFromCartPage(){
+        Session::forget('coupon');
+        return response()->json(['success' => 'Coupon removed successfully']);
     }
 
 
