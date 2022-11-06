@@ -141,6 +141,7 @@ active
     <script>
          $("select[name='division_id']").on('change', function (event) {
         var divId = $(this).val();
+        // alert(divId)
 
         /* ==== ajax request ==== */
         if (divId) {

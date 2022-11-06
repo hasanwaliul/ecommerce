@@ -6,6 +6,9 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
+use App\Models\ShippingDistrict;
+use App\Models\ShippingDivision;
+use App\Models\ShippingState;
 
 class FrontendDataService {
 
@@ -95,23 +98,34 @@ class FrontendDataService {
         return Product::where('product_status',1)->where('product_tags_en', $tag)->orWhere('product_tags_bn', $tag)->orderBy('product_id', 'DESC')->paginate(1);
       }
 
-/* ################################## Sub Category Wise Product Show  ################################## */
+    /* ################################## Sub Category Wise Product Show  ################################## */
       public function SubCategoryWiseProductInfo($subCatId, $slug){
         // dd('Calling from method');
         return Product::where('product_status', 1)->where('subcategory_id', $subCatId)->orderBy('product_id', 'DESC')->paginate(1);
         // return Product::where('product_status', 1)->where('subcategory_id', $subCatId)->orWhere('subcategory_slug_en', $slug)->orWhere('subcategory_slug_bn', $slug)->orderBy('product_id', 'DESC')->get();
       }
 
-/* ##################################  Sub Sub Category Wise Product Show  ################################## */
-public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
-    // dd('Calling from method');
-    return Product::where('product_status', 1)->where('subsubcategory_id', $subsubCatId)->orderBy('product_id', 'DESC')->paginate(1);
-}
+    /* ##################################  Sub Sub Category Wise Product Show  ################################## */
+    public function SubSubCategoryWiseProductsInfo($subsubCatId, $slug){
+        // dd('Calling from method');
+        return Product::where('product_status', 1)->where('subsubcategory_id', $subsubCatId)->orderBy('product_id', 'DESC')->paginate(1);
+    }
 
-/* ##################################  Product info for modal  ################################## */
-public function FindSingleProductInfoForModal($prodId){
-    return Product::with('categoryfuncProd', 'brandfuncProd')->where('product_id', $prodId)->first();
-}
+    /* ##################################  Product info for modal  ################################## */
+    public function FindSingleProductInfoForModal($prodId){
+        return Product::with('categoryfuncProd', 'brandfuncProd')->where('product_id', $prodId)->first();
+    }
 
+    /* ##################################  Cart Page All Information  ################################## */
+    public function ShippingAreaAllDivisions(){
+        return ShippingDivision::orderBy('division_id', 'DESC')->latest()->get();
+    }
 
+    public function ShippingAreaAllDistricts(){
+        return ShippingDistrict::with('division')->orderBy('district_id', 'DESC')->latest()->get();
+    }
+
+    public function ShippingAreaAllStates(){
+        return ShippingState::with('division', 'distrct')->orderBy('state_id', 'DESC')->latest()->get();
+    }
 }

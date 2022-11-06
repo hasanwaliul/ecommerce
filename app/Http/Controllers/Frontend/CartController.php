@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
+use App\Models\Coupon;
 use App\Models\Wishlist;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -88,7 +90,11 @@ class CartController extends Controller
   // ####################### Cart Product View On Cart Page #######################
     public function cartItemView(){
         // dd('Calling');
-        return view('user.cart-page');
+        $divisions = (new FrontendDataService())->ShippingAreaAllDivisions();
+        // $districs = (new FrontendDataService())->ShippingAreaAllDistricts();
+        $states = (new FrontendDataService())->ShippingAreaAllStates();
+        // dd($districs);
+        return view('user.cart-page', compact('divisions', 'states'));
     }
 
     public function cartProducts(){
@@ -124,6 +130,23 @@ class CartController extends Controller
         } else {
             Cart::update($rowId, $row->qty - 1); // Will update the quantity with One
             return response()->json('Decremented');
+        }
+    }
+
+    // ########################## Apply Coupon For Cart Page
+    public function couponApplyForCartPage(Request $request){
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
+
+        if ($coupon) {
+            Session::put('coupon', [
+                'coupon_name' => $request->coupon_name,
+                'coupon_discount' => $request->coupon_discount,
+                'coupon_discount_amount' => round(Cart::total() * $request->coupon_discount / 100),
+                'total_amount' => round(Cart::total() - Cart::total() * $request->coupon_discount / 100),
+            ]);
+            return response()->json(['error' => 'Coupon Applied Successfully']);
+        }else {
+            return response()->json(['error' => 'You have entered an invalid coupon']);
         }
     }
 

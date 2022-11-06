@@ -73,7 +73,8 @@ Route::get('/cart/product-remove/{rowId}', [CartController::class, 'cartProductR
 Route::get('/cart/product-increment/{rowId}', [CartController::class, 'cartProductIncrementFromCartPage']);
 // #################### Ajax Request for Product Decrement (From Cart Page) ####################
 Route::get('/cart/product-decrement/{rowId}', [CartController::class, 'cartProductDecrementFromCartPage']);
-
+// #################### Ajax Request for Product Price with Coupon (From Cart Page) ####################
+Route::post('/coupon-apply', [CartController::class, 'couponApplyForCartPage']);
 // #################### Product Add To Wishlist  ####################
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
@@ -219,7 +220,3 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 
 
 });
-
-        /* ###########################################################################################
-                ############################### User Part  End  ###############################
-            ########################################################################################### */

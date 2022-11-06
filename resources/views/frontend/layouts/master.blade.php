@@ -123,7 +123,7 @@
                                 <input type="text" class="form-control" id="pQty" value="" min="1">
                             </div>
                             <input type="hidden" name="product_id" id="product_id">
-                            <button type="submit" class="btn btn-primary" onclick="addToCart()">Add To Cart</button>
+                            <button type="submit" class="btn btn-primary" id="addToCart" onclick="addToCart()">Add To Cart</button>
                         </div>
                     </div>
                 </div>
@@ -176,6 +176,8 @@
         toastr.warning("{{ session('warning') }}");
         @endif
     </script>
+
+
     {{-- ################## Bootstrap Tagsinput ###################--}}
     <script src=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js "></script>
 
@@ -192,6 +194,7 @@
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
     {{-- ################## Sweetalert 2 ###################--}}
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script src=" {{ asset('backend') }}/lib/sweetalert/sweetalert2.all.min.js "></script>
 
     {{-- Modal Ajax request Start --}}
@@ -563,7 +566,6 @@
         // End Product Info Show On Cart Page
 
 
-
         // Product Remove From Mini Cart Start
         function CartProductRemove(rowId) {
             // alert(rowId);
@@ -633,7 +635,45 @@
         }
          // End Product Decrement On Cart Page
     </script>
-    {{-- Modal Ajax request End --}}
+
+    <script>
+        
+         // Start Cart Page Coupon Apply With Ajax
+         function applyCoupon() {
+            var coupon_name = $('#coupon_name').val();
+            // alert(coupon_name);
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                data:{coupon_name:coupon_name},
+                url: "{{ url('/coupon-apply') }}",
+                success: function (data) {
+                    //  start message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'message',
+                            title: data.success
+                        })
+                    } else {
+                        $('#coupon_name').val('');
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    //  end message
+                }
+            });
+        }
+
+         // End Cart Page Coupon Apply With Ajax
+    </script>
 
     @yield('script')
 
