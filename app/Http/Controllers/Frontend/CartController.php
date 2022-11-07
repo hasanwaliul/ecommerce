@@ -18,9 +18,9 @@ class CartController extends Controller
         $produtDetails = (new FrontendDataService())->SingleProductDetails($prdId);
 
         if (Session::has('coupon')) {
-           Session::forget('coupon');
+            Session::forget('coupon');
         }
-
+        
         if ($produtDetails->discount_price == null) {
             Cart::add([
                 'id' => $prdId,
@@ -125,6 +125,7 @@ class CartController extends Controller
 
     public function cartProductIncrementFromCartPage($rowId){
         $row = Cart::get($rowId); // Get the row id for cart product
+        Cart::update($rowId, $row->qty + 1); // Will update the quantity with One
 
         if (Session::has('coupon')) {
             $coupon_name = session::get('coupon')['coupon_name'];
@@ -136,7 +137,6 @@ class CartController extends Controller
                 'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
             ]);
         }
-        Cart::update($rowId, $row->qty + 1); // Will update the quantity with One
 
         return response()->json('Incremented');
     }
@@ -144,21 +144,22 @@ class CartController extends Controller
     public function cartProductDecrementFromCartPage($rowId){
         $row = Cart::get($rowId); // Get the row id for cart product
 
-        if (Session::has('coupon')) {
-            $coupon_name = session::get('coupon')['coupon_name'];
-            $coupon = Coupon::where('coupon_name', $coupon_name)->first();
-            Session::put('coupon', [
-                'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
-                'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
-            ]);
-        }
-
         if ($row->qty == 1) {
             return response()->json('Not Applicable');
         } else {
             Cart::update($rowId, $row->qty - 1); // Will update the quantity with One
+
+            if (Session::has('coupon')) {
+                $coupon_name = session::get('coupon')['coupon_name'];
+                $coupon = Coupon::where('coupon_name', $coupon_name)->first();
+                Session::put('coupon', [
+                    'coupon_name' => $coupon->coupon_name,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
+                    'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
+                ]);
+            }
+
             return response()->json('Decremented');
         }
     }
