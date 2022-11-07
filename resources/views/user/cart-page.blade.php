@@ -43,7 +43,6 @@
 
 
 
-
 				<div class="shopping-cart">
 					<div class="shopping-cart-table ">
 						<div class="table-responsive">
@@ -62,7 +61,7 @@
                                 <tbody id="cartProduct" class="text-center">
 
                                 </tbody>
-								<tfoot>
+								{{-- <tfoot>
 									<tr>
 										<td colspan="7">
 											<div class="shopping-cart-btn">
@@ -76,7 +75,8 @@
 											</div><!-- /.shopping-cart-btn -->
 										</td>
 									</tr>
-								</tfoot>
+								</tfoot> --}}
+
 							</table><!-- /table -->
 						</div>
 					</div><!-- /.shopping-cart-table -->

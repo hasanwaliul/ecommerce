@@ -204,7 +204,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         })
-        // Start Product View ( On Cart) With Modal
+        // Start Product Details View ( On Cart) With Modal
         function productView(id) {
             // alert(id)
             $.ajax({
@@ -263,7 +263,7 @@
                 }
             })
         }
-        // End Product View (On Cart) With Modal
+        // End Product Details View (On Cart) With Modal
 
         // Start Product Buying info (To Cart)
         function addToCart(id) {
@@ -285,11 +285,11 @@
                     quantity: qty,
                 },
                 success: function (data) {
-                    miniCartInfo();
                     // alert(id)
-                    // console.log(data)
-                    $('#closeModal').click();
+                    // console.log(data);
 
+                    miniCartInfo();
+                    $('#closeModal').click();
 
                     //  start message
                     const Toast = Swal.mixin({
@@ -432,7 +432,7 @@
                 url: "{{ url('/user/wishlist-products/view') }}",
                 dataType: 'json',
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
                     var rows = "";
                     $.each(response,function (key, value) {
                         rows += `
@@ -558,7 +558,7 @@
                                     </tr>
                                 `
                     });
-                    console.log(cartItem);
+                    // console.log(cartItem);
                     $('#cartProduct').html(cartItem);
                 },
             });
@@ -576,8 +576,12 @@
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data)
-                    miniCartInfo();
                     cartPageProduct();
+                    miniCartInfo();
+                    couponCalculatedData();
+                    $('#CouponField').css('display','');
+                    $('#coupon_name').val('');
+                    
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,
@@ -651,8 +655,10 @@
                 data:{coupon_name:coupon_name},
                 url: "{{ url('/coupon-apply') }}",
                 success: function (data) {
+                    console.log(data);
                     couponCalculatedData();
-                    $('#CouponField').hide();
+                    // $('#CouponField').hide();
+                    $('#CouponField').css('display','none');
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,
@@ -686,6 +692,7 @@
                 dataType: 'json',
                 success: function (data) {
                     if (data.totalprice) {
+                        $('#CouponField').css('display','');
                         $('#couponCalculatedDataField').html(
                             `
 								<tr>
@@ -740,7 +747,9 @@
                     url: "{{ url('/applied-coupon-remove') }}",
                     success: function (data) {
                         couponCalculatedData();
-                        $('#CouponField').show();
+                        // $('#CouponField').show();
+                        $('#CouponField').css('display','');
+                        $('#coupon_name').val('');
                         //  start message
                         const Toast = Swal.mixin({
                             toast: true,
