@@ -28,6 +28,7 @@
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/animate.min.css">
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/rateit.css">
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href=" {{ asset('backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/font-awesome.css">
 
@@ -177,6 +178,13 @@
         @endif
     </script>
 
+    {{-- ################## Data search ###################--}}
+    {{-- <script>
+        // Select2 by showing the search
+        $('.select2-show-search').select2({
+            minimumResultsForSearch: ''
+        });
+    </script> --}}
 
     {{-- ################## Bootstrap Tagsinput ###################--}}
     <script src=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.min.js "></script>
@@ -193,6 +201,7 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
+    <script src=" {{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
     {{-- ################## Sweetalert 2 ###################--}}
     {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
     <script src=" {{ asset('backend') }}/lib/sweetalert/sweetalert2.all.min.js "></script>
@@ -581,7 +590,7 @@
                     couponCalculatedData();
                     $('#CouponField').css('display','');
                     $('#coupon_name').val('');
-                    
+
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,

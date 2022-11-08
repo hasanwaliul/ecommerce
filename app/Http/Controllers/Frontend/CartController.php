@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\DataServices\FrontendDataService;
+use App\Http\Controllers\DataServices\ProductTypeDataService;
 use App\Models\Coupon;
 use App\Models\Wishlist;
 use Carbon\Carbon;
@@ -15,12 +16,12 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public function cartDataStore(Request $request, $prdId){
-        $produtDetails = (new FrontendDataService())->SingleProductDetails($prdId);
-
         if (Session::has('coupon')) {
             Session::forget('coupon');
         }
-        
+
+        $produtDetails = (new FrontendDataService())->SingleProductDetails($prdId);
+
         if ($produtDetails->discount_price == null) {
             Cart::add([
                 'id' => $prdId,
@@ -93,12 +94,7 @@ class CartController extends Controller
 
   // ####################### Cart Product View On Cart Page #######################
     public function cartItemView(){
-        // dd('Calling');
-        $divisions = (new FrontendDataService())->ShippingAreaAllDivisions();
-        // $districs = (new FrontendDataService())->ShippingAreaAllDistricts();
-        $states = (new FrontendDataService())->ShippingAreaAllStates();
-        // dd($districs);
-        return view('user.cart-page', compact('divisions', 'states'));
+        return view('user.cart-page');
     }
 
     public function cartProducts(){
@@ -169,13 +165,15 @@ class CartController extends Controller
         $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
 
         if ($coupon) {
-            Session::put('coupon', [
-                'coupon_name' => $coupon->coupon_name,
-                'coupon_discount' => $coupon->coupon_discount,
-                'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
-                'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
-            ]);
-            return response()->json(['success' => 'Coupon Applied Successfully']);
+            return  round(Cart::total() * $coupon->coupon_discount / 100);
+
+            // Session::put('coupon', [
+            //     'coupon_name' => $coupon->coupon_name,
+            //     'coupon_discount' => $coupon->coupon_discount,
+            //     'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
+            //     'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
+            // ]);
+            // return response()->json(['success' => 'Coupon Applied Successfully']);
         }else {
             return response()->json(['error' => 'You have entered an invalid coupon']);
         }
@@ -200,6 +198,27 @@ class CartController extends Controller
     public function appliedCouponDataRemoveFromCartPage(){
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon removed successfully']);
+    }
+
+    // ######################### Checkout Page For Cart Products #########################
+    public function checkoutPageForSelectedCartProducts(){
+        if (Auth::check()) {
+            if (Cart::total() > 0) {
+
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::total();
+
+                $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
+                // dd($divisions);
+                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions'));
+            } else {
+                return redirect()->route('frontend')->with('error','You Need To Shop Here'); //Toastr alert
+            }
+
+        }else {
+            return redirect()->route('login')->with('error','You Have To Login First'); //Toastr alert
+        }
     }
 
 

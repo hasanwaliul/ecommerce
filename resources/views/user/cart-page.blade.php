@@ -198,9 +198,11 @@
 								<tr>
 									<td>
 										<div class="cart-checkout-btn pull-right">
-											<button type="submit" class="btn btn-primary checkout-btn">
+											<a href="{{route('checkouts')}}">
+                                                <button type="submit" class="btn btn-primary checkout-btn">
                                                 PROCCED TO CHEKOUT
-                                            </button>
+                                                </button>
+                                            </a>
 										</div>
 									</td>
 								</tr>

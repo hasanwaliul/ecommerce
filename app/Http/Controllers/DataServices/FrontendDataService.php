@@ -126,6 +126,6 @@ class FrontendDataService {
     }
 
     public function ShippingAreaAllStates(){
-        return ShippingState::with('division', 'distrct')->orderBy('state_id', 'DESC')->latest()->get();
+        return ShippingState::with('division', 'district')->orderBy('state_id', 'DESC')->latest()->get();
     }
 }

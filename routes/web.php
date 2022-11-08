@@ -80,6 +80,9 @@ Route::get('/cart-page/coupon-calculated-data', [CartController::class, 'couponC
 // #################### Ajax Request for Coupon Remove with Ajax (From Cart Page) ####################
 Route::get('/applied-coupon-remove', [CartController::class, 'appliedCouponDataRemoveFromCartPage']);
 
+// #################### Ajax Request for Coupon Remove with Ajax (From Cart Page) ####################
+Route::get('/checkout-page', [CartController::class, 'checkoutPageForSelectedCartProducts'])->name('checkouts');
+
 // #################### Product Add To Wishlist  ####################
 Route::get('product/add/wishlist/{productId}', [CartController::class, 'productAddToWishlist'])->name('product-addTo-wishlist');
 
@@ -221,7 +224,8 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     // #################### Products remove from Wishlist page  ####################
     Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
-
+    // #################### Division Wise Districts Show For Checkout Page  ####################
+    Route::get('division-wise/districts/{district_id}', []);
 
 
 });

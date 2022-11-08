@@ -14,7 +14,10 @@
                                 @if (Session()->get('language') == 'bangla') আমার বাঁজার @else My Cart @endif
                             </a>
                         </li>
-                        {{-- <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li> --}}
+                        <li><a href=" {{route('checkouts')}} "><i class="icon fa fa-briefcase"></i>
+                                @if (Session()->get('language') == 'bangla') পন্য কিনুন @else Checkout @endif
+                            </a>
+                        </li>
                         <li>
                             @auth
                             <a href="{{ route('user-dashboard') }}"><i class="fa fa-tachometer"></i>
