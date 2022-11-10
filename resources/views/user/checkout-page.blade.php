@@ -215,7 +215,7 @@
     <script>
         $("select[name='division_id']").on('change', function (event) {
        var divId = $(this).val();
-       // alert(divId)
+       console.log(divId)
 
         /* ==== ajax request ==== */
         if (divId) {

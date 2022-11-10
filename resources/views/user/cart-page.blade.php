@@ -42,7 +42,6 @@
             </div> --}}
 
 
-
 				<div class="shopping-cart">
 					<div class="shopping-cart-table ">
 						<div class="table-responsive">
@@ -209,7 +208,9 @@
 							</tbody><!-- /tbody -->
 						</table><!-- /table -->
 					</div><!-- /.cart-shopping-total -->
+                    
 				</div><!-- /.shopping-cart -->
+
         </div><!-- /.row -->
     </div><!-- /.sigin-in-->
     {{-- Wishlist Page Content End --}}

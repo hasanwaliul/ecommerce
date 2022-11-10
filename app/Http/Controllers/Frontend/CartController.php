@@ -164,14 +164,15 @@ class CartController extends Controller
     public function couponApplyForCartPage(Request $request){
         $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
 
+
         if ($coupon) {
-            return  round(Cart::total() * $coupon->coupon_discount / 100);
+            return   $coupon;
 
             // Session::put('coupon', [
             //     'coupon_name' => $coupon->coupon_name,
             //     'coupon_discount' => $coupon->coupon_discount,
             //     'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
-            //     'total_amount' => round(Cart::total() - (Cart::total() * $coupon->coupon_discount / 100)),
+            //     'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
             // ]);
             // return response()->json(['success' => 'Coupon Applied Successfully']);
         }else {
@@ -200,7 +201,7 @@ class CartController extends Controller
         return response()->json(['success' => 'Coupon removed successfully']);
     }
 
-    // ######################### Checkout Page For Cart Products #########################
+    // ######################### Checkout Page From Cart Products #########################
     public function checkoutPageForSelectedCartProducts(){
         if (Auth::check()) {
             if (Cart::total() > 0) {

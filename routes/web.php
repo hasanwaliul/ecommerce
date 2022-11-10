@@ -11,7 +11,8 @@ use App\Http\Controllers\Frontend\CartController;
     use App\Http\Controllers\User\UserController;
     use App\Http\Controllers\Frontend\FrontendController;
     use App\Http\Controllers\Frontend\LanguageController;
-    use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\ShippingController;
+use App\Http\Controllers\Frontend\WishlistController;
     use Illuminate\Support\Facades\Artisan;
     use Illuminate\Support\Facades\Auth;
 
@@ -80,7 +81,7 @@ Route::get('/cart-page/coupon-calculated-data', [CartController::class, 'couponC
 // #################### Ajax Request for Coupon Remove with Ajax (From Cart Page) ####################
 Route::get('/applied-coupon-remove', [CartController::class, 'appliedCouponDataRemoveFromCartPage']);
 
-// #################### Ajax Request for Coupon Remove with Ajax (From Cart Page) ####################
+// #################### Checkout Page (From Cart Page) ####################
 Route::get('/checkout-page', [CartController::class, 'checkoutPageForSelectedCartProducts'])->name('checkouts');
 
 // #################### Product Add To Wishlist  ####################
@@ -223,9 +224,6 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
     // #################### Products remove from Wishlist page  ####################
     Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
-
-    // #################### Division Wise Districts Show For Checkout Page  ####################
-    Route::get('division-wise/districts/{district_id}', []);
 
 
 });
