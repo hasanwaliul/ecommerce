@@ -225,5 +225,4 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     // #################### Products remove from Wishlist page  ####################
     Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
-
 });

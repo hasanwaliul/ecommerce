@@ -166,7 +166,7 @@ class CartController extends Controller
 
 
         if ($coupon) {
-            return   $coupon;
+            return  Cart::total()*$coupon->coupon_discount/100;
 
             // Session::put('coupon', [
             //     'coupon_name' => $coupon->coupon_name,
@@ -211,8 +211,10 @@ class CartController extends Controller
                 $cartTotal = Cart::total();
 
                 $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
-                // dd($divisions);
-                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions'));
+                $districts = (new ProductTypeDataService())->ShippingAreaAllDistricts();
+                $states = (new ProductTypeDataService())->ShippingAreaAllStates();
+                // dd($districts);
+                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions', 'districts', 'states'));
             } else {
                 return redirect()->route('frontend')->with('error','You Need To Shop Here'); //Toastr alert
             }

@@ -127,8 +127,8 @@
     <script src=" {{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src=" {{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src=" {{ asset('backend') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-    {{-- ################## Data Table ###################--}}
 
+    {{-- ################## Data Table ###################--}}
     <script src=" {{ asset('backend') }}/lib/datatables/jquery.dataTables.js"></script>
     <script src=" {{ asset('backend') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src=" {{ asset('backend') }}/lib/select2/js/select2.min.js"></script>

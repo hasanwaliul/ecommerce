@@ -83,7 +83,7 @@
                                     <div class="col-md-6 col-sm-6 already-registered-login">
                                             <div class="form-group">
                                                 <label class="info-title">Select Division<span>*</span> </label>
-                                                <select class="form-control select2-show-search" name="division_id"  id=""
+                                                <select class="form-control select2-show-search" name="division_id"  id="division_id"
                                                     data-placeholder="Choose one">
                                                     <option label="Choose one"></option>
                                                 @foreach ($divisions as $division)
@@ -99,6 +99,10 @@
                                                 <label class="info-title" >Select District <span>*</span> </label>
                                                 <select class="form-control select2-show-search" name="district_id" data-placeholder="Choose one">
                                                     <option label="Choose one"></option>
+                                                @foreach ($districts as $district)
+                                                    <option value=" {{ $district->district_id }} "> {{ $district->district_name }}
+                                                    </option>
+                                                @endforeach
                                                 </select>
                                                 @error('district_id')
                                                 <span class="text-danger"> {{ $message }} </span>
@@ -108,9 +112,10 @@
                                                 <label class="info-title">Select State/Upazilla <span>*</span></label>
                                                 <select class="form-control select2-show-search" name="state_id" data-placeholder="Choose one">
                                                     <option label="Choose one"></option>
-                                                    {{-- @foreach ($categories as $category)
-                                                    <option value=" {{ $category->category_id }} "> {{ $category->category_name_en }} </option>
-                                                    @endforeach --}}
+                                                @foreach ($states as $state)
+                                                    <option value=" {{ $state->state_id }} "> {{ $state->state_name }}
+                                                    </option>
+                                                @endforeach
                                                 </select>
                                                 @error('state_id')
                                                 <span class="text-danger"> {{ $message }} </span>
@@ -204,7 +209,6 @@
         </div><!-- /.row -->
     </div><!-- /.checkout-box -->
     {{-- Checkbox Page Content End --}}
-
 </div><!-- /.row -->
 @include('frontend.layouts.footer-slider')
 
@@ -214,16 +218,17 @@
             {{-- Division Wise District Name With Ajax Request --}}
     <script>
         $("select[name='division_id']").on('change', function (event) {
-       var divId = $(this).val();
-       console.log(divId)
+            var divId = $(this).val();
+            console.log(divId);
 
         /* ==== ajax request ==== */
         if (divId) {
             $.ajax({
-                url: "{{ url('division-wise/districts/') }}/" + divId,
+                url: "{{ url('/division-wise/districts/') }}/" + divId,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
+                    console.log(data)
                     // response
                     if (data == "") {
                         $('select[name="district_id"]').empty();
