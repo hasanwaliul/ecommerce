@@ -63,7 +63,7 @@ class FrontendController extends Controller
 
 
 
-        // dd($relatedProducts);
+        // dd($singleProduct);
         return view('frontend.product-details', compact('singleProduct', 'multiImages', 'hot_deals',
                     'product_color_en', 'product_color_bn', 'product_size_en', 'product_size_bn', 'relatedProducts'));
     }

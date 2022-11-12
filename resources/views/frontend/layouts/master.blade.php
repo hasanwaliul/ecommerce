@@ -109,7 +109,7 @@
                             </ul>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group" id="productColorArea">
                                 <label for="product_color">Product Color:</label>
                                 <select class="form-control" id="product_color" name="pColor">
                                 </select>
@@ -119,12 +119,14 @@
                                 <select class="form-control" id="product_size" name="pSize">
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="qtyArea">
                                 <label for="pQty">Quantity:</label>
                                 <input type="text" class="form-control" id="pQty" value="" min="1">
                             </div>
                             <input type="hidden" name="product_id" id="product_id">
+                          <div id="addToCartArea">
                             <button type="submit" class="btn btn-primary" id="addToCart" onclick="addToCart()">Add To Cart</button>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -214,7 +216,7 @@
                 url: '/product/view/withModal/' + id,
                 dataType: 'json',
                 success: function (data) {
-                    // console.log(data)
+                    console.log(data)
                     $('#pName').text(data.product.product_name_en);
                     $('#pPrice').text(data.product.discount_price);
                     $('#pCode').text(data.product.product_code);
@@ -246,10 +248,30 @@
                         $('#stockout').text('Stock Out');
                     }
 
+                    // Product Quantity Area
+                    if (data.product.product_qty > 0) {
+                        $('#qtyArea').show();
+                    } else {
+                        $('#qtyArea').hide();
+                    }
+
+                    // Product Add To Cart Area
+                    if (data.product.product_qty > 0) {
+                        $('#addToCartArea').show();
+                    } else {
+                        $('#addToCartArea').hide();
+                    }
+
+                    // Product Color
+                    if (data.color == null) {
+                       $('#productColorArea').hide();
+                    } else {
+                    }
+
                     // Product Color
                     $('select[name="pColor"]').empty();
-                    $.each(data.color, function (key, value) {
-                        $('select[name="pColor"]').append('<option value=" ' + value + ' ">' + value + '</option>')
+                        $.each(data.color, function (key, value) {
+                            $('select[name="pColor"]').append('<option value=" ' + value + ' ">' + value + '</option>')
                     })
 
                     // Product Size

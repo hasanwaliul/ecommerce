@@ -846,7 +846,7 @@
                                     </div>
                                     <div class="col-sm-9">
                                         <div class="stock-box">
-                                            @if ($singleProduct->product_qty == null)
+                                            @if ($singleProduct->product_qty == 0)
                                             @if (Session()->get('language') == 'bangla')
                                             <span class="value">ফুরিয়ে গেছে</span>
                                             @else
@@ -974,39 +974,47 @@
                             <div class="quantity-container info-container">
                                 <div class="row">
 
-                                    <div class="col-sm-2">
-                                        @if (Session()->get('language') == 'bangla')
-                                        <span class="label">পরিমাণ :</span>
-                                        @else
-                                        <span class="label">Qty :</span>
-                                        @endif
-                                    </div>
+                                    @if ($singleProduct->product_qty == 0)
 
-                                    <div class="col-sm-2">
-                                        <div class="cart-quantity">
-                                            <div class="quant-input">
-                                                <div class="arrows">
-                                                    <div class="arrow plus gradient"><span class="ir"><i
-                                                                class="icon fa fa-sort-asc"></i></span></div>
-                                                    <div class="arrow minus gradient"><span class="ir"><i
-                                                                class="icon fa fa-sort-desc"></i></span></div>
+                                    @else
+                                        <div class="col-sm-2">
+                                            @if (Session()->get('language') == 'bangla')
+                                            <span class="label">পরিমাণ :</span>
+                                            @else
+                                            <span class="label">Qty :</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <div class="cart-quantity">
+                                                <div class="quant-input">
+                                                    <div class="arrows">
+                                                        <div class="arrow plus gradient"><span class="ir"><i
+                                                                    class="icon fa fa-sort-asc"></i></span></div>
+                                                        <div class="arrow minus gradient"><span class="ir"><i
+                                                                    class="icon fa fa-sort-desc"></i></span></div>
+                                                    </div>
+                                                    <input type="text" value="1" min="1" id="pQty">
                                                 </div>
-                                                <input type="text" value="1" min="1" id="pQty">
                                             </div>
                                         </div>
-                                    </div>
+                                    @endif
 
                                     <input type="hidden" name="product_id" id="product_id" value="{{$singleProduct->product_id}}">
 
-                                    <div class="col-sm-7">
-                                        <button type="submit" onclick=" addToCart() " class="btn btn-primary">
-                                            @if (Session()->get('language') == 'bangla')
-                                            <i class="fa fa-shopping-cart inner-right-vs"></i> ব্যাগে যুক্ত করুন
-                                            @else
-                                            <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
-                                            @endif
-                                        </button>
-                                    </div>
+                                    @if ($singleProduct->product_qty == 0)
+
+                                    @else
+                                        <div class="col-sm-7">
+                                            <button type="submit" onclick=" addToCart() " class="btn btn-primary">
+                                                @if (Session()->get('language') == 'bangla')
+                                                <i class="fa fa-shopping-cart inner-right-vs"></i> ব্যাগে যুক্ত করুন
+                                                @else
+                                                <i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART
+                                                @endif
+                                            </button>
+                                        </div>
+                                    @endif
 
                                 </div><!-- /.row -->
                             </div><!-- /.quantity-container -->
