@@ -195,6 +195,14 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
+    {{-- ################## Jquery form validator ###################--}}
+    <script type="text/javascript" src=" {{ asset('common') }}/jquery.validate.js "></script>
+    <script>
+        $.validate({
+            lang : 'en'
+        });
+    </script>
+
 
 
     {{-- ################## Sweetalert 2 ###################--}}
@@ -216,7 +224,7 @@
                 url: '/product/view/withModal/' + id,
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data)
+                    // console.log(data)
                     $('#pName').text(data.product.product_name_en);
                     $('#pPrice').text(data.product.discount_price);
                     $('#pCode').text(data.product.product_code);
@@ -262,10 +270,10 @@
                         $('#addToCartArea').hide();
                     }
 
-                    // Product Color
-                    if (data.color == null) {
-                       $('#productColorArea').hide();
-                    } else {
+                    if (data.product.product_color_en == null) {
+                        $('#productColorArea').hide();
+                    }else {
+                        $('#productColorArea').show();
                     }
 
                     // Product Color
@@ -603,7 +611,8 @@
                     cartPageProduct();
                     miniCartInfo();
                     couponCalculatedData();
-                    $('#CouponField').css('display','');
+                    $('#CouponField').show();
+                    // $('#CouponField').css('display','');
                     $('#coupon_name').val('');
 
                     //  start message
@@ -681,8 +690,8 @@
                 success: function (data) {
                     console.log(data);
                     couponCalculatedData();
-                    // $('#CouponField').hide();
-                    $('#CouponField').css('display','none');
+                    $('#CouponField').hide();
+                    // $('#CouponField').css('display','none');
                     //  start message
                     const Toast = Swal.mixin({
                         toast: true,

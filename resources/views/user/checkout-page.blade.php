@@ -40,109 +40,151 @@
                             <div class="panel-body">
                                 <div class="row">
 
-                                    <!-- already-registered-login -->
-                                    <div class="col-md-6 col-sm-6 already-registered-login">
-                                        <h4 class="checkout-subtitle"></h4>
+                                    <form class="register-form" role="form">
 
-                                        <form class="register-form" role="form">
+                                        <!-- already-registered-login -->
+                                        <div class="col-md-6 col-sm-6 already-registered-login">
+                                            <h4 class="checkout-subtitle"></h4>
 
                                             <div class="form-group">
                                                 <label class="info-title" for="name">Name
                                                     <span>*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
-                                                    id="name" placeholder="Your name" value="{{ Auth::user()->name }}">
+                                                    id="name" placeholder="Your name" value="{{ Auth::user()->name }}"
+                                                    name="shippingName" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="info-title" for="email">Email
                                                     <span>*</span></label>
                                                 <input type="email" class="form-control unicase-form-control text-input"
-                                                    id="email" placeholder="Your email"
-                                                    value="{{ Auth::user()->email }}">
+                                                    id="email" placeholder="Your email" value="{{ Auth::user()->email }}"
+                                                     name="shippingEmail" required>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="info-title" for="phone">Phone
                                                     <span>*</span></label>
                                                 <input type="text" class="form-control unicase-form-control text-input"
-                                                    id="phone" placeholder="Your phone number"
-                                                    value="{{ Auth::user()->phone }}">
+                                                    id="phone" placeholder="Your phone number" value="{{ Auth::user()->phone }}"
+                                                    name="shippingPhone" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="info-title" for="name">Post Code
+                                                    <span>*</span></label>
+                                                <input type="text" class="form-control unicase-form-control text-input"
+                                                    id="name" placeholder="Your post code" value="" name="shippingPostCode" required>
+                                            </div>
+                                        </div>
+                                        <!-- already-registered-login -->
+
+                                        <!-- already-registered-login -->
+                                        <div class="col-md-6 col-sm-6 already-registered-login">
+                                            <div class="form-group">
+                                                <label class="info-title">Select Division<span>*</span> </label>
+                                                <select class="form-control select2-show-search" name="division_id"
+                                                    id="" data-placeholder="Choose one" required>
+                                                    <option label="Choose one"></option>
+                                                    @foreach ($divisions as $division)
+                                                    <option value=" {{ $division->division_id }} "> {{
+                                                        $division->division_name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('division_id')
+                                                <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title">Select District <span>*</span> </label>
+                                                <select class="form-control select2-show-search" name="district_id"
+                                                    data-placeholder="Choose one" required>
+                                                    <option label="Choose one"></option>
+                                                    @foreach ($districts as $district)
+                                                    <option value=" {{ $district->district_id }} "> {{
+                                                        $district->district_name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('district_id')
+                                                <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
+                                                
+                                                {{-- <select class="form-control select2-show-search" name="district_id"
+                                                    data-placeholder="Choose one" required>
+                                                    <option label="Choose one"></option>
+                                                </select>
+                                                @error('district_id')
+                                                <span class="text-danger"> {{ $message }} </span>
+                                                @enderror --}}
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title">Select State/Upazilla <span>*</span></label>
+                                                <select class="form-control select2-show-search" name="state_id"
+                                                    data-placeholder="Choose one" required>
+                                                    <option label="Choose one"></option>
+                                                    @foreach ($states as $state)
+                                                    <option value=" {{ $state->state_id }} "> {{ $state->state_name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('state_id')
+                                                <span class="text-danger"> {{ $message }} </span>
+                                                @enderror
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="info-title" for="notes">Keep A Notes
                                                     <span>*</span></label>
                                                 <textarea name="shipping_notes" id="notes" cols="30" rows="5"
-                                                    placeholder="Your notes ....."></textarea>
+                                                    placeholder="Your notes ....." name="shippingNotes" required></textarea>
 
                                             </div>
-                                    </div>
-                                    <!-- already-registered-login -->
+                                            {{-- <div class="form-group">
+                                                <label class="info-title" for="exampleInputPassword1">Password
+                                                    <span>*</span></label>
+                                                <input type="password"
+                                                    class="form-control unicase-form-control text-input"
+                                                    id="exampleInputPassword1" placeholder="">
+                                                <a href="#" class="forgot-password">Forgot your Password?</a>
+                                            </div> --}}
+                                        </div>
+                                        <!-- already-registered-login -->
 
-                                    <!-- already-registered-login -->
-                                    <div class="col-md-6 col-sm-6 already-registered-login">
-                                        <div class="form-group">
-                                            <label class="info-title">Select Division<span>*</span> </label>
-                                            <select class="form-control select2-show-search" name="division_id"
-                                                id="" data-placeholder="Choose one">
-                                                <option label="Choose one"></option>
-                                                @foreach ($divisions as $division)
-                                                <option value=" {{ $division->division_id }} "> {{
-                                                    $division->division_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @error('division_id')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror
+                                        <div class="panel-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="unicase-checkout-title">Payment Method</h4>
+                                                </div><br>
+                                                <div class="">
+                                                    <ul class="nav nav-checkout-progress list-unstyled">
+                                                        <li>
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios"
+                                                                    id="optionsRadios2" value="option2" required> &nbsp; Strip
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios"
+                                                                    id="optionsRadios2" value="option2" required> &nbsp; Card
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label>
+                                                                <input type="radio" name="optionsRadios"
+                                                                    id="optionsRadios2" value="option2" required> &nbsp; Cash on
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="info-title">Select District <span>*</span> </label>
-                                            {{-- <select class="form-control select2-show-search" name="district_id"
-                                                data-placeholder="Choose one">
-                                                <option label="Choose one"></option>
-                                                @foreach ($districts as $district)
-                                                <option value=" {{ $district->district_id }} "> {{
-                                                    $district->district_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @error('district_id')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror --}}
-                                            <select class="form-control select2-show-search" name="district_id" data-placeholder="Choose one">
-                                                <option label="Choose one"></option>
-                                            </select>
-                                            @error('district_id')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="info-title">Select State/Upazilla <span>*</span></label>
-                                            <select class="form-control select2-show-search" name="state_id"
-                                                data-placeholder="Choose one">
-                                                <option label="Choose one"></option>
-                                                @foreach ($states as $state)
-                                                <option value=" {{ $state->state_id }} "> {{ $state->state_name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                            @error('state_id')
-                                            <span class="text-danger"> {{ $message }} </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="info-title" for="exampleInputPassword1">Password
-                                                <span>*</span></label>
-                                            <input type="password" class="form-control unicase-form-control text-input"
-                                                id="exampleInputPassword1" placeholder="">
-                                            <a href="#" class="forgot-password">Forgot your Password?</a>
-                                        </div>
-                                        <button type="submit"
-                                            class="btn-upper btn btn-primary checkout-page-button">Login</button>
-                                        </form>
-                                    </div>
-                                    <!-- already-registered-login -->
+
+                                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="float: right;">Buy</button>
+
+                                    </form>
 
                                 </div>
                             </div>
@@ -154,71 +196,98 @@
 
                 </div><!-- /.checkout-steps -->
             </div>
+
             <div class="col-md-5">
-                <!-- checkout-progress-sidebar -->
-                <div class="checkout-progress-sidebar ">
-                    <div class="panel-group">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="unicase-checkout-title">Your Cart Product Details</h4>
-                            </div>
-                            <div class="table-responsive text-center">
-                                <table class="table table-hover table-bordered mg-0">
-                                    <thead class="bg-info">
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Qty</th>
-                                            <th>Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($carts as $cart)
-                                        <tr>
-                                            <td style="padding: 15px;"><img src="{{ asset($cart->options->image) }}"
-                                                    alt="cart-img" height="65px" width="65px"></td>
-                                            <td style="padding: 15px;">{{ $cart->name }}</td>
-                                            <td style="padding: 15px;">{{ $cart->qty }}</td>
-                                            <td style="padding: 15px;">${{ $cart->price }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div><!-- table-responsive -->
+                <div class="panel-group checkout-steps" id="accordion1">
+
+                    <!-- checkout-step-01  -->
+                    <div class="panel panel-default checkout-step-01">
+
+                        <!-- panel-heading -->
+                        <div class="panel-heading">
+                            <h4 class="unicase-checkout-title">
+                                <a data-toggle="collapse" class="" data-parent="#accordion1" href="#collapseTwo">
+                                    <span><i class="icon fa fa-shopping-cart" style="font-size: 18px;"></i></span>Your Cart Product Details:
+                                </a>
+                            </h4>
                         </div>
+                        <!-- panel-heading -->
+
+                        <div id="collapseTwo" class="panel-collapse collapse in">
+
+
+                            <!-- checkout-progress-sidebar -->
+                            <div class="checkout-progress-sidebar ">
+                                <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="unicase-checkout-title"></h4>
+                                        </div>
+                                        <div class="table-responsive text-center">
+                                            <table class="table table-hover table-bordered mg-0">
+                                                <thead class="bg-info">
+                                                    <tr>
+                                                        <th>Image</th>
+                                                        <th>Name</th>
+                                                        <th>Qty</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($carts as $cart)
+                                                    <tr>
+                                                        <td style="padding: 15px;"><img
+                                                                src="{{ asset($cart->options->image) }}" alt="cart-img"
+                                                                height="65px" width="65px"></td>
+                                                        <td style="padding: 15px;">{{ $cart->name }}</td>
+                                                        <td style="padding: 15px;">{{ $cart->qty }}</td>
+                                                        <td style="padding: 15px;">${{ $cart->price }}</td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div><!-- table-responsive -->
+                                    </div>
+                                </div>
+                            </div> <!-- checkout-progress-sidebar -->
+
+                        </div><!-- row -->
                     </div>
-                </div> <!-- checkout-progress-sidebar -->
-                <!-- checkout-progress-sidebar -->
-                <div class="checkout-progress-sidebar " style="float: right;">
-                    <div class="panel-group">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="unicase-checkout-title">Total Amount Of This Products</h4>
+                    <!-- checkout-step-01  -->
+                    <br>
+                    <!-- checkout-progress-sidebar -->
+                    <div class="checkout-progress-sidebar " style="float: right;">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="unicase-checkout-title">Total Amount Of This Products</h4>
+                                </div>
+                                @if (Session()->has('coupon'))
+                                <div class="">
+                                    <ul class="nav nav-checkout-progress list-unstyled">
+                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
+                                        <li><strong>Coupon Name: &nbsp; &nbsp;</strong>
+                                            {{session()->get('coupon')['coupon_name']}}
+                                            {{session()->get('coupon')['coupon_discount']}} </li>
+                                        <li><strong>Coupon Discount: &nbsp; &nbsp;</strong>
+                                            -{{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                        <li><strong>Grand Total: &nbsp; &nbsp;</strong>
+                                            {{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                    </ul>
+                                </div>
+                                @else
+                                <div class="">
+                                    <ul class="nav nav-checkout-progress list-unstyled">
+                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
+                                        <li><strong>Grand Total: &nbsp; &nbsp; ${{$cartTotal}}</strong></li>
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
-                            @if (Session()->has('coupon'))
-                            <div class="">
-                                <ul class="nav nav-checkout-progress list-unstyled">
-                                    <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
-                                    <li><strong>Coupon Name: &nbsp; &nbsp;</strong>
-                                        {{session()->get('coupon')['coupon_name']}}
-                                        {{session()->get('coupon')['coupon_discount']}} </li>
-                                    <li><strong>Coupon Discount: &nbsp; &nbsp;</strong>
-                                        -{{session()->get('coupon')['discount_amount_withCoupon']}} </li>
-                                    <li><strong>Grand Total: &nbsp; &nbsp;</strong>
-                                        {{session()->get('coupon')['discount_amount_withCoupon']}} </li>
-                                </ul>
-                            </div>
-                            @else
-                            <div class="">
-                                <ul class="nav nav-checkout-progress list-unstyled">
-                                    <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
-                                    <li><strong>Grand Total: &nbsp; &nbsp; ${{$cartTotal}}</strong></li>
-                                </ul>
-                            </div>
-                            @endif
                         </div>
-                    </div>
-                </div> <!-- checkout-progress-sidebar -->
+                    </div> <!-- checkout-progress-sidebar -->
+
+                </div><!-- /.checkout-steps -->
             </div>
         </div><!-- /.row -->
     </div><!-- /.checkout-box -->
@@ -227,16 +296,18 @@
 @include('frontend.layouts.footer-slider')
 
 @endsection
-{{-- <script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script> --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+{{--
+<script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script> --}}
+{{--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script> --}}
 @section('scripts')
 
 {{-- Division Wise District Name With Ajax Request --}}
 <script src="scripts/jquery.js">
-    $(document).ready(function() {
-        $("select[name='division_id']").on('change', function (){
-        var divId = $(this).val();
-        alert(divId)
+    $(document).ready(function () {
+        $("select[name='division_id']").on('change', function (event) {
+            var divId = $(this).val();
+            alert(divId)
 
             /* ==== ajax request ==== */
             if (divId) {
@@ -267,7 +338,7 @@
             /* ==== ajax request ==== */
         });
 
-     });
+    });
 
 </script>
 @endsection
