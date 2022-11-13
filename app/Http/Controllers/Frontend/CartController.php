@@ -201,7 +201,7 @@ class CartController extends Controller
         return response()->json(['success' => 'Coupon removed successfully']);
     }
 
-    // ######################### Checkout Page From Cart Products #########################
+    // ######################### Checkout Page For Cart Products #########################
     public function checkoutPageForSelectedCartProducts(){
         if (Auth::check()) {
             if (Cart::total() > 0) {
@@ -223,6 +223,7 @@ class CartController extends Controller
             return redirect()->route('login')->with('error','You Have To Login First'); //Toastr alert
         }
     }
+    
 
 
 

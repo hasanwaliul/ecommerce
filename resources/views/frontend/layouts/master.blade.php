@@ -267,6 +267,11 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
+    
+    {{-- Stripe Payment Method --}}
+    {{-- <link rel="stylesheet" href=" {{ asset('common') }}/checkout.css ">
+    <script src=" {{ asset('common') }}/checkout.js "></script> --}}
+    <script src="https://js.stripe.com/v3/"></script>
     {{-- ################## Jquery form validator ###################--}}
     <script type="text/javascript" src=" {{ asset('common') }}/jquery.validate.js "></script>
     <script>

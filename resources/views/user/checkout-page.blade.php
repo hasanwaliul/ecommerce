@@ -40,8 +40,8 @@
                             <div class="panel-body">
                                 <div class="row">
 
-                                    <form class="register-form" role="form">
-
+                                    <form class="register-form" role="form" method="post" action="{{ route('shipping-form-data') }}">
+                                        @csrf
                                         <!-- already-registered-login -->
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <h4 class="checkout-subtitle"></h4>
@@ -110,7 +110,7 @@
                                                 @error('district_id')
                                                 <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
-                                                
+
                                                 {{-- <select class="form-control select2-show-search" name="district_id"
                                                     data-placeholder="Choose one" required>
                                                     <option label="Choose one"></option>
@@ -161,20 +161,20 @@
                                                     <ul class="nav nav-checkout-progress list-unstyled">
                                                         <li>
                                                             <label>
-                                                                <input type="radio" name="optionsRadios"
-                                                                    id="optionsRadios2" value="option2" required> &nbsp; Strip
+                                                                <input type="radio" name="paymentMethod"
+                                                                    id="paymentMethod" value="stripe" required> &nbsp; Strip
                                                             </label>
                                                         </li>
                                                         <li>
                                                             <label>
-                                                                <input type="radio" name="optionsRadios"
-                                                                    id="optionsRadios2" value="option2" required> &nbsp; Card
+                                                                <input type="radio" name="paymentMethod"
+                                                                    id="paymentMethod" value="card" required> &nbsp; Card
                                                             </label>
                                                         </li>
                                                         <li>
                                                             <label>
-                                                                <input type="radio" name="optionsRadios"
-                                                                    id="optionsRadios2" value="option2" required> &nbsp; Cash on
+                                                                <input type="radio" name="paymentMethod"
+                                                                    id="paymentMethod" value="cashOn" required> &nbsp; Cash on
                                                             </label>
                                                         </li>
                                                     </ul>
@@ -182,7 +182,7 @@
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="float: right;">Buy</button>
+                                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button" style="float: right;">Process For Order</button>
 
                                     </form>
 

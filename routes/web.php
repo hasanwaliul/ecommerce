@@ -8,7 +8,8 @@
     use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Frontend\CartController;
-    use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\User\UserController;
     use App\Http\Controllers\Frontend\FrontendController;
     use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\ShippingController;
@@ -225,4 +226,6 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     // #################### Products remove from Wishlist page  ####################
     Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
+    // #################### Product Shippin Information from Checkout page  ####################
+    Route::post('/shipping-form-data', [CheckoutController::class, 'shippingFormDataFromCheckoutPage'])->name('shipping-form-data');
 });
