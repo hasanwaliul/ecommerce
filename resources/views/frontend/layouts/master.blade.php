@@ -77,7 +77,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> <span id="pName"></span> </h5>
+                    @if (Session()->get('language') == 'bangla')
+                        <h5 class="modal-title" id="exampleModalLabel"> <span id="pNameBn"></span> </h5>
+                    @else
+                        <h5 class="modal-title" id="exampleModalLabel"> <span id="pNameEn"></span> </h5>
+                    @endif
+
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -91,42 +96,109 @@
                         </div>
                         <div class="col-md-4">
                             <ul class="list-group">
-                                <li class="list-group-item">
-                                    Price:
-                                    <strong class="text-danget" class="text-info">
-                                        $<span id="pPrice"></span>
-                                        <del id="oldPrice" class="text-danger"></del>
-                                    </strong>
-                                </li>
-                                <li class="list-group-item">Code: <strong id="pCode" class="text-info"></strong></li>
-                                <li class="list-group-item">Category: <strong id="pCategory" class="text-info"></strong>
-                                </li>
-                                <li class="list-group-item">Brand: <strong id="pBrand" class="text-info"></strong></li>
-                                <li class="list-group-item">Stock:
-                                    <span class="label label-success" id="available"></span>
-                                    <span class="label label-danger" id="stockout"></span>
-                                </li>
+                                @if (Session()->get('language') == 'bangla')
+                                    <li class="list-group-item">
+                                        মূল্য:
+                                        <strong class="text-danget" class="text-info">
+                                            $<span id="pPrice"></span>
+                                            <del id="oldPrice" class="text-danger"></del>
+                                        </strong>
+                                    </li>
+                                @else
+                                    <li class="list-group-item">
+                                        Price:
+                                        <strong class="text-danget" class="text-info">
+                                            $<span id="pPrice"></span>
+                                            <del id="oldPrice" class="text-danger"></del>
+                                        </strong>
+                                    </li>
+                                @endif
+
+                                @if (Session()->get('language') == 'bangla')
+                                    <li class="list-group-item">কোড নংঃ <strong id="pCode" class="text-info"></strong></li>
+                                @else
+                                    <li class="list-group-item">Code No: <strong id="pCode" class="text-info"></strong></li>
+                                @endif
+
+                                @if (Session()->get('language') == 'bangla')
+                                    <li class="list-group-item">পণ্যের ধরনঃ <strong id="pCategoryBn" class="text-info"></strong></li>
+                                @else
+                                    <li class="list-group-item">Category: <strong id="pCategoryEn" class="text-info"></strong></li>
+                                @endif
+
+                                @if (Session()->get('language') == 'bangla')
+                                    <li class="list-group-item">ব্র্যান্ডের নামঃ <strong id="pBrandBn" class="text-info"></strong></li>
+                                @else
+                                    <li class="list-group-item">Brand: <strong id="pBrandEn" class="text-info"></strong></li>
+                                @endif
+
+                                @if (Session()->get('language') == 'bangla')
+                                    <li class="list-group-item">উপস্থিতিঃ
+                                        <span class="label label-success" id="availableBn"></span>
+                                        <span class="label label-danger" id="stockoutBn"></span>
+                                    </li>
+                                @else
+                                    <li class="list-group-item">Stock:
+                                        <span class="label label-success" id="available"></span>
+                                        <span class="label label-danger" id="stockout"></span>
+                                    </li>
+                                @endif
+
                             </ul>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group" id="productColorArea">
-                                <label for="product_color">Product Color:</label>
-                                <select class="form-control" id="product_color" name="pColor">
-                                </select>
-                            </div>
-                            <div class="form-group" id="sizeArea">
-                                <label for="product_size">Product Size:</label>
-                                <select class="form-control" id="product_size" name="pSize">
-                                </select>
-                            </div>
-                            <div class="form-group" id="qtyArea">
-                                <label for="pQty">Quantity:</label>
-                                <input type="text" class="form-control" id="pQty" value="" min="1">
-                            </div>
+                            @if (Session()->get('language') ==  'bangla')
+                                <div class="form-group" id="productColorArea">
+                                    <label for="product_color">পণ্যের রংঃ </label>
+                                    <select class="form-control" id="product_color" name="pColorBn">
+                                    </select>
+                                </div>
+                            @else
+                                <div class="form-group" id="productColorArea">
+                                    <label for="product_color">Product Color: </label>
+                                    <select class="form-control" id="product_color" name="pColorEn">
+                                    </select>
+                                </div>
+                            @endif
+
+                            @if (Session()->get('language') ==  'bangla')
+                                <div class="form-group" id="sizeArea">
+                                    <label for="product_size">পণ্যের আকারঃ </label>
+                                    <select class="form-control" id="product_size" name="pSizeBn">
+                                    </select>
+                                </div>
+                            @else
+                                <div class="form-group" id="sizeArea">
+                                    <label for="product_size">Product Size:</label>
+                                    <select class="form-control" id="product_size" name="pSizeEn">
+                                    </select>
+                                </div>
+                            @endif
+
+                            @if (Session()->get('language') ==  'bangla')
+                                <div class="form-group" id="qtyArea">
+                                    <label for="pQty">পরিমাণঃ </label>
+                                    <input type="text" class="form-control" id="pQty" value="" min="1">
+                                </div>
+                            @else
+                                <div class="form-group" id="qtyArea">
+                                    <label for="pQty">Quantity:</label>
+                                    <input type="text" class="form-control" id="pQty" value="" min="1">
+                                </div>
+                            @endif
+
                             <input type="hidden" name="product_id" id="product_id">
-                          <div id="addToCartArea">
-                            <button type="submit" class="btn btn-primary" id="addToCart" onclick="addToCart()">Add To Cart</button>
-                          </div>
+
+                            @if (Session()->get('language') == 'bangla')
+                                <div id="addToCartArea">
+                                <button type="submit" class="btn btn-primary" id="addToCart" onclick="addToCart()">ব্যাগে যুক্ত করুন</button>
+                                </div>
+                            @else
+                                <div id="addToCartArea">
+                                <button type="submit" class="btn btn-primary" id="addToCart" onclick="addToCart()">Add To Cart</button>
+                                </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -225,15 +297,19 @@
                 dataType: 'json',
                 success: function (data) {
                     // console.log(data)
-                    $('#pName').text(data.product.product_name_en);
+                    $('#pNameBn').text(data.product.product_name_bn);
+                    $('#pNameEn').text(data.product.product_name_en);
                     $('#pPrice').text(data.product.discount_price);
                     $('#pCode').text(data.product.product_code);
-                    $('#pCategory').text(data.product.category_id);
-                    $('#pBrand').text(data.product.brand_id);
+                    $('#pCategoryEn').text(data.product.categoryfunc_prod.category_name_en);
+                    $('#pCategoryBn').text(data.product.categoryfunc_prod.category_name_bn);
+                    $('#pBrandEn').text(data.product.brandfunc_prod.brand_name_en);
+                    $('#pBrandBn').text(data.product.brandfunc_prod.brand_name_bn);
                     $('#pImage').attr('src', '/' + data.product.product_thumbnail);
 
                     $('#product_id').val(id);
                     $('#pQty').text(data.product.product_qty)
+
 
                     // Product Price
                     if (data.product.discount_price == null) {
@@ -245,7 +321,17 @@
                         $('#oldPrice').text(data.product.actual_price);
                     }
 
-                    // Product Stock Status
+                    // Product Stock Status Bangla
+                    if (data.product.product_qty > 0) {
+                        $('#availableBn').text('');
+                        $('#stockoutBn').text('');
+                        $('#availableBn').text('এখনও রয়েছে');
+                    } else {
+                        $('#availableBn').text('');
+                        $('#stockoutBn').text('');
+                        $('#stockoutBn').text('ফুরিয়ে গেছে');
+                    }
+                    // Product Stock Status English
                     if (data.product.product_qty > 0) {
                         $('#available').text('');
                         $('#stockout').text('');
@@ -276,22 +362,38 @@
                         $('#productColorArea').show();
                     }
 
-                    // Product Color
-                    $('select[name="pColor"]').empty();
-                        $.each(data.color, function (key, value) {
-                            $('select[name="pColor"]').append('<option value=" ' + value + ' ">' + value + '</option>')
+                    // Product Color Bangla
+                    $('select[name="pColorBn"]').empty();
+                        $.each(data.colorBn, function (key, value) {
+                            $('select[name="pColorBn"]').append('<option value=" ' + value + ' ">' + value + '</option>')
+                    })
+                    // Product Color English
+                    $('select[name="pColorEn"]').empty();
+                        $.each(data.colorEn, function (key, value) {
+                            $('select[name="pColorEn"]').append('<option value=" ' + value + ' ">' + value + '</option>')
                     })
 
-                    // Product Size
-                    $('select[name="pSize"]').empty();
-                    $.each(data.size, function (key, value) {
-                        $('select[name="pSize"]').append('<option value=" ' + value + ' ">' + value + '</option>')
-                        if (data.size == "") {
+                    // Product Size Bnagla
+                    $('select[name="pSizeBn"]').empty();
+                    $.each(data.sizeBn, function (key, value) {
+                        $('select[name="pSizeBn"]').append('<option value=" ' + value + ' ">' + value + '</option>')
+                        if (data.sizeBn == '') {
                             $('#sizeArea').hide();
                         } else {
                             $('#sizeArea').show();
                         }
                     })
+                    // Product Size English
+                    $('select[name="pSizeEn"]').empty();
+                    $.each(data.sizeEn, function (key, value) {
+                        $('select[name="pSizeEn"]').append('<option value=" ' + value + ' ">' + value + '</option>')
+                        if (data.sizeEn == "") {
+                            $('#sizeArea').hide();
+                        } else {
+                            $('#sizeArea').show();
+                        }
+                    })
+
                 }
             })
         }
@@ -300,7 +402,8 @@
         // Start Product Buying info (To Cart)
         function addToCart(id) {
             var id = $('#product_id').val();
-            var name = $('#pName').text();
+            var name = $('#pNameBn').text();
+            var name = $('#pNameEn').text();
             var color = $('#product_color option:selected').text();
             var size = $('#product_size option:selected').text();
             var qty = $('#pQty').val();
