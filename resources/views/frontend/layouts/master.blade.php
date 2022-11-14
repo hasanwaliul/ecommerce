@@ -29,6 +29,7 @@
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/rateit.css">
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/bootstrap-select.min.css">
 
+
     <!-- Icons/Glyphs -->
     <link rel="stylesheet" href=" {{ asset('frontend') }}/assets/css/font-awesome.css">
 
@@ -47,6 +48,9 @@
     {{-- Bootstrap tagsinput --}}
     <link rel="stylesheet" href=" {{ asset('backend') }}/lib/bootstrap-tagsinput/bootstrap-tagsinput.css ">
 
+    {{-- Bootstrap tagsinput --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 </head>
 
 <body class="cnt-home">
@@ -214,6 +218,8 @@
     {{-- tostr cdn --}}
     <script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script>
     <script src=" {{ asset('backend/lib/toastr/toastr.min.js') }} "></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script>
         @if (Session:: has('message'))
         toastr.options =
@@ -267,11 +273,7 @@
     <script src=" {{ asset('frontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
-    
-    {{-- Stripe Payment Method --}}
-    {{-- <link rel="stylesheet" href=" {{ asset('common') }}/checkout.css ">
-    <script src=" {{ asset('common') }}/checkout.js "></script> --}}
-    <script src="https://js.stripe.com/v3/"></script>
+
     {{-- ################## Jquery form validator ###################--}}
     <script type="text/javascript" src=" {{ asset('common') }}/jquery.validate.js "></script>
     <script>

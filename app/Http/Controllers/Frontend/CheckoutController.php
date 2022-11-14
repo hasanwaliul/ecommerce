@@ -29,6 +29,12 @@ class CheckoutController extends Controller
         }else {
             return 'Cash On Delivery';
         }
-
     }
+
+
+    public function afterpaymentFromCheckoutPage()
+    {
+       echo 'Payment Has been Received';
+    }
+
 }

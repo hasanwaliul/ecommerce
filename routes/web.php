@@ -13,6 +13,7 @@ use App\Http\Controllers\User\UserController;
     use App\Http\Controllers\Frontend\FrontendController;
     use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\ShippingController;
+use App\Http\Controllers\Frontend\StripeController;
 use App\Http\Controllers\Frontend\WishlistController;
     use Illuminate\Support\Facades\Artisan;
     use Illuminate\Support\Facades\Auth;
@@ -226,6 +227,18 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     // #################### Products remove from Wishlist page  ####################
     Route::get('/wishlist/product-remove/{product_id}', [WishlistController::class, 'wishlistProductRemove']);
 
-    // #################### Product Shippin Information from Checkout page  ####################
+    // #################### Product Shippin Information from Checkout page (stripe.blade.php) ####################
     Route::post('/shipping-form-data', [CheckoutController::class, 'shippingFormDataFromCheckoutPage'])->name('shipping-form-data');
+    Route::post('/stripe-payment', [StripeController::class, 'stripePaymentRequestFromCheckoutPage'])->name('stripe-payment-request');
+
+
+    // Route::post('/checkout/payment-request',[CheckoutController::class, 'afterpaymentFromCheckoutPage'])->name('checkout.credit-card');
+
+
+
+
+
+
+
+
 });
