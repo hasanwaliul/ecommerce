@@ -111,9 +111,9 @@
                                                 <select class="form-control select2-show-search" name="division_id"
                                                 data-placeholder="Choose one" required>
                                                  <option label="Choose one"></option>
-                                                 @foreach ($divisions as $division)
-                                                 <option value=" {{ $division->division_id }} "> {{
-                                                     $division->division_name }}
+                                                 @foreach ($states as $state)
+                                                 <option value=" {{ $state->states_id }} "> {{
+                                                     $state->state_name }}
                                                  </option>
                                                  @endforeach
                                              </select>

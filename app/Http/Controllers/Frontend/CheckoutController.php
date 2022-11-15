@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -19,6 +20,9 @@ class CheckoutController extends Controller
         $data['state_id'] = $request->state_id;
         $data['shipping_notes'] = $request->shipping_notes;
         $data['paymentMethod'] = $request->paymentMethod;
+
+
+        $cartTotal = Cart::total();
 
         // dd($data['paymentMethod']);
 
@@ -43,7 +47,7 @@ class CheckoutController extends Controller
             $intent = $payment_intent->client_secret;
             // dd($intent);
 
-            return view('frontend.payment.stripe', compact('data', 'intent'));
+            return view('frontend.payment.stripe', compact('data', 'cartTotal', 'intent'));
         } elseif ($request->paymentMethod == 'card') {
             return 'card';
         }else {

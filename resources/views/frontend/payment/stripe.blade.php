@@ -32,18 +32,15 @@
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
                                         <li><strong>Sub Total: &nbsp; &nbsp;</strong>
-                                            {{session()->get('coupon')['subTotal']}}
+                                            {{$cartTotal}}
                                         </li>
                                         <li><strong>Coupon Name: &nbsp; &nbsp;</strong>
                                             {{session()->get('coupon')['coupon_name']}}
-                                            {{session()->get('coupon')['coupon_discount']}}
-                                        </li>
+                                           ({{session()->get('coupon')['coupon_discount']}}%)</li>
                                         <li><strong>Coupon Discount: &nbsp; &nbsp;</strong>
-                                            -{{session()->get('coupon')['discount_amount_withCoupon']}}
-                                         </li>
+                                            -{{session()->get('coupon')['discount_amount_withCoupon']}} </li><br>
                                         <li><strong>Grand Total: &nbsp; &nbsp;</strong>
-                                            {{session()->get('coupon')['discount_amount_withCoupon']}}
-                                        </li>
+                                            {{session()->get('coupon')['total_amount']}} </li>
                                     </ul>
                                 </div>
                                 @else
@@ -69,7 +66,7 @@
                         <div class="panel-heading">
                             <h4 class="unicase-checkout-title">
                                 <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
-                                    <span><i class="tx-20 fa fa-briefcase"></i></span> Enter your credit card information:
+                                    <span><i class="tx-20 fa fa-briefcase"></i></span> Enter your credit/Debit card information:
                                 </a>
                             </h4>
                         </div>

@@ -126,7 +126,7 @@ class CartController extends Controller
         if (Session::has('coupon')) {
             $coupon_name = session::get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name', $coupon_name)->first();
-            
+
             Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
                 'coupon_discount' => $coupon->coupon_discount,
@@ -216,8 +216,9 @@ class CartController extends Controller
                 $cartTotal = Cart::total();
 
                 $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
+                $states = (new ProductTypeDataService())->ShippingAreaAllStates();
                 // dd($districts);
-                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions'));
+                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions', 'states'));
             } else {
                 return redirect()->route('frontend')->with('error','You Have To Buy Now For Checkout Your Products'); //Toastr alert
             }
