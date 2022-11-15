@@ -274,8 +274,10 @@
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
 
+    @yield('scripts')
+
     {{-- ################## Jquery form validator ###################--}}
-    <script type="text/javascript" src=" {{ asset('common') }}/jquery.validate.js "></script>
+    <script src="{{asset('common')}}/jquery.validate.min.js"></script>
     <script>
         $.validate({
             lang : 'en'

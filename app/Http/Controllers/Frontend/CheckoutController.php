@@ -20,10 +20,30 @@ class CheckoutController extends Controller
         $data['shipping_notes'] = $request->shipping_notes;
         $data['paymentMethod'] = $request->paymentMethod;
 
-        // dd($data['shippingPhone']);
+        // dd($data['paymentMethod']);
 
         if ($request->paymentMethod == 'stripe') {
-            return view('frontend.payment.stripe', compact('data'));
+            // Enter Your Stripe Secret
+            \Stripe\Stripe::setApiKey('sk_test_51M3f7tBk9uu7umqzkXdtElc5aSE4fLWYQHpa65HVJeNRmiuYJfO0QrGYY4CcXjJAHRbll0KxUMzTdhrCqGUakPDe00e0Ka7yKA');
+
+            $amount = 100;
+            $amount *= 100;
+            $amount = (int) $amount;
+
+            $payment_intent = \Stripe\PaymentIntent::create([
+                'description' => 'Stripe Test Payment',
+                'amount' => $amount,
+                'currency' => 'INR',
+                'description' => 'Payment From Waliul Hasan',
+                'payment_method_types' => ['card'],
+                'metadata' => ['order_id' == '01'],
+            ]);
+            // dd($payment_intent);
+
+            $intent = $payment_intent->client_secret;
+            // dd($intent);
+
+            return view('frontend.payment.stripe', compact('data', 'intent'));
         } elseif ($request->paymentMethod == 'card') {
             return 'card';
         }else {

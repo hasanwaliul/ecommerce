@@ -84,7 +84,7 @@
                                             <div class="form-group">
                                                 <label class="info-title">Select Division<span>*</span> </label>
                                                 <select class="form-control select2-show-search" name="division_id"
-                                                    id="" data-placeholder="Choose one" required>
+                                                   data-placeholder="Choose one" required>
                                                     <option label="Choose one"></option>
                                                     @foreach ($divisions as $division)
                                                     <option value=" {{ $division->division_id }} "> {{
@@ -101,34 +101,22 @@
                                                 <select class="form-control select2-show-search" name="district_id"
                                                     data-placeholder="Choose one" required>
                                                     <option label="Choose one"></option>
-                                                    @foreach ($districts as $district)
-                                                    <option value=" {{ $district->district_id }} "> {{
-                                                        $district->district_name }}
-                                                    </option>
-                                                    @endforeach
                                                 </select>
                                                 @error('district_id')
                                                 <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
-
-                                                {{-- <select class="form-control select2-show-search" name="district_id"
-                                                    data-placeholder="Choose one" required>
-                                                    <option label="Choose one"></option>
-                                                </select>
-                                                @error('district_id')
-                                                <span class="text-danger"> {{ $message }} </span>
-                                                @enderror --}}
                                             </div>
                                             <div class="form-group">
                                                 <label class="info-title">Select State/Upazilla <span>*</span></label>
-                                                <select class="form-control select2-show-search" name="state_id"
-                                                    data-placeholder="Choose one" required>
-                                                    <option label="Choose one"></option>
-                                                    @foreach ($states as $state)
-                                                    <option value=" {{ $state->state_id }} "> {{ $state->state_name }}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
+                                                <select class="form-control select2-show-search" name="division_id"
+                                                data-placeholder="Choose one" required>
+                                                 <option label="Choose one"></option>
+                                                 @foreach ($divisions as $division)
+                                                 <option value=" {{ $division->division_id }} "> {{
+                                                     $division->division_name }}
+                                                 </option>
+                                                 @endforeach
+                                             </select>
                                                 @error('state_id')
                                                 <span class="text-danger"> {{ $message }} </span>
                                                 @enderror
@@ -265,14 +253,14 @@
                                 @if (Session()->has('coupon'))
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
-                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
+                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong> {{$cartTotal}}</li>
                                         <li><strong>Coupon Name: &nbsp; &nbsp;</strong>
                                             {{session()->get('coupon')['coupon_name']}}
-                                            {{session()->get('coupon')['coupon_discount']}} </li>
+                                           ({{session()->get('coupon')['coupon_discount']}}%)</li>
                                         <li><strong>Coupon Discount: &nbsp; &nbsp;</strong>
-                                            -{{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                            -{{session()->get('coupon')['discount_amount_withCoupon']}} </li><br>
                                         <li><strong>Grand Total: &nbsp; &nbsp;</strong>
-                                            {{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                            {{session()->get('coupon')['total_amount']}} </li>
                                     </ul>
                                 </div>
                                 @else
@@ -294,51 +282,76 @@
     {{-- Checkbox Page Content End --}}
 </div><!-- /.row -->
 @include('frontend.layouts.footer-slider')
-
 @endsection
-{{--
-<script src=" {{ asset('backend/lib/toastr/jquery.min.js') }} "></script> --}}
-{{--
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script> --}}
+
 @section('scripts')
 
-{{-- Division Wise District Name With Ajax Request --}}
-<script src="scripts/jquery.js">
-    $(document).ready(function () {
-        $("select[name='division_id']").on('change', function (event) {
-            var divId = $(this).val();
-            alert(divId)
+            {{-- Division Wise District Name With Ajax Request --}}
+    <script>
+         $("select[name='division_id']").on('change', function (event) {
+        var divId = $(this).val();
+        // alert(divId)
 
-            /* ==== ajax request ==== */
-            if (divId) {
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "{{ url('division-wise/districts/') }}/" + divId,
-                    success: function (data) {
-                        // response
-                        // if (data == "") {
-                        //     $('select[name="district_id"]').empty();
-                        //     $('select[name="district_id"]').append('<option value="">Districts Not Found!</option>');
-                        // } else {
-                        //     $('select[name="district_id"]').empty();
-                        //     $('select[name="district_id"]').append('<option value="">Select Any Districts</option>');
-                        //     // data load
-                        //     $.each(data, function (key, value) {
-                        //         $('select[name="district_id"]').append('<option value="' + value.district_id + '">' + value.district_name + '</option>');
-                        //     });
-                        //     // data load
-                        // }
-
-                        comsole.log(data)
-                        // response
-                    },
-                });
-            }
-            /* ==== ajax request ==== */
-        });
-
+        /* ==== ajax request ==== */
+        if (divId) {
+            $.ajax({
+                url: "{{ url('division-wise/districts/') }}/" + divId,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // response
+                    if (data == "") {
+                        $('select[name="district_id"]').empty();
+                        $('select[name="district_id"]').append('<option value="">Districts Not Found!</option>');
+                    } else {
+                        $('select[name="district_id"]').empty();
+                        $('select[name="district_id"]').append('<option value="">Select Any Districts</option>');
+                        // data load
+                        $.each(data, function (key, value) {
+                            $('select[name="district_id"]').append('<option value="' + value.district_id + '">' + value.district_name + '</option>');
+                        });
+                        // data load
+                    }
+                    // response
+                },
+            });
+        }
+        /* ==== ajax request ==== */
     });
 
-</script>
+    // District Wise States Name With Ajax Request
+    $("select[name='district_id']").on('change', function (event) {
+        var distId = $(this).val();
+        alert(distId)
+
+        /* ==== ajax request ==== */
+        if (distId) {
+            // console.log('hello')
+            $.ajax({
+                type: "GET",
+                url: "{{ url('/district-wise/states/') }}/" + distId,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data)
+
+                    // response
+                    if (data == "") {
+                        $('select[name="state_id"]').empty();
+                        $('select[name="state_id"]').append('<option value="">States Not Found!</option>');
+                    } else {
+                        $('select[name="state_id"]').empty();
+                        $('select[name="state_id"]').append('<option value="">Select Any States</option>');
+                        // data load
+                        $.each(data, function (key, value) {
+                            $('select[name="state_id"]').append('<option value="' + value.state_id  + '">' + value.state_name + '</option>');
+                        });
+                        // data load
+                    }
+                    // response
+                },
+            });
+        }
+        /* ==== ajax request ==== */
+    });
+    </script>
 @endsection

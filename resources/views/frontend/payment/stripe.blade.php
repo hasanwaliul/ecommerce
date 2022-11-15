@@ -31,14 +31,19 @@
                                 @if (Session()->has('coupon'))
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
-                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong></li>
+                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong>
+                                            {{session()->get('coupon')['subTotal']}}
+                                        </li>
                                         <li><strong>Coupon Name: &nbsp; &nbsp;</strong>
                                             {{session()->get('coupon')['coupon_name']}}
-                                            {{session()->get('coupon')['coupon_discount']}} </li>
+                                            {{session()->get('coupon')['coupon_discount']}}
+                                        </li>
                                         <li><strong>Coupon Discount: &nbsp; &nbsp;</strong>
-                                            -{{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                            -{{session()->get('coupon')['discount_amount_withCoupon']}}
+                                         </li>
                                         <li><strong>Grand Total: &nbsp; &nbsp;</strong>
-                                            {{session()->get('coupon')['discount_amount_withCoupon']}} </li>
+                                            {{session()->get('coupon')['discount_amount_withCoupon']}}
+                                        </li>
                                     </ul>
                                 </div>
                                 @else
@@ -77,7 +82,7 @@
                                 <div class="row">
 
                                     <div class="card">
-                                        <form action="{{route('stripe-payment-request')}}" method="post"
+                                        <form action="{{route('checkout.credit-card')}}" method="post"
                                             id="payment-form">
                                             @csrf
                                             <div class="form-group">
@@ -96,10 +101,8 @@
                                                 </div>
                                             </div><br>
                                             <div class="card-footer">
-                                                {{-- <button id="card-button" class="btn btn-primary" type="submit"
-                                                    data-secret="{{ $intent }}"> Complete Payment </button> --}}
-                                                <button id="card-button" class="btn btn-primary" type="submit"> Complete Payment </button>
-
+                                                <button id="card-button" class="btn btn-primary" type="submit"
+                                                    data-secret="{{ $intent }}"> Complete Payment </button>
                                             </div>
                                         </form>
                                     </div>

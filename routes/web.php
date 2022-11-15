@@ -51,7 +51,8 @@ Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTag
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
-Route::get('division-wise/districts/{id}', [CategoryController::class, 'DivisionWisedistrictData'])->name('division-wise-states');
+Route::get('division-wise/districts/{id}', [CategoryController::class, 'DivisionWisedistrictData'])->name('division-wise-districts');
+Route::get('district-wise/states/{id}', [CategoryController::class, 'DistrictWiseStateData'])->name('district-wise-states');
         /* ###########################################################################################
             ############################### Cart Part Start  ###############################
         ########################################################################################### */
@@ -229,10 +230,9 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 
     // #################### Product Shippin Information from Checkout page (stripe.blade.php) ####################
     Route::post('/shipping-form-data', [CheckoutController::class, 'shippingFormDataFromCheckoutPage'])->name('shipping-form-data');
-    Route::post('/stripe-payment', [StripeController::class, 'stripePaymentRequestFromCheckoutPage'])->name('stripe-payment-request');
+    Route::post('/payment-request',[CheckoutController::class, 'afterpaymentFromCheckoutPage'])->name('checkout.credit-card');
 
 
-    // Route::post('/checkout/payment-request',[CheckoutController::class, 'afterpaymentFromCheckoutPage'])->name('checkout.credit-card');
 
 
 

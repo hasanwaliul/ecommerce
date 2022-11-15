@@ -4,6 +4,7 @@
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ShippingDistrict;
+use App\Models\ShippingState;
 use App\Models\Subcategory;
 use App\Models\SubsubCategory;
 use Carbon\Carbon;
@@ -24,6 +25,10 @@ use Carbon\Carbon;
         // Division Wise District Data Show
         public function DivisionWiseDistrictDataShow($id){
             return ShippingDistrict::select('district_id', 'district_name')->where('division_id', $id)->get();
+        }
+        // District Wise States Data Show
+        public function DistrictWiseStatesDataShow($id){
+            return ShippingState::select('state_id', 'state_name')->where('district_id', $id)->get();
         }
 
 

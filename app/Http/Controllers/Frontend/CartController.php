@@ -57,7 +57,7 @@ class CartController extends Controller
     public function productBuyInfoOnMiniCart(){
         $carts = Cart::content();
         $cartQty = Cart::count();
-        $cartTotal = Cart::total();
+        $cartTotal = floatval(Cart::total());
 
         return response()->json(array(
             'carts' => $carts,
@@ -83,12 +83,12 @@ class CartController extends Controller
                     'product_id' => $product_id,
                     'created_at' => Carbon::now(),
                 ]);
-                return response()->json(['success' => 'Successfully added to your wishlist']);
+                return response()->json(['success' => 'Successfully added on your wishlist']);
             }else {
                 return response()->json(['error' => 'This product already on your wishlist']);
             }
         }else {
-            return response()->json(['error' => 'At first Login here to put this product in wishlist']);
+            return response()->json(['error' => 'At first Login here to put this product on wishlist']);
         }
     }
 
@@ -100,7 +100,7 @@ class CartController extends Controller
     public function cartProducts(){
         $carts = Cart::content();
         $cartQty = Cart::count();
-        $cartTotal = Cart::total();
+        $cartTotal = floatval(Cart::total());
 
         return response()->json(array(
             'carts' => $carts,
@@ -126,6 +126,7 @@ class CartController extends Controller
         if (Session::has('coupon')) {
             $coupon_name = session::get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name', $coupon_name)->first();
+            
             Session::put('coupon', [
                 'coupon_name' => $coupon->coupon_name,
                 'coupon_discount' => $coupon->coupon_discount,
@@ -162,19 +163,23 @@ class CartController extends Controller
 
     // ########################## Apply Coupon For Cart Page ##########################
     public function couponApplyForCartPage(Request $request){
-        $coupon = Coupon::where('coupon_name', $request->coupon_name)->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
+        $coupon = Coupon::where('coupon_name', $request->coupon_name)
+                    ->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))->first();
 
+        // dd($coupon);
+        $cartTotal = floatval(Cart::total());
 
         if ($coupon) {
-            return  Cart::total()*$coupon->coupon_discount/100;
+            // dd(floatval(Cart::total()));
 
-            // Session::put('coupon', [
-            //     'coupon_name' => $coupon->coupon_name,
-            //     'coupon_discount' => $coupon->coupon_discount,
-            //     'discount_amount_withCoupon' => round(Cart::total() * $coupon->coupon_discount / 100),
-            //     'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount / 100),
-            // ]);
-            // return response()->json(['success' => 'Coupon Applied Successfully']);
+            Session::put('coupon', [
+                'subTotal' => Cart::total(),
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount_withCoupon' => round($cartTotal * $coupon->coupon_discount / 100),
+                'total_amount' => round($cartTotal - ($cartTotal * $coupon->coupon_discount / 100)),
+            ]);
+            return response()->json(['success' => 'Coupon Applied Successfully']);
         }else {
             return response()->json(['error' => 'You have entered an invalid coupon']);
         }
@@ -191,7 +196,7 @@ class CartController extends Controller
             ));
         } else {
             return response()->json(array(
-                'totalprice' => Cart::total(),
+                'totalprice' => intval(Cart::total()),
             ));
         }
     }
@@ -211,19 +216,17 @@ class CartController extends Controller
                 $cartTotal = Cart::total();
 
                 $divisions = (new ProductTypeDataService())->ShippingAreaAllDivisions();
-                $districts = (new ProductTypeDataService())->ShippingAreaAllDistricts();
-                $states = (new ProductTypeDataService())->ShippingAreaAllStates();
                 // dd($districts);
-                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions', 'districts', 'states'));
+                return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions'));
             } else {
-                return redirect()->route('frontend')->with('error','You Need To Shop Here'); //Toastr alert
+                return redirect()->route('frontend')->with('error','You Have To Buy Now For Checkout Your Products'); //Toastr alert
             }
 
         }else {
-            return redirect()->route('login')->with('error','You Have To Login First'); //Toastr alert
+            return redirect()->route('login')->with('error','You Need To Login First'); //Toastr alert
         }
     }
-    
+
 
 
 
