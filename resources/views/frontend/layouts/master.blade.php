@@ -8,12 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="This is an ecommerce website based on laravel name Easy Shopping">
     <meta name="author" content="Waliul Hasan">
-    <meta name="keywords"
-        content="online store, online business, ecom, ecommerce website, shopping cart, e business, ecommerce platforms">
+    <meta name="keywords" content="online store, online business, ecom, ecommerce website, shopping cart, e business, ecommerce platforms">
     <meta name="robots" content="all">
 
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <title> @yield('title') </title>
 
@@ -836,6 +835,20 @@
                 url: '/cart-page/coupon-calculated-data',
                 dataType: 'json',
                 success: function (data) {
+                    console.log(data)
+
+                        /* show employee information in employee table */
+                        if (data.totalprice == 0) {
+
+                            $('#asloob_img').addClass('d-none').removeClass('d-block');
+                            $('#profile_img').addClass('d-block').removeClass('d-none');
+
+                        } else {
+                            $('#profile_img').addClass('d-none').removeClass('d-block');
+                            $('#asloob_img').addClass('d-block').removeClass('d-none');
+                        }
+
+
                     if (data.totalprice) {
                         $('#CouponField').css('display','');
                         $('#couponCalculatedDataField').html(
@@ -920,8 +933,6 @@
             }
          // End Cart Page Applied Coupon Data Remove With Ajax
     </script>
-
-    @yield('script')
 
 </body>
 
