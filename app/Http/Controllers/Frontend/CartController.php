@@ -220,7 +220,7 @@ class CartController extends Controller
                 // dd($districts);
                 return view('user.checkout-page', compact('carts', 'cartQty', 'cartTotal', 'divisions', 'states'));
             } else {
-                return redirect()->route('frontend')->with('error','You Have To Buy Now For Checkout Your Products'); //Toastr alert
+                return redirect()->route('frontend')->with('error','You Have To Buy Some Products For Checkout'); //Toastr alert
             }
 
         }else {

@@ -273,8 +273,6 @@
     <script src=" {{ asset('frontend') }}/assets/js/wow.min.js"></script>
     <script src=" {{ asset('frontend') }}/assets/js/scripts.js"></script>
 
-    @yield('scripts')
-
     {{-- ################## Jquery form validator ###################--}}
     <script src="{{asset('common')}}/jquery.validate.min.js"></script>
     <script>
@@ -837,18 +835,6 @@
                 success: function (data) {
                     console.log(data)
 
-                        /* show employee information in employee table */
-                        if (data.totalprice == 0) {
-
-                            $('#asloob_img').addClass('d-none').removeClass('d-block');
-                            $('#profile_img').addClass('d-block').removeClass('d-none');
-
-                        } else {
-                            $('#profile_img').addClass('d-none').removeClass('d-block');
-                            $('#asloob_img').addClass('d-block').removeClass('d-none');
-                        }
-
-
                     if (data.totalprice) {
                         $('#CouponField').css('display','');
                         $('#couponCalculatedDataField').html(
@@ -889,6 +875,13 @@
 
                             `
                         )
+                    }
+                    /* Hide and Show coupon calculate data feild */
+                    if (data.totalprice == 0) {
+                        $('#calculatedTextFeild').hide();
+
+                    } else {
+                        $('#calculatedTextFeild').show();
                     }
                 }
 
@@ -933,6 +926,8 @@
             }
          // End Cart Page Applied Coupon Data Remove With Ajax
     </script>
+    
+    @yield('scripts')
 
 </body>
 

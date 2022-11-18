@@ -76,7 +76,7 @@
                                         <td>
                                             <div class="form-group">
                                                 <input type="text" class="form-control unicase-form-control text-input"
-                                                    placeholder="You Coupon.." id="coupon_name">
+                                                    placeholder="Apply Your Coupon..." id="coupon_name">
                                             </div>
                                             <div class="clearfix pull-right">
                                                 <button type="submit" class="btn-upper btn btn-primary" onclick="applyCoupon()">APPLY COUPON</button>
@@ -89,7 +89,7 @@
                     </div><!-- /.estimate-ship-tax -->
 
 
-					<div class="col-md-6 col-sm-12 cart-shopping-total">
+					<div class="col-md-6 col-sm-12 cart-shopping-total" id="calculatedTextFeild">
 						<table class="table">
 							<thead id="couponCalculatedDataField">
 

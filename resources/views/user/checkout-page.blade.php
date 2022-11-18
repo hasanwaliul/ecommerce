@@ -295,7 +295,7 @@
         /* ==== ajax request ==== */
         if (divId) {
             $.ajax({
-                url: "{{ url('division-wise/districts/') }}/" + divId,
+                url: "{{ url('/division-wise/districts') }}/"+divId,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -322,14 +322,14 @@
     // District Wise States Name With Ajax Request
     $("select[name='district_id']").on('change', function (event) {
         var distId = $(this).val();
-        alert(distId)
+        // alert(distId)
 
         /* ==== ajax request ==== */
         if (distId) {
-            // console.log('hello')
+            // alert('hello')
             $.ajax({
                 type: "GET",
-                url: "{{ url('/district-wise/states/') }}/" + distId,
+                url: "{{ url('/district-wise/states') }}/" + distId,
                 dataType: "json",
                 success: function (data) {
                     console.log(data)

@@ -36,6 +36,7 @@ class CategoryController extends Controller
     // District wise States Data show
     public function DistrictWiseStateData($id){
         $data = (new ProductInfoDataService())->DistrictWiseStatesDataShow($id);
+        // $data = $id;
         return json_encode($data);
     }
 
