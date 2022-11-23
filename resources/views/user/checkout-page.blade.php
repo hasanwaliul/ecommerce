@@ -108,11 +108,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="info-title">Select State/Upazilla <span>*</span></label>
-                                                <select class="form-control select2-show-search" name="division_id"
+                                                <select class="form-control select2-show-search" name="state_id"
                                                 data-placeholder="Choose one" required>
                                                  <option label="Choose one"></option>
                                                  @foreach ($states as $state)
-                                                 <option value=" {{ $state->states_id }} "> {{
+                                                 <option value=" {{ $state->state_id  }} "> {{
                                                      $state->state_name }}
                                                  </option>
                                                  @endforeach
@@ -126,7 +126,7 @@
                                                 <label class="info-title" for="notes">Keep A Notes
                                                     <span>*</span></label>
                                                 <textarea name="shipping_notes" id="notes" cols="30" rows="5"
-                                                    placeholder="Your notes ....." name="shippingNotes" required></textarea>
+                                                    placeholder="Your notes here ....." name="shippingNotes" required></textarea>
 
                                             </div>
                                             {{-- <div class="form-group">
@@ -299,6 +299,7 @@
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
+                    // console.log(data)
                     // response
                     if (data == "") {
                         $('select[name="district_id"]').empty();
@@ -319,14 +320,14 @@
         /* ==== ajax request ==== */
     });
 
-    // District Wise States Name With Ajax Request
+
+    // ################ District Wise States Name With Ajax Request ################
     $("select[name='district_id']").on('change', function (event) {
         var distId = $(this).val();
         // alert(distId)
 
         /* ==== ajax request ==== */
         if (distId) {
-            // alert('hello')
             $.ajax({
                 type: "GET",
                 url: "{{ url('/district-wise/states') }}/" + distId,

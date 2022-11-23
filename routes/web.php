@@ -47,7 +47,7 @@ Route::get('subSubCatg-wise/products/{subSubCatId}/{subSubSlug}', [FrontendContr
 // ########## Products Tag Wise Product show  ##########
 Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTagWiseProductShow'])->name('products-tagwise-product');
 
-// #################### Ajax Request for select data (Category, Subcategory, Sub Subcategory) ####################
+// #################### Ajax Request for select data (Category, Subcategory, Sub Subcategory, Division, District) ####################
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');

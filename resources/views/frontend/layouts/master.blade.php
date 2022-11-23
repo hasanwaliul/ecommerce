@@ -833,7 +833,7 @@
                 url: '/cart-page/coupon-calculated-data',
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data)
+                    // console.log(data)
 
                     if (data.totalprice) {
                         $('#CouponField').css('display','');
@@ -926,7 +926,7 @@
             }
          // End Cart Page Applied Coupon Data Remove With Ajax
     </script>
-    
+
     @yield('scripts')
 
 </body>

@@ -42,7 +42,7 @@ class CheckoutController extends Controller
                 'payment_method_types' => ['card'],
                 'metadata' => ['order_id' == '01'],
             ]);
-            // dd($payment_intent);
+            dd($payment_intent);
 
             $intent = $payment_intent->client_secret;
             // dd($intent);
@@ -56,8 +56,9 @@ class CheckoutController extends Controller
     }
 
 
-    public function afterpaymentFromCheckoutPage()
+    public function afterpaymentFromCheckoutPage(Request $request)
     {
+        dd($request->all());
        echo 'Payment Has been Received';
     }
 

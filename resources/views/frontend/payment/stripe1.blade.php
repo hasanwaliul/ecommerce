@@ -46,8 +46,8 @@
                                 @else
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
-                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong> ${{$cartTotal}}</li>
-                                        <li><strong>Grand Total: &nbsp; &nbsp; ${{$cartTotal}}</strong></li>
+                                        <li><strong>Sub Total: &nbsp; &nbsp;</strong></li>
+                                        <li><strong>Grand Total: &nbsp; &nbsp;</strong></li>
                                     </ul>
                                 </div>
                                 @endif
@@ -92,15 +92,6 @@
                                                     <div id="card-element">
                                                         <!-- A Stripe Element will be inserted here. -->
                                                     </div>
-                                                    <input type="hidden" name="shippingName" value="{{ $data['shippingName'] }}">
-                                                    <input type="hidden" name="shippingEmail" value="{{ $data['shippingEmail'] }}">
-                                                    <input type="hidden" name="shippingName" value="{{ $data['shippingPhone'] }}">
-                                                    <input type="hidden" name="shippingPostCode" value="{{ $data['shippingPostCode'] }}">
-                                                    <input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
-                                                    <input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
-                                                    <input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
-                                                    <input type="hidden" name="shipping_notes" value="{{ $data['shipping_notes'] }}">
-                                                    <input type="hidden" name="paymentMethod" value="{{ $data['paymentMethod'] }}">
                                                     <!-- Used to display form errors. -->
                                                     <div id="card-errors" role="alert"></div>
                                                     <input type="hidden" name="plan" value="" />
