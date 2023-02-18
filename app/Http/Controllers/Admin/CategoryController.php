@@ -7,6 +7,8 @@ use App\Http\Controllers\DataServices\ProductInfoDataService;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Expr\FuncCall;
+
 class CategoryController extends Controller
 {
     // Category Wise SubCategory Data show
@@ -28,15 +30,14 @@ class CategoryController extends Controller
     }
 
     // Division wise District Data show
-    public function DivisionWisedistrictData($id){
+    public function divisionWiseDistrictData($id){
         $data = (new ProductInfoDataService())->DivisionWiseDistrictDataShow($id);
         return json_encode($data);
     }
 
     // District wise States Data show
-    public function DistrictWiseStateData($id){
+    public function districtWiseStatesData($id){
         $data = (new ProductInfoDataService())->DistrictWiseStatesDataShow($id);
-        // $data = $id;
         return json_encode($data);
     }
 

@@ -99,6 +99,18 @@ active
 @section('scripts')
 <script type="text/javascript">
 
+                    // var value = $('select#searchItype_id option:selected').val(response.itemInfos[0].itype_id);
+                    // let element = document.getElementById('searchItype_id');
+                    // element.value = response.itemInfos[0].itype_id;
+
+                    // let catg = document.getElementById('searchIcateg_id');
+                    // catg.value = response.itemInfos[0].icatg_id;
+
+                    // let subCatg = document.getElementById('searchIsubCateg_id');
+                    // subCatg.value = response.itemInfos[0].iscatg_id;
+
+                    // let itemCode = document.getElementById('searchItemCode');
+                    // itemCode.value = response.itemInfos[0].item_deta_code;
 
 </script>
 

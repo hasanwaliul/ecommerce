@@ -306,6 +306,7 @@
                         $('select[name="district_id"]').append('<option value="">Districts Not Found!</option>');
                     } else {
                         $('select[name="district_id"]').empty();
+                        $('select[name="state_id"]').empty();
                         $('select[name="district_id"]').append('<option value="">Select Any Districts</option>');
                         // data load
                         $.each(data, function (key, value) {
@@ -330,8 +331,10 @@
         if (distId) {
             $.ajax({
                 type: "GET",
-                url: "{{ url('/district-wise/states') }}/" + distId,
-                dataType: "json",
+                url: "{{ url('/district-wise/states/') }}/" + distId,
+                // data    : formData,
+                dataType: 'json',
+                encode  : true,
                 success: function (data) {
                     console.log(data)
 
@@ -354,5 +357,6 @@
         }
         /* ==== ajax request ==== */
     });
+
     </script>
 @endsection

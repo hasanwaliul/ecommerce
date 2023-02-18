@@ -1,22 +1,21 @@
 <?php
-    use Illuminate\Support\Facades\Route;
-    use App\Http\Controllers\Admin\AdminController;
-    use App\Http\Controllers\Admin\BannerController;
-    use App\Http\Controllers\Admin\BrandController;
-    use App\Http\Controllers\admin\CategoryController;
-    use App\Http\Controllers\Admin\CouponController;
-    use App\Http\Controllers\Admin\ProductController;
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\User\UserController;
-    use App\Http\Controllers\Frontend\FrontendController;
-    use App\Http\Controllers\Frontend\LanguageController;
-use App\Http\Controllers\Frontend\ShippingController;
-use App\Http\Controllers\Frontend\StripeController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\WishlistController;
-    use Illuminate\Support\Facades\Artisan;
-    use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 // cache clear route /
 
@@ -30,8 +29,8 @@ Route::get('/clear-cache', function () {
     return 'CACHE CLEARED SUCCESSFULLY';
 });
 
-    // ################################## Frontend  ##################################
-Route::get('/',[FrontendController::class, 'index'])->name('frontend');
+// ################################## Frontend  ##################################
+Route::get('/', [FrontendController::class, 'index'])->name('frontend');
 Route::get('single-prduct/details/{id}/{slug}', [FrontendController::class, 'SingleProductDetails'])->name('single-product-details');
 
 
@@ -51,9 +50,10 @@ Route::get('tagwise-product/show/{tag}', [FrontendController::class, 'productTag
 Route::get('category-wise/subcategory/{id}', [CategoryController::class, 'categoryWiseSubcategory'])->name('category-wise-subcategory');
 Route::get('subcategory-wise/brands/{id}', [CategoryController::class, 'subcategoryWiseBrandData'])->name('subcategory-wise-brand');
 Route::get('subcategory-wise/subsubcategory/{id}', [CategoryController::class, 'subcategoryWiseSubsubcategoryData'])->name('subcategory-wise-subsubcategory');
-Route::get('division-wise/districts/{id}', [CategoryController::class, 'DivisionWisedistrictData'])->name('division-wise-districts');
-Route::get('district-wise/states/{id}', [CategoryController::class, 'DistrictWiseStateData'])->name('district-wise-states');
-        /* ###########################################################################################
+Route::get('division-wise/districts/{id}', [CategoryController::class, 'divisionWiseDistrictData'])->name('division-wise-districts');
+Route::get('district-wise/states/{id}', [CategoryController::class, 'districtWiseStatesData'])->name('district-wise-states');
+
+/* ###########################################################################################
             ############################### Cart Part Start  ###############################
         ########################################################################################### */
 
@@ -95,11 +95,11 @@ Route::get('product/add/wishlist/{productId}', [CartController::class, 'productA
 Auth::routes();
 
 
-            /* ###########################################################################################
+/* ###########################################################################################
                     ############################### Admin Part  Start  ###############################
                 ########################################################################################### */
 
-Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'Admin'], function (){
+Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace' => 'Admin'], function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin-dashboard');
 
     // #################### Admin Profile ####################
@@ -178,30 +178,27 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
     Route::get('coupon-delete/{id}', [CouponController::class, 'couponDataDelete'])->name('coupon-data-delete');
 
     //  ################################## Shipping Area (Division) Part Start #################################
-    Route::get('division',[ShippingAreaController::class, 'index'])->name('divisions');
-    Route::post('division/add',[ShippingAreaController::class, 'divisionDataAdd'])->name('division-add');
+    Route::get('division', [ShippingAreaController::class, 'index'])->name('divisions');
+    Route::post('division/add', [ShippingAreaController::class, 'divisionDataAdd'])->name('division-add');
     Route::get('division-edit/{id}', [ShippingAreaController::class, 'divisionDataEdit'])->name('division-data-edit');
     Route::post('division-data/update', [ShippingAreaController::class, 'divisionDataUpdate'])->name('division-data-update');
     Route::get('division-delete/{id}', [ShippingAreaController::class, 'divisionDataDelete'])->name('division-data-delete');
 
     //  ################################## Shipping Area (District) Part Start #################################
     Route::get('district', [ShippingAreaController::class, 'districtIndex'])->name('districts');
-    Route::post('district/add',[ShippingAreaController::class, 'districtDataAdd'])->name('district-add');
+    Route::post('district/add', [ShippingAreaController::class, 'districtDataAdd'])->name('district-add');
     Route::get('district-edit/{id}', [ShippingAreaController::class, 'districtDataEdit'])->name('district-data-edit');
     Route::post('district-data/update', [ShippingAreaController::class, 'districtDataUpdate'])->name('district-data-update');
     Route::get('district-delete/{id}', [ShippingAreaController::class, 'districtDataDelete'])->name('district-data-delete');
 
     //  ################################## Shipping Area (States/Upazilla) Part Start #################################
     Route::get('state', [ShippingAreaController::class, 'stateIndex'])->name('states');
-    Route::post('states/add',[ShippingAreaController::class, 'statesDataAdd'])->name('states-add');
+    Route::post('states/add', [ShippingAreaController::class, 'statesDataAdd'])->name('states-add');
     Route::get('states-edit/{id}', [ShippingAreaController::class, 'statesDataEdit'])->name('states-data-edit');
     Route::post('state-data/update', [ShippingAreaController::class, 'stateDataUpdate'])->name('state-data-update');
     Route::get('states-delete/{id}', [ShippingAreaController::class, 'statesDataDelete'])->name('states-data-delete');
-
-
-
 });
-            /* ###########################################################################################
+/* ###########################################################################################
                     ############################### Admin Part  End  ###############################
                 ########################################################################################### */
 
@@ -210,10 +207,10 @@ Route::group(['prefix'=>'admin','middleware' => ['admin','auth'], 'namespace'=>'
 
 
 
-            /* ###########################################################################################
+/* ###########################################################################################
                     ############################### User Part  Start  ###############################
                 ########################################################################################### */
-Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'], function(){
+Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' => 'User'], function () {
     Route::get('dashboard', [UserController::class, 'index'])->name('user-dashboard');
     Route::post('update/data', [UserController::class, 'updateData'])->name('update-profile');
     Route::get('image', [UserController::class, 'profileImage'])->name('profile-image');
@@ -222,7 +219,7 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
     Route::post('password/update', [UserController::class, 'userPasswordUpdate'])->name('user-password-update');
 
     // #################### Products view Page at Wishlist  ####################
-    Route::get('wishlist',[WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
+    Route::get('wishlist', [WishlistController::class, 'wishlistItemView'])->name('wishlist-item-view');
     // #################### Products show at Wishlist page  ####################
     Route::get('/wishlist-products/view', [WishlistController::class, 'wishsistProducts']);
     // #################### Products remove from Wishlist page  ####################
@@ -230,15 +227,5 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'User'
 
     // #################### Product Shippin Information from Checkout page (stripe.blade.php) ####################
     Route::post('/shipping-form-data', [CheckoutController::class, 'shippingFormDataFromCheckoutPage'])->name('shipping-form-data');
-    Route::post('/payment-request',[CheckoutController::class, 'afterpaymentFromCheckoutPage'])->name('checkout.credit-card');
-
-
-
-
-
-
-
-
-
-
+    Route::post('/payment-request', [CheckoutController::class, 'afterpaymentFromCheckoutPage'])->name('checkout.credit-card');
 });
