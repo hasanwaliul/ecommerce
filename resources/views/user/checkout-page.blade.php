@@ -126,7 +126,7 @@
                                                 <label class="info-title" for="notes">Keep A Notes
                                                     <span>*</span></label>
                                                 <textarea name="shipping_notes" id="notes" cols="30" rows="5"
-                                                    placeholder="Your notes here ....." name="shippingNotes" required></textarea>
+                                                    placeholder="Your notes here ....." name="shippingNotes" ></textarea>
 
                                             </div>
                                             {{-- <div class="form-group">
@@ -244,7 +244,7 @@
                     <!-- checkout-step-01  -->
                     <br>
                     <!-- checkout-progress-sidebar -->
-                    <div class="checkout-progress-sidebar " style="float: right;">
+                    <div class="checkout-progress-sidebar " style=" float: right; border: 20px solid #d1d3cb; border-radius: 20px">
                         <div class="panel-group">
                             <div class="panel panel-default">
                                 <div class="panel-heading">

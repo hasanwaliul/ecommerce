@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CheckoutController extends Controller
 {
     public function shippingFormDataFromCheckoutPage(Request $request){
-        // dd($request->all());
+        dd($request->all());
         $data = array();
         $data['shippingName'] = $request->shippingName;
         $data['shippingEmail'] = $request->shippingEmail;
